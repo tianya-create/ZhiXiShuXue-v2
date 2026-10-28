@@ -1,0 +1,130 @@
+[
+  {
+    "id": "q1",
+    "type": "choice",
+    "content": "下列哪个数是有理数？",
+    "options": [
+      "√2",
+      "π",
+      "0.5",
+      "e"
+    ],
+    "answer": "0.5",
+    "score": 10,
+    "difficulty": "easy",
+    "knowledgePoints": [
+      "kp-001"
+    ],
+    "createdAt": "2026-04-21T16:44:06.321Z",
+    "updatedAt": "2026-04-21T16:44:06.321Z"
+  },
+  {
+    "id": "q2",
+    "type": "choice",
+    "content": "3 + (-5) 的结果是？",
+    "options": [
+      "-2",
+      "2",
+      "8",
+      "-8"
+    ],
+    "answer": "-2",
+    "score": 10,
+    "difficulty": "easy",
+    "knowledgePoints": [
+      "kp-002"
+    ],
+    "createdAt": "2026-04-21T16:44:06.321Z",
+    "updatedAt": "2026-04-21T16:44:06.321Z"
+  },
+  {
+    "id": "q3",
+    "type": "fill",
+    "content": "方程 2x + 3 = 7 的解是 x = ?",
+    "answer": "2",
+    "score": 15,
+    "difficulty": "medium",
+    "knowledgePoints": [
+      "kp-005"
+    ],
+    "createdAt": "2026-04-21T16:44:06.321Z",
+    "updatedAt": "2026-04-21T16:44:06.321Z"
+  },
+  {
+    "id": "q4",
+    "type": "choice",
+    "content": "下列哪组是平行线？",
+    "options": [
+      "相交的两条直线",
+      "永不相交的两条直线",
+      "垂直的两条直线",
+      "重合的两条直线"
+    ],
+    "answer": "永不相交的两条直线",
+    "score": 15,
+    "difficulty": "medium",
+    "knowledgePoints": [
+      "kp-007"
+    ],
+    "createdAt": "2026-04-21T16:44:06.321Z",
+    "updatedAt": "2026-04-21T16:44:06.321Z"
+  },
+  {
+    "id": "q5",
+    "type": "choice",
+    "content": "(-3) × (-4) 的结果是？",
+    "options": [
+      "-12",
+      "12",
+      "-7",
+      "7"
+    ],
+    "answer": "12",
+    "score": 10,
+    "difficulty": "easy",
+    "knowledgePoints": [
+      "kp-003"
+    ],
+    "createdAt": "2026-04-21T16:44:06.321Z",
+    "updatedAt": "2026-04-21T16:44:06.321Z"
+  },
+  {
+    "id": "q6",
+    "type": "shortAnswer",
+    "content": "请简述有理数的定义和性质。",
+    "answer": "有理数是可以表示为两个整数之比的数，包括整数和分数。性质包括：封闭性、交换律、结合律、分配律等。",
+    "score": 20,
+    "difficulty": "hard",
+    "knowledgePoints": [
+      "kp-001"
+    ],
+    "createdAt": "2026-04-21T16:44:06.321Z",
+    "updatedAt": "2026-04-21T16:44:06.321Z"
+  },
+  {
+    "id": "q7",
+    "type": "shortAnswer",
+    "content": "请解一元一次方程 3x - 5 = 10，并写出详细步骤。",
+    "answer": "3x - 5 = 10\n3x = 15\nx = 5",
+    "score": 20,
+    "difficulty": "medium",
+    "knowledgePoints": [
+      "kp-005"
+    ],
+    "createdAt": "2026-04-21T16:44:06.321Z",
+    "updatedAt": "2026-04-21T16:44:06.321Z"
+  },
+  {
+    "id": "q8",
+    "type": "shortAnswer",
+    "content": "请解释平行线的定义和性质。",
+    "answer": "平行线是在同一平面内永不相交的两条直线。性质包括：同位角相等、内错角相等、同旁内角互补等。",
+    "score": 20,
+    "difficulty": "medium",
+    "knowledgePoints": [
+      "kp-007"
+    ],
+    "createdAt": "2026-04-21T16:44:06.321Z",
+    "updatedAt": "2026-04-21T16:44:06.321Z"
+  }
+]

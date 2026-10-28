@@ -1,0 +1,58 @@
+{
+  "root": { "id": "root-junior-math", "name": "初中数学" },
+  "categories": [
+    {
+      "id": "cat-arith",
+      "name": "数与式",
+      "aliases": ["数与式"],
+      "nodes": [
+        { "id": "alg-1", "name": "整式", "domain": "代数", "difficulty": 2, "studyMinutes": 35, "prerequisites": [], "dependencies": ["alg-2"], "masterStatus": "待巩固" },
+        { "id": "alg-2", "name": "整式加减", "domain": "代数", "difficulty": 2, "studyMinutes": 40, "prerequisites": ["alg-1"], "dependencies": ["alg-3"], "masterStatus": "待巩固" }
+      ]
+    },
+    {
+      "id": "cat-eq",
+      "name": "方程与不等式",
+      "aliases": ["方程与不等式"],
+      "nodes": [
+        { "id": "alg-3", "name": "一元一次方程", "domain": "代数", "difficulty": 3, "studyMinutes": 45, "prerequisites": ["alg-2"], "dependencies": ["alg-4"], "masterStatus": "未掌握" },
+        { "id": "alg-4", "name": "二元一次方程组", "domain": "代数", "difficulty": 4, "studyMinutes": 55, "prerequisites": ["alg-3"], "dependencies": ["alg-5"], "masterStatus": "未掌握" },
+        { "id": "alg-5", "name": "一元二次方程", "domain": "代数", "difficulty": 4, "studyMinutes": 60, "prerequisites": ["alg-3"], "dependencies": ["alg-6"], "masterStatus": "待巩固" }
+      ]
+    },
+    {
+      "id": "cat-func",
+      "name": "函数",
+      "aliases": ["函数"],
+      "nodes": [
+        { "id": "alg-6", "name": "一次函数", "domain": "代数", "difficulty": 3, "studyMinutes": 50, "prerequisites": ["alg-3"], "dependencies": ["alg-7"], "masterStatus": "已掌握" },
+        { "id": "alg-7", "name": "反比例函数", "domain": "代数", "difficulty": 4, "studyMinutes": 55, "prerequisites": ["alg-6"], "dependencies": ["alg-8"], "masterStatus": "待巩固" },
+        { "id": "alg-8", "name": "二次函数", "domain": "代数", "difficulty": 5, "studyMinutes": 70, "prerequisites": ["alg-5", "alg-6"], "dependencies": [], "masterStatus": "未掌握" }
+      ]
+    },
+    {
+      "id": "cat-geo",
+      "name": "几何",
+      "aliases": ["图形与几何", "几何"],
+      "nodes": [
+        { "id": "geo-1", "name": "线段与角", "domain": "几何", "difficulty": 1, "studyMinutes": 25, "prerequisites": [], "dependencies": ["geo-2"], "masterStatus": "已掌握" },
+        { "id": "geo-2", "name": "相交线与平行线", "domain": "几何", "difficulty": 2, "studyMinutes": 35, "prerequisites": ["geo-1"], "dependencies": ["geo-3"], "masterStatus": "待巩固" },
+        { "id": "geo-3", "name": "三角形", "domain": "几何", "difficulty": 2, "studyMinutes": 40, "prerequisites": ["geo-2"], "dependencies": ["geo-6", "geo-7"], "masterStatus": "待巩固" },
+        { "id": "geo-6", "name": "圆", "domain": "几何", "difficulty": 4, "studyMinutes": 60, "prerequisites": ["geo-3"], "dependencies": ["geo-7"], "masterStatus": "待巩固" },
+        { "id": "geo-7", "name": "勾股定理", "domain": "几何", "difficulty": 3, "studyMinutes": 35, "prerequisites": ["geo-3"], "dependencies": [], "masterStatus": "已掌握" }
+      ]
+    },
+    {
+      "id": "cat-stat",
+      "name": "统计概率",
+      "aliases": ["统计与概率", "统计概率"],
+      "nodes": [
+        { "id": "stat-1", "name": "数据收集", "domain": "概率统计", "difficulty": 1, "studyMinutes": 20, "prerequisites": [], "dependencies": ["stat-2"], "masterStatus": "已掌握" },
+        { "id": "stat-2", "name": "数据整理", "domain": "概率统计", "difficulty": 2, "studyMinutes": 25, "prerequisites": ["stat-1"], "dependencies": ["stat-3"], "masterStatus": "待巩固" },
+        { "id": "stat-3", "name": "平均数中位数众数", "domain": "概率统计", "difficulty": 2, "studyMinutes": 30, "prerequisites": ["stat-2"], "dependencies": ["stat-4"], "masterStatus": "待巩固" },
+        { "id": "stat-4", "name": "概率初步", "domain": "概率统计", "difficulty": 3, "studyMinutes": 35, "prerequisites": ["stat-3"], "dependencies": ["stat-5"], "masterStatus": "未掌握" },
+        { "id": "stat-5", "name": "频率估计概率", "domain": "概率统计", "difficulty": 4, "studyMinutes": 40, "prerequisites": ["stat-4"], "dependencies": [], "masterStatus": "未掌握" }
+      ]
+    }
+  ]
+}
