@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  app:
+    build: .
+    ports:
+      - '5001:5001'
+      - '5000:5000'
+    volumes:
+      - ./backend/database:/app/backend/database
+    environment:
+      - API_PORT=5001
