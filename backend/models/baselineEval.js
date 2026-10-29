@@ -483,9 +483,10 @@ function main() {
     console.log(bins);
   }
 
-  // P1-4：输出目录可配置（--out），默认项目内 output/，不存在自动创建
+  // P1-4：输出目录可配置（--out），默认脚本所在项目内的 实验结果文件/（不存在自动创建），
+  // 不依赖任何外部或原作者本地路径
   const outIdx = args.indexOf('--out');
-  const outDir = outIdx >= 0 ? path.resolve(args[outIdx + 1]) : path.join(__dirname, '..', '..', 'output');
+  const outDir = outIdx >= 0 ? path.resolve(args[outIdx + 1]) : path.join(__dirname, '..', '实验结果文件');
   fs.mkdirSync(outDir, { recursive: true });
   const outFile = path.join(outDir, `baseline-results-${source}.json`);
 

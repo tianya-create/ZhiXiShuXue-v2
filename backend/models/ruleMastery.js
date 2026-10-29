@@ -78,10 +78,11 @@ function rule0(records, options = {}) {
 }
 
 /**
- * Rule-1：Rule-0 + 连续答题修正，忠实提取自 masteryEngine.calculateMastery：
+ * Rule-1：在 Rule-0 平滑正确率基础上加入线上规则中的连续答题修正：
  *   - 最近 3 次全对且速度不慢于历史（last3Time <= historicalAvgTime * 1.2）→ +streakBoost
  *   - 最近 2 次全错 → -streakPenalty
  *   - 样本不足（次数 < minSamples 或去重题目 < minDistinctQuestions）→ mastery 封顶 insufficientCap
+ * 注意：使用拉普拉斯平滑，并非线上公式的完全复现（完全复现见 Online-Rule）。
  * 结果裁剪到 [0, 1]。
  */
 function rule1(records, options = {}) {

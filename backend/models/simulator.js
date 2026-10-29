@@ -226,7 +226,8 @@ function main() {
   }
   console.log('学生原型分布:', JSON.stringify(typeCount));
 
-  const outDir = path.join(__dirname, '..', '..', 'output');
+  // 默认写入脚本所在项目内的 实验结果文件/（不存在自动创建），不依赖外部路径
+  const outDir = path.join(__dirname, '..', '实验结果文件');
   fs.mkdirSync(outDir, { recursive: true });
   const csvFile = path.join(outDir, 'simulated-records.csv');
   fs.writeFileSync(csvFile, recordsToCsv(records));
