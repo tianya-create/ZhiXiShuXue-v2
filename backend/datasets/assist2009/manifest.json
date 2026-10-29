@@ -1,0 +1,161 @@
+{
+  "dataset": {
+    "name": "ASSISTments 2009-2010 Skill Builder",
+    "officialPage": "https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010",
+    "mirrorUsed": "https://github.com/WalidAlsafadi/SkillMap-AI-Student-Support-Prediction/blob/main/data/raw/skill_builder_data.csv",
+    "license": "ASSISTments 数据使用协议（学术研究用途，引用 ASSISTments 团队）",
+    "note": "本仓库不提交原始数据文件，仅提交清洗结果元信息与统计；原始文件请按 manifest.source 自行下载"
+  },
+  "source": {
+    "rawFile": "backend/datasets/raw/skill_builder_data.csv",
+    "rawBytes": 82676405,
+    "rawSha256": "sha256:408698925fc3488672431e4c19b9b16808b6a25760f8e41ad4d3d6257ad0832a",
+    "rawColumns": [
+      "order_id",
+      "assignment_id",
+      "user_id",
+      "assistment_id",
+      "problem_id",
+      "original",
+      "correct",
+      "attempt_count",
+      "ms_first_response",
+      "tutor_mode",
+      "answer_type",
+      "sequence_id",
+      "student_class_id",
+      "position",
+      "type",
+      "base_sequence_id",
+      "skill_id",
+      "skill_name",
+      "teacher_id",
+      "school_id",
+      "hint_count",
+      "hint_total",
+      "overlap_time",
+      "template_id",
+      "answer_id",
+      "answer_text",
+      "first_action",
+      "bottom_hint",
+      "opportunity",
+      "opportunity_original"
+    ],
+    "rowCountInRaw": 525534
+  },
+  "output": {
+    "file": "backend/datasets/assist2009/interactions.csv",
+    "sha256": "sha256:6f055c6b5105b8295ef8bcf9dd23c668634f56eedc4dbdcf5a8708bee0618be9",
+    "bytes": 16982305,
+    "rowCount": 266948,
+    "columns": [
+      "userId",
+      "questionId",
+      "kpCode",
+      "isCorrect",
+      "costTime",
+      "createdAt",
+      "sequenceIndex"
+    ]
+  },
+  "cleaning": [
+    {
+      "step": "read",
+      "description": "读取原始记录行数",
+      "removed": 0,
+      "remaining": 525534
+    },
+    {
+      "step": "malformed",
+      "description": "删除列数与表头不一致的行",
+      "removed": 0,
+      "remaining": 525534
+    },
+    {
+      "step": "missing-user",
+      "description": "删除缺少 user_id 的行",
+      "removed": 0,
+      "remaining": 525534
+    },
+    {
+      "step": "missing-skill",
+      "description": "删除缺少 skill_id / skill_name 的行（缺失知识点）",
+      "removed": 78690,
+      "remaining": 446844
+    },
+    {
+      "step": "invalid-correct",
+      "description": "删除 correct 不是 0/1 的行",
+      "removed": 0,
+      "remaining": 446844
+    },
+    {
+      "step": "exact-duplicate",
+      "description": "删除 (user_id, order_id, skill_id) 完全重复的记录",
+      "removed": 121207,
+      "remaining": 325637
+    },
+    {
+      "step": "multi-skill",
+      "description": "同一 order 多知识点：保留 skill_id 最小者作为主知识点",
+      "removed": 51047,
+      "remaining": 274590
+    },
+    {
+      "step": "short-sequence",
+      "description": "删除交互数 < 2 的 (学生,知识点) 序列（无法做下一题预测；共 7642 个序列）",
+      "removed": 7642,
+      "remaining": 266948
+    }
+  ],
+  "rules": {
+    "missingSkill": "缺少 skill_id 或 skill_name 的记录直接删除（不猜测知识点）",
+    "duplicate": "按 (user_id, order_id, skill_id) 去重，保留首次出现",
+    "multiSkill": "同一 order_id 关联多个知识点时，复制记录会重复计数，因此保留 skill_id 数值最小者作为主知识点（固定策略，切换需重跑并记录）",
+    "shortSequence": "每个 (学生, 知识点) 序列至少 2 次交互，否则无法定义「预测下一次」任务",
+    "costTime": "ms_first_response 毫秒转秒后取整；缺失或非正值记为 0（速度条件视为不满足）",
+    "timeModel": {
+      "type": "relative-sequence-index",
+      "description": "数据集无真实答题时间戳（order_id 非时序），因此用「学生内交互序号」构造相对时间轴：createdAt = 2000-01-01T00:00:00.000Z + 序号 × 60s。它不是真实日期，只用于定义先后顺序与时间间隔",
+      "important": "相对时间下的「间隔天数」不具现实含义，涉及时间衰减的模型（Rule-2）在本数据集上的结论需谨慎解读"
+    },
+    "ids": {
+      "userId": "a09-u<原始 user_id>",
+      "questionId": "a09-p<原始 problem_id>",
+      "kpCode": "a09-s<原始 skill_id>",
+      "skillNames": "skill_id → skill_name 映射见 skill-names.json"
+    }
+  },
+  "split": {
+    "protocol": "时间顺序 walk-forward：预测第 t 次交互只使用同一 (学生, 知识点) 序列中前 t-1 次记录；不做随机划分，测试样本与训练样本按时间严格分离",
+    "seed": 42,
+    "bootstrap": "学生级聚类 bootstrap（重采样单位为学生）"
+  },
+  "stats": {
+    "students": 3931,
+    "knowledgePoints": 100,
+    "questions": 16807,
+    "interactions": 266948,
+    "predictors": 239521,
+    "predictorDefinition": "walk-forward 可预测样本数 = 交互数 − (学生,知识点) 序列数（每条序列首条无历史，无法预测）",
+    "correctRate": 0.658,
+    "groupCount": 27427,
+    "groupSizeMedian": 6,
+    "groupSizeMax": 290
+  },
+  "reproducibility": {
+    "script": "scripts/ingest-assistments2009.js",
+    "scriptSha256": "sha256:21fc2cfd09a33e897884f4596f41fec178cef6b05a94a0594d4ddcbedc87de4a",
+    "gitCommit": "56db1d6b2bf0e599f48179cc6acd9fc27f1e3ac4",
+    "generatedAt": "2026-10-29T05:53:12.997Z",
+    "node": "v22.22.2",
+    "args": {
+      "input": "backend\\datasets\\raw\\skill_builder_data.csv",
+      "out": "backend\\datasets\\assist2009",
+      "minInteractions": 2,
+      "sampleStudents": null,
+      "quiet": false
+    }
+  }
+}

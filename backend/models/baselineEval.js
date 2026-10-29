@@ -256,134 +256,13 @@ function formatTable(results) {
 }
 
 // ---------- 统计严谨性：学生级 bootstrap 置信区间 + 配对显著性检验 ----------
-// 依据《知识追踪项目推荐实验方案》：同一学生的答题记录彼此相关，
-// 以「学生」为单位有放回重采样，保留其全部记录，重复约 1000 次，取 2.5%/97.5% 分位数。
-
-function mulberry32(seed) {
-  let a = seed >>> 0;
-  return function () {
-    a |= 0; a = (a + 0x6D2B79F5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-function percentile(sorted, q) {
-  if (!sorted.length) return null;
-  const pos = (sorted.length - 1) * q;
-  const base = Math.floor(pos);
-  const rest = pos - base;
-  return sorted[base + 1] !== undefined
-    ? sorted[base] + rest * (sorted[base + 1] - sorted[base])
-    : sorted[base];
-}
-
-// 按学生分组（学生级重采样单位）
-function groupRowsByStudent(rows) {
-  const groups = new Map();
-  for (const row of rows) {
-    if (!groups.has(row.userId)) groups.set(row.userId, []);
-    groups.get(row.userId).push(row);
-  }
-  return [...groups.values()];
-}
-
-// rows 来自 walkForward 输出；学生级 bootstrap，返回各指标 95% 置信区间
-function bootstrapCIs(rows, { reps = 1000, seed = 42 } = {}) {
-  const groups = groupRowsByStudent(rows);
-  const rand = mulberry32(seed);
-  const samples = { AUC: [], LogLoss: [], Accuracy: [], Brier: [] };
-  for (let r = 0; r < reps; r++) {
-    const picked = [];
-    for (let g = 0; g < groups.length; g++) {
-      const student = groups[Math.floor(rand() * groups.length)];
-      picked.push(...student);
-    }
-    const m = evaluateMetrics(picked);
-    if (m.AUC !== null) samples.AUC.push(m.AUC);
-    samples.LogLoss.push(m.LogLoss);
-    samples.Accuracy.push(m.Accuracy);
-    samples.Brier.push(m.Brier);
-  }
-  const ci = {};
-  for (const [name, arr] of Object.entries(samples)) {
-    arr.sort((a, b) => a - b);
-    ci[name] = [Number(percentile(arr, 0.025).toFixed(4)), Number(percentile(arr, 0.975).toFixed(4))];
-  }
-  return ci;
-}
-
-// 配对比较：两模型 walk-forward 输出按 (userId,kpCode,createdAt) 对齐（target 相同）
-// 统计方法：学生级聚类 bootstrap 下计算「池化」指标差（相同学生、相同测试样本的配对比较）。
-// 注意：不能用学生内逐行 AUC 的均值——短序列上增长窗口预测器存在机械性负偏差
-// （pred(t) 的历史窗口包含 target(t-1)，会制造虚假反相关），池化 AUC 才是 KT 标准指标。
-function pairedComparison(rowsA, rowsB, { reps = 1000, seed = 42 } = {}) {
-  const keyOf = (row) => `${row.userId}|${row.kpCode}|${row.createdAt}`;
-  const mapB = new Map(rowsB.map((row) => [keyOf(row), row]));
-  const paired = [];
-  for (const a of rowsA) {
-    const b = mapB.get(keyOf(a));
-    if (b && b.target === a.target) paired.push({ key: keyOf(a), a, b });
-  }
-
-  // 学生级聚类
-  const groups = new Map();
-  for (const item of paired) {
-    const gk = item.key.split('|')[0];
-    if (!groups.has(gk)) groups.set(gk, []);
-    groups.get(gk).push(item);
-  }
-  const groupList = [...groups.values()];
-
-  function pooledMetrics(items) {
-    const auc = rocAUC(items.map((x) => ({ pred: x.a.pred, target: x.a.target })));
-    const eps = params.logLossEps;
-    let llA = 0, llB = 0;
-    for (const x of items) {
-      const pa = Math.min(1 - eps, Math.max(eps, x.a.pred));
-      const pb = Math.min(1 - eps, Math.max(eps, x.b.pred));
-      llA += -(x.a.target * Math.log(pa) + (1 - x.a.target) * Math.log(1 - pa));
-      llB += -(x.b.target * Math.log(pb) + (1 - x.b.target) * Math.log(1 - pb));
-    }
-    return {
-      dAUC: auc === null ? null : auc - rocAUC(items.map((x) => ({ pred: x.b.pred, target: x.b.target }))),
-      dLogLoss: (llA - llB) / items.length
-    };
-  }
-
-  const observed = pooledMetrics(paired);
-  const rand = mulberry32(seed);
-  const n = groupList.length;
-
-  function bootStats(observedDiff, pickDiff) {
-    const diffs = [];
-    for (let r = 0; r < reps; r++) {
-      const picked = [];
-      for (let g = 0; g < n; g++) picked.push(...groupList[Math.floor(rand() * n)]);
-      const m = pickDiff(picked);
-      if (m !== null) diffs.push(m);
-    }
-    diffs.sort((a, b) => a - b);
-    const pAbove = diffs.filter((d) => d <= 0).length / diffs.length;
-    return {
-      meanDiff: Number(observedDiff.toFixed(4)),
-      ci: [Number(percentile(diffs, 0.025).toFixed(4)), Number(percentile(diffs, 0.975).toFixed(4))],
-      // bootstrap 双侧 p 值：分布越过 0 的比例的两倍（加一平滑避免 0/1）
-      p: Number(Math.min(1, 2 * Math.min((pAbove * diffs.length + 1) / (diffs.length + 1),
-        ((1 - pAbove) * diffs.length + 1) / (diffs.length + 1))).toFixed(4)),
-      units: n
-    };
-  }
-
-  return {
-    pairedRows: paired.length,
-    dAUC: observed.dAUC === null
-      ? { meanDiff: null, ci: [null, null], p: null, units: n }
-      : bootStats(observed.dAUC, (items) => pooledMetrics(items).dAUC),
-    dLogLoss: bootStats(observed.dLogLoss, (items) => pooledMetrics(items).dLogLoss)
-  };
-}
+// 大样本（十万条以上）下若每次重采样都重新排序算 AUC，2000 次 bootstrap 要一小时以上。
+// 因此实现移到 bootstrapStats.js：预排序 + 预计算损失 + 权重前缀和，指标与 evaluateMetrics 等价。
+const {
+  bootstrapAllModels,
+  bootstrapCIs,
+  pairedComparison
+} = require('./bootstrapStats');
 
 function formatComparisonTable(comparisons) {
   const header = ['对比 (A vs B)', 'ΔAUC均值', 'ΔAUC 95%CI', 'p(AUC)', 'ΔLogLoss均值', 'ΔLogLoss 95%CI', 'p(LogLoss)'];
@@ -403,15 +282,28 @@ function formatComparisonTable(comparisons) {
 
 // 数据集元信息（方案要求随结果一并报告）
 function datasetStats(records) {
-  const times = records.map((r) => new Date(r.createdAt).getTime()).filter(Number.isFinite);
+  // 注意：不能用 Math.min(...times)，几十万条记录会触发参数个数上限（RangeError）
+  let minT = Infinity;
+  let maxT = -Infinity;
+  const users = new Set();
+  const questions = new Set();
+  const kps = new Set();
+  for (const r of records) {
+    const t = new Date(r.createdAt).getTime();
+    if (Number.isFinite(t)) {
+      if (t < minT) minT = t;
+      if (t > maxT) maxT = t;
+    }
+    users.add(r.userId);
+    questions.add(r.questionId);
+    kps.add(r.kpCode);
+  }
   return {
     recordCount: records.length,
-    studentCount: new Set(records.map((r) => r.userId)).size,
-    questionCount: new Set(records.map((r) => r.questionId)).size,
-    knowledgePointCount: new Set(records.map((r) => r.kpCode)).size,
-    timeRange: times.length
-      ? [new Date(Math.min(...times)).toISOString(), new Date(Math.max(...times)).toISOString()]
-      : []
+    studentCount: users.size,
+    questionCount: questions.size,
+    knowledgePointCount: kps.size,
+    timeRange: minT === Infinity ? [] : [new Date(minT).toISOString(), new Date(maxT).toISOString()]
   };
 }
 
@@ -452,9 +344,11 @@ function main() {
   const walkRows = {};
   for (const model of models) walkRows[model] = walkForward(records, model);
 
+  // 同一批重采样权重同时用于所有模型：置信区间与两两配对检验天然配对，且只遍历一次数据
+  const boot = bootstrapAllModels(walkRows, { reps });
   console.log(`\n== 95% 置信区间（学生级 bootstrap × ${reps}）==`);
   const ciTable = models.map((model) => {
-    const ci = bootstrapCIs(walkRows[model], { reps });
+    const ci = boot.ciByModel[model];
     const m = results[model];
     return [model,
       `${m.AUC === null ? '-' : m.AUC} [${ci.AUC[0]}, ${ci.AUC[1]}]`,
@@ -464,12 +358,7 @@ function main() {
   ciTable.forEach((r) => console.log(r.join(' | ')));
 
   console.log(`\n== 配对显著性检验（学生级聚类 bootstrap，池化指标差, Δ = 行A - 行B）==`);
-  const pairs = [];
-  for (let i = 0; i < models.length; i++) {
-    for (let j = i + 1; j < models.length; j++) {
-      pairs.push({ a: models[i], b: models[j], res: pairedComparison(walkRows[models[i]], walkRows[models[j]], { reps }) });
-    }
-  }
+  const pairs = boot.comparisons.map((c) => ({ a: c.a, b: c.b, res: { dAUC: c.dAUC, dLogLoss: c.dLogLoss } }));
   console.log(formatComparisonTable(pairs));
   console.log('\n判读：主要依据 Δ 及其 95% CI（CI 不含 0 → 方向稳定）；AUC 越大越好，LogLoss/Brier 越小越好。');
   console.log('注意：p 值为探索性指标（受 bootstrap 次数影响分辨率有限），不作为模型优越性的充分依据；');
@@ -488,7 +377,10 @@ function main() {
   const outIdx = args.indexOf('--out');
   const outDir = outIdx >= 0 ? path.resolve(args[outIdx + 1]) : path.join(__dirname, '..', '实验结果文件');
   fs.mkdirSync(outDir, { recursive: true });
-  const outFile = path.join(outDir, `baseline-results-${source}.json`);
+  // --label 用于区分不同数据集的结果文件（例如 assist2009），默认用数据源名
+  const labelIdx = args.indexOf('--label');
+  const label = labelIdx >= 0 ? String(args[labelIdx + 1]).replace(/[^\w.-]/g, '') : source;
+  const outFile = path.join(outDir, `baseline-results-${label}.json`);
 
   // 可复现性元信息：代码版本 + 输入文件指纹 + 运行时间
   let gitCommit = null;
@@ -509,6 +401,7 @@ function main() {
 
   fs.writeFileSync(outFile, JSON.stringify({
     source,
+    label,
     inputFile: source === 'csv' ? path.resolve(csvFile || '') : null,
     inputHash,
     gitCommit,
@@ -522,7 +415,8 @@ function main() {
       pairedComparison: '相同学生、相同测试样本的配对比较，池化指标差 + 学生级 bootstrap 置信区间与双侧 p 值',
       pValueInterpretation: '探索性指标：bootstrap 次数有限时分辨率低，不作为模型优越性的充分依据；主要结论应基于 Δ 及其 95% CI',
       metricInterpretation: 'AUC=排序能力；LogLoss=概率预测质量；Brier=概率校准与误差；Accuracy/F1=固定阈值0.5下的分类表现（Majority 正例率<0.5 时 F1=0 属预期）',
-      bootstrapReps: reps,
+      bootstrapReps: boot.reps,
+      bootstrapUnits: `${boot.students} 名学生（学生级聚类重采样）`,
       seed: 42
     },
     params,
@@ -544,6 +438,7 @@ module.exports = {
   formatTable,
   bootstrapCIs,
   pairedComparison,
+  bootstrapAllModels,
   formatComparisonTable,
   calibrationBins,
   datasetStats,

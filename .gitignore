@@ -91,6 +91,11 @@ logs/
 .env.*
 !.env.example
 
+# 公开数据集原始/清洗产物（体量大、受数据许可约束，按 backend/datasets/README.md 自行下载）
+# 只提交 manifest.json 与 skill-names.json 等元信息
+backend/datasets/raw/
+backend/datasets/assist2009/interactions.csv
+
 # 数据库文件
 backend/database/questions.sqlite
 
