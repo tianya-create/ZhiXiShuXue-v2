@@ -1,0 +1,19 @@
+{
+  "comment": "规则掌握度基线实验固定参数。所有基线共用同一组参数，禁止按学生单独调参。",
+  "windowSize": 10,
+  "minSamples": 5,
+  "minDistinctQuestions": 3,
+  "insufficientCap": 0.79,
+  "streakBoost": 0.10,
+  "streakPenalty": 0.10,
+  "streakWindowCorrect": 3,
+  "streakWindowWrong": 2,
+  "speedTolerance": 1.2,
+  "decayRate": 0.03,
+  "laplacePrior": 1,
+  "coldStartMastery": 0.5,
+  "probFloor": 0.01,
+  "probCeil": 0.99,
+  "decisionThreshold": 0.5,
+  "logLossEps": 1e-12
+}
