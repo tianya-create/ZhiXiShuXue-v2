@@ -102,6 +102,13 @@ function walkForward(records, model, options = {}) {
   const groups = groupByStudentKp(records);
   const rows = [];
 
+  // 可选目标过滤器：(groupIndex, t) => boolean，只保留返回 true 的预测目标。
+  // BKT 的无泄漏评估用它在「估计段/评估段」切分下只评估评估段目标；
+  // 不传时行为与原来完全一致（所有非首批次记录都是目标）。
+  // 同一批目标集合 + 相同的批次/前缀规则，保证 BKT 与规则模型逐条可比。
+  const targetFilter = options.targetFilter;
+  let groupIndex = -1;
+
   // Majority 用的全局前缀和：prefixCount[i] = 前 i 条记录数，prefixCorrect[i] = 前 i 条正确数
   const globalSorted = sortByTime(records);
   const globalTimes = globalSorted.map((item) => new Date(item.createdAt).getTime());
@@ -123,6 +130,7 @@ function walkForward(records, model, options = {}) {
   }
 
   for (const group of groups) {
+    groupIndex++;
     // 同一时间戳视为同一答题批次：批次内记录互不为历史信息，历史只包含
     // 严格早于目标时刻的记录（与 Majority 的全局前缀规则一致）。
     // 首批次（无任何更早记录）整体跳过；之后每个记录都是预测目标——
@@ -136,11 +144,16 @@ function walkForward(records, model, options = {}) {
              new Date(group[cutoff].createdAt).getTime() < currentTime) cutoff++;
       const history = group.slice(0, cutoff);
       const target = group[t].isCorrect ? 1 : 0;
+      if (targetFilter && !targetFilter(groupIndex, t, group, history)) continue;
       let pred;
       if (model === 'Majority') {
         // 拉普拉斯平滑的全局累积正例率（严格早于目标时刻），无历史时为 0.5
         const cnt = countBefore(currentTime);
         pred = (prefixCorrect[cnt] + 1) / (prefixCount[cnt] + 2);
+      } else if (options.bktPredict) {
+        // BKT：由外部注入的预测器计算（predictNextCorrect 与参数见 bkt.js），
+        // 历史以二值作答序列传入；参数为知识点级、仅由估计段拟合
+        pred = options.bktPredict(group[t].kpCode, history.map((r) => (r.isCorrect ? 1 : 0)));
       } else {
         // 预测时刻 = 目标答题时刻：时间衰减按「距上次练习的真实间隔」计算，
         // 而不是按今天的系统时间（否则历史数据衰减全部失真）
