@@ -91,14 +91,26 @@
       "remaining": 446844
     },
     {
-      "step": "exact-duplicate",
-      "description": "删除 (user_id, order_id, skill_id) 完全重复的记录",
+      "step": "duplicate-write",
+      "description": "删除同一 (user_id, order_id, skill_id) 的重复写入：problem_id/correct/ms_first_response 完全一致（实测仅 opportunity 不同），保留原始文件中首次出现的行",
       "removed": 121207,
       "remaining": 325637
     },
     {
+      "step": "duplicate-conflict",
+      "description": "同键但 problem_id/correct/ms_first_response 存在差异的记录：不按重复删除，全部保留并单独报告（共 0 条）",
+      "removed": 0,
+      "remaining": 325637
+    },
+    {
+      "step": "empty-order-id",
+      "description": "order_id 为空的记录：去重键会退化为 user_id|skill_id 造成误删风险，故不参与去重、全部保留（共 0 条）",
+      "removed": 0,
+      "remaining": 325637
+    },
+    {
       "step": "multi-skill",
-      "description": "同一 order 多知识点：保留 skill_id 最小者作为主知识点",
+      "description": "同一 order 多知识点：按 --multi-skill min 策略处理，保留 skill_id 最小者作为主知识点",
       "removed": 51047,
       "remaining": 274590
     },
@@ -111,13 +123,13 @@
   ],
   "rules": {
     "missingSkill": "缺少 skill_id 或 skill_name 的记录直接删除（不猜测知识点）",
-    "duplicate": "按 (user_id, order_id, skill_id) 去重，保留首次出现",
-    "multiSkill": "同一 order_id 关联多个知识点时，复制记录会重复计数，因此保留 skill_id 数值最小者作为主知识点（固定策略，切换需重跑并记录）",
-    "shortSequence": "每个 (学生, 知识点) 序列至少 2 次交互，否则无法定义「预测下一次」任务",
+    "duplicate": "仅当 order_id 非空时按 (user_id, order_id, skill_id) 去重：同键后续行只在 problem_id/correct/ms_first_response 完全一致时判定为「重复写入」，保留原始文件中首次出现的记录（不比较 opportunity 数值、不保证保留最小 opportunity；同组记录除 opportunity/opportunity_original 外字段完全一致且这两列不进入输出，保留哪一行不影响结果）。实测出现重复写入的键 3227 组，其中首次出现即最小 opportunity 的 3227 组。存在差异的行保留并单独计数（duplicate-conflict：0 条）。order_id 为空的记录不参与去重、全部保留（empty-order-id：0 条）",
+    "multiSkill": "同一 order_id 关联多个知识点时按固定策略 --multi-skill min 处理（保留 skill_id 数值最小者作为主知识点）。注意：skill_id 数值大小不代表教学上的主知识点，该规则仅用于构造单知识点预测任务；策略切换必须重跑并做敏感性分析",
+    "shortSequence": "每个 (学生, 知识点) 序列至少 2 次交互，否则无法定义「预测下一次」任务。注意：短序列删除只针对 walk-forward 预测实验；描述性统计应使用未删除短序列的口径（见 stats.statsBeforeShortSequence）",
     "costTime": "ms_first_response 毫秒转秒后取整；缺失或非正值记为 0（速度条件视为不满足）",
     "timeModel": {
       "type": "relative-sequence-index",
-      "description": "数据集无真实答题时间戳（order_id 非时序），因此用「学生内交互序号」构造相对时间轴：createdAt = 2000-01-01T00:00:00.000Z + 序号 × 60s。它不是真实日期，只用于定义先后顺序与时间间隔",
+      "description": "数据集无真实答题时间戳（order_id 非时序），因此用「学生内交互序号」构造相对时间轴：createdAt = 2000-01-01T00:00:00.000Z + 序号 × 60s。序列顺序取原始文件中同一学生记录的出现顺序（不按 order_id 排序），仅用于构造可复现的相对顺序，不代表真实答题时间，也不是真实日期",
       "important": "相对时间下的「间隔天数」不具现实含义，涉及时间衰减的模型（Rule-2）在本数据集上的结论需谨慎解读"
     },
     "ids": {
@@ -134,6 +146,16 @@
   },
   "stats": {
     "students": 3931,
+    "studentsBeforeShortSequence": 4151,
+    "studentsAfterShortSequence": 3931,
+    "shortSequenceNote": "删除短序列会改变样本组成（单次交互学生被排除、正确率与学生分布可能变化）；walk-forward 实验用本层统计，描述性统计用 statsBeforeShortSequence",
+    "statsBeforeShortSequence": {
+      "students": 4151,
+      "knowledgePoints": 102,
+      "questions": 16891,
+      "interactions": 274590,
+      "correctRate": 0.6617
+    },
     "knowledgePoints": 100,
     "questions": 16807,
     "interactions": 266948,
@@ -146,16 +168,17 @@
   },
   "reproducibility": {
     "script": "scripts/ingest-assistments2009.js",
-    "scriptSha256": "sha256:21fc2cfd09a33e897884f4596f41fec178cef6b05a94a0594d4ddcbedc87de4a",
-    "gitCommit": "56db1d6b2bf0e599f48179cc6acd9fc27f1e3ac4",
-    "generatedAt": "2026-10-29T05:53:12.997Z",
+    "scriptSha256": "sha256:386a6651bc2a5c5620f93b5d603188ecdfd6ee8faa12b592be04e42774cd552b",
+    "gitCommit": "cb3f251a7b8843e4d22a85cfb9bead6fdc69cd79",
+    "generatedAt": "2026-10-29T06:47:07.183Z",
     "node": "v22.22.2",
     "args": {
       "input": "backend\\datasets\\raw\\skill_builder_data.csv",
       "out": "backend\\datasets\\assist2009",
       "minInteractions": 2,
+      "multiSkill": "min",
       "sampleStudents": null,
-      "quiet": false
+      "quiet": true
     }
   }
 }

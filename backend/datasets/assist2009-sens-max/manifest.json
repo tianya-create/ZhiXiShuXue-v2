@@ -1,0 +1,184 @@
+{
+  "dataset": {
+    "name": "ASSISTments 2009-2010 Skill Builder",
+    "officialPage": "https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010",
+    "mirrorUsed": "https://github.com/WalidAlsafadi/SkillMap-AI-Student-Support-Prediction/blob/main/data/raw/skill_builder_data.csv",
+    "license": "ASSISTments 数据使用协议（学术研究用途，引用 ASSISTments 团队）",
+    "note": "本仓库不提交原始数据文件，仅提交清洗结果元信息与统计；原始文件请按 manifest.source 自行下载"
+  },
+  "source": {
+    "rawFile": "backend/datasets/raw/skill_builder_data.csv",
+    "rawBytes": 82676405,
+    "rawSha256": "sha256:408698925fc3488672431e4c19b9b16808b6a25760f8e41ad4d3d6257ad0832a",
+    "rawColumns": [
+      "order_id",
+      "assignment_id",
+      "user_id",
+      "assistment_id",
+      "problem_id",
+      "original",
+      "correct",
+      "attempt_count",
+      "ms_first_response",
+      "tutor_mode",
+      "answer_type",
+      "sequence_id",
+      "student_class_id",
+      "position",
+      "type",
+      "base_sequence_id",
+      "skill_id",
+      "skill_name",
+      "teacher_id",
+      "school_id",
+      "hint_count",
+      "hint_total",
+      "overlap_time",
+      "template_id",
+      "answer_id",
+      "answer_text",
+      "first_action",
+      "bottom_hint",
+      "opportunity",
+      "opportunity_original"
+    ],
+    "rowCountInRaw": 525534
+  },
+  "output": {
+    "file": "backend/datasets/assist2009-sens-max/interactions.csv",
+    "sha256": "sha256:61b843cf9fa728928e2478ea8b5324d06339560d2f63cdd95129942cab664baf",
+    "bytes": 17022266,
+    "rowCount": 267289,
+    "columns": [
+      "userId",
+      "questionId",
+      "kpCode",
+      "isCorrect",
+      "costTime",
+      "createdAt",
+      "sequenceIndex"
+    ]
+  },
+  "cleaning": [
+    {
+      "step": "read",
+      "description": "读取原始记录行数",
+      "removed": 0,
+      "remaining": 525534
+    },
+    {
+      "step": "malformed",
+      "description": "删除列数与表头不一致的行",
+      "removed": 0,
+      "remaining": 525534
+    },
+    {
+      "step": "missing-user",
+      "description": "删除缺少 user_id 的行",
+      "removed": 0,
+      "remaining": 525534
+    },
+    {
+      "step": "missing-skill",
+      "description": "删除缺少 skill_id / skill_name 的行（缺失知识点）",
+      "removed": 78690,
+      "remaining": 446844
+    },
+    {
+      "step": "invalid-correct",
+      "description": "删除 correct 不是 0/1 的行",
+      "removed": 0,
+      "remaining": 446844
+    },
+    {
+      "step": "duplicate-write",
+      "description": "删除同一 (user_id, order_id, skill_id) 的重复写入：problem_id/correct/ms_first_response 完全一致（实测仅 opportunity 不同），保留原始文件中首次出现的行",
+      "removed": 121207,
+      "remaining": 325637
+    },
+    {
+      "step": "duplicate-conflict",
+      "description": "同键但 problem_id/correct/ms_first_response 存在差异的记录：不按重复删除，全部保留并单独报告（共 0 条）",
+      "removed": 0,
+      "remaining": 325637
+    },
+    {
+      "step": "empty-order-id",
+      "description": "order_id 为空的记录：去重键会退化为 user_id|skill_id 造成误删风险，故不参与去重、全部保留（共 0 条）",
+      "removed": 0,
+      "remaining": 325637
+    },
+    {
+      "step": "multi-skill",
+      "description": "同一 order 多知识点：按 --multi-skill max 策略处理，保留 skill_id 最大者作为主知识点",
+      "removed": 51047,
+      "remaining": 274590
+    },
+    {
+      "step": "short-sequence",
+      "description": "删除交互数 < 2 的 (学生,知识点) 序列（无法做下一题预测；共 7301 个序列）",
+      "removed": 7301,
+      "remaining": 267289
+    }
+  ],
+  "rules": {
+    "missingSkill": "缺少 skill_id 或 skill_name 的记录直接删除（不猜测知识点）",
+    "duplicate": "仅当 order_id 非空时按 (user_id, order_id, skill_id) 去重：同键后续行只在 problem_id/correct/ms_first_response 完全一致时判定为「重复写入」，保留原始文件中首次出现的记录（不比较 opportunity 数值、不保证保留最小 opportunity；同组记录除 opportunity/opportunity_original 外字段完全一致且这两列不进入输出，保留哪一行不影响结果）。实测出现重复写入的键 3227 组，其中首次出现即最小 opportunity 的 3227 组。存在差异的行保留并单独计数（duplicate-conflict：0 条）。order_id 为空的记录不参与去重、全部保留（empty-order-id：0 条）",
+    "multiSkill": "同一 order_id 关联多个知识点时按固定策略 --multi-skill max 处理（保留 skill_id 数值最大者作为主知识点）。注意：skill_id 数值大小不代表教学上的主知识点，该规则仅用于构造单知识点预测任务；策略切换必须重跑并做敏感性分析",
+    "shortSequence": "每个 (学生, 知识点) 序列至少 2 次交互，否则无法定义「预测下一次」任务。注意：短序列删除只针对 walk-forward 预测实验；描述性统计应使用未删除短序列的口径（见 stats.statsBeforeShortSequence）",
+    "costTime": "ms_first_response 毫秒转秒后取整；缺失或非正值记为 0（速度条件视为不满足）",
+    "timeModel": {
+      "type": "relative-sequence-index",
+      "description": "数据集无真实答题时间戳（order_id 非时序），因此用「学生内交互序号」构造相对时间轴：createdAt = 2000-01-01T00:00:00.000Z + 序号 × 60s。序列顺序取原始文件中同一学生记录的出现顺序（不按 order_id 排序），仅用于构造可复现的相对顺序，不代表真实答题时间，也不是真实日期",
+      "important": "相对时间下的「间隔天数」不具现实含义，涉及时间衰减的模型（Rule-2）在本数据集上的结论需谨慎解读"
+    },
+    "ids": {
+      "userId": "a09-u<原始 user_id>",
+      "questionId": "a09-p<原始 problem_id>",
+      "kpCode": "a09-s<原始 skill_id>",
+      "skillNames": "skill_id → skill_name 映射见 skill-names.json"
+    }
+  },
+  "split": {
+    "protocol": "时间顺序 walk-forward：预测第 t 次交互只使用同一 (学生, 知识点) 序列中前 t-1 次记录；不做随机划分，测试样本与训练样本按时间严格分离",
+    "seed": 42,
+    "bootstrap": "学生级聚类 bootstrap（重采样单位为学生）"
+  },
+  "stats": {
+    "students": 3930,
+    "studentsBeforeShortSequence": 4151,
+    "studentsAfterShortSequence": 3930,
+    "shortSequenceNote": "删除短序列会改变样本组成（单次交互学生被排除、正确率与学生分布可能变化）；walk-forward 实验用本层统计，描述性统计用 statsBeforeShortSequence",
+    "statsBeforeShortSequence": {
+      "students": 4151,
+      "knowledgePoints": 103,
+      "questions": 16891,
+      "interactions": 274590,
+      "correctRate": 0.6617
+    },
+    "knowledgePoints": 98,
+    "questions": 16810,
+    "interactions": 267289,
+    "predictors": 240513,
+    "predictorDefinition": "walk-forward 可预测样本数 = 交互数 − (学生,知识点) 序列数（每条序列首条无历史，无法预测）",
+    "correctRate": 0.6582,
+    "groupCount": 26776,
+    "groupSizeMedian": 6,
+    "groupSizeMax": 290
+  },
+  "reproducibility": {
+    "script": "scripts/ingest-assistments2009.js",
+    "scriptSha256": "sha256:386a6651bc2a5c5620f93b5d603188ecdfd6ee8faa12b592be04e42774cd552b",
+    "gitCommit": "cb3f251a7b8843e4d22a85cfb9bead6fdc69cd79",
+    "generatedAt": "2026-10-29T06:47:21.413Z",
+    "node": "v22.22.2",
+    "args": {
+      "input": "backend\\datasets\\raw\\skill_builder_data.csv",
+      "out": "backend/datasets/assist2009-sens-max",
+      "minInteractions": 2,
+      "multiSkill": "max",
+      "sampleStudents": null,
+      "quiet": true
+    }
+  }
+}

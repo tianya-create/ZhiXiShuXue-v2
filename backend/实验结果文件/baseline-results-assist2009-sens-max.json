@@ -1,0 +1,712 @@
+{
+  "source": "csv",
+  "label": "assist2009-sens-max",
+  "inputFile": "D:\\迅雷云盘\\WorkBuddy\\2026-10-28-23-41-59\\zhiXiShuXue\\backend\\datasets\\assist2009-sens-max\\interactions.csv",
+  "inputHash": "sha256:61b843cf9fa72892",
+  "gitCommit": "cb3f251",
+  "generatedAt": "2026-10-29T06:20:19.171Z",
+  "dataset": {
+    "recordCount": 267289,
+    "studentCount": 3930,
+    "questionCount": 16810,
+    "knowledgePointCount": 98,
+    "timeRange": [
+      "2000-01-01T00:01:00.000Z",
+      "2000-01-01T17:20:00.000Z"
+    ]
+  },
+  "evalProtocol": {
+    "task": "预测学生下一次答题结果（时间顺序 walk-forward，无未来信息泄漏）",
+    "majority": "全局时间前缀正例率（前缀和+二分查找，严格早于预测时刻，与组处理顺序无关）",
+    "sameTimestampRule": "同一时间戳视为同一答题批次，批次内记录互不为历史信息；排序以 createdAt、attemptIndex、原始行序为稳定次序",
+    "bootstrap": "学生级聚类 bootstrap，重采样单位为学生，保留其全部记录",
+    "pairedComparison": "相同学生、相同测试样本的配对比较，池化指标差 + 学生级 bootstrap 置信区间与双侧 p 值",
+    "pValueInterpretation": "探索性指标：bootstrap 次数有限时分辨率低，不作为模型优越性的充分依据；主要结论应基于 Δ 及其 95% CI",
+    "metricInterpretation": "AUC=排序能力；LogLoss=概率预测质量；Brier=概率校准与误差；Accuracy/F1=固定阈值0.5下的分类表现（Majority 正例率<0.5 时 F1=0 属预期）",
+    "bootstrapReps": 2000,
+    "bootstrapUnits": "3930 名学生（学生级聚类重采样）",
+    "seed": 42
+  },
+  "params": {
+    "comment": "规则掌握度基线实验固定参数。所有基线共用同一组参数，禁止按学生单独调参。",
+    "windowSize": 10,
+    "minSamples": 5,
+    "minDistinctQuestions": 3,
+    "insufficientCap": 0.79,
+    "streakBoost": 0.1,
+    "streakPenalty": 0.1,
+    "streakWindowCorrect": 3,
+    "streakWindowWrong": 2,
+    "speedTolerance": 1.2,
+    "decayRate": 0.03,
+    "laplacePrior": 1,
+    "coldStartMastery": 0.5,
+    "probFloor": 0.01,
+    "probCeil": 0.99,
+    "decisionThreshold": 0.5,
+    "logLossEps": 1e-12
+  },
+  "results": {
+    "Majority": {
+      "n": 240513,
+      "AUC": 0.5315,
+      "LogLoss": 0.6363,
+      "Brier": 0.2221,
+      "Accuracy": 0.6706,
+      "F1": 0.8028,
+      "positiveRate": 0.6706
+    },
+    "Online-Rule": {
+      "n": 240513,
+      "AUC": 0.6986,
+      "LogLoss": 0.7603,
+      "Brier": 0.2249,
+      "Accuracy": 0.7044,
+      "F1": 0.7842,
+      "positiveRate": 0.6706
+    },
+    "Rule-0": {
+      "n": 240513,
+      "AUC": 0.7052,
+      "LogLoss": 0.5956,
+      "Brier": 0.2042,
+      "Accuracy": 0.7053,
+      "F1": 0.787,
+      "positiveRate": 0.6706
+    },
+    "Rule-1": {
+      "n": 240513,
+      "AUC": 0.7038,
+      "LogLoss": 0.6194,
+      "Brier": 0.2088,
+      "Accuracy": 0.7031,
+      "F1": 0.7821,
+      "positiveRate": 0.6706
+    },
+    "Rule-2": {
+      "n": 240513,
+      "AUC": 0.7038,
+      "LogLoss": 0.6194,
+      "Brier": 0.2088,
+      "Accuracy": 0.67,
+      "F1": 0.7402,
+      "positiveRate": 0.6706
+    }
+  },
+  "bootstrap": {
+    "method": "学生级聚类 bootstrap：以学生为重采样单位，保留其全部记录；同一批重采样权重同时用于所有模型（paired bootstrap）",
+    "reps": 2000,
+    "units": 3930,
+    "ci": {
+      "Majority": {
+        "AUC": [
+          0.5235,
+          0.539
+        ],
+        "LogLoss": [
+          0.6314,
+          0.6417
+        ],
+        "Brier": [
+          0.2197,
+          0.2247
+        ],
+        "Accuracy": [
+          0.6613,
+          0.6791
+        ],
+        "draws": 2000
+      },
+      "Online-Rule": {
+        "AUC": [
+          0.6921,
+          0.7054
+        ],
+        "LogLoss": [
+          0.7524,
+          0.7679
+        ],
+        "Brier": [
+          0.2222,
+          0.2276
+        ],
+        "Accuracy": [
+          0.6993,
+          0.7094
+        ],
+        "draws": 2000
+      },
+      "Rule-0": {
+        "AUC": [
+          0.6982,
+          0.7122
+        ],
+        "LogLoss": [
+          0.5907,
+          0.6004
+        ],
+        "Brier": [
+          0.202,
+          0.2063
+        ],
+        "Accuracy": [
+          0.7,
+          0.7105
+        ],
+        "draws": 2000
+      },
+      "Rule-1": {
+        "AUC": [
+          0.6968,
+          0.711
+        ],
+        "LogLoss": [
+          0.6139,
+          0.6249
+        ],
+        "Brier": [
+          0.2064,
+          0.2111
+        ],
+        "Accuracy": [
+          0.6979,
+          0.708
+        ],
+        "draws": 2000
+      },
+      "Rule-2": {
+        "AUC": [
+          0.6968,
+          0.711
+        ],
+        "LogLoss": [
+          0.6139,
+          0.6249
+        ],
+        "Brier": [
+          0.2064,
+          0.2111
+        ],
+        "Accuracy": [
+          0.6648,
+          0.6749
+        ],
+        "draws": 2000
+      }
+    },
+    "comparisons": [
+      {
+        "a": "Majority",
+        "b": "Online-Rule",
+        "dAUC": {
+          "meanDiff": -0.1672,
+          "ci": [
+            -0.177,
+            -0.1565
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": -0.1239,
+          "ci": [
+            -0.1314,
+            -0.1157
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Majority",
+        "b": "Rule-0",
+        "dAUC": {
+          "meanDiff": -0.1738,
+          "ci": [
+            -0.1837,
+            -0.1629
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.0408,
+          "ci": [
+            0.0355,
+            0.0464
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Majority",
+        "b": "Rule-1",
+        "dAUC": {
+          "meanDiff": -0.1724,
+          "ci": [
+            -0.1824,
+            -0.1614
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.0171,
+          "ci": [
+            0.0112,
+            0.0231
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Majority",
+        "b": "Rule-2",
+        "dAUC": {
+          "meanDiff": -0.1724,
+          "ci": [
+            -0.1824,
+            -0.1614
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.0171,
+          "ci": [
+            0.0112,
+            0.0231
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Online-Rule",
+        "b": "Rule-0",
+        "dAUC": {
+          "meanDiff": -0.0066,
+          "ci": [
+            -0.0074,
+            -0.0058
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.1647,
+          "ci": [
+            0.1608,
+            0.1685
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Online-Rule",
+        "b": "Rule-1",
+        "dAUC": {
+          "meanDiff": -0.0052,
+          "ci": [
+            -0.0059,
+            -0.0046
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.1409,
+          "ci": [
+            0.1373,
+            0.1446
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Online-Rule",
+        "b": "Rule-2",
+        "dAUC": {
+          "meanDiff": -0.0052,
+          "ci": [
+            -0.0059,
+            -0.0046
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.1409,
+          "ci": [
+            0.1373,
+            0.1446
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Rule-0",
+        "b": "Rule-1",
+        "dAUC": {
+          "meanDiff": 0.0014,
+          "ci": [
+            0.0007,
+            0.0021
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": -0.0237,
+          "ci": [
+            -0.0247,
+            -0.0228
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Rule-0",
+        "b": "Rule-2",
+        "dAUC": {
+          "meanDiff": 0.0014,
+          "ci": [
+            0.0007,
+            0.0021
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": -0.0237,
+          "ci": [
+            -0.0247,
+            -0.0228
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Rule-1",
+        "b": "Rule-2",
+        "dAUC": {
+          "meanDiff": 0,
+          "ci": [
+            0,
+            0
+          ],
+          "p": 1
+        },
+        "dLogLoss": {
+          "meanDiff": 0,
+          "ci": [
+            0,
+            0
+          ],
+          "p": 0.001
+        }
+      }
+    ]
+  },
+  "calibration": {
+    "Majority": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 10076,
+        "meanPredicted": 0.5568,
+        "observedRate": 0.6571
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 230437,
+        "meanPredicted": 0.6368,
+        "observedRate": 0.6711
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      }
+    ],
+    "Online-Rule": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 33087,
+        "meanPredicted": 0.0114,
+        "observedRate": 0.3497
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 6112,
+        "meanPredicted": 0.12,
+        "observedRate": 0.4041
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 9275,
+        "meanPredicted": 0.2228,
+        "observedRate": 0.4824
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 11924,
+        "meanPredicted": 0.3184,
+        "observedRate": 0.5552
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 11875,
+        "meanPredicted": 0.407,
+        "observedRate": 0.5837
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 27031,
+        "meanPredicted": 0.5067,
+        "observedRate": 0.6734
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 26575,
+        "meanPredicted": 0.6287,
+        "observedRate": 0.7269
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 57823,
+        "meanPredicted": 0.7617,
+        "observedRate": 0.7883
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 21468,
+        "meanPredicted": 0.8147,
+        "observedRate": 0.7861
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 35343,
+        "meanPredicted": 0.9533,
+        "observedRate": 0.8272
+      }
+    ],
+    "Rule-0": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 4447,
+        "meanPredicted": 0.0841,
+        "observedRate": 0.0949
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 8088,
+        "meanPredicted": 0.1501,
+        "observedRate": 0.2198
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 15613,
+        "meanPredicted": 0.2424,
+        "observedRate": 0.3972
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 23577,
+        "meanPredicted": 0.3358,
+        "observedRate": 0.5047
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 17422,
+        "meanPredicted": 0.4174,
+        "observedRate": 0.579
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 46082,
+        "meanPredicted": 0.5327,
+        "observedRate": 0.6708
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 51764,
+        "meanPredicted": 0.6518,
+        "observedRate": 0.7652
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 37727,
+        "meanPredicted": 0.7442,
+        "observedRate": 0.7955
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 30239,
+        "meanPredicted": 0.8315,
+        "observedRate": 0.8442
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 5554,
+        "meanPredicted": 0.9129,
+        "observedRate": 0.8684
+      }
+    ],
+    "Rule-1": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 11690,
+        "meanPredicted": 0.034,
+        "observedRate": 0.1565
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 13295,
+        "meanPredicted": 0.141,
+        "observedRate": 0.3741
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 7940,
+        "meanPredicted": 0.2445,
+        "observedRate": 0.4514
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 23467,
+        "meanPredicted": 0.3318,
+        "observedRate": 0.5193
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 17719,
+        "meanPredicted": 0.4217,
+        "observedRate": 0.5966
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 38399,
+        "meanPredicted": 0.5311,
+        "observedRate": 0.6858
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 47328,
+        "meanPredicted": 0.6509,
+        "observedRate": 0.7663
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 42708,
+        "meanPredicted": 0.7576,
+        "observedRate": 0.8003
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 19782,
+        "meanPredicted": 0.841,
+        "observedRate": 0.8007
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 18185,
+        "meanPredicted": 0.9509,
+        "observedRate": 0.8532
+      }
+    ],
+    "Rule-2": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 14788,
+        "meanPredicted": 0.0478,
+        "observedRate": 0.1897
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 10568,
+        "meanPredicted": 0.1551,
+        "observedRate": 0.3928
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 9068,
+        "meanPredicted": 0.2555,
+        "observedRate": 0.4609
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 29189,
+        "meanPredicted": 0.3503,
+        "observedRate": 0.5393
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 32614,
+        "meanPredicted": 0.4796,
+        "observedRate": 0.6533
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 26024,
+        "meanPredicted": 0.5833,
+        "observedRate": 0.7195
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 39162,
+        "meanPredicted": 0.6655,
+        "observedRate": 0.768
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 42590,
+        "meanPredicted": 0.7611,
+        "observedRate": 0.8009
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 19498,
+        "meanPredicted": 0.8476,
+        "observedRate": 0.8023
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 17012,
+        "meanPredicted": 0.9544,
+        "observedRate": 0.8545
+      }
+    ]
+  }
+}
