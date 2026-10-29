@@ -4,6 +4,18 @@ const { updateMastery } = require("./masteryEngine");
 const { enrichQuestion } = require("./curriculum");
 const { canonicalKnowledgeId } = require("./question-map");
 const { finalizePendingLearningRound } = require("./adaptive-learning");
+
+// 方案埋点：学生作答后回填推荐日志的 answered_at（只回填一次）
+function markRecommendationAnswered(studentId, questionId, answeredAt) {
+  for (const log of db.find("recommendationLogs", { studentId })) {
+    if (log.answeredAt) continue;
+    const details = log.details || [];
+    const hit = details.some((item) => item.questionId === questionId) ||
+      (log.questionIds || []).includes(questionId);
+    if (hit) db.updateById("recommendationLogs", log.id, { answeredAt });
+  }
+}
+
 function gradeQuestions(ids, answers, overrides = []) {
   return [...new Set(ids)].map((id) => {
     const question =
@@ -46,6 +58,10 @@ function synchronize(record) {
     affected.add(kpCode);
     const sourceRef = record.id + ":" + result.questionId;
     const existing = db.findOne("student_answer", { sourceRef });
+    // 方案埋点：attemptIndex = 该生对该题的第几次作答；answerDuration 与 costTime 同义留档
+    const priorAttempts = db
+      .find("student_answer", { userId: record.studentId, questionId: result.questionId })
+      .filter((item) => !existing || item.id !== existing.id);
     const value = {
       sourceRef,
       userId: record.studentId,
@@ -57,12 +73,17 @@ function synchronize(record) {
       costTime:
         Number(record.costTime || 0) /
         Math.max(1, record.questionResults.length),
+      answerDuration:
+        Number(record.costTime || 0) /
+        Math.max(1, record.questionResults.length),
+      attemptIndex: existing?.attemptIndex || priorAttempts.length + 1,
       userAnswer: result.answer,
       createdAt: record.submittedAt || record.createdAt,
     };
     existing
       ? db.updateById("student_answer", existing.id, value)
       : db.create("student_answer", value);
+    markRecommendationAnswered(record.studentId, result.questionId, value.createdAt);
     const attempts = db
       .find("student_answer", {
         userId: record.studentId,

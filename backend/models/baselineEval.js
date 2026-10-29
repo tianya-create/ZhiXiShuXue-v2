@@ -154,6 +154,7 @@ function generateSyntheticRecords({ students = 40, kps = 6, avgPerPair = 12 } = 
 }
 
 // 从内存数据库读取（需先 seedDemoData 或有真实运行数据）
+// 兼容方案字段：answerDuration / answer_duration 视为 costTime，attemptIndex 透传
 function loadFromDb() {
   const db = require('../database/memory-db');
   return db.find('student_answer').map((item) => ({
@@ -161,25 +162,36 @@ function loadFromDb() {
     kpCode: item.kpCode,
     questionId: item.questionId,
     isCorrect: !!item.isCorrect,
-    costTime: Number(item.costTime || 0),
+    costTime: Number(item.costTime ?? item.answerDuration ?? item.answer_duration ?? 0),
+    attemptIndex: item.attemptIndex ?? null,
     createdAt: item.createdAt
   }));
 }
 
 // CSV：userId,kpCode,questionId,isCorrect,costTime,createdAt
+// 兼容列名：answerDuration / answer_duration 等价 costTime；attemptIndex 可选
 function loadFromCsv(filePath) {
   const text = fs.readFileSync(filePath, 'utf8').trim();
   const lines = text.split(/\r?\n/);
   const header = lines[0].split(',').map((s) => s.trim());
-  const idx = (name) => header.indexOf(name);
+  const idx = (...names) => {
+    for (const name of names) {
+      const i = header.indexOf(name);
+      if (i >= 0) return i;
+    }
+    return -1;
+  };
   return lines.slice(1).map((line) => {
     const cells = line.split(',');
+    const durationCell = idx('costTime', 'answerDuration', 'answer_duration');
+    const attemptCell = idx('attemptIndex', 'attempt_index');
     return {
       userId: cells[idx('userId')].trim(),
       kpCode: cells[idx('kpCode')].trim(),
       questionId: cells[idx('questionId')].trim(),
       isCorrect: cells[idx('isCorrect')].trim() === '1' || cells[idx('isCorrect')].trim().toLowerCase() === 'true',
-      costTime: Number(cells[idx('costTime')] || 0),
+      costTime: Number(durationCell >= 0 ? cells[durationCell] : 0),
+      attemptIndex: attemptCell >= 0 ? Number(cells[attemptCell]) : null,
       createdAt: cells[idx('createdAt')].trim()
     };
   });
@@ -206,7 +218,9 @@ function formatTable(results) {
   return [line(header), line(widths.map((w) => '-'.repeat(w))), ...rows.map(line)].join('\n');
 }
 
-// ---------- 统计严谨性：bootstrap 置信区间 + 配对显著性检验 ----------
+// ---------- 统计严谨性：学生级 bootstrap 置信区间 + 配对显著性检验 ----------
+// 依据《知识追踪项目推荐实验方案》：同一学生的答题记录彼此相关，
+// 以「学生」为单位有放回重采样，保留其全部记录，重复约 1000 次，取 2.5%/97.5% 分位数。
 
 function mulberry32(seed) {
   let a = seed >>> 0;
@@ -228,27 +242,26 @@ function percentile(sorted, q) {
     : sorted[base];
 }
 
-// 行按 (userId|kpCode) 分组，bootstrap 重采样「组」以保留学生内相关性
-function groupRows(rows) {
+// 按学生分组（学生级重采样单位）
+function groupRowsByStudent(rows) {
   const groups = new Map();
   for (const row of rows) {
-    const key = `${row.userId}|${row.kpCode}`;
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key).push(row);
+    if (!groups.has(row.userId)) groups.set(row.userId, []);
+    groups.get(row.userId).push(row);
   }
   return [...groups.values()];
 }
 
-// rows 来自 walkForward 输出；返回各指标 95% 置信区间
+// rows 来自 walkForward 输出；学生级 bootstrap，返回各指标 95% 置信区间
 function bootstrapCIs(rows, { reps = 1000, seed = 42 } = {}) {
-  const groups = groupRows(rows);
+  const groups = groupRowsByStudent(rows);
   const rand = mulberry32(seed);
   const samples = { AUC: [], LogLoss: [], Accuracy: [], Brier: [] };
   for (let r = 0; r < reps; r++) {
     const picked = [];
     for (let g = 0; g < groups.length; g++) {
-      const group = groups[Math.floor(rand() * groups.length)];
-      picked.push(...group);
+      const student = groups[Math.floor(rand() * groups.length)];
+      picked.push(...student);
     }
     const m = evaluateMetrics(picked);
     if (m.AUC !== null) samples.AUC.push(m.AUC);
@@ -265,8 +278,8 @@ function bootstrapCIs(rows, { reps = 1000, seed = 42 } = {}) {
 }
 
 // 配对比较：两模型 walk-forward 输出按 (userId,kpCode,createdAt) 对齐（target 相同）
-// 统计方法：组级（聚类）bootstrap 下计算「池化」指标差。
-// 注意：不能用组内逐行 AUC 的均值——短序列上增长窗口预测器存在机械性负偏差
+// 统计方法：学生级聚类 bootstrap 下计算「池化」指标差（相同学生、相同测试样本的配对比较）。
+// 注意：不能用学生内逐行 AUC 的均值——短序列上增长窗口预测器存在机械性负偏差
 // （pred(t) 的历史窗口包含 target(t-1)，会制造虚假反相关），池化 AUC 才是 KT 标准指标。
 function pairedComparison(rowsA, rowsB, { reps = 1000, seed = 42 } = {}) {
   const keyOf = (row) => `${row.userId}|${row.kpCode}|${row.createdAt}`;
@@ -277,10 +290,10 @@ function pairedComparison(rowsA, rowsB, { reps = 1000, seed = 42 } = {}) {
     if (b && b.target === a.target) paired.push({ key: keyOf(a), a, b });
   }
 
-  // 组级聚类
+  // 学生级聚类
   const groups = new Map();
   for (const item of paired) {
-    const gk = item.key.split('|').slice(0, 2).join('|');
+    const gk = item.key.split('|')[0];
     if (!groups.has(gk)) groups.set(gk, []);
     groups.get(gk).push(item);
   }
@@ -322,14 +335,14 @@ function pairedComparison(rowsA, rowsB, { reps = 1000, seed = 42 } = {}) {
       // bootstrap 双侧 p 值：分布越过 0 的比例的两倍（加一平滑避免 0/1）
       p: Number(Math.min(1, 2 * Math.min((pAbove * diffs.length + 1) / (diffs.length + 1),
         ((1 - pAbove) * diffs.length + 1) / (diffs.length + 1))).toFixed(4)),
-      groups: n
+      units: n
     };
   }
 
   return {
     pairedRows: paired.length,
     dAUC: observed.dAUC === null
-      ? { meanDiff: null, ci: [null, null], p: null, groups: n }
+      ? { meanDiff: null, ci: [null, null], p: null, units: n }
       : bootStats(observed.dAUC, (items) => pooledMetrics(items).dAUC),
     dLogLoss: bootStats(observed.dLogLoss, (items) => pooledMetrics(items).dLogLoss)
   };
@@ -349,6 +362,20 @@ function formatComparisonTable(comparisons) {
   const widths = header.map((h, i) => Math.max(String(h).length, ...rows.map((r) => String(r[i]).length)));
   const line = (cells) => '| ' + cells.map((c, i) => String(c).padEnd(widths[i])).join(' | ') + ' |';
   return [line(header), line(widths.map((w) => '-'.repeat(w))), ...rows.map(line)].join('\n');
+}
+
+// 数据集元信息（方案要求随结果一并报告）
+function datasetStats(records) {
+  const times = records.map((r) => new Date(r.createdAt).getTime()).filter(Number.isFinite);
+  return {
+    recordCount: records.length,
+    studentCount: new Set(records.map((r) => r.userId)).size,
+    questionCount: new Set(records.map((r) => r.questionId)).size,
+    knowledgePointCount: new Set(records.map((r) => r.kpCode)).size,
+    timeRange: times.length
+      ? [new Date(Math.min(...times)).toISOString(), new Date(Math.max(...times)).toISOString()]
+      : []
+  };
 }
 
 function main() {
@@ -372,6 +399,8 @@ function main() {
   }
 
   console.log(`数据源: ${source}，答题记录 ${records.length} 条，(学生,知识点) 组合 ${groupByStudentKp(records).length} 组`);
+  const stats = datasetStats(records);
+  console.log(`数据概况: 学生 ${stats.studentCount}，题目 ${stats.questionCount}，知识点 ${stats.knowledgePointCount}，时间范围 ${stats.timeRange.join(' ~ ') || '无'}`);
   const results = runEvaluation(records);
   const table = formatTable(results);
   console.log('\n== 时间顺序评估结果（预测第 t 次只用前 t-1 次记录）==');
@@ -384,7 +413,7 @@ function main() {
   const walkRows = {};
   for (const model of models) walkRows[model] = walkForward(records, model);
 
-  console.log(`\n== 95% 置信区间（组级 bootstrap × ${reps}）==`);
+  console.log(`\n== 95% 置信区间（学生级 bootstrap × ${reps}）==`);
   const ciTable = models.map((model) => {
     const ci = bootstrapCIs(walkRows[model], { reps });
     const m = results[model];
@@ -395,7 +424,7 @@ function main() {
   console.log(['模型', 'AUC [CI]', 'LogLoss [CI]'].map((h, i) => String(h).padEnd(Math.max(h.length, ...ciTable.map((r) => r[i].length)))).join(' | '));
   ciTable.forEach((r) => console.log(r.join(' | ')));
 
-  console.log(`\n== 配对显著性检验（组级聚类 bootstrap，池化指标差, Δ = 行A - 行B）==`);
+  console.log(`\n== 配对显著性检验（学生级聚类 bootstrap，池化指标差, Δ = 行A - 行B）==`);
   const pairs = [];
   for (let i = 0; i < models.length; i++) {
     for (let j = i + 1; j < models.length; j++) {
@@ -408,7 +437,19 @@ function main() {
   const outDir = path.join(__dirname, '..', '..', 'output');
   fs.mkdirSync(outDir, { recursive: true });
   const outFile = path.join(outDir, `baseline-results-${source}.json`);
-  fs.writeFileSync(outFile, JSON.stringify({ source, recordCount: records.length, params, results }, null, 2));
+  fs.writeFileSync(outFile, JSON.stringify({
+    source,
+    dataset: stats,
+    evalProtocol: {
+      task: '预测学生下一次答题结果（时间顺序 walk-forward，无未来信息泄漏）',
+      bootstrap: '学生级聚类 bootstrap，重采样单位为学生，保留其全部记录',
+      pairedComparison: '相同学生、相同测试样本的配对比较，池化指标差 + 学生级 bootstrap 置信区间与双侧 p 值',
+      bootstrapReps: reps,
+      seed: 42
+    },
+    params,
+    results
+  }, null, 2));
   console.log(`\n结果已写入 ${outFile}`);
   console.log('注意：synthetic 源仅用于验证评估管道，结果不可作为真实学习效果。');
 }
@@ -425,6 +466,7 @@ module.exports = {
   bootstrapCIs,
   pairedComparison,
   formatComparisonTable,
+  datasetStats,
   generateSyntheticRecords,
   loadFromDb,
   loadFromCsv

@@ -98,12 +98,34 @@ function getPersonalizedPush(studentId, options = {}) {
     }
     if (questions.length >= limit) break;
   }
-  if (questions.length)
+  if (questions.length) {
+    // 方案埋点：推荐过程保存来源、原因、模型版本、推荐时掌握度与预测正确概率、题目难度
+    const masteryByNode = new Map(
+      ranked.map((node) => [node.id, node.mastery]),
+    );
     db.create("recommendationLogs", {
       studentId,
       questionIds: questions.map((item) => item.id),
       reason: "按已学范围、真实作答和复习间隔选题",
+      recommendationSource: "personalized-push",
+      modelVersion: "mastery-engine-v1",
+      recommendedAt: new Date().toISOString(),
+      answeredAt: null,
+      details: questions.map((question) => {
+        const masteryBefore = masteryByNode.get(question.knowledgePointId) ?? null;
+        return {
+          questionId: question.id,
+          recommendationSource: "personalized-push",
+          recommendationReason: question.recommendationReason || "",
+          modelVersion: "mastery-engine-v1",
+          masteryBefore,
+          predictedCorrectProbability:
+            masteryBefore === null ? null : Number((masteryBefore / 100).toFixed(4)),
+          questionDifficulty: question.difficulty ?? question.difficultyLevel ?? null,
+        };
+      }),
     });
+  }
   return {
     studentId,
     questions,
