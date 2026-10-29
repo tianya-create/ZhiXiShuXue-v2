@@ -3,8 +3,8 @@
   "label": "assist2009",
   "inputFile": "D:\\迅雷云盘\\WorkBuddy\\2026-10-28-23-41-59\\zhiXiShuXue\\backend\\datasets\\assist2009\\interactions.csv",
   "inputHash": "sha256:6f055c6b5105b829",
-  "gitCommit": "4a5b93a",
-  "generatedAt": "2026-10-29T05:59:08.705Z",
+  "gitCommit": "8d2c3f1",
+  "generatedAt": "2026-10-29T06:02:48.813Z",
   "dataset": {
     "recordCount": 266948,
     "studentCount": 3931,
@@ -92,6 +92,310 @@
       "F1": 0.7382,
       "positiveRate": 0.6703
     }
+  },
+  "bootstrap": {
+    "method": "学生级聚类 bootstrap：以学生为重采样单位，保留其全部记录；同一批重采样权重同时用于所有模型（paired bootstrap）",
+    "reps": 2000,
+    "units": 3931,
+    "ci": {
+      "Majority": {
+        "AUC": [
+          0.5304,
+          0.5483
+        ],
+        "LogLoss": [
+          0.6317,
+          0.6416
+        ],
+        "Brier": [
+          0.2198,
+          0.2246
+        ],
+        "Accuracy": [
+          0.6615,
+          0.6791
+        ],
+        "draws": 2000
+      },
+      "Online-Rule": {
+        "AUC": [
+          0.6908,
+          0.7046
+        ],
+        "LogLoss": [
+          0.7567,
+          0.7723
+        ],
+        "Brier": [
+          0.2233,
+          0.2287
+        ],
+        "Accuracy": [
+          0.6984,
+          0.7085
+        ],
+        "draws": 2000
+      },
+      "Rule-0": {
+        "AUC": [
+          0.697,
+          0.7116
+        ],
+        "LogLoss": [
+          0.5926,
+          0.6024
+        ],
+        "Brier": [
+          0.2028,
+          0.2071
+        ],
+        "Accuracy": [
+          0.6994,
+          0.7097
+        ],
+        "draws": 2000
+      },
+      "Rule-1": {
+        "AUC": [
+          0.6956,
+          0.7103
+        ],
+        "LogLoss": [
+          0.6157,
+          0.6267
+        ],
+        "Brier": [
+          0.2072,
+          0.2119
+        ],
+        "Accuracy": [
+          0.6971,
+          0.7073
+        ],
+        "draws": 2000
+      },
+      "Rule-2": {
+        "AUC": [
+          0.6956,
+          0.7103
+        ],
+        "LogLoss": [
+          0.6156,
+          0.6267
+        ],
+        "Brier": [
+          0.2072,
+          0.2119
+        ],
+        "Accuracy": [
+          0.6632,
+          0.6735
+        ],
+        "draws": 2000
+      }
+    },
+    "comparisons": [
+      {
+        "a": "Majority",
+        "b": "Online-Rule",
+        "dAUC": {
+          "meanDiff": -0.1585,
+          "ci": [
+            -0.17,
+            -0.1468
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": -0.1278,
+          "ci": [
+            -0.136,
+            -0.1197
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Majority",
+        "b": "Rule-0",
+        "dAUC": {
+          "meanDiff": -0.165,
+          "ci": [
+            -0.1766,
+            -0.153
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.0393,
+          "ci": [
+            0.0338,
+            0.0451
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Majority",
+        "b": "Rule-1",
+        "dAUC": {
+          "meanDiff": -0.1637,
+          "ci": [
+            -0.1754,
+            -0.1516
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.0156,
+          "ci": [
+            0.0098,
+            0.0218
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Majority",
+        "b": "Rule-2",
+        "dAUC": {
+          "meanDiff": -0.1637,
+          "ci": [
+            -0.1754,
+            -0.1516
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.0156,
+          "ci": [
+            0.0098,
+            0.0218
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Online-Rule",
+        "b": "Rule-0",
+        "dAUC": {
+          "meanDiff": -0.0065,
+          "ci": [
+            -0.0074,
+            -0.0058
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.167,
+          "ci": [
+            0.1631,
+            0.1713
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Online-Rule",
+        "b": "Rule-1",
+        "dAUC": {
+          "meanDiff": -0.0052,
+          "ci": [
+            -0.0059,
+            -0.0045
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.1433,
+          "ci": [
+            0.1398,
+            0.1475
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Online-Rule",
+        "b": "Rule-2",
+        "dAUC": {
+          "meanDiff": -0.0052,
+          "ci": [
+            -0.0059,
+            -0.0045
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.1433,
+          "ci": [
+            0.1398,
+            0.1475
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Rule-0",
+        "b": "Rule-1",
+        "dAUC": {
+          "meanDiff": 0.0013,
+          "ci": [
+            0.0006,
+            0.0019
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": -0.0237,
+          "ci": [
+            -0.0247,
+            -0.0227
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Rule-0",
+        "b": "Rule-2",
+        "dAUC": {
+          "meanDiff": 0.0013,
+          "ci": [
+            0.0006,
+            0.0019
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": -0.0237,
+          "ci": [
+            -0.0246,
+            -0.0227
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Rule-1",
+        "b": "Rule-2",
+        "dAUC": {
+          "meanDiff": 0,
+          "ci": [
+            0,
+            0
+          ],
+          "p": 1
+        },
+        "dLogLoss": {
+          "meanDiff": 0,
+          "ci": [
+            0,
+            0
+          ],
+          "p": 0.001
+        }
+      }
+    ]
   },
   "calibration": {
     "Majority": [

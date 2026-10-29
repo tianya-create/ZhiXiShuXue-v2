@@ -3,16 +3,16 @@
   "label": "synthetic",
   "inputFile": null,
   "inputHash": null,
-  "gitCommit": "4a5b93a",
-  "generatedAt": "2026-10-29T05:59:09.723Z",
+  "gitCommit": "8d2c3f1",
+  "generatedAt": "2026-10-29T06:02:49.855Z",
   "dataset": {
-    "recordCount": 2898,
+    "recordCount": 2818,
     "studentCount": 40,
-    "questionCount": 2898,
+    "questionCount": 2818,
     "knowledgePointCount": 6,
     "timeRange": [
-      "2026-01-01T09:48:15.034Z",
-      "2026-03-07T20:17:34.043Z"
+      "2026-01-01T07:10:57.074Z",
+      "2026-03-05T20:57:12.080Z"
     ]
   },
   "evalProtocol": {
@@ -48,50 +48,354 @@
   },
   "results": {
     "Majority": {
-      "n": 2658,
-      "AUC": 0.5245,
-      "LogLoss": 0.6781,
-      "Brier": 0.2425,
-      "Accuracy": 0.588,
-      "F1": 0.7405,
-      "positiveRate": 0.5877
+      "n": 2578,
+      "AUC": 0.4937,
+      "LogLoss": 0.6928,
+      "Brier": 0.2498,
+      "Accuracy": 0.5163,
+      "F1": 0.6482,
+      "positiveRate": 0.5221
     },
     "Online-Rule": {
-      "n": 2658,
-      "AUC": 0.6769,
-      "LogLoss": 0.8043,
-      "Brier": 0.2484,
-      "Accuracy": 0.6433,
-      "F1": 0.705,
-      "positiveRate": 0.5877
+      "n": 2578,
+      "AUC": 0.7001,
+      "LogLoss": 0.7879,
+      "Brier": 0.2416,
+      "Accuracy": 0.6373,
+      "F1": 0.6584,
+      "positiveRate": 0.5221
     },
     "Rule-0": {
-      "n": 2658,
-      "AUC": 0.6824,
-      "LogLoss": 0.6366,
-      "Brier": 0.2227,
-      "Accuracy": 0.6433,
-      "F1": 0.709,
-      "positiveRate": 0.5877
+      "n": 2578,
+      "AUC": 0.7065,
+      "LogLoss": 0.6263,
+      "Brier": 0.2185,
+      "Accuracy": 0.6408,
+      "F1": 0.6662,
+      "positiveRate": 0.5221
     },
     "Rule-1": {
-      "n": 2658,
-      "AUC": 0.6814,
-      "LogLoss": 0.6697,
-      "Brier": 0.2299,
-      "Accuracy": 0.6418,
-      "F1": 0.7029,
-      "positiveRate": 0.5877
+      "n": 2578,
+      "AUC": 0.7071,
+      "LogLoss": 0.6518,
+      "Brier": 0.2235,
+      "Accuracy": 0.6362,
+      "F1": 0.6559,
+      "positiveRate": 0.5221
     },
     "Rule-2": {
-      "n": 2658,
-      "AUC": 0.6822,
-      "LogLoss": 0.672,
-      "Brier": 0.2334,
-      "Accuracy": 0.6321,
-      "F1": 0.6623,
-      "positiveRate": 0.5877
+      "n": 2578,
+      "AUC": 0.7069,
+      "LogLoss": 0.6573,
+      "Brier": 0.2265,
+      "Accuracy": 0.642,
+      "F1": 0.613,
+      "positiveRate": 0.5221
     }
+  },
+  "bootstrap": {
+    "method": "学生级聚类 bootstrap：以学生为重采样单位，保留其全部记录；同一批重采样权重同时用于所有模型（paired bootstrap）",
+    "reps": 2000,
+    "units": 40,
+    "ci": {
+      "Majority": {
+        "AUC": [
+          0.4721,
+          0.5151
+        ],
+        "LogLoss": [
+          0.6907,
+          0.6948
+        ],
+        "Brier": [
+          0.2488,
+          0.2508
+        ],
+        "Accuracy": [
+          0.4714,
+          0.5642
+        ],
+        "draws": 2000
+      },
+      "Online-Rule": {
+        "AUC": [
+          0.6614,
+          0.7299
+        ],
+        "LogLoss": [
+          0.7416,
+          0.8321
+        ],
+        "Brier": [
+          0.2264,
+          0.257
+        ],
+        "Accuracy": [
+          0.604,
+          0.6717
+        ],
+        "draws": 2000
+      },
+      "Rule-0": {
+        "AUC": [
+          0.6668,
+          0.7367
+        ],
+        "LogLoss": [
+          0.5968,
+          0.6544
+        ],
+        "Brier": [
+          0.206,
+          0.2308
+        ],
+        "Accuracy": [
+          0.6077,
+          0.6752
+        ],
+        "draws": 2000
+      },
+      "Rule-1": {
+        "AUC": [
+          0.6672,
+          0.7387
+        ],
+        "LogLoss": [
+          0.6172,
+          0.6848
+        ],
+        "Brier": [
+          0.2098,
+          0.2367
+        ],
+        "Accuracy": [
+          0.6029,
+          0.6707
+        ],
+        "draws": 2000
+      },
+      "Rule-2": {
+        "AUC": [
+          0.667,
+          0.7386
+        ],
+        "LogLoss": [
+          0.6259,
+          0.6879
+        ],
+        "Brier": [
+          0.2142,
+          0.2391
+        ],
+        "Accuracy": [
+          0.6119,
+          0.6721
+        ],
+        "draws": 2000
+      }
+    },
+    "comparisons": [
+      {
+        "a": "Majority",
+        "b": "Online-Rule",
+        "dAUC": {
+          "meanDiff": -0.2032,
+          "ci": [
+            -0.2446,
+            -0.1603
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": -0.095,
+          "ci": [
+            -0.1385,
+            -0.0499
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Majority",
+        "b": "Rule-0",
+        "dAUC": {
+          "meanDiff": -0.2094,
+          "ci": [
+            -0.251,
+            -0.1662
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.0664,
+          "ci": [
+            0.0394,
+            0.0948
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Majority",
+        "b": "Rule-1",
+        "dAUC": {
+          "meanDiff": -0.21,
+          "ci": [
+            -0.253,
+            -0.1662
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.0408,
+          "ci": [
+            0.0085,
+            0.0743
+          ],
+          "p": 0.012
+        }
+      },
+      {
+        "a": "Majority",
+        "b": "Rule-2",
+        "dAUC": {
+          "meanDiff": -0.2099,
+          "ci": [
+            -0.2534,
+            -0.1652
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": 0.0354,
+          "ci": [
+            0.0056,
+            0.0659
+          ],
+          "p": 0.019
+        }
+      },
+      {
+        "a": "Online-Rule",
+        "b": "Rule-0",
+        "dAUC": {
+          "meanDiff": -0.0062,
+          "ci": [
+            -0.0116,
+            -0.0008
+          ],
+          "p": 0.028
+        },
+        "dLogLoss": {
+          "meanDiff": 0.1615,
+          "ci": [
+            0.1409,
+            0.1818
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Online-Rule",
+        "b": "Rule-1",
+        "dAUC": {
+          "meanDiff": -0.0068,
+          "ci": [
+            -0.012,
+            -0.0015
+          ],
+          "p": 0.011
+        },
+        "dLogLoss": {
+          "meanDiff": 0.1359,
+          "ci": [
+            0.1188,
+            0.1527
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Online-Rule",
+        "b": "Rule-2",
+        "dAUC": {
+          "meanDiff": -0.0067,
+          "ci": [
+            -0.0127,
+            -0.0006
+          ],
+          "p": 0.035
+        },
+        "dLogLoss": {
+          "meanDiff": 0.1304,
+          "ci": [
+            0.1105,
+            0.1496
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Rule-0",
+        "b": "Rule-1",
+        "dAUC": {
+          "meanDiff": -0.0006,
+          "ci": [
+            -0.0044,
+            0.0029
+          ],
+          "p": 0.7656
+        },
+        "dLogLoss": {
+          "meanDiff": -0.0256,
+          "ci": [
+            -0.0332,
+            -0.0184
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Rule-0",
+        "b": "Rule-2",
+        "dAUC": {
+          "meanDiff": -0.0005,
+          "ci": [
+            -0.0051,
+            0.004
+          ],
+          "p": 0.8116
+        },
+        "dLogLoss": {
+          "meanDiff": -0.0311,
+          "ci": [
+            -0.0387,
+            -0.0237
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Rule-1",
+        "b": "Rule-2",
+        "dAUC": {
+          "meanDiff": 0.0001,
+          "ci": [
+            -0.0022,
+            0.0025
+          ],
+          "p": 0.9395
+        },
+        "dLogLoss": {
+          "meanDiff": -0.0055,
+          "ci": [
+            -0.0113,
+            0.0001
+          ],
+          "p": 0.053
+        }
+      }
+    ]
   },
   "calibration": {
     "Majority": [
@@ -121,21 +425,21 @@
       },
       {
         "range": "[0.4, 0.5)",
-        "n": 1,
-        "meanPredicted": 0.4953,
-        "observedRate": 0
+        "n": 379,
+        "meanPredicted": 0.4928,
+        "observedRate": 0.5198
       },
       {
         "range": "[0.5, 0.6)",
-        "n": 2642,
-        "meanPredicted": 0.5626,
-        "observedRate": 0.5882
+        "n": 2199,
+        "meanPredicted": 0.5099,
+        "observedRate": 0.5225
       },
       {
         "range": "[0.6, 0.7)",
-        "n": 15,
-        "meanPredicted": 0.6267,
-        "observedRate": 0.5333
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
       },
       {
         "range": "[0.7, 0.8)",
@@ -159,249 +463,249 @@
     "Online-Rule": [
       {
         "range": "[0.0, 0.1)",
-        "n": 317,
-        "meanPredicted": 0.0139,
-        "observedRate": 0.3817
+        "n": 489,
+        "meanPredicted": 0.014,
+        "observedRate": 0.2863
       },
       {
         "range": "[0.1, 0.2)",
-        "n": 148,
-        "meanPredicted": 0.1345,
-        "observedRate": 0.4122
+        "n": 137,
+        "meanPredicted": 0.1325,
+        "observedRate": 0.3431
       },
       {
         "range": "[0.2, 0.3)",
-        "n": 166,
-        "meanPredicted": 0.2366,
-        "observedRate": 0.4096
+        "n": 197,
+        "meanPredicted": 0.2315,
+        "observedRate": 0.3553
       },
       {
         "range": "[0.3, 0.4)",
-        "n": 206,
-        "meanPredicted": 0.3254,
-        "observedRate": 0.4612
+        "n": 191,
+        "meanPredicted": 0.3247,
+        "observedRate": 0.4921
       },
       {
         "range": "[0.4, 0.5)",
-        "n": 169,
-        "meanPredicted": 0.4138,
-        "observedRate": 0.497
+        "n": 173,
+        "meanPredicted": 0.414,
+        "observedRate": 0.5434
       },
       {
         "range": "[0.5, 0.6)",
-        "n": 326,
-        "meanPredicted": 0.5089,
-        "observedRate": 0.5491
+        "n": 357,
+        "meanPredicted": 0.5087,
+        "observedRate": 0.4846
       },
       {
         "range": "[0.6, 0.7)",
-        "n": 271,
-        "meanPredicted": 0.6356,
-        "observedRate": 0.6199
+        "n": 229,
+        "meanPredicted": 0.6348,
+        "observedRate": 0.559
       },
       {
         "range": "[0.7, 0.8)",
-        "n": 534,
-        "meanPredicted": 0.767,
-        "observedRate": 0.6816
+        "n": 440,
+        "meanPredicted": 0.7672,
+        "observedRate": 0.7
       },
       {
         "range": "[0.8, 0.9)",
-        "n": 205,
-        "meanPredicted": 0.8289,
-        "observedRate": 0.7805
+        "n": 143,
+        "meanPredicted": 0.8299,
+        "observedRate": 0.6993
       },
       {
         "range": "[0.9, 1.0)",
-        "n": 316,
-        "meanPredicted": 0.9659,
-        "observedRate": 0.8291
+        "n": 222,
+        "meanPredicted": 0.9694,
+        "observedRate": 0.8649
       }
     ],
     "Rule-0": [
       {
         "range": "[0.0, 0.1)",
-        "n": 22,
-        "meanPredicted": 0.0847,
-        "observedRate": 0.1364
+        "n": 36,
+        "meanPredicted": 0.0856,
+        "observedRate": 0.1389
       },
       {
         "range": "[0.1, 0.2)",
-        "n": 79,
-        "meanPredicted": 0.1502,
-        "observedRate": 0.2405
+        "n": 161,
+        "meanPredicted": 0.1455,
+        "observedRate": 0.1988
       },
       {
         "range": "[0.2, 0.3)",
-        "n": 224,
-        "meanPredicted": 0.2469,
-        "observedRate": 0.4152
+        "n": 301,
+        "meanPredicted": 0.2422,
+        "observedRate": 0.3189
       },
       {
         "range": "[0.3, 0.4)",
-        "n": 349,
-        "meanPredicted": 0.3382,
-        "observedRate": 0.4413
+        "n": 361,
+        "meanPredicted": 0.3379,
+        "observedRate": 0.3961
       },
       {
         "range": "[0.4, 0.5)",
-        "n": 288,
-        "meanPredicted": 0.4199,
-        "observedRate": 0.4792
+        "n": 291,
+        "meanPredicted": 0.4197,
+        "observedRate": 0.5017
       },
       {
         "range": "[0.5, 0.6)",
-        "n": 496,
-        "meanPredicted": 0.5257,
-        "observedRate": 0.5605
+        "n": 497,
+        "meanPredicted": 0.5224,
+        "observedRate": 0.503
       },
       {
         "range": "[0.6, 0.7)",
-        "n": 502,
-        "meanPredicted": 0.6462,
-        "observedRate": 0.6355
+        "n": 412,
+        "meanPredicted": 0.6468,
+        "observedRate": 0.6505
       },
       {
         "range": "[0.7, 0.8)",
-        "n": 326,
-        "meanPredicted": 0.7406,
-        "observedRate": 0.773
+        "n": 240,
+        "meanPredicted": 0.7395,
+        "observedRate": 0.7375
       },
       {
         "range": "[0.8, 0.9)",
-        "n": 313,
-        "meanPredicted": 0.833,
-        "observedRate": 0.8147
+        "n": 215,
+        "meanPredicted": 0.8349,
+        "observedRate": 0.8
       },
       {
         "range": "[0.9, 1.0)",
-        "n": 59,
-        "meanPredicted": 0.9109,
-        "observedRate": 0.8644
+        "n": 64,
+        "meanPredicted": 0.9112,
+        "observedRate": 0.8906
       }
     ],
     "Rule-1": [
       {
         "range": "[0.0, 0.1)",
-        "n": 98,
-        "meanPredicted": 0.041,
-        "observedRate": 0.2245
+        "n": 189,
+        "meanPredicted": 0.0385,
+        "observedRate": 0.1799
       },
       {
         "range": "[0.1, 0.2)",
-        "n": 180,
-        "meanPredicted": 0.1455,
-        "observedRate": 0.4278
+        "n": 237,
+        "meanPredicted": 0.1391,
+        "observedRate": 0.3122
       },
       {
         "range": "[0.2, 0.3)",
-        "n": 156,
-        "meanPredicted": 0.242,
-        "observedRate": 0.4038
+        "n": 187,
+        "meanPredicted": 0.2462,
+        "observedRate": 0.3316
       },
       {
         "range": "[0.3, 0.4)",
-        "n": 337,
-        "meanPredicted": 0.3329,
-        "observedRate": 0.4599
+        "n": 331,
+        "meanPredicted": 0.3318,
+        "observedRate": 0.435
       },
       {
         "range": "[0.4, 0.5)",
-        "n": 245,
-        "meanPredicted": 0.4215,
-        "observedRate": 0.4857
+        "n": 254,
+        "meanPredicted": 0.4218,
+        "observedRate": 0.5433
       },
       {
         "range": "[0.5, 0.6)",
-        "n": 416,
-        "meanPredicted": 0.5238,
-        "observedRate": 0.5625
+        "n": 431,
+        "meanPredicted": 0.5211,
+        "observedRate": 0.4849
       },
       {
         "range": "[0.6, 0.7)",
-        "n": 454,
-        "meanPredicted": 0.6462,
-        "observedRate": 0.6211
+        "n": 387,
+        "meanPredicted": 0.6457,
+        "observedRate": 0.6434
       },
       {
         "range": "[0.7, 0.8)",
-        "n": 404,
-        "meanPredicted": 0.7545,
-        "observedRate": 0.7525
+        "n": 304,
+        "meanPredicted": 0.7557,
+        "observedRate": 0.7171
       },
       {
         "range": "[0.8, 0.9)",
-        "n": 177,
-        "meanPredicted": 0.8385,
-        "observedRate": 0.8079
+        "n": 115,
+        "meanPredicted": 0.8372,
+        "observedRate": 0.8
       },
       {
         "range": "[0.9, 1.0)",
-        "n": 191,
-        "meanPredicted": 0.9531,
-        "observedRate": 0.8534
+        "n": 143,
+        "meanPredicted": 0.9607,
+        "observedRate": 0.8811
       }
     ],
     "Rule-2": [
       {
         "range": "[0.0, 0.1)",
-        "n": 133,
-        "meanPredicted": 0.0519,
-        "observedRate": 0.2481
+        "n": 255,
+        "meanPredicted": 0.0501,
+        "observedRate": 0.2078
       },
       {
         "range": "[0.1, 0.2)",
-        "n": 172,
-        "meanPredicted": 0.1498,
-        "observedRate": 0.4535
+        "n": 197,
+        "meanPredicted": 0.1473,
+        "observedRate": 0.3198
       },
       {
         "range": "[0.2, 0.3)",
-        "n": 296,
-        "meanPredicted": 0.2614,
-        "observedRate": 0.4358
+        "n": 328,
+        "meanPredicted": 0.2575,
+        "observedRate": 0.3689
       },
       {
         "range": "[0.3, 0.4)",
-        "n": 347,
-        "meanPredicted": 0.3478,
-        "observedRate": 0.4726
+        "n": 356,
+        "meanPredicted": 0.3479,
+        "observedRate": 0.4916
       },
       {
         "range": "[0.4, 0.5)",
-        "n": 376,
-        "meanPredicted": 0.453,
-        "observedRate": 0.5293
+        "n": 403,
+        "meanPredicted": 0.4553,
+        "observedRate": 0.5037
       },
       {
         "range": "[0.5, 0.6)",
-        "n": 399,
-        "meanPredicted": 0.5565,
-        "observedRate": 0.6065
+        "n": 329,
+        "meanPredicted": 0.5559,
+        "observedRate": 0.617
       },
       {
         "range": "[0.6, 0.7)",
-        "n": 432,
-        "meanPredicted": 0.6502,
-        "observedRate": 0.7153
+        "n": 329,
+        "meanPredicted": 0.6482,
+        "observedRate": 0.6687
       },
       {
         "range": "[0.7, 0.8)",
-        "n": 291,
-        "meanPredicted": 0.7475,
-        "observedRate": 0.7938
+        "n": 216,
+        "meanPredicted": 0.742,
+        "observedRate": 0.7685
       },
       {
         "range": "[0.8, 0.9)",
-        "n": 147,
-        "meanPredicted": 0.8448,
-        "observedRate": 0.8367
+        "n": 114,
+        "meanPredicted": 0.8458,
+        "observedRate": 0.8421
       },
       {
         "range": "[0.9, 1.0)",
-        "n": 65,
-        "meanPredicted": 0.9395,
-        "observedRate": 0.8308
+        "n": 51,
+        "meanPredicted": 0.9364,
+        "observedRate": 0.902
       }
     ]
   }

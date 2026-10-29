@@ -446,6 +446,19 @@ function main() {
     },
     params,
     results,
+    // 统计不确定性与模型间配对比较必须随结果文件一起保存，不能只打印在终端
+    bootstrap: {
+      method: '学生级聚类 bootstrap：以学生为重采样单位，保留其全部记录；同一批重采样权重同时用于所有模型（paired bootstrap）',
+      reps: boot.reps,
+      units: boot.students,
+      ci: boot.ciByModel,
+      comparisons: boot.comparisons.map((c) => ({
+        a: c.a,
+        b: c.b,
+        dAUC: c.dAUC,
+        dLogLoss: c.dLogLoss
+      }))
+    },
     calibration
   }, null, 2));
   console.log(`\n结果已写入 ${outFile}`);
