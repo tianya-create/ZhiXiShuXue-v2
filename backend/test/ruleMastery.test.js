@@ -1,4 +1,4 @@
-const { rule0, rule1, rule2, predictNextCorrect, sortByTime } = require('../models/ruleMastery')
+const { onlineRule, rule0, rule1, rule2, predictNextCorrect, sortByTime } = require('../models/ruleMastery')
 const { evaluateMetrics, rocAUC, generateSyntheticRecords, walkForward, runEvaluation, pairedComparison } = require('../models/baselineEval')
 
 describe('rule mastery baselines', () => {
@@ -63,6 +63,32 @@ describe('rule mastery baselines', () => {
     expect(() => predictNextCorrect('BKT', [])).toThrow()
   })
 
+  test('Online-Rule 复现线上公式：无平滑、样本不足封顶 0.79', () => {
+    // 样本不足（1 题）封顶 0.79（线上「封顶 79 分」）
+    const oneCorrect = [mk(true, 60, 1, 'q1')]
+    expect(onlineRule(oneCorrect).mastery).toBeCloseTo(0.79, 5)
+    // 7 题 3 对 4 错（末尾连错 2 次触发 -0.1，两模型同受影响）：
+    // Online-Rule 普通正确率 3/7 - 0.1 ≈ 0.3286（无平滑）
+    const seven = [
+      mk(true, 60, 1, 'q1'), mk(true, 60, 2, 'q2'), mk(false, 60, 3, 'q3'),
+      mk(true, 60, 4, 'q4'), mk(false, 60, 5, 'q5'), mk(false, 60, 6, 'q6'),
+      mk(false, 60, 7, 'q7')
+    ]
+    expect(onlineRule(seven).mastery).toBeCloseTo(3 / 7 - 0.1, 5)
+    expect(rule0(seven).mastery).toBeCloseTo(4 / 9, 5) // (3+1)/(7+2) 平滑
+  })
+
+  test('Rule-1 使用平滑正确率，并非线上公式的完全复现（与 Online-Rule 区分）', () => {
+    const seven = [
+      mk(true, 60, 1, 'q1'), mk(true, 60, 2, 'q2'), mk(false, 60, 3, 'q3'),
+      mk(true, 60, 4, 'q4'), mk(false, 60, 5, 'q5'), mk(false, 60, 6, 'q6'),
+      mk(false, 60, 7, 'q7')
+    ]
+    // Rule-1：(3+1)/(7+2) - 0.1 ≈ 0.3444；Online-Rule：3/7 - 0.1 ≈ 0.3286
+    expect(rule1(seven).mastery).toBeCloseTo(4 / 9 - 0.1, 5)
+    expect(onlineRule(seven).mastery).toBeCloseTo(3 / 7 - 0.1, 5)
+  })
+
   test('sortByTime 不修改原数组', () => {
     const records = [mk(true, 60, 3, 'q3'), mk(true, 60, 1, 'q1')]
     const sorted = sortByTime(records)
@@ -94,15 +120,32 @@ describe('baseline evaluation', () => {
     expect(majorityRows.every((r) => r.pred > 0 && r.pred < 1)).toBe(true)
   })
 
-  test('runEvaluation 输出四模型结果', () => {
+  test('runEvaluation 输出五模型结果', () => {
     const records = generateSyntheticRecords({ students: 5, kps: 3, avgPerPair: 10 })
     const results = runEvaluation(records)
-    expect(Object.keys(results).sort()).toEqual(['Majority', 'Rule-0', 'Rule-1', 'Rule-2'])
+    expect(Object.keys(results).sort()).toEqual(['Majority', 'Online-Rule', 'Rule-0', 'Rule-1', 'Rule-2'])
     for (const m of Object.values(results)) {
       expect(m.n).toBeGreaterThan(0)
       expect(Number.isFinite(m.LogLoss)).toBe(true)
       expect(Number.isFinite(m.Brier)).toBe(true)
     }
+  })
+
+  test('Majority 交错时间无泄漏：早期目标不得看到同组未来的自身结果', () => {
+    // 学生 A：day1 对（历史），day100 目标 → 处理 A 时全局指针曾推进越过 B 的早期目标
+    // 学生 B：day2 错（历史），day3 目标（答错）
+    // 无泄漏时 B 目标的 Majority 预测 = (1对+1)/(2条+2) = 0.5；
+    // 泄漏时（旧单调指针实现）B 自己 day3 的结果已被计入 → (1+1+0)/(3+2) = 0.4
+    const d = (n) => new Date(Date.UTC(2026, 0, 1) + n * 864e5).toISOString()
+    const records = [
+      { userId: 'A', kpCode: 'K1', questionId: 'a1', isCorrect: true, costTime: 60, createdAt: d(1) },
+      { userId: 'A', kpCode: 'K1', questionId: 'a2', isCorrect: true, costTime: 60, createdAt: d(100) },
+      { userId: 'B', kpCode: 'K1', questionId: 'b1', isCorrect: false, costTime: 60, createdAt: d(2) },
+      { userId: 'B', kpCode: 'K1', questionId: 'b2', isCorrect: false, costTime: 60, createdAt: d(3) }
+    ]
+    const rows = walkForward(records, 'Majority')
+    const rowB = rows.find((r) => r.userId === 'B')
+    expect(rowB.pred).toBeCloseTo(0.5, 6)
   })
 
   test('rocAUC 完全反向预测为 0', () => {
@@ -134,10 +177,10 @@ describe('baseline evaluation', () => {
     const rowsB = walkForward(records, 'Rule-0')
     const res = pairedComparison(rowsA, rowsB, { reps: 300, seed: 7 })
     expect(res.pairedRows).toBe(rowsA.length)
-    // i.i.d. 下无真实差异：ΔAUC 应接近 0。旧版组内逐行 AUC 方差会产生 ~+0.22 的伪显著偏差，
-    // 这里以 |ΔAUC| < 0.05 作回归护栏（微小差异在样本多时被判「显著」属正常统计行为）
-    expect(Math.abs(res.dAUC.meanDiff)).toBeLessThan(0.05)
-    expect(res.dAUC.ci[0]).toBeGreaterThan(-0.1)
-    expect(res.dAUC.ci[1]).toBeLessThan(0.1)
+    // 每组固定 p：Rule-0 能追踪学生个体，AUC 真实高于全局 Majoriy 约 0.1；
+    // 旧版伪显著偏差是 +0.22（Majority 反而更好）且方向为正，这里护栏：
+    // Majority 不得显著优于 Rule-0，且差距不得超出正常范围
+    expect(res.dAUC.meanDiff).toBeLessThan(0.05)
+    expect(res.dAUC.meanDiff).toBeGreaterThan(-0.2)
   })
 })

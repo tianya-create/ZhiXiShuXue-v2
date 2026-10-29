@@ -8,7 +8,7 @@ const { sortByTime, predictNextCorrect } = require('./ruleMastery');
  *
  * 对每个 (学生, 知识点) 组合，按时间升序遍历答题记录：
  *   预测第 t 次时，只允许使用第 1 ~ t-1 次记录。
- * 对比模型：Majority / Rule-0 / Rule-1 / Rule-2
+ * 对比模型：Majority / Online-Rule（线上公式复现）/ Rule-0 / Rule-1 / Rule-2
  * 指标：AUC、LogLoss、Brier、Accuracy、F1
  */
 
@@ -75,35 +75,44 @@ function groupByStudentKp(records) {
   return [...groups.values()];
 }
 
-// walk-forward 生成预测样本；majority 使用「全局时间前缀」的正例占比（避免泄漏）
+// walk-forward 生成预测样本。
+// Majority 使用「全局时间前缀」正例率：预先计算全局时间排序的前缀和，
+// 预测时刻 T 用二分查找取 createdAt < T 的记录数与正确数。
+// 这样与组处理顺序完全无关，避免单调指针在交错时间数据上的未来信息泄漏。
 function walkForward(records, model, options = {}) {
   const groups = groupByStudentKp(records);
   const rows = [];
-  // 全局时间线：用于 Majority 基线的累积正例率
-  const globalSorted = sortByTime(records);
-  let seen = 0;
-  let seenCorrect = 0;
 
-  const globalIndex = new Map();
-  globalSorted.forEach((item, idx) => globalIndex.set(item, idx));
+  // Majority 用的全局前缀和：prefixCount[i] = 前 i 条记录数，prefixCorrect[i] = 前 i 条正确数
+  const globalSorted = sortByTime(records);
+  const globalTimes = globalSorted.map((item) => new Date(item.createdAt).getTime());
+  const prefixCount = [0];
+  const prefixCorrect = [0];
+  for (let i = 0; i < globalSorted.length; i++) {
+    prefixCount.push(prefixCount[i] + 1);
+    prefixCorrect.push(prefixCorrect[i] + (globalSorted[i].isCorrect ? 1 : 0));
+  }
+  // 第一个时间 >= T 的记录下标（即 createdAt < T 的记录条数）
+  function countBefore(timeMs) {
+    let lo = 0, hi = globalTimes.length;
+    while (lo < hi) {
+      const mid = (lo + hi) >> 1;
+      if (globalTimes[mid] < timeMs) lo = mid + 1;
+      else hi = mid;
+    }
+    return lo;
+  }
 
   for (const group of groups) {
     for (let t = 1; t < group.length; t++) {
       const history = group.slice(0, t);
       const target = group[t].isCorrect ? 1 : 0;
       const currentTime = new Date(group[t].createdAt).getTime();
-      // 推进全局时间线到目标时刻之前
-      while (seen < globalSorted.length &&
-             new Date(globalSorted[seen].createdAt).getTime() < currentTime) {
-        if (globalIndex.get(group[t]) !== seen) {
-          seenCorrect += globalSorted[seen].isCorrect ? 1 : 0;
-          seen++;
-        } else break;
-      }
       let pred;
       if (model === 'Majority') {
-        // 拉普拉斯平滑的全局累积正例率，避免早期 0/1 极端概率；无历史时为 0.5
-        pred = (seenCorrect + 1) / (seen + 2);
+        // 拉普拉斯平滑的全局累积正例率（严格早于目标时刻），无历史时为 0.5
+        const cnt = countBefore(currentTime);
+        pred = (prefixCorrect[cnt] + 1) / (prefixCount[cnt] + 2);
       } else {
         // 预测时刻 = 目标答题时刻：时间衰减按「距上次练习的真实间隔」计算，
         // 而不是按今天的系统时间（否则历史数据衰减全部失真）
@@ -199,7 +208,7 @@ function loadFromCsv(filePath) {
 
 // ---------- 主流程 ----------
 
-function runEvaluation(records, { models = ['Majority', 'Rule-0', 'Rule-1', 'Rule-2'], options = {} } = {}) {
+function runEvaluation(records, { models = ['Majority', 'Online-Rule', 'Rule-0', 'Rule-1', 'Rule-2'], options = {} } = {}) {
   const results = {};
   for (const model of models) {
     const rows = walkForward(records, model, options);
@@ -384,11 +393,13 @@ function main() {
   const source = sourceIdx >= 0 ? args[sourceIdx + 1] : 'synthetic';
 
   let records;
+  let csvFile = null;
   if (source === 'db') {
     records = loadFromDb();
   } else if (source === 'csv') {
     const fileIdx = args.indexOf('--file');
-    records = loadFromCsv(args[fileIdx + 1]);
+    csvFile = args[fileIdx + 1];
+    records = loadFromCsv(csvFile);
   } else {
     records = generateSyntheticRecords();
   }
@@ -437,11 +448,31 @@ function main() {
   const outDir = path.join(__dirname, '..', '..', 'output');
   fs.mkdirSync(outDir, { recursive: true });
   const outFile = path.join(outDir, `baseline-results-${source}.json`);
+
+  // 可复现性元信息：代码版本 + 输入文件指纹 + 运行时间
+  let gitCommit = null;
+  try {
+    gitCommit = require('child_process')
+      .execSync('git rev-parse --short HEAD', { cwd: path.join(__dirname, '..', '..') })
+      .toString().trim();
+  } catch (e) { /* 非 git 环境忽略 */ }
+  let inputHash = null;
+  if (source === 'csv' && csvFile) {
+    const crypto = require('crypto');
+    inputHash = 'sha256:' + crypto.createHash('sha256')
+      .update(fs.readFileSync(path.resolve(csvFile))).digest('hex').slice(0, 16);
+  }
+
   fs.writeFileSync(outFile, JSON.stringify({
     source,
+    inputFile: source === 'csv' ? path.resolve(csvFile || '') : null,
+    inputHash,
+    gitCommit,
+    generatedAt: new Date().toISOString(),
     dataset: stats,
     evalProtocol: {
       task: '预测学生下一次答题结果（时间顺序 walk-forward，无未来信息泄漏）',
+      majority: '全局时间前缀正例率（前缀和+二分查找，严格早于预测时刻，与组处理顺序无关）',
       bootstrap: '学生级聚类 bootstrap，重采样单位为学生，保留其全部记录',
       pairedComparison: '相同学生、相同测试样本的配对比较，池化指标差 + 学生级 bootstrap 置信区间与双侧 p 值',
       bootstrapReps: reps,

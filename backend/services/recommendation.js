@@ -41,7 +41,9 @@ function getForgettingUrgency(userId, question) {
   const nearest = REVIEW_INTERVALS.reduce((best, current) => {
     return Math.abs(current - days) < Math.abs(best - days) ? current : best;
   }, REVIEW_INTERVALS[0]);
-  return 1 / (Math.abs(nearest - days) + 0.5);
+  // 复习间隔启发式分数：距最近复习间隔越近分越高，裁剪到 [0, 1]，
+  // 避免恰好命中间隔时得 2 分导致综合分权重超设计值。非严格遗忘模型。
+  return Math.min(1, 1 / (Math.abs(nearest - days) + 0.5));
 }
 
 function excludeRecentCorrect(userId, questionId) {
@@ -95,6 +97,10 @@ function getSmartRecommendations(userId, limit = 10, refresh = false) {
       ...question,
       kpCode,
       score: Number(finalScore.toFixed(4)),
+      // 算法标识：本服务为「实验性综合推荐」（错题相似度+知识点权重+复习间隔启发式），
+      // 与 personalized-push.js 的「线上规则推荐」是两套独立逻辑
+      algorithm: "hybrid-experimental",
+      modelVersion: "hybrid-v1",
       recommendationReason: buildReason(question, bestMistake && (bestMistake.kpName || bestMistake.kpCode)),
       scoreBreakdown: {
         similarity: Number(bestSimilarity.toFixed(4)),

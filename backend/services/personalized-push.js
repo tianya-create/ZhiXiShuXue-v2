@@ -99,16 +99,19 @@ function getPersonalizedPush(studentId, options = {}) {
     if (questions.length >= limit) break;
   }
   if (questions.length) {
-    // 方案埋点：推荐过程保存来源、原因、模型版本、推荐时掌握度与预测正确概率、题目难度
+    // 埋点：推荐过程保存来源、原因、算法版本、推荐时掌握度与估计正确概率、题目难度。
+    // 注意：estimatedCorrectProbability 是「展示掌握度 ÷ 100」的启发式估计值，
+    // 不是 BKT/DKT 等模型的输出；接入知识追踪模型后由模型概率替代。
     const masteryByNode = new Map(
       ranked.map((node) => [node.id, node.mastery]),
     );
     db.create("recommendationLogs", {
       studentId,
       questionIds: questions.map((item) => item.id),
-      reason: "按已学范围、真实作答和复习间隔选题",
+      reason: "基于掌握度、先修关系和复习间隔的规则推荐",
       recommendationSource: "personalized-push",
-      modelVersion: "mastery-engine-v1",
+      algorithm: "rule-based-push",
+      modelVersion: "rule-push-v1",
       recommendedAt: new Date().toISOString(),
       answeredAt: null,
       details: questions.map((question) => {
@@ -117,10 +120,12 @@ function getPersonalizedPush(studentId, options = {}) {
           questionId: question.id,
           recommendationSource: "personalized-push",
           recommendationReason: question.recommendationReason || "",
-          modelVersion: "mastery-engine-v1",
-          masteryBefore,
-          predictedCorrectProbability:
+          algorithm: "rule-based-push",
+          modelVersion: "rule-push-v1",
+          masteryBefore, // 展示掌握度（0-100，样本不足时封顶 79，页面展示规则而非校准概率）
+          estimatedCorrectProbability:
             masteryBefore === null ? null : Number((masteryBefore / 100).toFixed(4)),
+          probabilitySource: masteryBefore === null ? null : "display-mastery-heuristic",
           questionDifficulty: question.difficulty ?? question.difficultyLevel ?? null,
         };
       }),

@@ -1,6 +1,27 @@
 {
   "source": "synthetic",
-  "recordCount": 2865,
+  "inputFile": null,
+  "inputHash": null,
+  "gitCommit": "7650774",
+  "generatedAt": "2026-10-29T02:16:44.734Z",
+  "dataset": {
+    "recordCount": 2865,
+    "studentCount": 40,
+    "questionCount": 2865,
+    "knowledgePointCount": 6,
+    "timeRange": [
+      "2026-01-01T09:55:20.101Z",
+      "2026-03-07T00:50:30.980Z"
+    ]
+  },
+  "evalProtocol": {
+    "task": "预测学生下一次答题结果（时间顺序 walk-forward，无未来信息泄漏）",
+    "majority": "全局时间前缀正例率（前缀和+二分查找，严格早于预测时刻，与组处理顺序无关）",
+    "bootstrap": "学生级聚类 bootstrap，重采样单位为学生，保留其全部记录",
+    "pairedComparison": "相同学生、相同测试样本的配对比较，池化指标差 + 学生级 bootstrap 置信区间与双侧 p 值",
+    "bootstrapReps": 500,
+    "seed": 42
+  },
   "params": {
     "comment": "规则掌握度基线实验固定参数。所有基线共用同一组参数，禁止按学生单独调参。",
     "windowSize": 10,
@@ -23,39 +44,48 @@
   "results": {
     "Majority": {
       "n": 2625,
-      "AUC": 0.528,
-      "LogLoss": 0.6809,
-      "Brier": 0.2439,
-      "Accuracy": 0.5771,
-      "F1": 0.7319,
-      "positiveRate": 0.5771
+      "AUC": 0.5227,
+      "LogLoss": 0.6921,
+      "Brier": 0.2495,
+      "Accuracy": 0.5284,
+      "F1": 0.5511,
+      "positiveRate": 0.5394
+    },
+    "Online-Rule": {
+      "n": 2625,
+      "AUC": 0.6805,
+      "LogLoss": 0.8172,
+      "Brier": 0.252,
+      "Accuracy": 0.6301,
+      "F1": 0.6582,
+      "positiveRate": 0.5394
     },
     "Rule-0": {
       "n": 2625,
-      "AUC": 0.6913,
-      "LogLoss": 0.6315,
-      "Brier": 0.221,
-      "Accuracy": 0.6465,
-      "F1": 0.7058,
-      "positiveRate": 0.5771
+      "AUC": 0.6849,
+      "LogLoss": 0.6414,
+      "Brier": 0.2254,
+      "Accuracy": 0.6301,
+      "F1": 0.662,
+      "positiveRate": 0.5394
     },
     "Rule-1": {
       "n": 2625,
-      "AUC": 0.6868,
-      "LogLoss": 0.6628,
-      "Brier": 0.2285,
-      "Accuracy": 0.6396,
-      "F1": 0.695,
-      "positiveRate": 0.5771
+      "AUC": 0.6838,
+      "LogLoss": 0.6721,
+      "Brier": 0.2323,
+      "Accuracy": 0.6267,
+      "F1": 0.654,
+      "positiveRate": 0.5394
     },
     "Rule-2": {
       "n": 2625,
-      "AUC": 0.6861,
-      "LogLoss": 0.6692,
-      "Brier": 0.2326,
-      "Accuracy": 0.6225,
-      "F1": 0.64,
-      "positiveRate": 0.5771
+      "AUC": 0.6836,
+      "LogLoss": 0.6794,
+      "Brier": 0.236,
+      "Accuracy": 0.6141,
+      "F1": 0.5917,
+      "positiveRate": 0.5394
     }
   }
 }

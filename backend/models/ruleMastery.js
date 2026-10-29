@@ -7,7 +7,10 @@ const params = require('./baselineParams.json');
  * 输出 mastery ∈ [0, 1]，作为下一题答对概率 p 使用。
  *
  * Rule-0：最近正确率（拉普拉斯平滑）
- * Rule-1：正确率 + 连续答题修正（提取自 backend/services/masteryEngine.js 的线上公式）
+ * Online-Rule：完全复现线上 masteryEngine.js 公式（普通正确率、无平滑，
+ *              连对/连错修正、样本不足封顶 0.79）——用于衡量「线上公式」本身
+ * Rule-1：Rule-0 + 连续答题修正（受线上公式启发，但使用平滑正确率，
+ *         并非线上公式的完全复现；与 Online-Rule 区分）
  * Rule-2：Rule-1 + 指数时间衰减 exp(-λd)
  *
  * 参数全部来自 baselineParams.json，固定不变，不按学生单独调整。
@@ -142,9 +145,20 @@ function rule2(records, options = {}) {
   };
 }
 
-const MODELS = { 'Rule-0': rule0, 'Rule-1': rule1, 'Rule-2': rule2 };
+/**
+ * Online-Rule：完全复现线上 masteryEngine.calculateMastery 公式：
+ *   - 最近 windowSize 次普通正确率（无拉普拉斯平滑，laplacePrior=0）
+ *   - 最近 3 次全对且速度不慢于历史 → +streakBoost
+ *   - 最近 2 次全错 → -streakPenalty
+ *   - 样本不足 → mastery 封顶 insufficientCap（对应线上「封顶 79 分」）
+ */
+function onlineRule(records, options = {}) {
+  return rule1(records, { ...options, laplacePrior: 0 });
+}
 
-// 统一入口：model = 'Rule-0' | 'Rule-1' | 'Rule-2'，返回下一题答对概率 p
+const MODELS = { 'Online-Rule': onlineRule, 'Rule-0': rule0, 'Rule-1': rule1, 'Rule-2': rule2 };
+
+// 统一入口：model = 'Online-Rule' | 'Rule-0' | 'Rule-1' | 'Rule-2'，返回下一题答对概率 p
 function predictNextCorrect(model, records, options = {}) {
   const fn = MODELS[model];
   if (!fn) throw new Error(`未知基线模型: ${model}`);
@@ -154,6 +168,7 @@ function predictNextCorrect(model, records, options = {}) {
 module.exports = {
   params,
   sortByTime,
+  onlineRule,
   rule0,
   rule1,
   rule2,
