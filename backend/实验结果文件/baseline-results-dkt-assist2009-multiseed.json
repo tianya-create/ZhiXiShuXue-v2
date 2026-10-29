@@ -1,0 +1,482 @@
+{
+  "generatedAt": "2026-10-29T13:42:26.004Z",
+  "experimentType": "5 个随机种子重复实验：改变学生划分、参数初始化和训练随机过程；共享同一数据集与同一组超参，不是统计意义上的完全独立实验",
+  "aggregation": "对各种子指标取 mean ± std（std 为种子间总体标准差，除以 n；不是跨种子置信区间）",
+  "caveatMergedTestSet": "各种子 test 学生集合不同，禁止把 5 份 test 目标合并成一个「合并测试集」重算总指标或做配对检验",
+  "perSeedCiMeaning": "每个种子内部的配对 bootstrap CI 只说明该划分内模型差异稳定，不是对 5 种子均值进行的跨种子显著性检验",
+  "protocol": "学生级 70/15/15（按学生划分，每个种子独立划分并独立训练）；各种子目标集不同，跨种子数字不可配对比较，仅统计方向一致性",
+  "seeds": [
+    {
+      "seed": 42,
+      "file": "baseline-results-dkt-assist2009.json",
+      "testTargets": 36967,
+      "epochsRun": 50,
+      "bestEpoch": 46
+    },
+    {
+      "seed": 43,
+      "file": "baseline-results-dkt-assist2009-s43.json",
+      "testTargets": 34096,
+      "epochsRun": 45,
+      "bestEpoch": 40
+    },
+    {
+      "seed": 44,
+      "file": "baseline-results-dkt-assist2009-s44.json",
+      "testTargets": 37177,
+      "epochsRun": 40,
+      "bestEpoch": 35
+    },
+    {
+      "seed": 45,
+      "file": "baseline-results-dkt-assist2009-s45.json",
+      "testTargets": 30832,
+      "epochsRun": 45,
+      "bestEpoch": 40
+    },
+    {
+      "seed": 46,
+      "file": "baseline-results-dkt-assist2009-s46.json",
+      "testTargets": 31227,
+      "epochsRun": 45,
+      "bestEpoch": 40
+    }
+  ],
+  "perModel": {
+    "DKT": {
+      "auc": {
+        "perSeed": [
+          0.7388,
+          0.7485,
+          0.7396,
+          0.744,
+          0.7513
+        ],
+        "mean": 0.7444,
+        "std": 0.0049
+      },
+      "logLoss": {
+        "perSeed": [
+          0.542,
+          0.5402,
+          0.5326,
+          0.5423,
+          0.5351
+        ],
+        "mean": 0.5384,
+        "std": 0.0039
+      }
+    },
+    "BKT": {
+      "auc": {
+        "perSeed": [
+          0.7093,
+          0.7209,
+          0.7128,
+          0.7107,
+          0.7248
+        ],
+        "mean": 0.7157,
+        "std": 0.0061
+      },
+      "logLoss": {
+        "perSeed": [
+          0.5621,
+          0.5618,
+          0.5511,
+          0.5644,
+          0.5546
+        ],
+        "mean": 0.5588,
+        "std": 0.0051
+      }
+    },
+    "Rule-0": {
+      "auc": {
+        "perSeed": [
+          0.6946,
+          0.7033,
+          0.6963,
+          0.7006,
+          0.7102
+        ],
+        "mean": 0.701,
+        "std": 0.0055
+      },
+      "logLoss": {
+        "perSeed": [
+          0.6001,
+          0.5996,
+          0.592,
+          0.5992,
+          0.5895
+        ],
+        "mean": 0.5961,
+        "std": 0.0044
+      }
+    },
+    "Majority": {
+      "auc": {
+        "perSeed": [
+          0.535,
+          0.5423,
+          0.5425,
+          0.536,
+          0.5625
+        ],
+        "mean": 0.5437,
+        "std": 0.0099
+      },
+      "logLoss": {
+        "perSeed": [
+          0.633,
+          0.6385,
+          0.6261,
+          0.6352,
+          0.6345
+        ],
+        "mean": 0.6335,
+        "std": 0.0041
+      }
+    }
+  },
+  "pairedDirection": [
+    {
+      "pair": "DKT − BKT",
+      "perSeed": [
+        {
+          "seed": 42,
+          "dAUC": 0.0294,
+          "dAucCi": [
+            0.023,
+            0.0361
+          ],
+          "dLogLoss": -0.0202,
+          "dLogLossCi": [
+            -0.0264,
+            -0.0145
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 43,
+          "dAUC": 0.0275,
+          "dAucCi": [
+            0.0226,
+            0.0325
+          ],
+          "dLogLoss": -0.0216,
+          "dLogLossCi": [
+            -0.0258,
+            -0.0178
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 44,
+          "dAUC": 0.0267,
+          "dAucCi": [
+            0.0226,
+            0.0313
+          ],
+          "dLogLoss": -0.0185,
+          "dLogLossCi": [
+            -0.0218,
+            -0.0154
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 45,
+          "dAUC": 0.033,
+          "dAucCi": [
+            0.0273,
+            0.0388
+          ],
+          "dLogLoss": -0.022,
+          "dLogLossCi": [
+            -0.0261,
+            -0.0179
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 46,
+          "dAUC": 0.0265,
+          "dAucCi": [
+            0.0214,
+            0.0317
+          ],
+          "dLogLoss": -0.0194,
+          "dLogLossCi": [
+            -0.0243,
+            -0.0147
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        }
+      ],
+      "aucPositiveSeeds": 5,
+      "aucCiExcludesZeroSeeds": 5,
+      "llNegativeSeeds": 5,
+      "llCiExcludesZeroSeeds": 5
+    },
+    {
+      "pair": "DKT − Rule-0",
+      "perSeed": [
+        {
+          "seed": 42,
+          "dAUC": 0.0441,
+          "dAucCi": [
+            0.0369,
+            0.0512
+          ],
+          "dLogLoss": -0.058,
+          "dLogLossCi": [
+            -0.0636,
+            -0.0517
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 43,
+          "dAUC": 0.045,
+          "dAucCi": [
+            0.0393,
+            0.0507
+          ],
+          "dLogLoss": -0.0593,
+          "dLogLossCi": [
+            -0.0642,
+            -0.0542
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 44,
+          "dAUC": 0.0433,
+          "dAucCi": [
+            0.0381,
+            0.0482
+          ],
+          "dLogLoss": -0.0593,
+          "dLogLossCi": [
+            -0.0646,
+            -0.0537
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 45,
+          "dAUC": 0.0432,
+          "dAucCi": [
+            0.0369,
+            0.0492
+          ],
+          "dLogLoss": -0.0568,
+          "dLogLossCi": [
+            -0.0622,
+            -0.0513
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 46,
+          "dAUC": 0.0412,
+          "dAucCi": [
+            0.0347,
+            0.0477
+          ],
+          "dLogLoss": -0.0545,
+          "dLogLossCi": [
+            -0.0609,
+            -0.0478
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        }
+      ],
+      "aucPositiveSeeds": 5,
+      "aucCiExcludesZeroSeeds": 5,
+      "llNegativeSeeds": 5,
+      "llCiExcludesZeroSeeds": 5
+    },
+    {
+      "pair": "DKT − Majority",
+      "perSeed": [
+        {
+          "seed": 42,
+          "dAUC": 0.204,
+          "dAucCi": [
+            0.1799,
+            0.2308
+          ],
+          "dLogLoss": -0.0913,
+          "dLogLossCi": [
+            -0.1081,
+            -0.0775
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 43,
+          "dAUC": 0.2067,
+          "dAucCi": [
+            0.1845,
+            0.2302
+          ],
+          "dLogLoss": -0.0985,
+          "dLogLossCi": [
+            -0.1127,
+            -0.0859
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 44,
+          "dAUC": 0.1967,
+          "dAucCi": [
+            0.1662,
+            0.2298
+          ],
+          "dLogLoss": -0.0935,
+          "dLogLossCi": [
+            -0.1052,
+            -0.0824
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 45,
+          "dAUC": 0.2079,
+          "dAucCi": [
+            0.1863,
+            0.23
+          ],
+          "dLogLoss": -0.0931,
+          "dLogLossCi": [
+            -0.1059,
+            -0.0817
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 46,
+          "dAUC": 0.188,
+          "dAucCi": [
+            0.1617,
+            0.2198
+          ],
+          "dLogLoss": -0.0992,
+          "dLogLossCi": [
+            -0.1158,
+            -0.0846
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        }
+      ],
+      "aucPositiveSeeds": 5,
+      "aucCiExcludesZeroSeeds": 5,
+      "llNegativeSeeds": 5,
+      "llCiExcludesZeroSeeds": 5
+    },
+    {
+      "pair": "BKT − Rule-0",
+      "perSeed": [
+        {
+          "seed": 42,
+          "dAUC": 0.0147,
+          "dAucCi": [
+            0.0091,
+            0.0204
+          ],
+          "dLogLoss": -0.0379,
+          "dLogLossCi": [
+            -0.0436,
+            -0.0318
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 43,
+          "dAUC": 0.0175,
+          "dAucCi": [
+            0.0116,
+            0.0231
+          ],
+          "dLogLoss": -0.0377,
+          "dLogLossCi": [
+            -0.0434,
+            -0.0317
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 44,
+          "dAUC": 0.0166,
+          "dAucCi": [
+            0.0106,
+            0.0225
+          ],
+          "dLogLoss": -0.0408,
+          "dLogLossCi": [
+            -0.0462,
+            -0.0352
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 45,
+          "dAUC": 0.0102,
+          "dAucCi": [
+            0.0046,
+            0.016
+          ],
+          "dLogLoss": -0.0348,
+          "dLogLossCi": [
+            -0.0403,
+            -0.0293
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        },
+        {
+          "seed": 46,
+          "dAUC": 0.0146,
+          "dAucCi": [
+            0.0081,
+            0.0213
+          ],
+          "dLogLoss": -0.035,
+          "dLogLossCi": [
+            -0.0419,
+            -0.0277
+          ],
+          "aucCiExcludesZero": true,
+          "llCiExcludesZero": true
+        }
+      ],
+      "aucPositiveSeeds": 5,
+      "aucCiExcludesZeroSeeds": 5,
+      "llNegativeSeeds": 5,
+      "llCiExcludesZeroSeeds": 5
+    }
+  ],
+  "conclusionTemplate": "在 {nSeeds} 个随机种子（改变学生划分、初始化与训练随机过程）的重复实验中，DKT − Rule-0 的 ΔAUC 在 {aucPos}/{nSeeds} 个种子为正、{aucCi}/{nSeeds} 个种子 CI 不含 0；DKT − BKT 的 ΔLogLoss 在 {llPos}/{nSeeds} 个种子为负、{llCi}/{nSeeds} 个种子 CI 不含 0。"
+}
