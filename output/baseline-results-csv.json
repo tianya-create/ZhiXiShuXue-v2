@@ -1,0 +1,61 @@
+{
+  "source": "csv",
+  "recordCount": 3602,
+  "params": {
+    "comment": "规则掌握度基线实验固定参数。所有基线共用同一组参数，禁止按学生单独调参。",
+    "windowSize": 10,
+    "minSamples": 5,
+    "minDistinctQuestions": 3,
+    "insufficientCap": 0.79,
+    "streakBoost": 0.1,
+    "streakPenalty": 0.1,
+    "streakWindowCorrect": 3,
+    "streakWindowWrong": 2,
+    "speedTolerance": 1.2,
+    "decayRate": 0.03,
+    "laplacePrior": 1,
+    "coldStartMastery": 0.5,
+    "probFloor": 0.01,
+    "probCeil": 0.99,
+    "decisionThreshold": 0.5,
+    "logLossEps": 1e-12
+  },
+  "results": {
+    "Majority": {
+      "n": 3284,
+      "AUC": 0.4915,
+      "LogLoss": 0.6671,
+      "Brier": 0.2371,
+      "Accuracy": 0.6145,
+      "F1": 0.0031,
+      "positiveRate": 0.3858
+    },
+    "Rule-0": {
+      "n": 3284,
+      "AUC": 0.5892,
+      "LogLoss": 0.6931,
+      "Brier": 0.2478,
+      "Accuracy": 0.5621,
+      "F1": 0.4947,
+      "positiveRate": 0.3858
+    },
+    "Rule-1": {
+      "n": 3284,
+      "AUC": 0.5874,
+      "LogLoss": 0.7245,
+      "Brier": 0.2537,
+      "Accuracy": 0.567,
+      "F1": 0.4772,
+      "positiveRate": 0.3858
+    },
+    "Rule-2": {
+      "n": 3284,
+      "AUC": 0.5876,
+      "LogLoss": 0.7162,
+      "Brier": 0.2498,
+      "Accuracy": 0.6005,
+      "F1": 0.4047,
+      "positiveRate": 0.3858
+    }
+  }
+}

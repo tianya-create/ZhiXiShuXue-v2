@@ -206,6 +206,151 @@ function formatTable(results) {
   return [line(header), line(widths.map((w) => '-'.repeat(w))), ...rows.map(line)].join('\n');
 }
 
+// ---------- 统计严谨性：bootstrap 置信区间 + 配对显著性检验 ----------
+
+function mulberry32(seed) {
+  let a = seed >>> 0;
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function percentile(sorted, q) {
+  if (!sorted.length) return null;
+  const pos = (sorted.length - 1) * q;
+  const base = Math.floor(pos);
+  const rest = pos - base;
+  return sorted[base + 1] !== undefined
+    ? sorted[base] + rest * (sorted[base + 1] - sorted[base])
+    : sorted[base];
+}
+
+// 行按 (userId|kpCode) 分组，bootstrap 重采样「组」以保留学生内相关性
+function groupRows(rows) {
+  const groups = new Map();
+  for (const row of rows) {
+    const key = `${row.userId}|${row.kpCode}`;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(row);
+  }
+  return [...groups.values()];
+}
+
+// rows 来自 walkForward 输出；返回各指标 95% 置信区间
+function bootstrapCIs(rows, { reps = 1000, seed = 42 } = {}) {
+  const groups = groupRows(rows);
+  const rand = mulberry32(seed);
+  const samples = { AUC: [], LogLoss: [], Accuracy: [], Brier: [] };
+  for (let r = 0; r < reps; r++) {
+    const picked = [];
+    for (let g = 0; g < groups.length; g++) {
+      const group = groups[Math.floor(rand() * groups.length)];
+      picked.push(...group);
+    }
+    const m = evaluateMetrics(picked);
+    if (m.AUC !== null) samples.AUC.push(m.AUC);
+    samples.LogLoss.push(m.LogLoss);
+    samples.Accuracy.push(m.Accuracy);
+    samples.Brier.push(m.Brier);
+  }
+  const ci = {};
+  for (const [name, arr] of Object.entries(samples)) {
+    arr.sort((a, b) => a - b);
+    ci[name] = [Number(percentile(arr, 0.025).toFixed(4)), Number(percentile(arr, 0.975).toFixed(4))];
+  }
+  return ci;
+}
+
+// 配对比较：两模型 walk-forward 输出按 (userId,kpCode,createdAt) 对齐（target 相同）
+// 统计方法：组级（聚类）bootstrap 下计算「池化」指标差。
+// 注意：不能用组内逐行 AUC 的均值——短序列上增长窗口预测器存在机械性负偏差
+// （pred(t) 的历史窗口包含 target(t-1)，会制造虚假反相关），池化 AUC 才是 KT 标准指标。
+function pairedComparison(rowsA, rowsB, { reps = 1000, seed = 42 } = {}) {
+  const keyOf = (row) => `${row.userId}|${row.kpCode}|${row.createdAt}`;
+  const mapB = new Map(rowsB.map((row) => [keyOf(row), row]));
+  const paired = [];
+  for (const a of rowsA) {
+    const b = mapB.get(keyOf(a));
+    if (b && b.target === a.target) paired.push({ key: keyOf(a), a, b });
+  }
+
+  // 组级聚类
+  const groups = new Map();
+  for (const item of paired) {
+    const gk = item.key.split('|').slice(0, 2).join('|');
+    if (!groups.has(gk)) groups.set(gk, []);
+    groups.get(gk).push(item);
+  }
+  const groupList = [...groups.values()];
+
+  function pooledMetrics(items) {
+    const auc = rocAUC(items.map((x) => ({ pred: x.a.pred, target: x.a.target })));
+    const eps = params.logLossEps;
+    let llA = 0, llB = 0;
+    for (const x of items) {
+      const pa = Math.min(1 - eps, Math.max(eps, x.a.pred));
+      const pb = Math.min(1 - eps, Math.max(eps, x.b.pred));
+      llA += -(x.a.target * Math.log(pa) + (1 - x.a.target) * Math.log(1 - pa));
+      llB += -(x.b.target * Math.log(pb) + (1 - x.b.target) * Math.log(1 - pb));
+    }
+    return {
+      dAUC: auc === null ? null : auc - rocAUC(items.map((x) => ({ pred: x.b.pred, target: x.b.target }))),
+      dLogLoss: (llA - llB) / items.length
+    };
+  }
+
+  const observed = pooledMetrics(paired);
+  const rand = mulberry32(seed);
+  const n = groupList.length;
+
+  function bootStats(observedDiff, pickDiff) {
+    const diffs = [];
+    for (let r = 0; r < reps; r++) {
+      const picked = [];
+      for (let g = 0; g < n; g++) picked.push(...groupList[Math.floor(rand() * n)]);
+      const m = pickDiff(picked);
+      if (m !== null) diffs.push(m);
+    }
+    diffs.sort((a, b) => a - b);
+    const pAbove = diffs.filter((d) => d <= 0).length / diffs.length;
+    return {
+      meanDiff: Number(observedDiff.toFixed(4)),
+      ci: [Number(percentile(diffs, 0.025).toFixed(4)), Number(percentile(diffs, 0.975).toFixed(4))],
+      // bootstrap 双侧 p 值：分布越过 0 的比例的两倍（加一平滑避免 0/1）
+      p: Number(Math.min(1, 2 * Math.min((pAbove * diffs.length + 1) / (diffs.length + 1),
+        ((1 - pAbove) * diffs.length + 1) / (diffs.length + 1))).toFixed(4)),
+      groups: n
+    };
+  }
+
+  return {
+    pairedRows: paired.length,
+    dAUC: observed.dAUC === null
+      ? { meanDiff: null, ci: [null, null], p: null, groups: n }
+      : bootStats(observed.dAUC, (items) => pooledMetrics(items).dAUC),
+    dLogLoss: bootStats(observed.dLogLoss, (items) => pooledMetrics(items).dLogLoss)
+  };
+}
+
+function formatComparisonTable(comparisons) {
+  const header = ['对比 (A vs B)', 'ΔAUC均值', 'ΔAUC 95%CI', 'p(AUC)', 'ΔLogLoss均值', 'ΔLogLoss 95%CI', 'p(LogLoss)'];
+  const rows = comparisons.map((c) => [
+    `${c.a} - ${c.b}`,
+    c.res.dAUC.meanDiff,
+    `[${c.res.dAUC.ci[0]}, ${c.res.dAUC.ci[1]}]`,
+    c.res.dAUC.p,
+    c.res.dLogLoss.meanDiff,
+    `[${c.res.dLogLoss.ci[0]}, ${c.res.dLogLoss.ci[1]}]`,
+    c.res.dLogLoss.p
+  ]);
+  const widths = header.map((h, i) => Math.max(String(h).length, ...rows.map((r) => String(r[i]).length)));
+  const line = (cells) => '| ' + cells.map((c, i) => String(c).padEnd(widths[i])).join(' | ') + ' |';
+  return [line(header), line(widths.map((w) => '-'.repeat(w))), ...rows.map(line)].join('\n');
+}
+
 function main() {
   const args = process.argv.slice(2);
   const sourceIdx = args.indexOf('--source');
@@ -232,6 +377,34 @@ function main() {
   console.log('\n== 时间顺序评估结果（预测第 t 次只用前 t-1 次记录）==');
   console.log(table);
 
+  // bootstrap 置信区间 + 配对显著性检验
+  const bootIdx = args.indexOf('--bootstrap');
+  const reps = bootIdx >= 0 ? Number(args[bootIdx + 1] || 1000) : 1000;
+  const models = Object.keys(results);
+  const walkRows = {};
+  for (const model of models) walkRows[model] = walkForward(records, model);
+
+  console.log(`\n== 95% 置信区间（组级 bootstrap × ${reps}）==`);
+  const ciTable = models.map((model) => {
+    const ci = bootstrapCIs(walkRows[model], { reps });
+    const m = results[model];
+    return [model,
+      `${m.AUC === null ? '-' : m.AUC} [${ci.AUC[0]}, ${ci.AUC[1]}]`,
+      `${m.LogLoss} [${ci.LogLoss[0]}, ${ci.LogLoss[1]}]`];
+  });
+  console.log(['模型', 'AUC [CI]', 'LogLoss [CI]'].map((h, i) => String(h).padEnd(Math.max(h.length, ...ciTable.map((r) => r[i].length)))).join(' | '));
+  ciTable.forEach((r) => console.log(r.join(' | ')));
+
+  console.log(`\n== 配对显著性检验（组级聚类 bootstrap，池化指标差, Δ = 行A - 行B）==`);
+  const pairs = [];
+  for (let i = 0; i < models.length; i++) {
+    for (let j = i + 1; j < models.length; j++) {
+      pairs.push({ a: models[i], b: models[j], res: pairedComparison(walkRows[models[i]], walkRows[models[j]], { reps }) });
+    }
+  }
+  console.log(formatComparisonTable(pairs));
+  console.log('\n判读：ΔAUC 的 CI 不含 0 且 p < 0.05 → 差异显著；AUC 越大越好，LogLoss 越小越好。');
+
   const outDir = path.join(__dirname, '..', '..', 'output');
   fs.mkdirSync(outDir, { recursive: true });
   const outFile = path.join(outDir, `baseline-results-${source}.json`);
@@ -249,6 +422,9 @@ module.exports = {
   walkForward,
   runEvaluation,
   formatTable,
+  bootstrapCIs,
+  pairedComparison,
+  formatComparisonTable,
   generateSyntheticRecords,
   loadFromDb,
   loadFromCsv

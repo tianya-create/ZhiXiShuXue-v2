@@ -1,5 +1,5 @@
 const { rule0, rule1, rule2, predictNextCorrect, sortByTime } = require('../models/ruleMastery')
-const { evaluateMetrics, rocAUC, generateSyntheticRecords, walkForward, runEvaluation } = require('../models/baselineEval')
+const { evaluateMetrics, rocAUC, generateSyntheticRecords, walkForward, runEvaluation, pairedComparison } = require('../models/baselineEval')
 
 describe('rule mastery baselines', () => {
   const mk = (isCorrect, costTime, offsetDays, questionId) => ({
@@ -110,5 +110,33 @@ describe('baseline evaluation', () => {
       { pred: 0.9, target: 0 }, { pred: 0.1, target: 1 }
     ]
     expect(rocAUC(pairs)).toBe(0)
+  })
+
+  test('i.i.d. 随机数据上配对检验不应报显著差异（防组内AUC伪显著回归）', () => {
+    // 每组固定 p 的 i.i.d. 结果：两个相同质量的预测器不应有显著 AUC 差
+    let seed = 20260101
+    const rand = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648 }
+    const records = []
+    for (let s = 0; s < 30; s++) {
+      for (let k = 0; k < 4; k++) {
+        const p = 0.2 + rand() * 0.6
+        const n = 8 + Math.floor(rand() * 10)
+        for (let i = 0; i < n; i++) {
+          records.push({
+            userId: `s${s}`, kpCode: `KP${k}`, questionId: `q${i}`,
+            isCorrect: rand() < p, costTime: 60,
+            createdAt: new Date(Date.UTC(2026, 0, 1) + (i * 3 + rand() * 2) * 864e5).toISOString()
+          })
+        }
+      }
+    }
+    const rowsA = walkForward(records, 'Majority')
+    const rowsB = walkForward(records, 'Rule-0')
+    const res = pairedComparison(rowsA, rowsB, { reps: 300, seed: 7 })
+    expect(res.pairedRows).toBe(rowsA.length)
+    // CI 应包含 0（i.i.d. 下无真实差异）
+    expect(res.dAUC.ci[0]).toBeLessThanOrEqual(0)
+    expect(res.dAUC.ci[1]).toBeGreaterThanOrEqual(0)
+    expect(res.dAUC.p).toBeGreaterThan(0.01)
   })
 })
