@@ -131,8 +131,7 @@ describe('baseline evaluation', () => {
     }
   })
 
-  test('Majority 交错时间无泄漏：早期目标不得看到同组未来的自身结果', () => {
-    // 学生 A：day1 对（历史），day100 目标 → 处理 A 时全局指针曾推进越过 B 的早期目标
+  test('Majority 交错时间无泄漏：早期目标不得看到同组未来的自身结果', () => {    // 学生 A：day1 对（历史），day100 目标 → 处理 A 时全局指针曾推进越过 B 的早期目标
     // 学生 B：day2 错（历史），day3 目标（答错）
     // 无泄漏时 B 目标的 Majority 预测 = (1对+1)/(2条+2) = 0.5；
     // 泄漏时（旧单调指针实现）B 自己 day3 的结果已被计入 → (1+1+0)/(3+2) = 0.4
@@ -146,6 +145,34 @@ describe('baseline evaluation', () => {
     const rows = walkForward(records, 'Majority')
     const rowB = rows.find((r) => r.userId === 'B')
     expect(rowB.pred).toBeCloseTo(0.5, 6)
+  })
+
+  test('同一时间戳为同一批次：批次内记录互不为历史信息', () => {
+    const t1 = new Date(Date.UTC(2026, 0, 1)).toISOString()
+    const t2 = new Date(Date.UTC(2026, 0, 2)).toISOString()
+    const records = [
+      { userId: 'A', kpCode: 'K1', questionId: 'q1', isCorrect: true, costTime: 60, createdAt: t1 },
+      { userId: 'A', kpCode: 'K1', questionId: 'q2', isCorrect: false, costTime: 60, createdAt: t1 },
+      { userId: 'A', kpCode: 'K1', questionId: 'q3', isCorrect: true, costTime: 60, createdAt: t2 }
+    ]
+    const rows = walkForward(records, 'Rule-0')
+    // 首批次（t1 的 q1、q2）无任何更早历史，整体跳过
+    expect(rows.filter((r) => r.createdAt === t1)).toHaveLength(0)
+    // q3 的历史 = 严格早于 t2 的 q1、q2（同批次互不为历史）→ (1+1)/(2+2) = 0.5
+    const rowQ3 = rows.find((r) => r.createdAt === t2)
+    expect(rowQ3.pred).toBeCloseTo(0.5, 6)
+  })
+
+  test('同一时间戳下原始 CSV 行顺序变化不改变评估结果', () => {
+    const t1 = new Date(Date.UTC(2026, 0, 1)).toISOString()
+    const t2 = new Date(Date.UTC(2026, 0, 2)).toISOString()
+    const mk = (qid, correct, ts) => ({ userId: 'A', kpCode: 'K1', questionId: qid, isCorrect: correct, costTime: 60, createdAt: ts })
+    const base = [mk('q1', true, t1), mk('q2', false, t1), mk('q3', true, t2), mk('q4', false, t2)]
+    const rowsA = walkForward(base, 'Rule-0')
+    const rowsB = walkForward([...base].reverse(), 'Rule-0')
+    const keyOf = (r) => `${r.userId}|${r.kpCode}|${r.createdAt}|${r.target}`
+    const mapA = new Map(rowsA.map((r) => [keyOf(r), r.pred]))
+    for (const r of rowsB) expect(r.pred).toBeCloseTo(mapA.get(keyOf(r)), 6)
   })
 
   test('rocAUC 完全反向预测为 0', () => {

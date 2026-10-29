@@ -62,6 +62,25 @@ function evaluateMetrics(rows) {
   };
 }
 
+// ---------- 分箱校准表（可靠性表）----------
+// 按预测概率分 10 桶，比较桶内平均预测概率与实际正确率；
+// 校准好的模型两者接近。用于解释「AUC 高但 LogLoss 差」的概率质量短板。
+function calibrationBins(rows, binCount = 10) {
+  const bins = Array.from({ length: binCount }, () => ({ n: 0, predSum: 0, correct: 0 }));
+  for (const row of rows) {
+    const b = Math.min(binCount - 1, Math.max(0, Math.floor(row.pred * binCount)));
+    bins[b].n++;
+    bins[b].predSum += row.pred;
+    bins[b].correct += row.target;
+  }
+  return bins.map((bin, i) => ({
+    range: `[${(i / binCount).toFixed(1)}, ${((i + 1) / binCount).toFixed(1)})`,
+    n: bin.n,
+    meanPredicted: bin.n ? Number((bin.predSum / bin.n).toFixed(4)) : null,
+    observedRate: bin.n ? Number((bin.correct / bin.n).toFixed(4)) : null
+  }));
+}
+
 // ---------- 数据准备 ----------
 
 // 按时间全局排序后按 (userId, kpCode) 分组，组内升序
@@ -104,10 +123,19 @@ function walkForward(records, model, options = {}) {
   }
 
   for (const group of groups) {
-    for (let t = 1; t < group.length; t++) {
-      const history = group.slice(0, t);
-      const target = group[t].isCorrect ? 1 : 0;
+    // 同一时间戳视为同一答题批次：批次内记录互不为历史信息，历史只包含
+    // 严格早于目标时刻的记录（与 Majority 的全局前缀规则一致）。
+    // 首批次（无任何更早记录）整体跳过；之后每个记录都是预测目标——
+    // 目标选取与批次内行顺序无关，输入行序变化不改变结果。
+    const minTs = new Date(group[0].createdAt).getTime();
+    let cutoff = 0;
+    for (let t = 0; t < group.length; t++) {
       const currentTime = new Date(group[t].createdAt).getTime();
+      if (currentTime === minTs) continue; // 首批次无历史
+      while (cutoff < group.length &&
+             new Date(group[cutoff].createdAt).getTime() < currentTime) cutoff++;
+      const history = group.slice(0, cutoff);
+      const target = group[t].isCorrect ? 1 : 0;
       let pred;
       if (model === 'Majority') {
         // 拉普拉斯平滑的全局累积正例率（严格早于目标时刻），无历史时为 0.5
@@ -417,9 +445,9 @@ function main() {
   console.log('\n== 时间顺序评估结果（预测第 t 次只用前 t-1 次记录）==');
   console.log(table);
 
-  // bootstrap 置信区间 + 配对显著性检验
+  // bootstrap 置信区间 + 配对显著性检验（正式结果建议 ≥2000 次）
   const bootIdx = args.indexOf('--bootstrap');
-  const reps = bootIdx >= 0 ? Number(args[bootIdx + 1] || 1000) : 1000;
+  const reps = bootIdx >= 0 ? Number(args[bootIdx + 1] || 2000) : 2000;
   const models = Object.keys(results);
   const walkRows = {};
   for (const model of models) walkRows[model] = walkForward(records, model);
@@ -443,9 +471,21 @@ function main() {
     }
   }
   console.log(formatComparisonTable(pairs));
-  console.log('\n判读：ΔAUC 的 CI 不含 0 且 p < 0.05 → 差异显著；AUC 越大越好，LogLoss 越小越好。');
+  console.log('\n判读：主要依据 Δ 及其 95% CI（CI 不含 0 → 方向稳定）；AUC 越大越好，LogLoss/Brier 越小越好。');
+  console.log('注意：p 值为探索性指标（受 bootstrap 次数影响分辨率有限），不作为模型优越性的充分依据；');
+  console.log('      Accuracy/F1 为固定阈值 0.5 下的分类表现，Majority 正例率 < 0.5 时 F1=0 属预期，解释力有限。');
 
-  const outDir = path.join(__dirname, '..', '..', 'output');
+  // P2-5：分箱校准表（可靠性表）——衡量概率预测质量（与排序能力 AUC 互补）
+  console.log('\n== 分箱校准表（10 箱：桶内平均预测概率 vs 实际正确率）==');
+  for (const model of models) {
+    const bins = calibrationBins(walkRows[model]);
+    console.log(`\n${model}:`);
+    console.log(bins);
+  }
+
+  // P1-4：输出目录可配置（--out），默认项目内 output/，不存在自动创建
+  const outIdx = args.indexOf('--out');
+  const outDir = outIdx >= 0 ? path.resolve(args[outIdx + 1]) : path.join(__dirname, '..', '..', 'output');
   fs.mkdirSync(outDir, { recursive: true });
   const outFile = path.join(outDir, `baseline-results-${source}.json`);
 
@@ -463,6 +503,9 @@ function main() {
       .update(fs.readFileSync(path.resolve(csvFile))).digest('hex').slice(0, 16);
   }
 
+  const calibration = {};
+  for (const model of models) calibration[model] = calibrationBins(walkRows[model]);
+
   fs.writeFileSync(outFile, JSON.stringify({
     source,
     inputFile: source === 'csv' ? path.resolve(csvFile || '') : null,
@@ -473,13 +516,17 @@ function main() {
     evalProtocol: {
       task: '预测学生下一次答题结果（时间顺序 walk-forward，无未来信息泄漏）',
       majority: '全局时间前缀正例率（前缀和+二分查找，严格早于预测时刻，与组处理顺序无关）',
+      sameTimestampRule: '同一时间戳视为同一答题批次，批次内记录互不为历史信息；排序以 createdAt、attemptIndex、原始行序为稳定次序',
       bootstrap: '学生级聚类 bootstrap，重采样单位为学生，保留其全部记录',
       pairedComparison: '相同学生、相同测试样本的配对比较，池化指标差 + 学生级 bootstrap 置信区间与双侧 p 值',
+      pValueInterpretation: '探索性指标：bootstrap 次数有限时分辨率低，不作为模型优越性的充分依据；主要结论应基于 Δ 及其 95% CI',
+      metricInterpretation: 'AUC=排序能力；LogLoss=概率预测质量；Brier=概率校准与误差；Accuracy/F1=固定阈值0.5下的分类表现（Majority 正例率<0.5 时 F1=0 属预期）',
       bootstrapReps: reps,
       seed: 42
     },
     params,
-    results
+    results,
+    calibration
   }, null, 2));
   console.log(`\n结果已写入 ${outFile}`);
   console.log('注意：synthetic 源仅用于验证评估管道，结果不可作为真实学习效果。');
@@ -497,6 +544,7 @@ module.exports = {
   bootstrapCIs,
   pairedComparison,
   formatComparisonTable,
+  calibrationBins,
   datasetStats,
   generateSyntheticRecords,
   loadFromDb,

@@ -7,8 +7,9 @@ const params = require('./baselineParams.json');
  * 输出 mastery ∈ [0, 1]，作为下一题答对概率 p 使用。
  *
  * Rule-0：最近正确率（拉普拉斯平滑）
- * Online-Rule：完全复现线上 masteryEngine.js 公式（普通正确率、无平滑，
- *              连对/连错修正、样本不足封顶 0.79）——用于衡量「线上公式」本身
+ * Online-Rule：在核心掌握度计算逻辑上复现线上 masteryEngine.js 公式（普通正确率、
+ *              无平滑、连对/连错修正、样本不足封顶 0.79），并对输出做概率裁剪
+ *              [0.01, 0.99] 以适配 LogLoss 和 Brier 等概率指标——非逐字节复现
  * Rule-1：Rule-0 + 连续答题修正（受线上公式启发，但使用平滑正确率，
  *         并非线上公式的完全复现；与 Online-Rule 区分）
  * Rule-2：Rule-1 + 指数时间衰减 exp(-λd)
@@ -16,11 +17,18 @@ const params = require('./baselineParams.json');
  * 参数全部来自 baselineParams.json，固定不变，不按学生单独调整。
  */
 
-// 记录按时间升序排序（isCorrect: boolean, costTime: number, createdAt: ISO 字符串）
+// 记录按时间升序排序（isCorrect: boolean, costTime: number, createdAt: ISO 字符串）。
+// 稳定排序：时间相同时依次按 attemptIndex、原始输入顺序排列，
+// 保证同一数据任意行顺序输入结果一致。
 function sortByTime(records) {
-  return [...(records || [])].sort(
-    (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-  );
+  return (records || [])
+    .map((item, idx) => ({ item, idx, ts: new Date(item.createdAt).getTime() }))
+    .sort((a, b) =>
+      a.ts - b.ts ||
+      (Number(a.item.attemptIndex) || 0) - (Number(b.item.attemptIndex) || 0) ||
+      a.idx - b.idx
+    )
+    .map((entry) => entry.item);
 }
 
 function daysBetween(laterMs, earlierMs) {
@@ -146,11 +154,12 @@ function rule2(records, options = {}) {
 }
 
 /**
- * Online-Rule：完全复现线上 masteryEngine.calculateMastery 公式：
+ * Online-Rule：核心掌握度计算逻辑复现线上 masteryEngine.calculateMastery 公式：
  *   - 最近 windowSize 次普通正确率（无拉普拉斯平滑，laplacePrior=0）
  *   - 最近 3 次全对且速度不慢于历史 → +streakBoost
  *   - 最近 2 次全错 → -streakPenalty
  *   - 样本不足 → mastery 封顶 insufficientCap（对应线上「封顶 79 分」）
+ * 输出经概率裁剪 [probFloor, probCeil] 以适配概率指标（非逐字节复现线上实现）。
  */
 function onlineRule(records, options = {}) {
   return rule1(records, { ...options, laplacePrior: 0 });

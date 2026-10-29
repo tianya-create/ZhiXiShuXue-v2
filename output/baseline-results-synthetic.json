@@ -2,24 +2,27 @@
   "source": "synthetic",
   "inputFile": null,
   "inputHash": null,
-  "gitCommit": "7650774",
-  "generatedAt": "2026-10-29T02:16:44.734Z",
+  "gitCommit": "f35b734",
+  "generatedAt": "2026-10-29T02:56:42.111Z",
   "dataset": {
-    "recordCount": 2865,
+    "recordCount": 2928,
     "studentCount": 40,
-    "questionCount": 2865,
+    "questionCount": 2928,
     "knowledgePointCount": 6,
     "timeRange": [
-      "2026-01-01T09:55:20.101Z",
-      "2026-03-07T00:50:30.980Z"
+      "2026-01-01T18:09:39.481Z",
+      "2026-03-04T00:18:04.043Z"
     ]
   },
   "evalProtocol": {
     "task": "预测学生下一次答题结果（时间顺序 walk-forward，无未来信息泄漏）",
     "majority": "全局时间前缀正例率（前缀和+二分查找，严格早于预测时刻，与组处理顺序无关）",
+    "sameTimestampRule": "同一时间戳视为同一答题批次，批次内记录互不为历史信息；排序以 createdAt、attemptIndex、原始行序为稳定次序",
     "bootstrap": "学生级聚类 bootstrap，重采样单位为学生，保留其全部记录",
     "pairedComparison": "相同学生、相同测试样本的配对比较，池化指标差 + 学生级 bootstrap 置信区间与双侧 p 值",
-    "bootstrapReps": 500,
+    "pValueInterpretation": "探索性指标：bootstrap 次数有限时分辨率低，不作为模型优越性的充分依据；主要结论应基于 Δ 及其 95% CI",
+    "metricInterpretation": "AUC=排序能力；LogLoss=概率预测质量；Brier=概率校准与误差；Accuracy/F1=固定阈值0.5下的分类表现（Majority 正例率<0.5 时 F1=0 属预期）",
+    "bootstrapReps": 2000,
     "seed": 42
   },
   "params": {
@@ -43,49 +46,361 @@
   },
   "results": {
     "Majority": {
-      "n": 2625,
-      "AUC": 0.5227,
-      "LogLoss": 0.6921,
-      "Brier": 0.2495,
-      "Accuracy": 0.5284,
-      "F1": 0.5511,
-      "positiveRate": 0.5394
+      "n": 2688,
+      "AUC": 0.5326,
+      "LogLoss": 0.6885,
+      "Brier": 0.2477,
+      "Accuracy": 0.5487,
+      "F1": 0.6953,
+      "positiveRate": 0.5588
     },
     "Online-Rule": {
-      "n": 2625,
-      "AUC": 0.6805,
-      "LogLoss": 0.8172,
-      "Brier": 0.252,
-      "Accuracy": 0.6301,
-      "F1": 0.6582,
-      "positiveRate": 0.5394
+      "n": 2688,
+      "AUC": 0.6853,
+      "LogLoss": 0.8048,
+      "Brier": 0.2475,
+      "Accuracy": 0.6469,
+      "F1": 0.6904,
+      "positiveRate": 0.5588
     },
     "Rule-0": {
-      "n": 2625,
-      "AUC": 0.6849,
-      "LogLoss": 0.6414,
-      "Brier": 0.2254,
-      "Accuracy": 0.6301,
-      "F1": 0.662,
-      "positiveRate": 0.5394
+      "n": 2688,
+      "AUC": 0.6888,
+      "LogLoss": 0.6374,
+      "Brier": 0.2233,
+      "Accuracy": 0.6455,
+      "F1": 0.6935,
+      "positiveRate": 0.5588
     },
     "Rule-1": {
-      "n": 2625,
-      "AUC": 0.6838,
-      "LogLoss": 0.6721,
-      "Brier": 0.2323,
-      "Accuracy": 0.6267,
-      "F1": 0.654,
-      "positiveRate": 0.5394
+      "n": 2688,
+      "AUC": 0.6912,
+      "LogLoss": 0.6633,
+      "Brier": 0.2286,
+      "Accuracy": 0.644,
+      "F1": 0.6872,
+      "positiveRate": 0.5588
     },
     "Rule-2": {
-      "n": 2625,
-      "AUC": 0.6836,
-      "LogLoss": 0.6794,
-      "Brier": 0.236,
-      "Accuracy": 0.6141,
-      "F1": 0.5917,
-      "positiveRate": 0.5394
+      "n": 2688,
+      "AUC": 0.6907,
+      "LogLoss": 0.6722,
+      "Brier": 0.2329,
+      "Accuracy": 0.6265,
+      "F1": 0.6309,
+      "positiveRate": 0.5588
     }
+  },
+  "calibration": {
+    "Majority": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 209,
+        "meanPredicted": 0.4832,
+        "observedRate": 0.5646
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 2479,
+        "meanPredicted": 0.5205,
+        "observedRate": 0.5583
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 0,
+        "meanPredicted": null,
+        "observedRate": null
+      }
+    ],
+    "Online-Rule": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 448,
+        "meanPredicted": 0.0146,
+        "observedRate": 0.3237
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 132,
+        "meanPredicted": 0.1298,
+        "observedRate": 0.3333
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 182,
+        "meanPredicted": 0.2325,
+        "observedRate": 0.4011
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 191,
+        "meanPredicted": 0.3233,
+        "observedRate": 0.5131
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 172,
+        "meanPredicted": 0.4154,
+        "observedRate": 0.4884
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 355,
+        "meanPredicted": 0.5113,
+        "observedRate": 0.5831
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 318,
+        "meanPredicted": 0.6346,
+        "observedRate": 0.6101
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 458,
+        "meanPredicted": 0.7646,
+        "observedRate": 0.6725
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 176,
+        "meanPredicted": 0.8245,
+        "observedRate": 0.767
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 256,
+        "meanPredicted": 0.9608,
+        "observedRate": 0.8359
+      }
+    ],
+    "Rule-0": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 29,
+        "meanPredicted": 0.0852,
+        "observedRate": 0.1379
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 135,
+        "meanPredicted": 0.1503,
+        "observedRate": 0.237
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 289,
+        "meanPredicted": 0.2435,
+        "observedRate": 0.3391
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 361,
+        "meanPredicted": 0.3377,
+        "observedRate": 0.4183
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 267,
+        "meanPredicted": 0.422,
+        "observedRate": 0.5206
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 548,
+        "meanPredicted": 0.5273,
+        "observedRate": 0.5912
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 487,
+        "meanPredicted": 0.6439,
+        "observedRate": 0.6427
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 318,
+        "meanPredicted": 0.7395,
+        "observedRate": 0.7138
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 209,
+        "meanPredicted": 0.8302,
+        "observedRate": 0.823
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 45,
+        "meanPredicted": 0.912,
+        "observedRate": 0.9333
+      }
+    ],
+    "Rule-1": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 152,
+        "meanPredicted": 0.0416,
+        "observedRate": 0.2105
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 236,
+        "meanPredicted": 0.1401,
+        "observedRate": 0.3178
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 157,
+        "meanPredicted": 0.247,
+        "observedRate": 0.3949
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 353,
+        "meanPredicted": 0.3333,
+        "observedRate": 0.4504
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 233,
+        "meanPredicted": 0.4223,
+        "observedRate": 0.5279
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 472,
+        "meanPredicted": 0.5268,
+        "observedRate": 0.5784
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 455,
+        "meanPredicted": 0.6431,
+        "observedRate": 0.6527
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 336,
+        "meanPredicted": 0.7513,
+        "observedRate": 0.7054
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 150,
+        "meanPredicted": 0.8401,
+        "observedRate": 0.7667
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 144,
+        "meanPredicted": 0.9478,
+        "observedRate": 0.8958
+      }
+    ],
+    "Rule-2": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 215,
+        "meanPredicted": 0.0539,
+        "observedRate": 0.2605
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 202,
+        "meanPredicted": 0.1487,
+        "observedRate": 0.3119
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 276,
+        "meanPredicted": 0.2612,
+        "observedRate": 0.4203
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 371,
+        "meanPredicted": 0.3446,
+        "observedRate": 0.4798
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 406,
+        "meanPredicted": 0.4552,
+        "observedRate": 0.569
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 421,
+        "meanPredicted": 0.557,
+        "observedRate": 0.6366
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 375,
+        "meanPredicted": 0.6484,
+        "observedRate": 0.7013
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 254,
+        "meanPredicted": 0.7433,
+        "observedRate": 0.7283
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 127,
+        "meanPredicted": 0.8425,
+        "observedRate": 0.8425
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 41,
+        "meanPredicted": 0.9349,
+        "observedRate": 0.8537
+      }
+    ]
   }
 }
