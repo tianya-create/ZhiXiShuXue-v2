@@ -207,10 +207,35 @@ function loadFromDb() {
 
 // CSV：userId,kpCode,questionId,isCorrect,costTime,createdAt
 // 兼容列名：answerDuration / answer_duration 等价 costTime；attemptIndex 可选
+// 最小 CSV 行解析：支持双引号包裹与 "" 转义（不支持跨行字段）
+function parseCsvLine(line) {
+  const cells = [];
+  let cur = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (inQuotes) {
+      if (ch === '"') {
+        if (line[i + 1] === '"') { cur += '"'; i++; } else inQuotes = false;
+      } else cur += ch;
+    } else if (ch === '"') {
+      inQuotes = true;
+    } else if (ch === ',') {
+      cells.push(cur);
+      cur = '';
+    } else if (ch !== '\r') {
+      cur += ch;
+    }
+  }
+  cells.push(cur);
+  return cells;
+}
+
 function loadFromCsv(filePath) {
+  // 说明：引号内的换行不支持（公开数据集清洗产物不会出现），如需支持请改用流式解析
   const text = fs.readFileSync(filePath, 'utf8').trim();
   const lines = text.split(/\r?\n/);
-  const header = lines[0].split(',').map((s) => s.trim());
+  const header = parseCsvLine(lines[0]).map((s) => s.trim());
   const idx = (...names) => {
     for (const name of names) {
       const i = header.indexOf(name);
@@ -219,7 +244,7 @@ function loadFromCsv(filePath) {
     return -1;
   };
   return lines.slice(1).map((line) => {
-    const cells = line.split(',');
+    const cells = parseCsvLine(line);
     const durationCell = idx('costTime', 'answerDuration', 'answer_duration');
     const attemptCell = idx('attemptIndex', 'attempt_index');
     return {
@@ -444,5 +469,6 @@ module.exports = {
   datasetStats,
   generateSyntheticRecords,
   loadFromDb,
-  loadFromCsv
+  loadFromCsv,
+  parseCsvLine
 };

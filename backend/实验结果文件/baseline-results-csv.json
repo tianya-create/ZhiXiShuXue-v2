@@ -1,9 +1,10 @@
 {
   "source": "csv",
+  "label": "csv",
   "inputFile": "D:\\迅雷云盘\\WorkBuddy\\2026-10-28-23-41-59\\zhiXiShuXue\\backend\\实验结果文件\\simulated-records.csv",
   "inputHash": "sha256:01b5da52353e3b18",
-  "gitCommit": "98f10c6",
-  "generatedAt": "2026-10-29T04:50:07.762Z",
+  "gitCommit": "4a5b93a",
+  "generatedAt": "2026-10-29T05:59:11.077Z",
   "dataset": {
     "recordCount": 4390,
     "studentCount": 60,
@@ -23,6 +24,7 @@
     "pValueInterpretation": "探索性指标：bootstrap 次数有限时分辨率低，不作为模型优越性的充分依据；主要结论应基于 Δ 及其 95% CI",
     "metricInterpretation": "AUC=排序能力；LogLoss=概率预测质量；Brier=概率校准与误差；Accuracy/F1=固定阈值0.5下的分类表现（Majority 正例率<0.5 时 F1=0 属预期）",
     "bootstrapReps": 2000,
+    "bootstrapUnits": "60 名学生（学生级聚类重采样）",
     "seed": 42
   },
   "params": {
