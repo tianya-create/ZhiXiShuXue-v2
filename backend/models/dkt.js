@@ -283,6 +283,7 @@ class GruDkt {
         p[i] -= lr * (m[i] / c1) / (Math.sqrt(v[i] / c2) + epsA);
       }
     }
+    this._afterParamsMutated();
   }
 
   copy() {
@@ -335,6 +336,49 @@ class GruDkt {
     for (let j = 0; j < H; j++) hNew[j] = (1 - z[j]) * hPrev[j] + z[j] * hh[j];
   }
 
+  // ---------- 输入路径钩子（默认 = 原始 DKT 行为；图增强子类覆盖） ----------
+  // 训练前向：由交互 id 生成 dropout 后的输入向量，并把 mask 记入 masks
+  _trainInput(id, E, masks) {
+    const D = this.D;
+    const row = id * D;
+    if (this.training) {
+      const keep = 1 - this.hp.dropout;
+      const mask = new Float64Array(D);
+      for (let d = 0; d < D; d++) mask[d] = this.trainRng() < keep ? 1 / keep : 0;
+      const xd = new Float64Array(D);
+      for (let d = 0; d < D; d++) xd[d] = E[row + d] * mask[d];
+      masks.push(mask);
+      return xd;
+    }
+    masks.push(null);
+    const xd = new Float64Array(D);
+    for (let d = 0; d < D; d++) xd[d] = E[row + d];
+    return xd;
+  }
+
+  // 反向传播：把某时间步输入向量的梯度路由到参数（默认只进 embedding 直达行）
+  _routeInputGrad(id, dxd, mask) {
+    const gE = this.grads.E;
+    const row = id * this.D;
+    if (mask) {
+      for (let d = 0; d < this.D; d++) gE[row + d] += dxd[d] * mask[d];
+    } else {
+      for (let d = 0; d < this.D; d++) gE[row + d] += dxd[d];
+    }
+  }
+
+  // 评估前向：由交互 id 生成输入向量（无 dropout）
+  _evalInput(id, E) {
+    const D = this.D;
+    const row = id * D;
+    const xd = new Float64Array(D);
+    for (let d = 0; d < D; d++) xd[d] = E[row + d];
+    return xd;
+  }
+
+  // 参数被修改后（Adam 更新 / 最优参数回滚）的钩子；图增强子类用它失效图缓存
+  _afterParamsMutated() {}
+
   // ---------- 训练前向：单序列前向 + BPTT，梯度累计进 this.grads ----------
   // 返回 { logLoss, targets }（目标位 t = 1..T-1）
   _forwardTrain(items) {
@@ -342,7 +386,6 @@ class GruDkt {
     const g = this.grads;
     const D = this.D, H = this.H;
     const eps = this.hp.bceEps;
-    const keep = 1 - this.hp.dropout;
     const T = items.length;
 
     const ids = new Int32Array(T);
@@ -388,19 +431,7 @@ class GruDkt {
       }
 
       // ---- 输入 x_t → h_{t+1} ----
-      const eRow = ids[t] * D;
-      let xd;
-      if (this.training) {
-        const mask = new Float64Array(D);
-        for (let d = 0; d < D; d++) mask[d] = this.trainRng() < keep ? 1 / keep : 0;
-        xd = new Float64Array(D);
-        for (let d = 0; d < D; d++) xd[d] = E[eRow + d] * mask[d];
-        masks.push(mask);
-      } else {
-        masks.push(null);
-        xd = new Float64Array(D);
-        for (let d = 0; d < D; d++) xd[d] = E[eRow + d];
-      }
+      const xd = this._trainInput(ids[t], E, masks);
       xs.push(xd);
       const cache = {
         z: new Float64Array(H), r: new Float64Array(H),
@@ -420,7 +451,7 @@ class GruDkt {
     const drPre = new Float64Array(H);
     const dhhPre = new Float64Array(H);
     const drh = new Float64Array(H);
-    const gE = g.E, gWz = g.Wz, gWr = g.Wr, gWh = g.Wh;
+    const gE = g.E, gWz = g.Wz, gWr = g.Wr, gWh = g.Wh; // gE 由 _routeInputGrad 钩子使用
     const gUz = g.Uz, gUr = g.Ur, gUh = g.Uh;
     const gBz = g.bz, gBr = g.br, gBh = g.bh;
 
@@ -495,14 +526,8 @@ class GruDkt {
           dhPrev[k] += Uz[k * H + j] * dp;
         }
       }
-      // dropout + embedding
-      const mask = masks[s];
-      const idRow = ids[s] * D;
-      if (mask) {
-        for (let d = 0; d < D; d++) gE[idRow + d] += dxd[d] * mask[d];
-      } else {
-        for (let d = 0; d < D; d++) gE[idRow + d] += dxd[d];
-      }
+      // dropout + embedding（默认直达 E；图增强子类同时路由到图分支）
+      this._routeInputGrad(ids[s], dxd, masks[s]);
     }
 
     return { logLoss, targets };
@@ -527,8 +552,7 @@ class GruDkt {
       }
       // 输入编码用 inputKpOf（历史输入 KP），与目标端口（kpCode）解耦
       const id = encodeInteractionId(this.kpIndex, inputKpOf(items[t]), items[t].correct, this.inputMode);
-      const xd = new Float64Array(this.D);
-      for (let d = 0; d < this.D; d++) xd[d] = this.params.E[id * this.D + d];
+      const xd = this._evalInput(id, this.params.E);
       this._step(xd, h, hNew, null);
       h.set(hNew);
     }
@@ -610,6 +634,7 @@ class GruDkt {
     // 回滚到验证集最优参数
     if (bestParams) {
       for (const key of Object.keys(this.params)) this.params[key].set(bestParams.params[key]);
+      this._afterParamsMutated();
     }
     return {
       epochsRun: curve.length,
