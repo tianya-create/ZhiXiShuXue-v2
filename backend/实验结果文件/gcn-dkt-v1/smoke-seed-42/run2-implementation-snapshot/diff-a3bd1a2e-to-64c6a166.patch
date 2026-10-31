@@ -1,0 +1,11 @@
+--- C:/Users/lenovo/Documents/ChatGPT/智析数学/知识追踪实验材料/backend/models/graphDktExperiment.js	2026-10-31 17:38:23.829103000 +0800
++++ D:/迅雷云盘/WorkBuddy/2026-10-28-23-41-59/zhiXiShuXue/backend/实验结果文件/gcn-dkt-v1/smoke-seed-42/run2-implementation-snapshot/graphDktExperiment.js	2026-10-31 18:32:47.943119800 +0800
+@@ -527,7 +527,7 @@
+     if (!r.paramsFinite) throw new Error(`${key}: 参数存在非有限值（${r.paramsFiniteFailure}），停止冒烟。`);
+     if (!r.valPredictions.allFinite) throw new Error(`${key}: 验证预测存在非有限值，停止冒烟。`);
+     if (!r.rollbackConsistent) throw new Error(`${key}: 早停回滚后 val LogLoss 与 bestValLogLoss 不一致，停止冒烟。`);
+-    emit(`  → val LogLoss ${r.training.bestValLogLoss}（epoch ${r.training.bestEpoch}/${r.training.epochsRun}，耗时 ${r.fitSeconds}s，batch 边界采样 RSS 峰值 ${(r.memory.rssPeakSampledBytes / 1048576).toFixed(0)}MB）`);
++    emit(`  → val LogLoss ${r.training.bestValLogLoss}（epoch ${r.training.bestEpoch}/${r.training.epochsRun}，耗时 ${r.fitSeconds}s，RSS 峰值 ${(r.memory.rssPeakBytes / 1048576).toFixed(0)}MB）`);
+     modelResults[key] = r;
+   }
+ 

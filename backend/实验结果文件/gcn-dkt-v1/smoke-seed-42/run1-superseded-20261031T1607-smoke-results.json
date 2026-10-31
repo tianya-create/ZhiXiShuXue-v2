@@ -1,0 +1,519 @@
+{
+  "smoke": true,
+  "purpose": "阶段 C 冒烟：数值/内存/耗时/早停检查——非正式结果，不得用于论文数字、test 指标或架构选择",
+  "protocolVersion": "assist2009-gcn-dkt-v1",
+  "stage": "C-smoke",
+  "seed": 42,
+  "generatedAt": "2026-10-31T08:07:39.984Z",
+  "nodeVersion": "v22.22.2",
+  "platform": "win32 x64",
+  "dataIsolation": {
+    "testStudents": 589,
+    "testUsage": "未读取：test 学生序列未参与训练、验证、早停与任何评估（冒烟仅 train/validation）",
+    "architectureSelection": "禁止：本轮不读取正式 test 指标，不据冒烟结果选择架构"
+  },
+  "dataHashes": {
+    "rawSha256": "sha256:408698925fc3488672431e4c19b9b16808b6a25760f8e41ad4d3d6257ad0832a",
+    "taskSha256": "sha256:6f055c6b5105b8295ef8bcf9dd23c668634f56eedc4dbdcf5a8708bee0618be9",
+    "splitSha256": "sha256:58ea5a51f76024535acd0e743fa07c7fef93278d58247bd66f60e7f111bb321a",
+    "vocabularySha256": "sha256:b590f45ff6e2b2f5a028af9d92ec6e762190545dd40e3dfdbc11f05b36df69ff",
+    "realEdgesSha256": "sha256:23ff58e75c2a48d7d815827f108065acb4ea889b9c8ca6424918869554dce395",
+    "realAdjacencySha256": "sha256:8624dd2b632d77098e542a47c82c0a50a9cbfc2bb4713c04b808ffaa252c4700",
+    "randomEdgesSha256": "sha256:62cbabfc0589228a8ad3767785d20e3fd88a8ff807af2d5446a96c94232ba500",
+    "randomAdjacencySha256": "sha256:0daf8abb403d9451e4027c29b59a4fac8c61ed68cefb8bbaf97aa997e82e72ce",
+    "selfloopAdjacencySha256": "sha256:2769c885faed7eeb65771bb3d6502052450861ee548f8c8bfe495c20c8f2cc1d"
+  },
+  "config": {
+    "protocolVersion": "assist2009-gcn-dkt-v1",
+    "schemaVersion": 1,
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "models": [
+      "Full-DKT",
+      "GCN-DKT",
+      "RandomGraph-DKT",
+      "Larger-DKT",
+      "SelfLoop-DKT"
+    ],
+    "graph": {
+      "source": "train-attempt-multiskill-coannotation",
+      "weight": "distinct-problem-support",
+      "minSupport": 1,
+      "normalization": "symmetric-with-unit-self-loop",
+      "selfLoopWeight": 1,
+      "randomization": "same-edge-count-and-weight-multiset",
+      "randomRetryLimit": 100
+    },
+    "model": {
+      "embedDim": 32,
+      "hiddenSize": 64,
+      "largerHiddenSize": 68,
+      "graphLayers": 2,
+      "graphHiddenDim": 32,
+      "graphResidualScale": 1,
+      "graphBranchDropout": 0,
+      "dropout": 0.2,
+      "residualFormula": "x_t = E[2*k_t + r_t] + Anorm·ReLU(Anorm·X·W1+b1)·W2+b2 [k_t]，X[k]=(E[2k]+E[2k+1])/2"
+    },
+    "training": {
+      "learningRate": 0.001,
+      "adamBetas": [
+        0.9,
+        0.999
+      ],
+      "adamEpsilon": 1e-8,
+      "weightDecay": 0,
+      "batchSize": 64,
+      "maxEpochs": 50,
+      "patience": 5,
+      "minImprovement": 0.00001,
+      "gradClipNorm": 5,
+      "bceEps": 1e-7,
+      "gradientReduction": "legacy-summed-target-gradients（锁定当前 dkt.js 实际梯度累计行为）"
+    },
+    "evaluation": {
+      "bootstrapReps": 2000,
+      "confidenceLevel": 0.95,
+      "predictionDecimals": 6,
+      "primaryMetric": "AUC",
+      "comparisons": [
+        "GCN-DKT − Full-DKT",
+        "GCN-DKT − RandomGraph-DKT",
+        "GCN-DKT − SelfLoop-DKT",
+        "GCN-DKT − Larger-DKT"
+      ],
+      "minimumMeanAucGainVsFull": 0.002,
+      "maximumMeanLogLossIncreaseVsFull": 0.001,
+      "selectionRule": "每项比较 AUC 点差 ≥4/5 种子为正且 ≥3/5 种子配对 CI 支持 GCN"
+    },
+    "data": {
+      "rawFile": "backend/datasets/raw/skill_builder_data.csv",
+      "rawSha256": "sha256:408698925fc3488672431e4c19b9b16808b6a25760f8e41ad4d3d6257ad0832a",
+      "taskFile": "backend/datasets/assist2009/interactions.csv",
+      "taskSha256": "sha256:6f055c6b5105b8295ef8bcf9dd23c668634f56eedc4dbdcf5a8708bee0618be9",
+      "records": 266948,
+      "students": 3931,
+      "knowledgePoints": 100,
+      "vocabRule": "完整任务固定词表（dkt.buildVocab(全任务序列)，与 dktEval 逐位一致），不随种子变化；train 未出现的 KP 保留为孤立节点；边仍仅来自 train 学生原始行",
+      "split": "学生级 70/15/15（dkt.js splitStudents，每种子 train 2752 / val 590 / test 589）",
+      "targetRule": "test 学生中非 (学生,KP) 组首时刻记录，与 DKT v2 完全一致"
+    },
+    "frozenBeforeTestRun": true,
+    "frozenAt": "2026-10-31",
+    "notes": [
+      "本配置在正式 test 运行前冻结；之后不得按结果修改阈值或图规则。",
+      "构图边界：仅 train 学生原始行；不用 response/correct；同题重复不重复加权。",
+      "已知数据适配事实（如实披露）：真实共现图稀疏（42 边、64/100 孤立节点）；约 50% 的 test 目标位于具有非自环邻接边的节点上（逐种子数值见各 graph-real-manifest.nonIsolatedTargetCoverage，含分子/分母/目标清单哈希）。注意：孤立节点仍有逐节点编码器（自环+逐节点参数），不能断言其预测不受图分支影响。",
+      "共现图表示关联，不等价于教学先修关系；即使通过也不得声称验证了先修关系价值。"
+    ]
+  },
+  "hyperUsed": {
+    "embedDim": 32,
+    "hiddenSize": 64,
+    "dropout": 0.2,
+    "learningRate": 0.001,
+    "batchSize": 64,
+    "maxEpochs": 3,
+    "earlyStoppingPatience": 5,
+    "gradClipNorm": 5,
+    "seed": 42,
+    "smokeEpochCap": 3,
+    "largerHiddenSize": 68
+  },
+  "vocabulary": {
+    "nodeCount": 100,
+    "vocabSize": 200,
+    "rule": "完整任务固定词表：dkt.buildVocab(全任务学生序列)（与 dktEval 逐位一致，kpCode 升序）；不随种子/划分变化"
+  },
+  "sequenceCounts": {
+    "train": 2752,
+    "validation": 590
+  },
+  "fullReferenceConsistency": {
+    "gruFitSeconds": 46.9,
+    "entryFitSeconds": 40,
+    "curveIdentical": true,
+    "paramsIdentical": true,
+    "gruValLogLoss": 0.575613,
+    "graphDktValLogLoss": 0.575613,
+    "valLogLossEqual": true
+  },
+  "models": {
+    "Full-DKT": {
+      "mode": "full",
+      "description": "Full-DKT：无图分支（残差分支参数清零）",
+      "paramCount": 31524,
+      "sequenceCounts": {
+        "train": 2752,
+        "validation": 590
+      },
+      "supervisionCounts": {
+        "train": 183285,
+        "validation": 39269
+      },
+      "training": {
+        "maxEpochsSmoke": 3,
+        "epochsRun": 3,
+        "bestEpoch": 3,
+        "bestValLogLoss": 0.575613,
+        "stoppedEarly": false,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.664482,
+            "valLogLoss": 0.630902
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.599279,
+            "valLogLoss": 0.591661
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.573958,
+            "valLogLoss": 0.575613
+          }
+        ]
+      },
+      "fitSeconds": 40,
+      "memory": {
+        "rssPeakBytes": 233066496,
+        "heapPeakBytes": 104791096
+      },
+      "valLogLossAfterRollback": 0.575613,
+      "rollbackConsistent": true,
+      "paramsFinite": true,
+      "paramsFiniteFailure": null,
+      "valPredictions": {
+        "count": 39269,
+        "allFinite": true
+      },
+      "paramDigest": "fb6ff2ab47c958f91c66ee8afb260d1a0fa5d4c21b064eb8d5b8289c39e54570",
+      "fit": {
+        "epochsRun": 3,
+        "bestEpoch": 3,
+        "bestValLogLoss": 0.575613,
+        "stoppedEarly": false,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.664482,
+            "valLogLoss": 0.630902
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.599279,
+            "valLogLoss": 0.591661
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.573958,
+            "valLogLoss": 0.575613
+          }
+        ]
+      }
+    },
+    "GCN-DKT": {
+      "mode": "gcn",
+      "description": "GCN-DKT：train-only 真实共现图",
+      "paramCount": 33636,
+      "sequenceCounts": {
+        "train": 2752,
+        "validation": 590
+      },
+      "supervisionCounts": {
+        "train": 183285,
+        "validation": 39269
+      },
+      "training": {
+        "maxEpochsSmoke": 3,
+        "epochsRun": 3,
+        "bestEpoch": 3,
+        "bestValLogLoss": 0.579161,
+        "stoppedEarly": false,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.659724,
+            "valLogLoss": 0.625589
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.600064,
+            "valLogLoss": 0.596196
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.577148,
+            "valLogLoss": 0.579161
+          }
+        ]
+      },
+      "fitSeconds": 45.5,
+      "memory": {
+        "rssPeakBytes": 269983744,
+        "heapPeakBytes": 119422600
+      },
+      "valLogLossAfterRollback": 0.579161,
+      "rollbackConsistent": true,
+      "paramsFinite": true,
+      "paramsFiniteFailure": null,
+      "valPredictions": {
+        "count": 39269,
+        "allFinite": true
+      },
+      "paramDigest": "4ec0dc89bf926b6f132035edfc7114cc60e534cec5b4495a295e9a1bc1b36af4",
+      "fit": {
+        "epochsRun": 3,
+        "bestEpoch": 3,
+        "bestValLogLoss": 0.579161,
+        "stoppedEarly": false,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.659724,
+            "valLogLoss": 0.625589
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.600064,
+            "valLogLoss": 0.596196
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.577148,
+            "valLogLoss": 0.579161
+          }
+        ]
+      }
+    },
+    "RandomGraph-DKT": {
+      "mode": "random-graph",
+      "description": "RandomGraph-DKT：同边数同边权多重集随机图",
+      "paramCount": 33636,
+      "sequenceCounts": {
+        "train": 2752,
+        "validation": 590
+      },
+      "supervisionCounts": {
+        "train": 183285,
+        "validation": 39269
+      },
+      "training": {
+        "maxEpochsSmoke": 3,
+        "epochsRun": 3,
+        "bestEpoch": 3,
+        "bestValLogLoss": 0.577921,
+        "stoppedEarly": false,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.660141,
+            "valLogLoss": 0.625727
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.599602,
+            "valLogLoss": 0.59542
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.57691,
+            "valLogLoss": 0.577921
+          }
+        ]
+      },
+      "fitSeconds": 44.5,
+      "memory": {
+        "rssPeakBytes": 283582464,
+        "heapPeakBytes": 127495768
+      },
+      "valLogLossAfterRollback": 0.577921,
+      "rollbackConsistent": true,
+      "paramsFinite": true,
+      "paramsFiniteFailure": null,
+      "valPredictions": {
+        "count": 39269,
+        "allFinite": true
+      },
+      "paramDigest": "bdf452b1c23b053452c45517a9b1704be54c68662b687cc7ddd3eef0d87311d1",
+      "fit": {
+        "epochsRun": 3,
+        "bestEpoch": 3,
+        "bestValLogLoss": 0.577921,
+        "stoppedEarly": false,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.660141,
+            "valLogLoss": 0.625727
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.599602,
+            "valLogLoss": 0.59542
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.57691,
+            "valLogLoss": 0.577921
+          }
+        ]
+      }
+    },
+    "Larger-DKT": {
+      "mode": "larger",
+      "description": "Larger-DKT：GRU hidden=68 容量对照",
+      "paramCount": 33904,
+      "sequenceCounts": {
+        "train": 2752,
+        "validation": 590
+      },
+      "supervisionCounts": {
+        "train": 183285,
+        "validation": 39269
+      },
+      "training": {
+        "maxEpochsSmoke": 3,
+        "epochsRun": 3,
+        "bestEpoch": 3,
+        "bestValLogLoss": 0.57484,
+        "stoppedEarly": false,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.66195,
+            "valLogLoss": 0.627206
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.597084,
+            "valLogLoss": 0.590553
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.573051,
+            "valLogLoss": 0.57484
+          }
+        ]
+      },
+      "fitSeconds": 40.2,
+      "memory": {
+        "rssPeakBytes": 295981056,
+        "heapPeakBytes": 127602184
+      },
+      "valLogLossAfterRollback": 0.57484,
+      "rollbackConsistent": true,
+      "paramsFinite": true,
+      "paramsFiniteFailure": null,
+      "valPredictions": {
+        "count": 39269,
+        "allFinite": true
+      },
+      "paramDigest": "0f9405e6c4ecbce4bb7f930d65a0c31236a74aca6547dfd5ed68e8b42f3801f3",
+      "fit": {
+        "epochsRun": 3,
+        "bestEpoch": 3,
+        "bestValLogLoss": 0.57484,
+        "stoppedEarly": false,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.66195,
+            "valLogLoss": 0.627206
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.597084,
+            "valLogLoss": 0.590553
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.573051,
+            "valLogLoss": 0.57484
+          }
+        ]
+      }
+    },
+    "SelfLoop-DKT": {
+      "mode": "selfloop",
+      "description": "SelfLoop-DKT：Anorm=I（仅逐节点编码器）",
+      "paramCount": 33636,
+      "sequenceCounts": {
+        "train": 2752,
+        "validation": 590
+      },
+      "supervisionCounts": {
+        "train": 183285,
+        "validation": 39269
+      },
+      "training": {
+        "maxEpochsSmoke": 3,
+        "epochsRun": 3,
+        "bestEpoch": 3,
+        "bestValLogLoss": 0.578676,
+        "stoppedEarly": false,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.659438,
+            "valLogLoss": 0.625066
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.599824,
+            "valLogLoss": 0.595829
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.577386,
+            "valLogLoss": 0.578676
+          }
+        ]
+      },
+      "fitSeconds": 44.2,
+      "memory": {
+        "rssPeakBytes": 303489024,
+        "heapPeakBytes": 137819592
+      },
+      "valLogLossAfterRollback": 0.578676,
+      "rollbackConsistent": true,
+      "paramsFinite": true,
+      "paramsFiniteFailure": null,
+      "valPredictions": {
+        "count": 39269,
+        "allFinite": true
+      },
+      "paramDigest": "27dcfaf3bd4742f070d702d83698824cd2d7f728d7e6c64f2191a422c7c621e8",
+      "fit": {
+        "epochsRun": 3,
+        "bestEpoch": 3,
+        "bestValLogLoss": 0.578676,
+        "stoppedEarly": false,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.659438,
+            "valLogLoss": 0.625066
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.599824,
+            "valLogLoss": 0.595829
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.577386,
+            "valLogLoss": 0.578676
+          }
+        ]
+      }
+    }
+  },
+  "allFiniteChecksPassed": true
+}
