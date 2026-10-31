@@ -29,6 +29,23 @@
 
 const { mulberry32 } = require('./bootstrapStats');
 
+// ---------- 输入模式（消融统一接口） ----------
+// 四种消融只改变「模型看到什么」，不改 GRU 结构与参数量来源：
+//   full          知识点 + 作答结果 + 原始学生序列（Full-DKT，参照）
+//   same-kp       只在同一 (学生, 知识点) 的历史内建模（屏蔽其他知识点历史）
+//   shuffled-kp   学生内部打乱知识点标签（保 response 序列、知识点频数、标签不变）
+//   no-response   只输入知识点，不输入历史对错（独立词表，不把缺失编码成答错）
+const INPUT_MODES = ['full', 'same-kp', 'shuffled-kp', 'no-response'];
+
+function fnv1a(str) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h >>> 0;
+}
+
 // ---------- 默认超参（第一版防过拟合配置，短序列数据不用大模型） ----------
 const DEFAULT_HYPERPARAMS = {
   embedDim: 32,             // Embedding 维度
@@ -74,18 +91,98 @@ function buildStudentSequences(records, { minLen = 2 } = {}) {
 }
 
 // 知识点词表：kpCode 升序 → 下标；交互 id = 2 × kpIndex + isCorrect
-function buildVocab(sequences) {
+// no-response 模式用独立词表（id = kpIndex，词表大小 = 知识点数），
+// 避免把「没有 response」编码成真实的答错 id。
+function buildVocab(sequences, { inputMode = 'full' } = {}) {
   const kps = new Set();
   for (const seq of sequences) for (const it of seq.items) kps.add(it.kpCode);
   const kpList = [...kps].sort();
   const kpIndex = new Map(kpList.map((k, i) => [k, i]));
-  return { kpList, kpIndex, vocabSize: kpList.length * 2, numSkills: kpList.length };
+  const vocabSize = inputMode === 'no-response' ? kpList.length : kpList.length * 2;
+  return { kpList, kpIndex, vocabSize, numSkills: kpList.length, inputMode };
 }
 
-function encodeInteractionId(kpIndex, kpCode, correct) {
+function encodeInteractionId(kpIndex, kpCode, correct, inputMode = 'full') {
   const idx = kpIndex.get(kpCode);
   if (idx === undefined) throw new Error(`未知知识点: ${kpCode}`);
+  if (inputMode === 'no-response') return idx;
   return idx * 2 + (correct ? 1 : 0);
+}
+
+// 历史输入 KP 与目标 KP 分离（v2 协议）：
+//   kpCode       交互原始所属知识点 → 决定输出端口（监督/预测取哪一维），
+//                shuffled-kp 变换也不允许改变它；
+//   inputKpCode  该交互被编码进 GRU 历史时使用的知识点（shuffled-kp 置换的是它）。
+// 未做置换的模式没有 inputKpCode 字段，回落到 kpCode（行为与 v1 完全一致）。
+function inputKpOf(item) {
+  return item.inputKpCode !== undefined ? item.inputKpCode : item.kpCode;
+}
+
+// ---------- 消融序列变换 ----------
+// 只改变模型输入序列，不改变交互本身、标签与目标集（目标集由调用方按原始序列定义）。
+function transformSequences(sequences, inputMode, { shuffleSeed = 0 } = {}) {
+  if (!INPUT_MODES.includes(inputMode)) throw new Error(`未知 inputMode: ${inputMode}`);
+
+  if (inputMode === 'shuffled-kp') {
+    // 每个学生内部打乱「历史输入知识点标签」（v2）：
+    // 只写 inputKpCode，kpCode（原始目标知识点）保持不变——
+    // 输出端口、目标身份、标签、response 序列与每学生知识点频数全部不变。
+    // 这是离线置换对照：使用整名学生的 KP 多重集，可能把未来才出现的 KP
+    // 放进较早的输入位置，不构成严格前缀可见的在线协议（见消融说明 §7）。
+    return sequences.map((seq) => {
+      const rnd = mulberry32((shuffleSeed ^ fnv1a(seq.userId)) >>> 0);
+      const labels = seq.items.map((it) => it.kpCode);
+      for (let i = labels.length - 1; i > 0; i--) {
+        const j = Math.floor(rnd() * (i + 1));
+        [labels[i], labels[j]] = [labels[j], labels[i]];
+      }
+      return { userId: seq.userId, items: seq.items.map((it, i) => ({ ...it, inputKpCode: labels[i] })) };
+    });
+  }
+
+  if (inputMode === 'same-kp') {
+    // 拆成 (学生, 知识点) 子序列：模型只能看到该学生此前同一知识点的交互。
+    // 子序列位置 0 即该组首条记录，因此可预测位（t ≥ 1）恰好等于
+    // 「非组首条」的目标集，与 Full-DKT 的目标集逐条一致。
+    const out = [];
+    for (const seq of sequences) {
+      const byKp = new Map();
+      for (const it of seq.items) {
+        if (!byKp.has(it.kpCode)) byKp.set(it.kpCode, []);
+        byKp.get(it.kpCode).push(it);
+      }
+      for (const kp of [...byKp.keys()].sort()) {
+        out.push({ userId: seq.userId, kpCode: kp, items: byKp.get(kp) });
+      }
+    }
+    return out;
+  }
+
+  // full / no-response：序列不变（no-response 的差异体现在编码与词表）
+  return sequences.map((seq) => ({ userId: seq.userId, items: seq.items }));
+}
+
+// 收集「按目标身份（userId|ts）」对齐的预测。
+// targetIds 为 null 时返回该模式下全部可预测位；给出时只保留目标集内的预测，
+// 用于保证四种模型在同一目标集上逐条对齐（模型看不到目标标签，只看历史）。
+function collectPredictions(model, sequences, { targetIds = null } = {}) {
+  const out = new Map();
+  for (const seq of sequences) {
+    const preds = model.predictSequence(seq.items);
+    for (const p of preds) {
+      const it = seq.items[p.t];
+      const key = `${seq.userId}|${it.ts}`;
+      if (targetIds && !targetIds.has(key)) continue;
+      if (p.kpCode !== it.kpCode) {
+        throw new Error(`预测端口知识点与原始知识点不一致（${seq.userId} t=${p.t}: ${p.kpCode} vs ${it.kpCode}），目标端口可能被污染。`);
+      }
+      if (out.has(key)) {
+        throw new Error(`目标键重复: ${key}（同一学生同一时刻出现多条可预测位），请检查时间轴构造。`);
+      }
+      out.set(key, p.pred);
+    }
+  }
+  return out;
 }
 
 // ---------- 学生级 train/val/test 划分（固定种子，可复现） ----------
@@ -120,6 +217,7 @@ class GruDkt {
     this.kpIndex = vocab.kpIndex;
     this.vocabSize = vocab.vocabSize;
     this.numSkills = vocab.numSkills;
+    this.inputMode = hp.inputMode || vocab.inputMode || 'full';
     const D = hp.embedDim, H = hp.hiddenSize, K = vocab.numSkills, V = vocab.vocabSize;
     this.D = D; this.H = H; this.K = K; this.V = V;
 
@@ -249,7 +347,8 @@ class GruDkt {
 
     const ids = new Int32Array(T);
     for (let t = 0; t < T; t++) {
-      ids[t] = this.kpIndex.get(items[t].kpCode) * 2 + items[t].correct;
+      // 输入编码用 inputKpOf（历史输入 KP），与目标端口（kpCode）解耦
+      ids[t] = encodeInteractionId(this.kpIndex, inputKpOf(items[t]), items[t].correct, this.inputMode);
     }
 
     // 前向缓存
@@ -268,6 +367,7 @@ class GruDkt {
       // ---- 目标 t：用 h_t（x_0..x_{t-1} 的摘要）预测 items[t].correct ----
       if (t > 0) {
         const k = this.kpIndex.get(items[t].kpCode);
+        if (k === undefined) throw new Error(`未知知识点（目标端口）: ${items[t].kpCode}`);
         const y = items[t].correct;
         let a = bout[k];
         const wRow = k * H;
@@ -419,12 +519,14 @@ class GruDkt {
     for (let t = 0; t < items.length; t++) {
       if (t > 0) {
         const k = this.kpIndex.get(items[t].kpCode);
+        if (k === undefined) throw new Error(`未知知识点（目标端口）: ${items[t].kpCode}`);
         let a = bout[k];
         const wRow = k * H;
         for (let j = 0; j < H; j++) a += Wout[wRow + j] * h[j];
         out.push({ t, kpCode: items[t].kpCode, pred: sigmoid(a) });
       }
-      const id = this.kpIndex.get(items[t].kpCode) * 2 + items[t].correct;
+      // 输入编码用 inputKpOf（历史输入 KP），与目标端口（kpCode）解耦
+      const id = encodeInteractionId(this.kpIndex, inputKpOf(items[t]), items[t].correct, this.inputMode);
       const xd = new Float64Array(this.D);
       for (let d = 0; d < this.D; d++) xd[d] = this.params.E[id * this.D + d];
       this._step(xd, h, hNew, null);
@@ -521,9 +623,13 @@ class GruDkt {
 
 module.exports = {
   DEFAULT_HYPERPARAMS,
+  INPUT_MODES,
   buildStudentSequences,
   buildVocab,
   encodeInteractionId,
+  inputKpOf,
+  transformSequences,
+  collectPredictions,
   splitStudents,
   sigmoid,
   GruDkt

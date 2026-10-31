@@ -124,3 +124,7 @@ output/playwright/
 .trae/
 
 frontend/.verify-build*/
+
+# 消融实验断点（临时产物，逐目标预测全量 JSON，约 25MB/个）
+backend/实验结果文件/ablation-checkpoint-*.json
+ablation-checkpoint-*.json

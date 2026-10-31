@@ -10,3 +10,7 @@
 *.vue text eol=lf
 *.css text eol=lf
 *.html text eol=lf
+
+# 实验结果产物（含逐目标预测 JSONL 与目标 manifest）必须逐字节保真：
+# 结果 JSON 里记录了这些文件的 sha256，任何换行符转换都会导致核验失败。
+backend/实验结果文件/** -text

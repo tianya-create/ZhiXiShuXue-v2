@@ -1,0 +1,685 @@
+{
+  "generatedAt": "2026-10-30T08:17:52.812Z",
+  "protocolVersion": "dkt-ablation-v2-input-kp-only",
+  "experimentType": "DKT 消融实验：同一协议/超参/目标集下比较四种输入模式（5 个随机种子重复：42, 43, 44, 45, 46）",
+  "aggregation": "各种子指标取 mean ± 总体标准差（÷n，本次 n=5）；差值方向按「Full-DKT − 消融」的点估计差统计：ΔAUC > 0 表示 Full 更好，ΔLogLoss < 0 表示 Full 更好",
+  "caveatMergedTestSet": "各种子 test 学生集合不同，禁止把多份 test 目标合并成一个「合并测试集」重算总指标或做配对检验",
+  "perSeedCiMeaning": "每个种子内部的配对 bootstrap CI 只说明该划分内差异稳定，不是对种子均值的跨种子显著性检验",
+  "seeds": [
+    {
+      "seed": 42,
+      "file": "baseline-results-dkt-ablation-s42.json",
+      "targetCount": 36967,
+      "trainStudents": 2752,
+      "testStudents": 589,
+      "epochs": {
+        "Full-DKT": 50,
+        "Same-KP-DKT": 27,
+        "Shuffled-KP-DKT": 40,
+        "NoResponse-DKT": 35
+      }
+    },
+    {
+      "seed": 43,
+      "file": "baseline-results-dkt-ablation-s43.json",
+      "targetCount": 34096,
+      "trainStudents": 2752,
+      "testStudents": 589,
+      "epochs": {
+        "Full-DKT": 45,
+        "Same-KP-DKT": 30,
+        "Shuffled-KP-DKT": 39,
+        "NoResponse-DKT": 44
+      }
+    },
+    {
+      "seed": 44,
+      "file": "baseline-results-dkt-ablation-s44.json",
+      "targetCount": 37177,
+      "trainStudents": 2752,
+      "testStudents": 589,
+      "epochs": {
+        "Full-DKT": 40,
+        "Same-KP-DKT": 30,
+        "Shuffled-KP-DKT": 42,
+        "NoResponse-DKT": 32
+      }
+    },
+    {
+      "seed": 45,
+      "file": "baseline-results-dkt-ablation-s45.json",
+      "targetCount": 30832,
+      "trainStudents": 2752,
+      "testStudents": 589,
+      "epochs": {
+        "Full-DKT": 45,
+        "Same-KP-DKT": 18,
+        "Shuffled-KP-DKT": 39,
+        "NoResponse-DKT": 30
+      }
+    },
+    {
+      "seed": 46,
+      "file": "baseline-results-dkt-ablation-s46.json",
+      "targetCount": 31227,
+      "trainStudents": 2752,
+      "testStudents": 589,
+      "epochs": {
+        "Full-DKT": 45,
+        "Same-KP-DKT": 14,
+        "Shuffled-KP-DKT": 35,
+        "NoResponse-DKT": 39
+      }
+    }
+  ],
+  "perModel": {
+    "Full-DKT": {
+      "AUC": {
+        "perSeed": [
+          0.7388,
+          0.7485,
+          0.7396,
+          0.744,
+          0.7513
+        ],
+        "mean": 0.7444,
+        "std": 0.0049
+      },
+      "LogLoss": {
+        "perSeed": [
+          0.542,
+          0.5402,
+          0.5326,
+          0.5423,
+          0.5351
+        ],
+        "mean": 0.5384,
+        "std": 0.0039
+      },
+      "Brier": {
+        "perSeed": [
+          0.1813,
+          0.1806,
+          0.177,
+          0.1816,
+          0.178
+        ],
+        "mean": 0.1797,
+        "std": 0.0019
+      },
+      "Accuracy": {
+        "perSeed": [
+          0.7336,
+          0.7339,
+          0.7429,
+          0.7309,
+          0.7396
+        ],
+        "mean": 0.7362,
+        "std": 0.0044
+      },
+      "F1": {
+        "perSeed": [
+          0.8217,
+          0.8184,
+          0.831,
+          0.8169,
+          0.824
+        ],
+        "mean": 0.8224,
+        "std": 0.005
+      },
+      "epochs": [
+        50,
+        45,
+        40,
+        45,
+        45
+      ],
+      "bestEpoch": [
+        46,
+        40,
+        35,
+        40,
+        40
+      ]
+    },
+    "Same-KP-DKT": {
+      "AUC": {
+        "perSeed": [
+          0.7309,
+          0.7411,
+          0.7294,
+          0.7311,
+          0.7385
+        ],
+        "mean": 0.7342,
+        "std": 0.0047
+      },
+      "LogLoss": {
+        "perSeed": [
+          0.5487,
+          0.5469,
+          0.5405,
+          0.5504,
+          0.5441
+        ],
+        "mean": 0.5461,
+        "std": 0.0035
+      },
+      "Brier": {
+        "perSeed": [
+          0.1841,
+          0.1829,
+          0.18,
+          0.1847,
+          0.1815
+        ],
+        "mean": 0.1826,
+        "std": 0.0017
+      },
+      "Accuracy": {
+        "perSeed": [
+          0.7264,
+          0.7303,
+          0.7382,
+          0.7266,
+          0.7356
+        ],
+        "mean": 0.7314,
+        "std": 0.0048
+      },
+      "F1": {
+        "perSeed": [
+          0.817,
+          0.8173,
+          0.8279,
+          0.816,
+          0.8221
+        ],
+        "mean": 0.8201,
+        "std": 0.0045
+      },
+      "epochs": [
+        27,
+        30,
+        30,
+        18,
+        14
+      ],
+      "bestEpoch": [
+        22,
+        25,
+        25,
+        13,
+        9
+      ]
+    },
+    "Shuffled-KP-DKT": {
+      "AUC": {
+        "perSeed": [
+          0.7375,
+          0.748,
+          0.7382,
+          0.742,
+          0.7467
+        ],
+        "mean": 0.7425,
+        "std": 0.0043
+      },
+      "LogLoss": {
+        "perSeed": [
+          0.5424,
+          0.5406,
+          0.5331,
+          0.5444,
+          0.5364
+        ],
+        "mean": 0.5394,
+        "std": 0.0041
+      },
+      "Brier": {
+        "perSeed": [
+          0.1818,
+          0.1808,
+          0.1773,
+          0.1823,
+          0.179
+        ],
+        "mean": 0.1802,
+        "std": 0.0019
+      },
+      "Accuracy": {
+        "perSeed": [
+          0.7315,
+          0.7337,
+          0.7428,
+          0.7295,
+          0.7393
+        ],
+        "mean": 0.7354,
+        "std": 0.005
+      },
+      "F1": {
+        "perSeed": [
+          0.8198,
+          0.8177,
+          0.8305,
+          0.8157,
+          0.823
+        ],
+        "mean": 0.8213,
+        "std": 0.0052
+      },
+      "epochs": [
+        40,
+        39,
+        42,
+        39,
+        35
+      ],
+      "bestEpoch": [
+        35,
+        34,
+        37,
+        34,
+        30
+      ]
+    },
+    "NoResponse-DKT": {
+      "AUC": {
+        "perSeed": [
+          0.6723,
+          0.6824,
+          0.6766,
+          0.6675,
+          0.6849
+        ],
+        "mean": 0.6767,
+        "std": 0.0064
+      },
+      "LogLoss": {
+        "perSeed": [
+          0.5865,
+          0.5893,
+          0.575,
+          0.5921,
+          0.5854
+        ],
+        "mean": 0.5857,
+        "std": 0.0058
+      },
+      "Brier": {
+        "perSeed": [
+          0.2004,
+          0.2017,
+          0.1952,
+          0.2031,
+          0.1999
+        ],
+        "mean": 0.2001,
+        "std": 0.0027
+      },
+      "Accuracy": {
+        "perSeed": [
+          0.694,
+          0.6949,
+          0.7072,
+          0.6827,
+          0.6948
+        ],
+        "mean": 0.6947,
+        "std": 0.0078
+      },
+      "F1": {
+        "perSeed": [
+          0.8025,
+          0.7983,
+          0.8142,
+          0.7888,
+          0.8012
+        ],
+        "mean": 0.801,
+        "std": 0.0082
+      },
+      "epochs": [
+        35,
+        44,
+        32,
+        30,
+        39
+      ],
+      "bestEpoch": [
+        30,
+        39,
+        27,
+        25,
+        34
+      ]
+    }
+  },
+  "versusFull": [
+    {
+      "comparison": "Full-DKT − Same-KP-DKT",
+      "perSeed": [
+        {
+          "seed": 42,
+          "dAUC": 0.0079,
+          "dAUCCI": [
+            0.0035,
+            0.0121
+          ],
+          "aucCIExcludesZero": true,
+          "aucCISupportsFull": true,
+          "dAUCBootstrapMean": 0.0079,
+          "dLogLoss": -0.0067,
+          "dLogLossCI": [
+            -0.0097,
+            -0.0038
+          ],
+          "logLossCIExcludesZero": true,
+          "logLossCISupportsFull": true,
+          "dLogLossBootstrapMean": -0.0068
+        },
+        {
+          "seed": 43,
+          "dAUC": 0.0074,
+          "dAUCCI": [
+            0.0032,
+            0.0119
+          ],
+          "aucCIExcludesZero": true,
+          "aucCISupportsFull": true,
+          "dAUCBootstrapMean": 0.0074,
+          "dLogLoss": -0.0066,
+          "dLogLossCI": [
+            -0.0096,
+            -0.0038
+          ],
+          "logLossCIExcludesZero": true,
+          "logLossCISupportsFull": true,
+          "dLogLossBootstrapMean": -0.0067
+        },
+        {
+          "seed": 44,
+          "dAUC": 0.0102,
+          "dAUCCI": [
+            0.0062,
+            0.0139
+          ],
+          "aucCIExcludesZero": true,
+          "aucCISupportsFull": true,
+          "dAUCBootstrapMean": 0.0101,
+          "dLogLoss": -0.0079,
+          "dLogLossCI": [
+            -0.0105,
+            -0.0054
+          ],
+          "logLossCIExcludesZero": true,
+          "logLossCISupportsFull": true,
+          "dLogLossBootstrapMean": -0.0079
+        },
+        {
+          "seed": 45,
+          "dAUC": 0.0128,
+          "dAUCCI": [
+            0.0084,
+            0.017
+          ],
+          "aucCIExcludesZero": true,
+          "aucCISupportsFull": true,
+          "dAUCBootstrapMean": 0.0127,
+          "dLogLoss": -0.0081,
+          "dLogLossCI": [
+            -0.0111,
+            -0.0051
+          ],
+          "logLossCIExcludesZero": true,
+          "logLossCISupportsFull": true,
+          "dLogLossBootstrapMean": -0.0081
+        },
+        {
+          "seed": 46,
+          "dAUC": 0.0127,
+          "dAUCCI": [
+            0.0091,
+            0.0164
+          ],
+          "aucCIExcludesZero": true,
+          "aucCISupportsFull": true,
+          "dAUCBootstrapMean": 0.0127,
+          "dLogLoss": -0.0089,
+          "dLogLossCI": [
+            -0.0125,
+            -0.0057
+          ],
+          "logLossCIExcludesZero": true,
+          "logLossCISupportsFull": true,
+          "dLogLossBootstrapMean": -0.0089
+        }
+      ],
+      "seedsWithFullBetterAUC": 5,
+      "seedsWithFullBetterLogLoss": 5,
+      "seedsWithAucCISupportingFull": 5,
+      "seedsWithLogLossCISupportingFull": 5,
+      "seedsWithAucCIExcludingZero": 5,
+      "seedsWithLogLossCIExcludingZero": 5,
+      "totalSeeds": 5
+    },
+    {
+      "comparison": "Full-DKT − Shuffled-KP-DKT",
+      "perSeed": [
+        {
+          "seed": 42,
+          "dAUC": 0.0013,
+          "dAUCCI": [
+            -0.0022,
+            0.0045
+          ],
+          "aucCIExcludesZero": false,
+          "aucCISupportsFull": false,
+          "dAUCBootstrapMean": 0.0013,
+          "dLogLoss": -0.0004,
+          "dLogLossCI": [
+            -0.0031,
+            0.0029
+          ],
+          "logLossCIExcludesZero": false,
+          "logLossCISupportsFull": false,
+          "dLogLossBootstrapMean": -0.0003
+        },
+        {
+          "seed": 43,
+          "dAUC": 0.0005,
+          "dAUCCI": [
+            -0.0023,
+            0.0033
+          ],
+          "aucCIExcludesZero": false,
+          "aucCISupportsFull": false,
+          "dAUCBootstrapMean": 0.0005,
+          "dLogLoss": -0.0004,
+          "dLogLossCI": [
+            -0.0024,
+            0.0017
+          ],
+          "logLossCIExcludesZero": false,
+          "logLossCISupportsFull": false,
+          "dLogLossBootstrapMean": -0.0003
+        },
+        {
+          "seed": 44,
+          "dAUC": 0.0013,
+          "dAUCCI": [
+            -0.0017,
+            0.0042
+          ],
+          "aucCIExcludesZero": false,
+          "aucCISupportsFull": false,
+          "dAUCBootstrapMean": 0.0013,
+          "dLogLoss": -0.0005,
+          "dLogLossCI": [
+            -0.0028,
+            0.0018
+          ],
+          "logLossCIExcludesZero": false,
+          "logLossCISupportsFull": false,
+          "dLogLossBootstrapMean": -0.0005
+        },
+        {
+          "seed": 45,
+          "dAUC": 0.0019,
+          "dAUCCI": [
+            -0.0009,
+            0.0046
+          ],
+          "aucCIExcludesZero": false,
+          "aucCISupportsFull": false,
+          "dAUCBootstrapMean": 0.0019,
+          "dLogLoss": -0.002,
+          "dLogLossCI": [
+            -0.0042,
+            0.0002
+          ],
+          "logLossCIExcludesZero": false,
+          "logLossCISupportsFull": false,
+          "dLogLossBootstrapMean": -0.0021
+        },
+        {
+          "seed": 46,
+          "dAUC": 0.0045,
+          "dAUCCI": [
+            0.0017,
+            0.0073
+          ],
+          "aucCIExcludesZero": true,
+          "aucCISupportsFull": true,
+          "dAUCBootstrapMean": 0.0045,
+          "dLogLoss": -0.0013,
+          "dLogLossCI": [
+            -0.0037,
+            0.0012
+          ],
+          "logLossCIExcludesZero": false,
+          "logLossCISupportsFull": false,
+          "dLogLossBootstrapMean": -0.0013
+        }
+      ],
+      "seedsWithFullBetterAUC": 5,
+      "seedsWithFullBetterLogLoss": 5,
+      "seedsWithAucCISupportingFull": 1,
+      "seedsWithLogLossCISupportingFull": 0,
+      "seedsWithAucCIExcludingZero": 1,
+      "seedsWithLogLossCIExcludingZero": 0,
+      "totalSeeds": 5
+    },
+    {
+      "comparison": "Full-DKT − NoResponse-DKT",
+      "perSeed": [
+        {
+          "seed": 42,
+          "dAUC": 0.0665,
+          "dAUCCI": [
+            0.0554,
+            0.079
+          ],
+          "aucCIExcludesZero": true,
+          "aucCISupportsFull": true,
+          "dAUCBootstrapMean": 0.0663,
+          "dLogLoss": -0.0445,
+          "dLogLossCI": [
+            -0.0539,
+            -0.036
+          ],
+          "logLossCIExcludesZero": true,
+          "logLossCISupportsFull": true,
+          "dLogLossBootstrapMean": -0.0446
+        },
+        {
+          "seed": 43,
+          "dAUC": 0.0661,
+          "dAUCCI": [
+            0.0552,
+            0.0789
+          ],
+          "aucCIExcludesZero": true,
+          "aucCISupportsFull": true,
+          "dAUCBootstrapMean": 0.0663,
+          "dLogLoss": -0.0491,
+          "dLogLossCI": [
+            -0.0602,
+            -0.0399
+          ],
+          "logLossCIExcludesZero": true,
+          "logLossCISupportsFull": true,
+          "dLogLossBootstrapMean": -0.0493
+        },
+        {
+          "seed": 44,
+          "dAUC": 0.063,
+          "dAUCCI": [
+            0.0516,
+            0.0758
+          ],
+          "aucCIExcludesZero": true,
+          "aucCISupportsFull": true,
+          "dAUCBootstrapMean": 0.0629,
+          "dLogLoss": -0.0425,
+          "dLogLossCI": [
+            -0.0537,
+            -0.0329
+          ],
+          "logLossCIExcludesZero": true,
+          "logLossCISupportsFull": true,
+          "dLogLossBootstrapMean": -0.0424
+        },
+        {
+          "seed": 45,
+          "dAUC": 0.0765,
+          "dAUCCI": [
+            0.0632,
+            0.0915
+          ],
+          "aucCIExcludesZero": true,
+          "aucCISupportsFull": true,
+          "dAUCBootstrapMean": 0.0765,
+          "dLogLoss": -0.0497,
+          "dLogLossCI": [
+            -0.06,
+            -0.041
+          ],
+          "logLossCIExcludesZero": true,
+          "logLossCISupportsFull": true,
+          "dLogLossBootstrapMean": -0.05
+        },
+        {
+          "seed": 46,
+          "dAUC": 0.0664,
+          "dAUCCI": [
+            0.0537,
+            0.0814
+          ],
+          "aucCIExcludesZero": true,
+          "aucCISupportsFull": true,
+          "dAUCBootstrapMean": 0.0663,
+          "dLogLoss": -0.0503,
+          "dLogLossCI": [
+            -0.0648,
+            -0.0381
+          ],
+          "logLossCIExcludesZero": true,
+          "logLossCISupportsFull": true,
+          "dLogLossBootstrapMean": -0.0503
+        }
+      ],
+      "seedsWithFullBetterAUC": 5,
+      "seedsWithFullBetterLogLoss": 5,
+      "seedsWithAucCISupportingFull": 5,
+      "seedsWithLogLossCISupportingFull": 5,
+      "seedsWithAucCIExcludingZero": 5,
+      "seedsWithLogLossCIExcludingZero": 5,
+      "totalSeeds": 5
+    }
+  ],
+  "judgmentRule": "按方案 §6：仅当「Full-DKT − 消融」的优势在多数种子中方向一致、且配对 CI 多数支持 Full 时，才可认为该信息源有独立贡献；否则如实写「当前数据规模与短序列条件下未观察到稳定边际收益」"
+}

@@ -206,6 +206,12 @@ function bootstrapAllModels(rowsByModel, { reps = 2000, seed = 42 } = {}) {
   const sampler = buildStudentSampler(base);
   const rand = mulberry32(seed);
 
+  // 点估计（未舍入）：全 1 权重，与 evaluateMetrics 数值等价。
+  // 与 bootstrap 差值均值分开：点估计差是报告用的 Δ，bootstrap 均值只是重采样分布的中心。
+  const allOne = new Float64Array(base.length).fill(1);
+  const pointMetrics = {};
+  for (const model of models) pointMetrics[model] = evaluators[model].evaluate(allOne);
+
   const aucSamples = {};
   const llSamples = {};
   const brierSamples = {};
@@ -261,18 +267,28 @@ function bootstrapAllModels(rowsByModel, { reps = 2000, seed = 42 } = {}) {
     const dLlSorted = [...pair.dLL].sort((x, y) => x - y);
     const meanAuc = dAucSorted.length ? dAucSorted.reduce((s, x) => s + x, 0) / dAucSorted.length : null;
     const meanLl = dLlSorted.length ? dLlSorted.reduce((s, x) => s + x, 0) / dLlSorted.length : null;
+    const pa = pointMetrics[pair.a];
+    const pb = pointMetrics[pair.b];
+    const pointAuc = pa && pb && pa.AUC !== null && pb.AUC !== null ? pa.AUC - pb.AUC : null;
+    const pointLl = pa && pb ? pa.LogLoss - pb.LogLoss : null;
     return {
       a: pair.a,
       b: pair.b,
       dAUC: {
-        meanDiff: meanAuc === null ? null : Number(meanAuc.toFixed(4)),
+        pointDiff: pointAuc === null ? null : pointAuc, // 未舍入点估计差（报告用 ΔAUC）
+        bootstrapMeanDiff: meanAuc, // bootstrap 重采样差值分布的均值（不是点估计）
+        meanDiff: meanAuc === null ? null : Number(meanAuc.toFixed(4)), // 兼容旧字段，= bootstrapMeanDiff
         ci: ciOf(dAucSorted),
-        p: pValueOf(dAucSorted)
+        p: pValueOf(dAucSorted),
+        validDraws: dAucSorted.length
       },
       dLogLoss: {
-        meanDiff: meanLl === null ? null : Number(meanLl.toFixed(4)),
+        pointDiff: pointLl,
+        bootstrapMeanDiff: meanLl,
+        meanDiff: meanLl === null ? null : Number(meanLl.toFixed(4)), // 兼容旧字段，= bootstrapMeanDiff
         ci: ciOf(dLlSorted),
-        p: pValueOf(dLlSorted)
+        p: pValueOf(dLlSorted),
+        validDraws: dLlSorted.length
       }
     };
   });

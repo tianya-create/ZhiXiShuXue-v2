@@ -1,0 +1,1278 @@
+{
+  "source": "csv",
+  "label": "dkt-ablation-s46",
+  "inputFile": "D:\\迅雷云盘\\WorkBuddy\\2026-10-28-23-41-59\\zhiXiShuXue\\backend\\datasets\\assist2009\\interactions.csv",
+  "inputHash": "sha256:6f055c6b5105b829",
+  "gitCommit": "82d54a7",
+  "generatedAt": "2026-10-30T02:53:47.127Z",
+  "seed": 46,
+  "trainStudents": 2752,
+  "validationStudents": 590,
+  "testStudents": 589,
+  "targetCount": 31227,
+  "dataset": {
+    "recordCount": 266948,
+    "studentCount": 3931,
+    "questionCount": 16807,
+    "knowledgePointCount": 100,
+    "timeRange": [
+      "2000-01-01T00:01:00.000Z",
+      "2000-01-01T17:20:00.000Z"
+    ]
+  },
+  "evalProtocol": {
+    "positioning": "DKT 消融实验：判断 DKT 的提升来自跨知识点历史、真实知识点顺序还是 response 本身；为是否引入图结构（GCN-DKT）提供依据",
+    "split": "学生级 train/validation/test = 0.7/0.15/0.15，种子 46，同一学生不跨集合",
+    "targetRule": "目标 = test 学生中 (学生,知识点) 组非首条记录（与 dktEval / 规则基线同一规则）；目标身份 = 学生 + 答题时刻，四模式逐条对齐",
+    "sharedHyperParams": "四模式超参完全相同（见 ablationHyperParams），仅输入信息不同",
+    "bootstrap": "学生级聚类 bootstrap（重采样单位 = test 学生），同一批权重用于四个模型 → 天然配对",
+    "bootstrapReps": 2000,
+    "comparisonDirection": "表中 Δ 统一为「Full-DKT − 消融模型」：ΔAUC > 0 表示参照更好；ΔLogLoss > 0 表示参照更差",
+    "ablationIsolation": "同一进程顺序训练，模型之间不共享参数，各自用同一 --seed 初始化"
+  },
+  "ablationHyperParams": {
+    "embedDim": 32,
+    "hiddenSize": 64,
+    "dropout": 0.2,
+    "learningRate": 0.001,
+    "batchSize": 64,
+    "maxEpochs": 50,
+    "earlyStoppingPatience": 5,
+    "seed": 46
+  },
+  "ablationProtocol": {
+    "sameKp": "拆成 (学生,知识点) 子序列，模型只能看到该知识点内的历史；子序列位置 0 即组首条，可预测位与 Full-DKT 目标集逐条一致",
+    "shuffledKp": "每个学生内部打乱知识点标签（独立变换种子 = --seed 与 userId 混合），保持交互数、顺序、response 序列与知识点频数不变；目标身份与标签仍取原始数据",
+    "noResponse": "独立词表（id = kpIndex，大小 = 知识点数），不把缺失 response 编码为答错；目标仍用真实 response；输出层仍按知识点"
+  },
+  "models": {
+    "Full-DKT": {
+      "inputMode": "full",
+      "description": "知识点 + response + 原始顺序",
+      "vocabSize": 200,
+      "paramCount": 31524,
+      "sequenceCounts": {
+        "train": 2752,
+        "validation": 590,
+        "test": 589
+      },
+      "training": {
+        "epochsRun": 45,
+        "bestEpoch": 40,
+        "bestValLogLoss": 0.542777,
+        "stoppedEarly": true,
+        "fitSeconds": 1283.5,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.667186,
+            "valLogLoss": 0.624253
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.600259,
+            "valLogLoss": 0.572143
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.574924,
+            "valLogLoss": 0.561742
+          },
+          {
+            "epoch": 4,
+            "trainLogLoss": 0.566566,
+            "valLogLoss": 0.557814
+          },
+          {
+            "epoch": 5,
+            "trainLogLoss": 0.561918,
+            "valLogLoss": 0.555928
+          },
+          {
+            "epoch": 6,
+            "trainLogLoss": 0.558776,
+            "valLogLoss": 0.554101
+          },
+          {
+            "epoch": 7,
+            "trainLogLoss": 0.556834,
+            "valLogLoss": 0.553033
+          },
+          {
+            "epoch": 8,
+            "trainLogLoss": 0.554934,
+            "valLogLoss": 0.553015
+          },
+          {
+            "epoch": 9,
+            "trainLogLoss": 0.553653,
+            "valLogLoss": 0.551848
+          },
+          {
+            "epoch": 10,
+            "trainLogLoss": 0.552423,
+            "valLogLoss": 0.550669
+          },
+          {
+            "epoch": 11,
+            "trainLogLoss": 0.551379,
+            "valLogLoss": 0.549813
+          },
+          {
+            "epoch": 12,
+            "trainLogLoss": 0.550064,
+            "valLogLoss": 0.54913
+          },
+          {
+            "epoch": 13,
+            "trainLogLoss": 0.54891,
+            "valLogLoss": 0.548613
+          },
+          {
+            "epoch": 14,
+            "trainLogLoss": 0.547681,
+            "valLogLoss": 0.547856
+          },
+          {
+            "epoch": 15,
+            "trainLogLoss": 0.547087,
+            "valLogLoss": 0.547582
+          },
+          {
+            "epoch": 16,
+            "trainLogLoss": 0.54595,
+            "valLogLoss": 0.547041
+          },
+          {
+            "epoch": 17,
+            "trainLogLoss": 0.545208,
+            "valLogLoss": 0.54713
+          },
+          {
+            "epoch": 18,
+            "trainLogLoss": 0.544571,
+            "valLogLoss": 0.546347
+          },
+          {
+            "epoch": 19,
+            "trainLogLoss": 0.543452,
+            "valLogLoss": 0.54619
+          },
+          {
+            "epoch": 20,
+            "trainLogLoss": 0.542737,
+            "valLogLoss": 0.545603
+          },
+          {
+            "epoch": 21,
+            "trainLogLoss": 0.542505,
+            "valLogLoss": 0.545487
+          },
+          {
+            "epoch": 22,
+            "trainLogLoss": 0.541912,
+            "valLogLoss": 0.54577
+          },
+          {
+            "epoch": 23,
+            "trainLogLoss": 0.541133,
+            "valLogLoss": 0.544319
+          },
+          {
+            "epoch": 24,
+            "trainLogLoss": 0.540415,
+            "valLogLoss": 0.545123
+          },
+          {
+            "epoch": 25,
+            "trainLogLoss": 0.539915,
+            "valLogLoss": 0.544534
+          },
+          {
+            "epoch": 26,
+            "trainLogLoss": 0.539202,
+            "valLogLoss": 0.544339
+          },
+          {
+            "epoch": 27,
+            "trainLogLoss": 0.538686,
+            "valLogLoss": 0.544366
+          },
+          {
+            "epoch": 28,
+            "trainLogLoss": 0.538288,
+            "valLogLoss": 0.543797
+          },
+          {
+            "epoch": 29,
+            "trainLogLoss": 0.537826,
+            "valLogLoss": 0.544384
+          },
+          {
+            "epoch": 30,
+            "trainLogLoss": 0.537101,
+            "valLogLoss": 0.543757
+          },
+          {
+            "epoch": 31,
+            "trainLogLoss": 0.536741,
+            "valLogLoss": 0.543892
+          },
+          {
+            "epoch": 32,
+            "trainLogLoss": 0.53669,
+            "valLogLoss": 0.544301
+          },
+          {
+            "epoch": 33,
+            "trainLogLoss": 0.536091,
+            "valLogLoss": 0.544571
+          },
+          {
+            "epoch": 34,
+            "trainLogLoss": 0.535541,
+            "valLogLoss": 0.543653
+          },
+          {
+            "epoch": 35,
+            "trainLogLoss": 0.53515,
+            "valLogLoss": 0.544001
+          },
+          {
+            "epoch": 36,
+            "trainLogLoss": 0.535004,
+            "valLogLoss": 0.543739
+          },
+          {
+            "epoch": 37,
+            "trainLogLoss": 0.534484,
+            "valLogLoss": 0.544317
+          },
+          {
+            "epoch": 38,
+            "trainLogLoss": 0.533941,
+            "valLogLoss": 0.543999
+          },
+          {
+            "epoch": 39,
+            "trainLogLoss": 0.533418,
+            "valLogLoss": 0.543026
+          },
+          {
+            "epoch": 40,
+            "trainLogLoss": 0.53334,
+            "valLogLoss": 0.542777
+          },
+          {
+            "epoch": 41,
+            "trainLogLoss": 0.532965,
+            "valLogLoss": 0.543336
+          },
+          {
+            "epoch": 42,
+            "trainLogLoss": 0.532563,
+            "valLogLoss": 0.543513
+          },
+          {
+            "epoch": 43,
+            "trainLogLoss": 0.531833,
+            "valLogLoss": 0.543851
+          },
+          {
+            "epoch": 44,
+            "trainLogLoss": 0.531849,
+            "valLogLoss": 0.543337
+          },
+          {
+            "epoch": 45,
+            "trainLogLoss": 0.531595,
+            "valLogLoss": 0.543833
+          }
+        ]
+      },
+      "coverage": "31227/31227"
+    },
+    "Same-KP-DKT": {
+      "inputMode": "same-kp",
+      "description": "仅同一 (学生,知识点) 内的历史",
+      "vocabSize": 200,
+      "paramCount": 31524,
+      "sequenceCounts": {
+        "train": 19619,
+        "validation": 4108,
+        "test": 3700
+      },
+      "training": {
+        "epochsRun": 14,
+        "bestEpoch": 9,
+        "bestValLogLoss": 0.548585,
+        "stoppedEarly": true,
+        "fitSeconds": 302.1,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.60278,
+            "valLogLoss": 0.561183
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.562021,
+            "valLogLoss": 0.555533
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.55691,
+            "valLogLoss": 0.553715
+          },
+          {
+            "epoch": 4,
+            "trainLogLoss": 0.554777,
+            "valLogLoss": 0.551417
+          },
+          {
+            "epoch": 5,
+            "trainLogLoss": 0.552919,
+            "valLogLoss": 0.551002
+          },
+          {
+            "epoch": 6,
+            "trainLogLoss": 0.551343,
+            "valLogLoss": 0.550665
+          },
+          {
+            "epoch": 7,
+            "trainLogLoss": 0.550284,
+            "valLogLoss": 0.55008
+          },
+          {
+            "epoch": 8,
+            "trainLogLoss": 0.5498,
+            "valLogLoss": 0.549772
+          },
+          {
+            "epoch": 9,
+            "trainLogLoss": 0.548915,
+            "valLogLoss": 0.548585
+          },
+          {
+            "epoch": 10,
+            "trainLogLoss": 0.548529,
+            "valLogLoss": 0.549805
+          },
+          {
+            "epoch": 11,
+            "trainLogLoss": 0.547747,
+            "valLogLoss": 0.549059
+          },
+          {
+            "epoch": 12,
+            "trainLogLoss": 0.547179,
+            "valLogLoss": 0.549255
+          },
+          {
+            "epoch": 13,
+            "trainLogLoss": 0.546111,
+            "valLogLoss": 0.548655
+          },
+          {
+            "epoch": 14,
+            "trainLogLoss": 0.545546,
+            "valLogLoss": 0.548715
+          }
+        ]
+      },
+      "coverage": "31227/31227"
+    },
+    "Shuffled-KP-DKT": {
+      "inputMode": "shuffled-kp",
+      "description": "学生内部打乱知识点标签（response/频数/标签不变）",
+      "vocabSize": 200,
+      "paramCount": 31524,
+      "sequenceCounts": {
+        "train": 2752,
+        "validation": 590,
+        "test": 589
+      },
+      "training": {
+        "epochsRun": 23,
+        "bestEpoch": 18,
+        "bestValLogLoss": 0.570535,
+        "stoppedEarly": true,
+        "fitSeconds": 621,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.676411,
+            "valLogLoss": 0.624762
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.618694,
+            "valLogLoss": 0.586579
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.591584,
+            "valLogLoss": 0.578703
+          },
+          {
+            "epoch": 4,
+            "trainLogLoss": 0.584048,
+            "valLogLoss": 0.576185
+          },
+          {
+            "epoch": 5,
+            "trainLogLoss": 0.580645,
+            "valLogLoss": 0.573776
+          },
+          {
+            "epoch": 6,
+            "trainLogLoss": 0.578275,
+            "valLogLoss": 0.57349
+          },
+          {
+            "epoch": 7,
+            "trainLogLoss": 0.576918,
+            "valLogLoss": 0.572263
+          },
+          {
+            "epoch": 8,
+            "trainLogLoss": 0.575544,
+            "valLogLoss": 0.572159
+          },
+          {
+            "epoch": 9,
+            "trainLogLoss": 0.574861,
+            "valLogLoss": 0.571755
+          },
+          {
+            "epoch": 10,
+            "trainLogLoss": 0.574075,
+            "valLogLoss": 0.571857
+          },
+          {
+            "epoch": 11,
+            "trainLogLoss": 0.573532,
+            "valLogLoss": 0.571285
+          },
+          {
+            "epoch": 12,
+            "trainLogLoss": 0.572539,
+            "valLogLoss": 0.571105
+          },
+          {
+            "epoch": 13,
+            "trainLogLoss": 0.572358,
+            "valLogLoss": 0.571861
+          },
+          {
+            "epoch": 14,
+            "trainLogLoss": 0.571306,
+            "valLogLoss": 0.570692
+          },
+          {
+            "epoch": 15,
+            "trainLogLoss": 0.57104,
+            "valLogLoss": 0.570839
+          },
+          {
+            "epoch": 16,
+            "trainLogLoss": 0.570612,
+            "valLogLoss": 0.571214
+          },
+          {
+            "epoch": 17,
+            "trainLogLoss": 0.570278,
+            "valLogLoss": 0.570942
+          },
+          {
+            "epoch": 18,
+            "trainLogLoss": 0.569957,
+            "valLogLoss": 0.570535
+          },
+          {
+            "epoch": 19,
+            "trainLogLoss": 0.569436,
+            "valLogLoss": 0.570995
+          },
+          {
+            "epoch": 20,
+            "trainLogLoss": 0.56905,
+            "valLogLoss": 0.570743
+          },
+          {
+            "epoch": 21,
+            "trainLogLoss": 0.568756,
+            "valLogLoss": 0.571734
+          },
+          {
+            "epoch": 22,
+            "trainLogLoss": 0.568472,
+            "valLogLoss": 0.571096
+          },
+          {
+            "epoch": 23,
+            "trainLogLoss": 0.568191,
+            "valLogLoss": 0.57124
+          }
+        ]
+      },
+      "coverage": "31227/31227"
+    },
+    "NoResponse-DKT": {
+      "inputMode": "no-response",
+      "description": "只输入知识点，不输入历史对错",
+      "vocabSize": 100,
+      "paramCount": 28324,
+      "sequenceCounts": {
+        "train": 2752,
+        "validation": 590,
+        "test": 589
+      },
+      "training": {
+        "epochsRun": 39,
+        "bestEpoch": 34,
+        "bestValLogLoss": 0.579866,
+        "stoppedEarly": true,
+        "fitSeconds": 844.7,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.669089,
+            "valLogLoss": 0.632149
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.625713,
+            "valLogLoss": 0.60346
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.618341,
+            "valLogLoss": 0.600003
+          },
+          {
+            "epoch": 4,
+            "trainLogLoss": 0.61451,
+            "valLogLoss": 0.597994
+          },
+          {
+            "epoch": 5,
+            "trainLogLoss": 0.611534,
+            "valLogLoss": 0.59476
+          },
+          {
+            "epoch": 6,
+            "trainLogLoss": 0.608878,
+            "valLogLoss": 0.592918
+          },
+          {
+            "epoch": 7,
+            "trainLogLoss": 0.606212,
+            "valLogLoss": 0.595152
+          },
+          {
+            "epoch": 8,
+            "trainLogLoss": 0.604641,
+            "valLogLoss": 0.587642
+          },
+          {
+            "epoch": 9,
+            "trainLogLoss": 0.60096,
+            "valLogLoss": 0.58807
+          },
+          {
+            "epoch": 10,
+            "trainLogLoss": 0.600844,
+            "valLogLoss": 0.587036
+          },
+          {
+            "epoch": 11,
+            "trainLogLoss": 0.599258,
+            "valLogLoss": 0.586172
+          },
+          {
+            "epoch": 12,
+            "trainLogLoss": 0.598039,
+            "valLogLoss": 0.586684
+          },
+          {
+            "epoch": 13,
+            "trainLogLoss": 0.596372,
+            "valLogLoss": 0.584862
+          },
+          {
+            "epoch": 14,
+            "trainLogLoss": 0.59505,
+            "valLogLoss": 0.584726
+          },
+          {
+            "epoch": 15,
+            "trainLogLoss": 0.593321,
+            "valLogLoss": 0.584826
+          },
+          {
+            "epoch": 16,
+            "trainLogLoss": 0.591985,
+            "valLogLoss": 0.584136
+          },
+          {
+            "epoch": 17,
+            "trainLogLoss": 0.591245,
+            "valLogLoss": 0.582966
+          },
+          {
+            "epoch": 18,
+            "trainLogLoss": 0.589844,
+            "valLogLoss": 0.585334
+          },
+          {
+            "epoch": 19,
+            "trainLogLoss": 0.588754,
+            "valLogLoss": 0.582882
+          },
+          {
+            "epoch": 20,
+            "trainLogLoss": 0.587325,
+            "valLogLoss": 0.582586
+          },
+          {
+            "epoch": 21,
+            "trainLogLoss": 0.587414,
+            "valLogLoss": 0.582588
+          },
+          {
+            "epoch": 22,
+            "trainLogLoss": 0.586404,
+            "valLogLoss": 0.585542
+          },
+          {
+            "epoch": 23,
+            "trainLogLoss": 0.585853,
+            "valLogLoss": 0.582626
+          },
+          {
+            "epoch": 24,
+            "trainLogLoss": 0.584769,
+            "valLogLoss": 0.582251
+          },
+          {
+            "epoch": 25,
+            "trainLogLoss": 0.583342,
+            "valLogLoss": 0.584991
+          },
+          {
+            "epoch": 26,
+            "trainLogLoss": 0.583674,
+            "valLogLoss": 0.584041
+          },
+          {
+            "epoch": 27,
+            "trainLogLoss": 0.582307,
+            "valLogLoss": 0.58294
+          },
+          {
+            "epoch": 28,
+            "trainLogLoss": 0.581713,
+            "valLogLoss": 0.581722
+          },
+          {
+            "epoch": 29,
+            "trainLogLoss": 0.58036,
+            "valLogLoss": 0.582479
+          },
+          {
+            "epoch": 30,
+            "trainLogLoss": 0.579775,
+            "valLogLoss": 0.582123
+          },
+          {
+            "epoch": 31,
+            "trainLogLoss": 0.579663,
+            "valLogLoss": 0.582732
+          },
+          {
+            "epoch": 32,
+            "trainLogLoss": 0.579392,
+            "valLogLoss": 0.580754
+          },
+          {
+            "epoch": 33,
+            "trainLogLoss": 0.577772,
+            "valLogLoss": 0.582534
+          },
+          {
+            "epoch": 34,
+            "trainLogLoss": 0.577264,
+            "valLogLoss": 0.579866
+          },
+          {
+            "epoch": 35,
+            "trainLogLoss": 0.577457,
+            "valLogLoss": 0.584559
+          },
+          {
+            "epoch": 36,
+            "trainLogLoss": 0.576489,
+            "valLogLoss": 0.583246
+          },
+          {
+            "epoch": 37,
+            "trainLogLoss": 0.575535,
+            "valLogLoss": 0.5823
+          },
+          {
+            "epoch": 38,
+            "trainLogLoss": 0.575512,
+            "valLogLoss": 0.580921
+          },
+          {
+            "epoch": 39,
+            "trainLogLoss": 0.57486,
+            "valLogLoss": 0.580004
+          }
+        ]
+      },
+      "coverage": "31227/31227"
+    }
+  },
+  "results": {
+    "Full-DKT": {
+      "n": 31227,
+      "AUC": 0.7513,
+      "LogLoss": 0.5351,
+      "Brier": 0.178,
+      "Accuracy": 0.7396,
+      "F1": 0.824,
+      "positiveRate": 0.6726
+    },
+    "Same-KP-DKT": {
+      "n": 31227,
+      "AUC": 0.7385,
+      "LogLoss": 0.5441,
+      "Brier": 0.1815,
+      "Accuracy": 0.7356,
+      "F1": 0.8221,
+      "positiveRate": 0.6726
+    },
+    "Shuffled-KP-DKT": {
+      "n": 31227,
+      "AUC": 0.7194,
+      "LogLoss": 0.5514,
+      "Brier": 0.1844,
+      "Accuracy": 0.7372,
+      "F1": 0.825,
+      "positiveRate": 0.6726
+    },
+    "NoResponse-DKT": {
+      "n": 31227,
+      "AUC": 0.6849,
+      "LogLoss": 0.5854,
+      "Brier": 0.1999,
+      "Accuracy": 0.6948,
+      "F1": 0.8012,
+      "positiveRate": 0.6726
+    }
+  },
+  "bootstrap": {
+    "reps": 2000,
+    "units": 589,
+    "ci": {
+      "Full-DKT": {
+        "AUC": [
+          0.7323,
+          0.7702
+        ],
+        "LogLoss": [
+          0.5212,
+          0.5499
+        ],
+        "Brier": [
+          0.1723,
+          0.1842
+        ],
+        "Accuracy": [
+          0.7272,
+          0.751
+        ],
+        "draws": 2000
+      },
+      "Same-KP-DKT": {
+        "AUC": [
+          0.7198,
+          0.7569
+        ],
+        "LogLoss": [
+          0.5313,
+          0.5571
+        ],
+        "Brier": [
+          0.1762,
+          0.1871
+        ],
+        "Accuracy": [
+          0.7245,
+          0.7463
+        ],
+        "draws": 2000
+      },
+      "Shuffled-KP-DKT": {
+        "AUC": [
+          0.6976,
+          0.7411
+        ],
+        "LogLoss": [
+          0.5386,
+          0.5647
+        ],
+        "Brier": [
+          0.1787,
+          0.1902
+        ],
+        "Accuracy": [
+          0.7247,
+          0.7489
+        ],
+        "draws": 2000
+      },
+      "NoResponse-DKT": {
+        "AUC": [
+          0.6683,
+          0.7001
+        ],
+        "LogLoss": [
+          0.5689,
+          0.6037
+        ],
+        "Brier": [
+          0.1928,
+          0.2081
+        ],
+        "Accuracy": [
+          0.6757,
+          0.7117
+        ],
+        "draws": 2000
+      }
+    },
+    "comparisons": [
+      {
+        "a": "Full-DKT",
+        "b": "Same-KP-DKT",
+        "dAUC": {
+          "meanDiff": 0.0127,
+          "ci": [
+            0.0091,
+            0.0164
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": -0.0089,
+          "ci": [
+            -0.0125,
+            -0.0057
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Full-DKT",
+        "b": "Shuffled-KP-DKT",
+        "dAUC": {
+          "meanDiff": 0.0319,
+          "ci": [
+            0.0259,
+            0.0381
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": -0.0161,
+          "ci": [
+            -0.0198,
+            -0.0121
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Full-DKT",
+        "b": "NoResponse-DKT",
+        "dAUC": {
+          "meanDiff": 0.0663,
+          "ci": [
+            0.0537,
+            0.0814
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": -0.0503,
+          "ci": [
+            -0.0648,
+            -0.0381
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Same-KP-DKT",
+        "b": "Shuffled-KP-DKT",
+        "dAUC": {
+          "meanDiff": 0.0192,
+          "ci": [
+            0.0123,
+            0.0261
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": -0.0072,
+          "ci": [
+            -0.0119,
+            -0.0019
+          ],
+          "p": 0.01
+        }
+      },
+      {
+        "a": "Same-KP-DKT",
+        "b": "NoResponse-DKT",
+        "dAUC": {
+          "meanDiff": 0.0537,
+          "ci": [
+            0.0398,
+            0.0695
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": -0.0414,
+          "ci": [
+            -0.0551,
+            -0.0302
+          ],
+          "p": 0.001
+        }
+      },
+      {
+        "a": "Shuffled-KP-DKT",
+        "b": "NoResponse-DKT",
+        "dAUC": {
+          "meanDiff": 0.0345,
+          "ci": [
+            0.0188,
+            0.0537
+          ],
+          "p": 0.001
+        },
+        "dLogLoss": {
+          "meanDiff": -0.0341,
+          "ci": [
+            -0.0504,
+            -0.0212
+          ],
+          "p": 0.001
+        }
+      }
+    ],
+    "versusFull": [
+      {
+        "comparison": "Full-DKT − Same-KP-DKT",
+        "dAUC": 0.0127,
+        "dAUCCI": [
+          0.0091,
+          0.0164
+        ],
+        "aucExcludesZero": true,
+        "dLogLoss": -0.0089,
+        "dLogLossCI": [
+          -0.0125,
+          -0.0057
+        ],
+        "logLossExcludesZero": true
+      },
+      {
+        "comparison": "Full-DKT − Shuffled-KP-DKT",
+        "dAUC": 0.0319,
+        "dAUCCI": [
+          0.0259,
+          0.0381
+        ],
+        "aucExcludesZero": true,
+        "dLogLoss": -0.0161,
+        "dLogLossCI": [
+          -0.0198,
+          -0.0121
+        ],
+        "logLossExcludesZero": true
+      },
+      {
+        "comparison": "Full-DKT − NoResponse-DKT",
+        "dAUC": 0.0663,
+        "dAUCCI": [
+          0.0537,
+          0.0814
+        ],
+        "aucExcludesZero": true,
+        "dLogLoss": -0.0503,
+        "dLogLossCI": [
+          -0.0648,
+          -0.0381
+        ],
+        "logLossExcludesZero": true
+      }
+    ]
+  },
+  "calibration": {
+    "Full-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 394,
+        "meanPredicted": 0.0684,
+        "observedRate": 0.0635
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 866,
+        "meanPredicted": 0.1507,
+        "observedRate": 0.1363
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 1142,
+        "meanPredicted": 0.2494,
+        "observedRate": 0.2557
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1455,
+        "meanPredicted": 0.3513,
+        "observedRate": 0.3601
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 2175,
+        "meanPredicted": 0.4532,
+        "observedRate": 0.4644
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 2923,
+        "meanPredicted": 0.5523,
+        "observedRate": 0.5488
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 4314,
+        "meanPredicted": 0.6555,
+        "observedRate": 0.6509
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 7434,
+        "meanPredicted": 0.7525,
+        "observedRate": 0.7532
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 8118,
+        "meanPredicted": 0.8468,
+        "observedRate": 0.8407
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 2406,
+        "meanPredicted": 0.9317,
+        "observedRate": 0.9131
+      }
+    ],
+    "Same-KP-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 185,
+        "meanPredicted": 0.0857,
+        "observedRate": 0.0378
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 734,
+        "meanPredicted": 0.1442,
+        "observedRate": 0.1226
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 888,
+        "meanPredicted": 0.2525,
+        "observedRate": 0.2432
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1480,
+        "meanPredicted": 0.3523,
+        "observedRate": 0.3155
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 2531,
+        "meanPredicted": 0.4568,
+        "observedRate": 0.4524
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 2637,
+        "meanPredicted": 0.5531,
+        "observedRate": 0.5351
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 4611,
+        "meanPredicted": 0.6557,
+        "observedRate": 0.6608
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 8640,
+        "meanPredicted": 0.7546,
+        "observedRate": 0.7539
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 8070,
+        "meanPredicted": 0.842,
+        "observedRate": 0.8411
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 1451,
+        "meanPredicted": 0.9303,
+        "observedRate": 0.9076
+      }
+    ],
+    "Shuffled-KP-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 495,
+        "meanPredicted": 0.0741,
+        "observedRate": 0.0505
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 834,
+        "meanPredicted": 0.149,
+        "observedRate": 0.1415
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 892,
+        "meanPredicted": 0.2522,
+        "observedRate": 0.2455
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1255,
+        "meanPredicted": 0.3526,
+        "observedRate": 0.3649
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 1862,
+        "meanPredicted": 0.4508,
+        "observedRate": 0.4511
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 3073,
+        "meanPredicted": 0.5553,
+        "observedRate": 0.5815
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 6068,
+        "meanPredicted": 0.6558,
+        "observedRate": 0.687
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 10456,
+        "meanPredicted": 0.7528,
+        "observedRate": 0.7756
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 6268,
+        "meanPredicted": 0.8343,
+        "observedRate": 0.8381
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 24,
+        "meanPredicted": 0.9129,
+        "observedRate": 0.9583
+      }
+    ],
+    "NoResponse-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 17,
+        "meanPredicted": 0.0775,
+        "observedRate": 0.0588
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 73,
+        "meanPredicted": 0.1585,
+        "observedRate": 0.3288
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 396,
+        "meanPredicted": 0.2627,
+        "observedRate": 0.3409
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1415,
+        "meanPredicted": 0.3557,
+        "observedRate": 0.3837
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 2389,
+        "meanPredicted": 0.4553,
+        "observedRate": 0.4584
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 4497,
+        "meanPredicted": 0.556,
+        "observedRate": 0.5541
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 6872,
+        "meanPredicted": 0.6519,
+        "observedRate": 0.6358
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 8419,
+        "meanPredicted": 0.7531,
+        "observedRate": 0.7527
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 5995,
+        "meanPredicted": 0.8394,
+        "observedRate": 0.8235
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 1154,
+        "meanPredicted": 0.9273,
+        "observedRate": 0.9263
+      }
+    ]
+  }
+}
