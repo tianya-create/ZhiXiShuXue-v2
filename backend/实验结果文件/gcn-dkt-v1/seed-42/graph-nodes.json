@@ -1,0 +1,406 @@
+{
+  "protocolVersion": "assist2009-gcn-dkt-v1",
+  "splitSeed": 42,
+  "nodes": [
+    {
+      "index": 0,
+      "kpCode": "a09-s1"
+    },
+    {
+      "index": 1,
+      "kpCode": "a09-s10"
+    },
+    {
+      "index": 2,
+      "kpCode": "a09-s11"
+    },
+    {
+      "index": 3,
+      "kpCode": "a09-s110"
+    },
+    {
+      "index": 4,
+      "kpCode": "a09-s12"
+    },
+    {
+      "index": 5,
+      "kpCode": "a09-s13"
+    },
+    {
+      "index": 6,
+      "kpCode": "a09-s15"
+    },
+    {
+      "index": 7,
+      "kpCode": "a09-s16"
+    },
+    {
+      "index": 8,
+      "kpCode": "a09-s163"
+    },
+    {
+      "index": 9,
+      "kpCode": "a09-s165"
+    },
+    {
+      "index": 10,
+      "kpCode": "a09-s166"
+    },
+    {
+      "index": 11,
+      "kpCode": "a09-s17"
+    },
+    {
+      "index": 12,
+      "kpCode": "a09-s173"
+    },
+    {
+      "index": 13,
+      "kpCode": "a09-s18"
+    },
+    {
+      "index": 14,
+      "kpCode": "a09-s2"
+    },
+    {
+      "index": 15,
+      "kpCode": "a09-s203"
+    },
+    {
+      "index": 16,
+      "kpCode": "a09-s204"
+    },
+    {
+      "index": 17,
+      "kpCode": "a09-s21"
+    },
+    {
+      "index": 18,
+      "kpCode": "a09-s217"
+    },
+    {
+      "index": 19,
+      "kpCode": "a09-s22"
+    },
+    {
+      "index": 20,
+      "kpCode": "a09-s24"
+    },
+    {
+      "index": 21,
+      "kpCode": "a09-s25"
+    },
+    {
+      "index": 22,
+      "kpCode": "a09-s26"
+    },
+    {
+      "index": 23,
+      "kpCode": "a09-s27"
+    },
+    {
+      "index": 24,
+      "kpCode": "a09-s276"
+    },
+    {
+      "index": 25,
+      "kpCode": "a09-s277"
+    },
+    {
+      "index": 26,
+      "kpCode": "a09-s278"
+    },
+    {
+      "index": 27,
+      "kpCode": "a09-s279"
+    },
+    {
+      "index": 28,
+      "kpCode": "a09-s280"
+    },
+    {
+      "index": 29,
+      "kpCode": "a09-s290"
+    },
+    {
+      "index": 30,
+      "kpCode": "a09-s292"
+    },
+    {
+      "index": 31,
+      "kpCode": "a09-s293"
+    },
+    {
+      "index": 32,
+      "kpCode": "a09-s294"
+    },
+    {
+      "index": 33,
+      "kpCode": "a09-s295"
+    },
+    {
+      "index": 34,
+      "kpCode": "a09-s296"
+    },
+    {
+      "index": 35,
+      "kpCode": "a09-s297"
+    },
+    {
+      "index": 36,
+      "kpCode": "a09-s298"
+    },
+    {
+      "index": 37,
+      "kpCode": "a09-s299"
+    },
+    {
+      "index": 38,
+      "kpCode": "a09-s301"
+    },
+    {
+      "index": 39,
+      "kpCode": "a09-s303"
+    },
+    {
+      "index": 40,
+      "kpCode": "a09-s307"
+    },
+    {
+      "index": 41,
+      "kpCode": "a09-s308"
+    },
+    {
+      "index": 42,
+      "kpCode": "a09-s309"
+    },
+    {
+      "index": 43,
+      "kpCode": "a09-s310"
+    },
+    {
+      "index": 44,
+      "kpCode": "a09-s311"
+    },
+    {
+      "index": 45,
+      "kpCode": "a09-s312"
+    },
+    {
+      "index": 46,
+      "kpCode": "a09-s314"
+    },
+    {
+      "index": 47,
+      "kpCode": "a09-s317"
+    },
+    {
+      "index": 48,
+      "kpCode": "a09-s32"
+    },
+    {
+      "index": 49,
+      "kpCode": "a09-s322"
+    },
+    {
+      "index": 50,
+      "kpCode": "a09-s323"
+    },
+    {
+      "index": 51,
+      "kpCode": "a09-s324"
+    },
+    {
+      "index": 52,
+      "kpCode": "a09-s325"
+    },
+    {
+      "index": 53,
+      "kpCode": "a09-s331"
+    },
+    {
+      "index": 54,
+      "kpCode": "a09-s333"
+    },
+    {
+      "index": 55,
+      "kpCode": "a09-s334"
+    },
+    {
+      "index": 56,
+      "kpCode": "a09-s34"
+    },
+    {
+      "index": 57,
+      "kpCode": "a09-s340"
+    },
+    {
+      "index": 58,
+      "kpCode": "a09-s343"
+    },
+    {
+      "index": 59,
+      "kpCode": "a09-s346"
+    },
+    {
+      "index": 60,
+      "kpCode": "a09-s348"
+    },
+    {
+      "index": 61,
+      "kpCode": "a09-s35"
+    },
+    {
+      "index": 62,
+      "kpCode": "a09-s350"
+    },
+    {
+      "index": 63,
+      "kpCode": "a09-s356"
+    },
+    {
+      "index": 64,
+      "kpCode": "a09-s362"
+    },
+    {
+      "index": 65,
+      "kpCode": "a09-s368"
+    },
+    {
+      "index": 66,
+      "kpCode": "a09-s371"
+    },
+    {
+      "index": 67,
+      "kpCode": "a09-s378"
+    },
+    {
+      "index": 68,
+      "kpCode": "a09-s39"
+    },
+    {
+      "index": 69,
+      "kpCode": "a09-s4"
+    },
+    {
+      "index": 70,
+      "kpCode": "a09-s40"
+    },
+    {
+      "index": 71,
+      "kpCode": "a09-s42"
+    },
+    {
+      "index": 72,
+      "kpCode": "a09-s46"
+    },
+    {
+      "index": 73,
+      "kpCode": "a09-s47"
+    },
+    {
+      "index": 74,
+      "kpCode": "a09-s48"
+    },
+    {
+      "index": 75,
+      "kpCode": "a09-s49"
+    },
+    {
+      "index": 76,
+      "kpCode": "a09-s5"
+    },
+    {
+      "index": 77,
+      "kpCode": "a09-s50"
+    },
+    {
+      "index": 78,
+      "kpCode": "a09-s51"
+    },
+    {
+      "index": 79,
+      "kpCode": "a09-s54"
+    },
+    {
+      "index": 80,
+      "kpCode": "a09-s58"
+    },
+    {
+      "index": 81,
+      "kpCode": "a09-s61"
+    },
+    {
+      "index": 82,
+      "kpCode": "a09-s63"
+    },
+    {
+      "index": 83,
+      "kpCode": "a09-s65"
+    },
+    {
+      "index": 84,
+      "kpCode": "a09-s67"
+    },
+    {
+      "index": 85,
+      "kpCode": "a09-s70"
+    },
+    {
+      "index": 86,
+      "kpCode": "a09-s74"
+    },
+    {
+      "index": 87,
+      "kpCode": "a09-s75"
+    },
+    {
+      "index": 88,
+      "kpCode": "a09-s77"
+    },
+    {
+      "index": 89,
+      "kpCode": "a09-s79"
+    },
+    {
+      "index": 90,
+      "kpCode": "a09-s8"
+    },
+    {
+      "index": 91,
+      "kpCode": "a09-s80"
+    },
+    {
+      "index": 92,
+      "kpCode": "a09-s81"
+    },
+    {
+      "index": 93,
+      "kpCode": "a09-s82"
+    },
+    {
+      "index": 94,
+      "kpCode": "a09-s83"
+    },
+    {
+      "index": 95,
+      "kpCode": "a09-s84"
+    },
+    {
+      "index": 96,
+      "kpCode": "a09-s85"
+    },
+    {
+      "index": 97,
+      "kpCode": "a09-s86"
+    },
+    {
+      "index": 98,
+      "kpCode": "a09-s9"
+    },
+    {
+      "index": 99,
+      "kpCode": "a09-s92"
+    }
+  ]
+}
