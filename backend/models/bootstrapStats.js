@@ -168,6 +168,16 @@ function ciOf(sortedValues) {
 }
 
 /**
+ * 未舍入 CI（原始百分位 2.5/97.5）。
+ * 方向判定必须基于此值：4 位舍入会把 [0.00004, …] 变成 [0, …]，
+ * 从而把「方向稳定为正」错判成「跨零」，也会让 CI 与支持标志自相矛盾。
+ */
+function ciPreciseOf(sortedValues) {
+  if (!sortedValues.length) return [null, null];
+  return [percentile(sortedValues, 0.025), percentile(sortedValues, 0.975)];
+}
+
+/**
  * 双侧 bootstrap p 值：2 × min(P(Δ≤0), P(Δ≥0))，两端各加 1 平滑。
  * 这样处理两个边界情形才不会出错：
  *   - 所有 Δ 恰好为 0（例如两个模型预测完全相同）→ 两个尾部概率都是 1 → p = 1；
@@ -258,6 +268,12 @@ function bootstrapAllModels(rowsByModel, { reps = 2000, seed = 42 } = {}) {
       LogLoss: ciOf([...llSamples[model]].sort((x, y) => x - y)),
       Brier: ciOf([...brierSamples[model]].sort((x, y) => x - y)),
       Accuracy: ciOf([...accSamples[model]].sort((x, y) => x - y)),
+      precise: {
+        AUC: ciPreciseOf([...aucSamples[model]].sort((x, y) => x - y)),
+        LogLoss: ciPreciseOf([...llSamples[model]].sort((x, y) => x - y)),
+        Brier: ciPreciseOf([...brierSamples[model]].sort((x, y) => x - y)),
+        Accuracy: ciPreciseOf([...accSamples[model]].sort((x, y) => x - y))
+      },
       draws: llSamples[model].length
     };
   }
@@ -279,6 +295,7 @@ function bootstrapAllModels(rowsByModel, { reps = 2000, seed = 42 } = {}) {
         bootstrapMeanDiff: meanAuc, // bootstrap 重采样差值分布的均值（不是点估计）
         meanDiff: meanAuc === null ? null : Number(meanAuc.toFixed(4)), // 兼容旧字段，= bootstrapMeanDiff
         ci: ciOf(dAucSorted),
+        ciPrecise: ciPreciseOf(dAucSorted),
         p: pValueOf(dAucSorted),
         validDraws: dAucSorted.length
       },
@@ -287,6 +304,7 @@ function bootstrapAllModels(rowsByModel, { reps = 2000, seed = 42 } = {}) {
         bootstrapMeanDiff: meanLl,
         meanDiff: meanLl === null ? null : Number(meanLl.toFixed(4)), // 兼容旧字段，= bootstrapMeanDiff
         ci: ciOf(dLlSorted),
+        ciPrecise: ciPreciseOf(dLlSorted),
         p: pValueOf(dLlSorted),
         validDraws: dLlSorted.length
       }
@@ -334,6 +352,8 @@ module.exports = {
   buildStudentSampler,
   mulberry32,
   percentile,
+  ciOf,
+  ciPreciseOf,
   bootstrapAllModels,
   bootstrapCIs,
   pairedComparison

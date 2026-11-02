@@ -1,0 +1,1304 @@
+{
+  "stage": "E-audit",
+  "protocolVersion": "assist2009-gcn-dkt-v1",
+  "seed": 42,
+  "generatedAt": "2026-11-02T02:51:39.673Z",
+  "nodeVersion": "v22.22.2",
+  "auditorSha256": "sha256:91469875816def66ef725f1beef6470459e72843b186c09bee308328f7596f3a",
+  "auditorSources": {
+    "auditGraphDktResults.js": "sha256:91469875816def66ef725f1beef6470459e72843b186c09bee308328f7596f3a",
+    "graphDktExperiment.js": "sha256:d000bead1a22691b284636d2907d445ba7ea864917076a213da5592a75bfe8c0",
+    "baselineEval.js": "sha256:32a943efda5186c1d4a1f1efa5db93c6191389ff9fb182784cd8c6e86b58bc71",
+    "bootstrapStats.js": "sha256:dfcc9caa6f81e3b754c172769491c022d5a0634bf0a6256b5957dc1984e75dc4"
+  },
+  "inputs": {
+    "targetsSha256": "sha256:da4bf9fced70c64dee6f7428ea5c2ad3a58da01b566df149ff023eaceaf5ea29",
+    "predictionsSha256": "sha256:f85c7574efc40ab2a7cb01dbdb1e8f03c983da6e4048188fcf671a0ee76abf49",
+    "resultsSha256": "sha256:0953319e3fcca332aeecae26da2278ab381ca5777c8bd611b80a12f63580b8e4",
+    "trainingCurvesSha256": "sha256:f5195248f9fca498d9306c0189afa4fd509603d2d0b84b505a023b35af25fd4c",
+    "targetsCount": 36967,
+    "targetManifestHash": "sha256:4a7c40f3ba97a41c85de3613926fe11e240a0243e17812f7bfd9de1ab55ba6bb",
+    "uniqueStudents": 589,
+    "resultsPresent": true
+  },
+  "bootstrapRecomputed": true,
+  "recomputeBootstrapFlag": true,
+  "checksTotal": 164,
+  "checksPassed": 164,
+  "checks": [
+    {
+      "name": "results.predictionsSha256 与实际文件一致",
+      "ok": true,
+      "detail": "记录 sha256:f85c7574efc40ab2a7cb01dbdb1e8f03c983da6e4048188fcf671a0ee76abf49"
+    },
+    {
+      "name": "results.targetsSha256 与实际文件一致",
+      "ok": true,
+      "detail": "记录 sha256:da4bf9fced70c64dee6f7428ea5c2ad3a58da01b566df149ff023eaceaf5ea29"
+    },
+    {
+      "name": "training-curves.json 存在且非空",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "results.seed 与审计种子一致",
+      "ok": true,
+      "detail": "42"
+    },
+    {
+      "name": "results.protocolVersion 一致",
+      "ok": true,
+      "detail": "assist2009-gcn-dkt-v1"
+    },
+    {
+      "name": "results.configSha256 与冻结配置一致",
+      "ok": true,
+      "detail": "sha256:65382df7dc7f1c74cf23472a0d87c08ce74bd883efcfe5f2c5649dca333fda35"
+    },
+    {
+      "name": "目标身份唯一",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "predictions 行数 == 目标数",
+      "ok": true,
+      "detail": "36967 vs 36967"
+    },
+    {
+      "name": "逐行身份/标签一致且五组预测合法",
+      "ok": true,
+      "detail": "0 行异常"
+    },
+    {
+      "name": "results.results.Full-DKT.AUC 与重算一致",
+      "ok": true,
+      "detail": "重算 0.7388 vs 记录 0.7388"
+    },
+    {
+      "name": "results.results.Full-DKT.LogLoss 与重算一致",
+      "ok": true,
+      "detail": "重算 0.542 vs 记录 0.542"
+    },
+    {
+      "name": "results.results.Full-DKT.Brier 与重算一致",
+      "ok": true,
+      "detail": "重算 0.1813 vs 记录 0.1813"
+    },
+    {
+      "name": "results.results.Full-DKT.Accuracy 与重算一致",
+      "ok": true,
+      "detail": "重算 0.7336 vs 记录 0.7336"
+    },
+    {
+      "name": "results.results.Full-DKT.n == 目标数",
+      "ok": true,
+      "detail": "36967"
+    },
+    {
+      "name": "results.calibration.Full-DKT 与重算一致",
+      "ok": true,
+      "detail": "分箱逐项一致"
+    },
+    {
+      "name": "results.results.GCN-DKT.AUC 与重算一致",
+      "ok": true,
+      "detail": "重算 0.7398 vs 记录 0.7398"
+    },
+    {
+      "name": "results.results.GCN-DKT.LogLoss 与重算一致",
+      "ok": true,
+      "detail": "重算 0.5406 vs 记录 0.5406"
+    },
+    {
+      "name": "results.results.GCN-DKT.Brier 与重算一致",
+      "ok": true,
+      "detail": "重算 0.181 vs 记录 0.181"
+    },
+    {
+      "name": "results.results.GCN-DKT.Accuracy 与重算一致",
+      "ok": true,
+      "detail": "重算 0.7321 vs 记录 0.7321"
+    },
+    {
+      "name": "results.results.GCN-DKT.n == 目标数",
+      "ok": true,
+      "detail": "36967"
+    },
+    {
+      "name": "results.calibration.GCN-DKT 与重算一致",
+      "ok": true,
+      "detail": "分箱逐项一致"
+    },
+    {
+      "name": "results.results.RandomGraph-DKT.AUC 与重算一致",
+      "ok": true,
+      "detail": "重算 0.7383 vs 记录 0.7383"
+    },
+    {
+      "name": "results.results.RandomGraph-DKT.LogLoss 与重算一致",
+      "ok": true,
+      "detail": "重算 0.5419 vs 记录 0.5419"
+    },
+    {
+      "name": "results.results.RandomGraph-DKT.Brier 与重算一致",
+      "ok": true,
+      "detail": "重算 0.1815 vs 记录 0.1815"
+    },
+    {
+      "name": "results.results.RandomGraph-DKT.Accuracy 与重算一致",
+      "ok": true,
+      "detail": "重算 0.7307 vs 记录 0.7307"
+    },
+    {
+      "name": "results.results.RandomGraph-DKT.n == 目标数",
+      "ok": true,
+      "detail": "36967"
+    },
+    {
+      "name": "results.calibration.RandomGraph-DKT 与重算一致",
+      "ok": true,
+      "detail": "分箱逐项一致"
+    },
+    {
+      "name": "results.results.Larger-DKT.AUC 与重算一致",
+      "ok": true,
+      "detail": "重算 0.7385 vs 记录 0.7385"
+    },
+    {
+      "name": "results.results.Larger-DKT.LogLoss 与重算一致",
+      "ok": true,
+      "detail": "重算 0.5425 vs 记录 0.5425"
+    },
+    {
+      "name": "results.results.Larger-DKT.Brier 与重算一致",
+      "ok": true,
+      "detail": "重算 0.1818 vs 记录 0.1818"
+    },
+    {
+      "name": "results.results.Larger-DKT.Accuracy 与重算一致",
+      "ok": true,
+      "detail": "重算 0.7304 vs 记录 0.7304"
+    },
+    {
+      "name": "results.results.Larger-DKT.n == 目标数",
+      "ok": true,
+      "detail": "36967"
+    },
+    {
+      "name": "results.calibration.Larger-DKT 与重算一致",
+      "ok": true,
+      "detail": "分箱逐项一致"
+    },
+    {
+      "name": "results.results.SelfLoop-DKT.AUC 与重算一致",
+      "ok": true,
+      "detail": "重算 0.7392 vs 记录 0.7392"
+    },
+    {
+      "name": "results.results.SelfLoop-DKT.LogLoss 与重算一致",
+      "ok": true,
+      "detail": "重算 0.5409 vs 记录 0.5409"
+    },
+    {
+      "name": "results.results.SelfLoop-DKT.Brier 与重算一致",
+      "ok": true,
+      "detail": "重算 0.1811 vs 记录 0.1811"
+    },
+    {
+      "name": "results.results.SelfLoop-DKT.Accuracy 与重算一致",
+      "ok": true,
+      "detail": "重算 0.7306 vs 记录 0.7306"
+    },
+    {
+      "name": "results.results.SelfLoop-DKT.n == 目标数",
+      "ok": true,
+      "detail": "36967"
+    },
+    {
+      "name": "results.calibration.SelfLoop-DKT 与重算一致",
+      "ok": true,
+      "detail": "分箱逐项一致"
+    },
+    {
+      "name": "results.bootstrap.reps == 冻结配置",
+      "ok": true,
+      "detail": "记录 2000"
+    },
+    {
+      "name": "results.bootstrap.units == test 学生数",
+      "ok": true,
+      "detail": "记录 589 vs 589"
+    },
+    {
+      "name": "results.bootstrap.ci.Full-DKT 存在",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "results.bootstrap.ci.Full-DKT.draws == reps",
+      "ok": true,
+      "detail": "记录 2000"
+    },
+    {
+      "name": "results.bootstrap.ci.Full-DKT.AUC（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.7212124374187658, 0.7570213690222778] vs 记录 [0.7212124374187658, 0.7570213690222778]"
+    },
+    {
+      "name": "results.bootstrap.ci.Full-DKT.LogLoss（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.5265139429713521, 0.5569205114123491] vs 记录 [0.5265139429713521, 0.5569205114123491]"
+    },
+    {
+      "name": "results.bootstrap.ci.Full-DKT.Brier（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.17498469732658822, 0.1873787467535954] vs 记录 [0.17498469732658822, 0.1873787467535954]"
+    },
+    {
+      "name": "results.bootstrap.ci.Full-DKT.Accuracy（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.7213584648995014, 0.7459223181405226] vs 记录 [0.7213584648995014, 0.7459223181405226]"
+    },
+    {
+      "name": "results.bootstrap.ci.GCN-DKT 存在",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "results.bootstrap.ci.GCN-DKT.draws == reps",
+      "ok": true,
+      "detail": "记录 2000"
+    },
+    {
+      "name": "results.bootstrap.ci.GCN-DKT.AUC（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.7232814724892035, 0.7573441926060728] vs 记录 [0.7232814724892035, 0.7573441926060728]"
+    },
+    {
+      "name": "results.bootstrap.ci.GCN-DKT.LogLoss（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.5259118406206924, 0.5547778303934432] vs 记录 [0.5259118406206924, 0.5547778303934432]"
+    },
+    {
+      "name": "results.bootstrap.ci.GCN-DKT.Brier（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.17490146992594874, 0.18693425414107578] vs 记录 [0.17490146992594874, 0.18693425414107578]"
+    },
+    {
+      "name": "results.bootstrap.ci.GCN-DKT.Accuracy（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.7198276633909092, 0.7445285204749373] vs 记录 [0.7198276633909092, 0.7445285204749373]"
+    },
+    {
+      "name": "results.bootstrap.ci.RandomGraph-DKT 存在",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "results.bootstrap.ci.RandomGraph-DKT.draws == reps",
+      "ok": true,
+      "detail": "记录 2000"
+    },
+    {
+      "name": "results.bootstrap.ci.RandomGraph-DKT.AUC（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.7211017778550768, 0.7561292575640174] vs 记录 [0.7211017778550768, 0.7561292575640174]"
+    },
+    {
+      "name": "results.bootstrap.ci.RandomGraph-DKT.LogLoss（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.5271114990664506, 0.5563647857161113] vs 记录 [0.5271114990664506, 0.5563647857161113]"
+    },
+    {
+      "name": "results.bootstrap.ci.RandomGraph-DKT.Brier（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.17529719433102145, 0.18755276091106626] vs 记录 [0.17529719433102145, 0.18755276091106626]"
+    },
+    {
+      "name": "results.bootstrap.ci.RandomGraph-DKT.Accuracy（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.717683716049734, 0.7435925787614086] vs 记录 [0.717683716049734, 0.7435925787614086]"
+    },
+    {
+      "name": "results.bootstrap.ci.Larger-DKT 存在",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "results.bootstrap.ci.Larger-DKT.draws == reps",
+      "ok": true,
+      "detail": "记录 2000"
+    },
+    {
+      "name": "results.bootstrap.ci.Larger-DKT.AUC（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.7217143260535936, 0.7563912907962584] vs 记录 [0.7217143260535936, 0.7563912907962584]"
+    },
+    {
+      "name": "results.bootstrap.ci.Larger-DKT.LogLoss（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.5265123608809, 0.5575052011599546] vs 记录 [0.5265123608809, 0.5575052011599546]"
+    },
+    {
+      "name": "results.bootstrap.ci.Larger-DKT.Brier（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.17532081374354355, 0.18801738927017955] vs 记录 [0.17532081374354355, 0.18801738927017955]"
+    },
+    {
+      "name": "results.bootstrap.ci.Larger-DKT.Accuracy（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.717536300487175, 0.7433486117805249] vs 记录 [0.717536300487175, 0.7433486117805249]"
+    },
+    {
+      "name": "results.bootstrap.ci.SelfLoop-DKT 存在",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "results.bootstrap.ci.SelfLoop-DKT.draws == reps",
+      "ok": true,
+      "detail": "记录 2000"
+    },
+    {
+      "name": "results.bootstrap.ci.SelfLoop-DKT.AUC（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.7227459335857964, 0.7570747946736288] vs 记录 [0.7227459335857964, 0.7570747946736288]"
+    },
+    {
+      "name": "results.bootstrap.ci.SelfLoop-DKT.LogLoss（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.5261562498547232, 0.55502047119199] vs 记录 [0.5261562498547232, 0.55502047119199]"
+    },
+    {
+      "name": "results.bootstrap.ci.SelfLoop-DKT.Brier（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.17502499257542542, 0.18704090025471537] vs 记录 [0.17502499257542542, 0.18704090025471537]"
+    },
+    {
+      "name": "results.bootstrap.ci.SelfLoop-DKT.Accuracy（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.718260006786769, 0.7432181818416921] vs 记录 [0.718260006786769, 0.7432181818416921]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT 存在",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.dAUC 与重算一致",
+      "ok": true,
+      "detail": "重算 0.0010068396555563686 vs 记录 0.0010068396555563686"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.dLogLoss 与重算一致",
+      "ok": true,
+      "detail": "重算 -0.0014409365177561195 vs 记录 -0.0014409365177561195"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.ciAvailable 与重算一致",
+      "ok": true,
+      "detail": "记录 true"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.dAUCCI（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [-0.0009816520113502447, 0.0030953040981611057] vs 记录 [-0.0009816520113502447, 0.0030953040981611057]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.dLogLossCI（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [-0.003599481297195239, 0.0004582572740524371] vs 记录 [-0.003599481297195239, 0.0004582572740524371]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.dAUCCI4 == round4(未舍入 CI)",
+      "ok": true,
+      "detail": "记录 [-0.001, 0.0031] vs 期望 [-0.001, 0.0031]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.dLogLossCI4 == round4(未舍入 CI)",
+      "ok": true,
+      "detail": "记录 [-0.0036, 0.0005] vs 期望 [-0.0036, 0.0005]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.aucExcludesZero 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 false vs 由记录 CI 判定 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.aucExcludesZero 与重算一致",
+      "ok": true,
+      "detail": "记录 false vs 重算 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.aucCISupportsGCN 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 false vs 由记录 CI 判定 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.aucCISupportsGCN 与重算一致",
+      "ok": true,
+      "detail": "记录 false vs 重算 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.logLossExcludesZero 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 false vs 由记录 CI 判定 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.logLossExcludesZero 与重算一致",
+      "ok": true,
+      "detail": "记录 false vs 重算 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.logLossCISupportsGCN 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 false vs 由记录 CI 判定 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.logLossCISupportsGCN 与重算一致",
+      "ok": true,
+      "detail": "记录 false vs 重算 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.标志实现交叉一致（审计 vs 主实现）",
+      "ok": true,
+      "detail": "两套独立实现的标志判定不一致"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.dAUCValidDraws 与重算一致",
+      "ok": true,
+      "detail": "记录 2000 vs 重算 2000"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.dLogLossValidDraws 与重算一致",
+      "ok": true,
+      "detail": "记录 2000 vs 重算 2000"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Full-DKT.units 与重算一致",
+      "ok": true,
+      "detail": "记录 589 vs 589"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT 存在",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.dAUC 与重算一致",
+      "ok": true,
+      "detail": "重算 0.0015621965893658496 vs 记录 0.0015621965893658496"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.dLogLoss 与重算一致",
+      "ok": true,
+      "detail": "重算 -0.001355891562970557 vs 记录 -0.001355891562970557"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.ciAvailable 与重算一致",
+      "ok": true,
+      "detail": "记录 true"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.dAUCCI（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [0.00026106310883184937, 0.0030043614693818386] vs 记录 [0.00026106310883184937, 0.0030043614693818386]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.dLogLossCI（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [-0.002534293349864572, -0.000304878469598298] vs 记录 [-0.002534293349864572, -0.000304878469598298]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.dAUCCI4 == round4(未舍入 CI)",
+      "ok": true,
+      "detail": "记录 [0.0003, 0.003] vs 期望 [0.0003, 0.003]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.dLogLossCI4 == round4(未舍入 CI)",
+      "ok": true,
+      "detail": "记录 [-0.0025, -0.0003] vs 期望 [-0.0025, -0.0003]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.aucExcludesZero 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 true vs 由记录 CI 判定 true"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.aucExcludesZero 与重算一致",
+      "ok": true,
+      "detail": "记录 true vs 重算 true"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.aucCISupportsGCN 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 true vs 由记录 CI 判定 true"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.aucCISupportsGCN 与重算一致",
+      "ok": true,
+      "detail": "记录 true vs 重算 true"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.logLossExcludesZero 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 true vs 由记录 CI 判定 true"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.logLossExcludesZero 与重算一致",
+      "ok": true,
+      "detail": "记录 true vs 重算 true"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.logLossCISupportsGCN 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 true vs 由记录 CI 判定 true"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.logLossCISupportsGCN 与重算一致",
+      "ok": true,
+      "detail": "记录 true vs 重算 true"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.标志实现交叉一致（审计 vs 主实现）",
+      "ok": true,
+      "detail": "两套独立实现的标志判定不一致"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.dAUCValidDraws 与重算一致",
+      "ok": true,
+      "detail": "记录 2000 vs 重算 2000"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.dLogLossValidDraws 与重算一致",
+      "ok": true,
+      "detail": "记录 2000 vs 重算 2000"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − RandomGraph-DKT.units 与重算一致",
+      "ok": true,
+      "detail": "记录 589 vs 589"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT 存在",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.dAUC 与重算一致",
+      "ok": true,
+      "detail": "重算 0.0005779579300220217 vs 记录 0.0005779579300220217"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.dLogLoss 与重算一致",
+      "ok": true,
+      "detail": "重算 -0.0002938816250770415 vs 记录 -0.0002938816250770415"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.ciAvailable 与重算一致",
+      "ok": true,
+      "detail": "记录 true"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.dAUCCI（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [-0.00012109560115446948, 0.0012509878814832868] vs 记录 [-0.00012109560115446948, 0.0012509878814832868]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.dLogLossCI（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [-0.0007920407270759711, 0.00019333782427757287] vs 记录 [-0.0007920407270759711, 0.00019333782427757287]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.dAUCCI4 == round4(未舍入 CI)",
+      "ok": true,
+      "detail": "记录 [-0.0001, 0.0013] vs 期望 [-0.0001, 0.0013]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.dLogLossCI4 == round4(未舍入 CI)",
+      "ok": true,
+      "detail": "记录 [-0.0008, 0.0002] vs 期望 [-0.0008, 0.0002]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.aucExcludesZero 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 false vs 由记录 CI 判定 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.aucExcludesZero 与重算一致",
+      "ok": true,
+      "detail": "记录 false vs 重算 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.aucCISupportsGCN 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 false vs 由记录 CI 判定 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.aucCISupportsGCN 与重算一致",
+      "ok": true,
+      "detail": "记录 false vs 重算 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.logLossExcludesZero 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 false vs 由记录 CI 判定 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.logLossExcludesZero 与重算一致",
+      "ok": true,
+      "detail": "记录 false vs 重算 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.logLossCISupportsGCN 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 false vs 由记录 CI 判定 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.logLossCISupportsGCN 与重算一致",
+      "ok": true,
+      "detail": "记录 false vs 重算 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.标志实现交叉一致（审计 vs 主实现）",
+      "ok": true,
+      "detail": "两套独立实现的标志判定不一致"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.dAUCValidDraws 与重算一致",
+      "ok": true,
+      "detail": "记录 2000 vs 重算 2000"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.dLogLossValidDraws 与重算一致",
+      "ok": true,
+      "detail": "记录 2000 vs 重算 2000"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − SelfLoop-DKT.units 与重算一致",
+      "ok": true,
+      "detail": "记录 589 vs 589"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT 存在",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.dAUC 与重算一致",
+      "ok": true,
+      "detail": "重算 0.001355223008723816 vs 记录 0.001355223008723816"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.dLogLoss 与重算一致",
+      "ok": true,
+      "detail": "重算 -0.001988349956182911 vs 记录 -0.001988349956182911"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.ciAvailable 与重算一致",
+      "ok": true,
+      "detail": "记录 true"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.dAUCCI（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [-0.001416772185736881, 0.004199991141869737] vs 记录 [-0.001416772185736881, 0.004199991141869737]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.dLogLossCI（未舍入）与重算一致",
+      "ok": true,
+      "detail": "重算 [-0.004625456465305214, 0.0003742489279583479] vs 记录 [-0.004625456465305214, 0.0003742489279583479]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.dAUCCI4 == round4(未舍入 CI)",
+      "ok": true,
+      "detail": "记录 [-0.0014, 0.0042] vs 期望 [-0.0014, 0.0042]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.dLogLossCI4 == round4(未舍入 CI)",
+      "ok": true,
+      "detail": "记录 [-0.0046, 0.0004] vs 期望 [-0.0046, 0.0004]"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.aucExcludesZero 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 false vs 由记录 CI 判定 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.aucExcludesZero 与重算一致",
+      "ok": true,
+      "detail": "记录 false vs 重算 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.aucCISupportsGCN 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 false vs 由记录 CI 判定 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.aucCISupportsGCN 与重算一致",
+      "ok": true,
+      "detail": "记录 false vs 重算 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.logLossExcludesZero 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 false vs 由记录 CI 判定 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.logLossExcludesZero 与重算一致",
+      "ok": true,
+      "detail": "记录 false vs 重算 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.logLossCISupportsGCN 与记录 CI 自洽",
+      "ok": true,
+      "detail": "记录 false vs 由记录 CI 判定 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.logLossCISupportsGCN 与重算一致",
+      "ok": true,
+      "detail": "记录 false vs 重算 false"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.标志实现交叉一致（审计 vs 主实现）",
+      "ok": true,
+      "detail": "两套独立实现的标志判定不一致"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.dAUCValidDraws 与重算一致",
+      "ok": true,
+      "detail": "记录 2000 vs 重算 2000"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.dLogLossValidDraws 与重算一致",
+      "ok": true,
+      "detail": "记录 2000 vs 重算 2000"
+    },
+    {
+      "name": "results.bootstrap.GCN-DKT − Larger-DKT.units 与重算一致",
+      "ok": true,
+      "detail": "记录 589 vs 589"
+    },
+    {
+      "name": "记录的统计实现哈希 == 当前源码 implementationHash",
+      "ok": true,
+      "detail": "记录 sha256:ebbcb582225965b1fee21b15a0de9ab1e62f52a33a708ea1c7ec28b8241b6578 vs 当前 sha256:ebbcb582225965b1fee21b15a0de9ab1e62f52a33a708ea1c7ec28b8241b6578"
+    },
+    {
+      "name": "implementationMetadata.sourceHashes 含五个源文件",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "修订记录：确实未重训（noRetraining）",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "name": "修订记录：预测未变（predictionsUnchanged）",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "name": "修订记录：predictionsSha256 == 实际文件",
+      "ok": true,
+      "detail": "sha256:f85c7574efc40ab2a7cb01dbdb1e8f03c983da6e4048188fcf671a0ee76abf49"
+    },
+    {
+      "name": "修订记录：训练实现哈希被原样保留",
+      "ok": true,
+      "detail": "修订记录 sha256:745492f347b7764fb4fd1eb6e4142ee744afafba9f81dbe055d8f072fe20593c vs implementationMetadata sha256:745492f347b7764fb4fd1eb6e4142ee744afafba9f81dbe055d8f072fe20593c"
+    },
+    {
+      "name": "修订记录：previousStatisticsSha256 非空",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "修订记录：statisticsImplementationHash == 当前源码",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "bootstrap CI 规则标注为未舍入",
+      "ok": true,
+      "detail": "CI 存未舍入百分位（2.5/97.5）；方向/显著性标志由未舍入值判定（*CI4 仅作展示，不参与判定）"
+    },
+    {
+      "name": "real 图 Anorm 独立重建哈希 == manifest",
+      "ok": true,
+      "detail": "sha256:8624dd2b632d7709 vs sha256:8624dd2b632d7709"
+    },
+    {
+      "name": "results.dataHashes.realAdjacencySha256 一致",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "name": "random 图 Anorm 独立重建哈希 == manifest",
+      "ok": true,
+      "detail": "sha256:0daf8abb403d9451 vs sha256:0daf8abb403d9451"
+    },
+    {
+      "name": "results.dataHashes.randomAdjacencySha256 一致",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "failures": [],
+  "recomputedMetrics": {
+    "Full-DKT": {
+      "n": 36967,
+      "AUC": 0.7388,
+      "LogLoss": 0.542,
+      "Brier": 0.1813,
+      "Accuracy": 0.7336,
+      "F1": 0.8217,
+      "positiveRate": 0.6771
+    },
+    "GCN-DKT": {
+      "n": 36967,
+      "AUC": 0.7398,
+      "LogLoss": 0.5406,
+      "Brier": 0.181,
+      "Accuracy": 0.7321,
+      "F1": 0.8197,
+      "positiveRate": 0.6771
+    },
+    "RandomGraph-DKT": {
+      "n": 36967,
+      "AUC": 0.7383,
+      "LogLoss": 0.5419,
+      "Brier": 0.1815,
+      "Accuracy": 0.7307,
+      "F1": 0.8199,
+      "positiveRate": 0.6771
+    },
+    "Larger-DKT": {
+      "n": 36967,
+      "AUC": 0.7385,
+      "LogLoss": 0.5425,
+      "Brier": 0.1818,
+      "Accuracy": 0.7304,
+      "F1": 0.82,
+      "positiveRate": 0.6771
+    },
+    "SelfLoop-DKT": {
+      "n": 36967,
+      "AUC": 0.7392,
+      "LogLoss": 0.5409,
+      "Brier": 0.1811,
+      "Accuracy": 0.7306,
+      "F1": 0.8191,
+      "positiveRate": 0.6771
+    }
+  },
+  "recomputedCalibration": {
+    "Full-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 568,
+        "meanPredicted": 0.0594,
+        "observedRate": 0.0581
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 815,
+        "meanPredicted": 0.1487,
+        "observedRate": 0.1656
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 1083,
+        "meanPredicted": 0.2519,
+        "observedRate": 0.2899
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1729,
+        "meanPredicted": 0.355,
+        "observedRate": 0.391
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 2580,
+        "meanPredicted": 0.4531,
+        "observedRate": 0.4593
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 3678,
+        "meanPredicted": 0.5526,
+        "observedRate": 0.5642
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 5804,
+        "meanPredicted": 0.6534,
+        "observedRate": 0.6466
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 8709,
+        "meanPredicted": 0.7534,
+        "observedRate": 0.7576
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 9148,
+        "meanPredicted": 0.8472,
+        "observedRate": 0.8366
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 2853,
+        "meanPredicted": 0.9314,
+        "observedRate": 0.9145
+      }
+    ],
+    "GCN-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 446,
+        "meanPredicted": 0.0575,
+        "observedRate": 0.0291
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 729,
+        "meanPredicted": 0.1482,
+        "observedRate": 0.144
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 1157,
+        "meanPredicted": 0.252,
+        "observedRate": 0.274
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1908,
+        "meanPredicted": 0.3555,
+        "observedRate": 0.391
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 2842,
+        "meanPredicted": 0.4537,
+        "observedRate": 0.4726
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 3713,
+        "meanPredicted": 0.5526,
+        "observedRate": 0.5508
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 5737,
+        "meanPredicted": 0.6552,
+        "observedRate": 0.6627
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 9370,
+        "meanPredicted": 0.7525,
+        "observedRate": 0.7597
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 8908,
+        "meanPredicted": 0.8438,
+        "observedRate": 0.8455
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 2157,
+        "meanPredicted": 0.9304,
+        "observedRate": 0.9318
+      }
+    ],
+    "RandomGraph-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 507,
+        "meanPredicted": 0.0582,
+        "observedRate": 0.0414
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 796,
+        "meanPredicted": 0.1522,
+        "observedRate": 0.152
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 1038,
+        "meanPredicted": 0.254,
+        "observedRate": 0.2909
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1724,
+        "meanPredicted": 0.3543,
+        "observedRate": 0.3921
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 2668,
+        "meanPredicted": 0.4529,
+        "observedRate": 0.4708
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 3619,
+        "meanPredicted": 0.5526,
+        "observedRate": 0.5424
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 5853,
+        "meanPredicted": 0.6547,
+        "observedRate": 0.6535
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 8909,
+        "meanPredicted": 0.7512,
+        "observedRate": 0.7523
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 9372,
+        "meanPredicted": 0.8471,
+        "observedRate": 0.8407
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 2481,
+        "meanPredicted": 0.9298,
+        "observedRate": 0.9214
+      }
+    ],
+    "Larger-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 665,
+        "meanPredicted": 0.0596,
+        "observedRate": 0.0361
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 639,
+        "meanPredicted": 0.1521,
+        "observedRate": 0.1941
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 1042,
+        "meanPredicted": 0.2534,
+        "observedRate": 0.3013
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1648,
+        "meanPredicted": 0.3538,
+        "observedRate": 0.3871
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 2623,
+        "meanPredicted": 0.4536,
+        "observedRate": 0.4666
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 3738,
+        "meanPredicted": 0.5532,
+        "observedRate": 0.5463
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 5551,
+        "meanPredicted": 0.6534,
+        "observedRate": 0.6444
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 8260,
+        "meanPredicted": 0.7525,
+        "observedRate": 0.7453
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 9562,
+        "meanPredicted": 0.8483,
+        "observedRate": 0.8343
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 3239,
+        "meanPredicted": 0.9315,
+        "observedRate": 0.912
+      }
+    ],
+    "SelfLoop-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 471,
+        "meanPredicted": 0.0579,
+        "observedRate": 0.0403
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 731,
+        "meanPredicted": 0.1483,
+        "observedRate": 0.1436
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 1087,
+        "meanPredicted": 0.2516,
+        "observedRate": 0.2751
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1866,
+        "meanPredicted": 0.3549,
+        "observedRate": 0.3885
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 2791,
+        "meanPredicted": 0.4526,
+        "observedRate": 0.479
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 3811,
+        "meanPredicted": 0.5521,
+        "observedRate": 0.5442
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 5670,
+        "meanPredicted": 0.655,
+        "observedRate": 0.6631
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 9504,
+        "meanPredicted": 0.7526,
+        "observedRate": 0.7566
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 8880,
+        "meanPredicted": 0.8427,
+        "observedRate": 0.845
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 2156,
+        "meanPredicted": 0.9299,
+        "observedRate": 0.9355
+      }
+    ]
+  },
+  "recomputedComparisons": [
+    {
+      "comparison": "GCN-DKT − Full-DKT",
+      "dAUC": 0.0010068396555563686,
+      "dAUCCI": [
+        -0.0009816520113502447,
+        0.0030953040981611057
+      ],
+      "dLogLoss": -0.0014409365177561195,
+      "dLogLossCI": [
+        -0.003599481297195239,
+        0.0004582572740524371
+      ],
+      "ciAvailable": true,
+      "aucExcludesZero": false,
+      "aucCISupportsGCN": false,
+      "logLossExcludesZero": false,
+      "logLossCISupportsGCN": false,
+      "dAUCValidDraws": 2000,
+      "dLogLossValidDraws": 2000,
+      "units": 589
+    },
+    {
+      "comparison": "GCN-DKT − RandomGraph-DKT",
+      "dAUC": 0.0015621965893658496,
+      "dAUCCI": [
+        0.00026106310883184937,
+        0.0030043614693818386
+      ],
+      "dLogLoss": -0.001355891562970557,
+      "dLogLossCI": [
+        -0.002534293349864572,
+        -0.000304878469598298
+      ],
+      "ciAvailable": true,
+      "aucExcludesZero": true,
+      "aucCISupportsGCN": true,
+      "logLossExcludesZero": true,
+      "logLossCISupportsGCN": true,
+      "dAUCValidDraws": 2000,
+      "dLogLossValidDraws": 2000,
+      "units": 589
+    },
+    {
+      "comparison": "GCN-DKT − SelfLoop-DKT",
+      "dAUC": 0.0005779579300220217,
+      "dAUCCI": [
+        -0.00012109560115446948,
+        0.0012509878814832868
+      ],
+      "dLogLoss": -0.0002938816250770415,
+      "dLogLossCI": [
+        -0.0007920407270759711,
+        0.00019333782427757287
+      ],
+      "ciAvailable": true,
+      "aucExcludesZero": false,
+      "aucCISupportsGCN": false,
+      "logLossExcludesZero": false,
+      "logLossCISupportsGCN": false,
+      "dAUCValidDraws": 2000,
+      "dLogLossValidDraws": 2000,
+      "units": 589
+    },
+    {
+      "comparison": "GCN-DKT − Larger-DKT",
+      "dAUC": 0.001355223008723816,
+      "dAUCCI": [
+        -0.001416772185736881,
+        0.004199991141869737
+      ],
+      "dLogLoss": -0.001988349956182911,
+      "dLogLossCI": [
+        -0.004625456465305214,
+        0.0003742489279583479
+      ],
+      "ciAvailable": true,
+      "aucExcludesZero": false,
+      "aucCISupportsGCN": false,
+      "logLossExcludesZero": false,
+      "logLossCISupportsGCN": false,
+      "dAUCValidDraws": 2000,
+      "dLogLossValidDraws": 2000,
+      "units": 589
+    }
+  ],
+  "implementation": {
+    "currentImplementationHash": "sha256:ebbcb582225965b1fee21b15a0de9ab1e62f52a33a708ea1c7ec28b8241b6578",
+    "statisticsImplementationHash": "sha256:ebbcb582225965b1fee21b15a0de9ab1e62f52a33a708ea1c7ec28b8241b6578",
+    "trainingImplementationHash": "sha256:745492f347b7764fb4fd1eb6e4142ee744afafba9f81dbe055d8f072fe20593c",
+    "revisionPresent": true
+  },
+  "passed": true,
+  "note": "审计不加载训练 checkpoint 与任何模型；指标/校准/CI/标志/有效抽样数全部从落盘 predictions.jsonl 与 targets.json 独立重算，并绑定 results.json 哈希供聚合器校验。"
+}

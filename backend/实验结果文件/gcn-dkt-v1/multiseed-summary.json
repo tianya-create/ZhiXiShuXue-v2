@@ -1,0 +1,1116 @@
+{
+  "stage": "E-aggregate",
+  "protocolVersion": "assist2009-gcn-dkt-v1",
+  "configSha256": "sha256:65382df7dc7f1c74cf23472a0d87c08ce74bd883efcfe5f2c5649dca333fda35",
+  "generatedAt": "2026-11-02T02:52:40.922Z",
+  "nodeVersion": "v22.22.2",
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "seedsComplete": true,
+  "note": "五种子齐全。",
+  "perSeed": {
+    "Full-DKT": [
+      {
+        "seed": 42,
+        "AUC": 0.7388,
+        "LogLoss": 0.542,
+        "Brier": 0.1813,
+        "Accuracy": 0.7336,
+        "bestValLogLoss": 0.546306,
+        "epochsRun": 50,
+        "fitSeconds": 662.3,
+        "targetCount": 36967
+      },
+      {
+        "seed": 43,
+        "AUC": 0.7485,
+        "LogLoss": 0.5402,
+        "Brier": 0.1806,
+        "Accuracy": 0.7339,
+        "bestValLogLoss": 0.534908,
+        "epochsRun": 45,
+        "fitSeconds": 784.9,
+        "targetCount": 34096
+      },
+      {
+        "seed": 44,
+        "AUC": 0.7396,
+        "LogLoss": 0.5326,
+        "Brier": 0.177,
+        "Accuracy": 0.7429,
+        "bestValLogLoss": 0.540668,
+        "epochsRun": 40,
+        "fitSeconds": 616.3,
+        "targetCount": 37177
+      },
+      {
+        "seed": 45,
+        "AUC": 0.744,
+        "LogLoss": 0.5423,
+        "Brier": 0.1816,
+        "Accuracy": 0.7309,
+        "bestValLogLoss": 0.549737,
+        "epochsRun": 45,
+        "fitSeconds": 1033.2,
+        "targetCount": 30832
+      },
+      {
+        "seed": 46,
+        "AUC": 0.7513,
+        "LogLoss": 0.5351,
+        "Brier": 0.178,
+        "Accuracy": 0.7396,
+        "bestValLogLoss": 0.542777,
+        "epochsRun": 45,
+        "fitSeconds": 530.9,
+        "targetCount": 31227
+      }
+    ],
+    "GCN-DKT": [
+      {
+        "seed": 42,
+        "AUC": 0.7398,
+        "LogLoss": 0.5406,
+        "Brier": 0.181,
+        "Accuracy": 0.7321,
+        "bestValLogLoss": 0.54811,
+        "epochsRun": 35,
+        "fitSeconds": 1082.5,
+        "targetCount": 36967
+      },
+      {
+        "seed": 43,
+        "AUC": 0.7467,
+        "LogLoss": 0.5415,
+        "Brier": 0.181,
+        "Accuracy": 0.7323,
+        "bestValLogLoss": 0.53514,
+        "epochsRun": 41,
+        "fitSeconds": 907.4,
+        "targetCount": 34096
+      },
+      {
+        "seed": 44,
+        "AUC": 0.7385,
+        "LogLoss": 0.533,
+        "Brier": 0.1772,
+        "Accuracy": 0.7421,
+        "bestValLogLoss": 0.539786,
+        "epochsRun": 47,
+        "fitSeconds": 946,
+        "targetCount": 37177
+      },
+      {
+        "seed": 45,
+        "AUC": 0.7422,
+        "LogLoss": 0.5431,
+        "Brier": 0.182,
+        "Accuracy": 0.7304,
+        "bestValLogLoss": 0.549848,
+        "epochsRun": 40,
+        "fitSeconds": 1176.1,
+        "targetCount": 30832
+      },
+      {
+        "seed": 46,
+        "AUC": 0.7511,
+        "LogLoss": 0.5348,
+        "Brier": 0.1778,
+        "Accuracy": 0.7394,
+        "bestValLogLoss": 0.542852,
+        "epochsRun": 44,
+        "fitSeconds": 653.5,
+        "targetCount": 31227
+      }
+    ],
+    "RandomGraph-DKT": [
+      {
+        "seed": 42,
+        "AUC": 0.7383,
+        "LogLoss": 0.5419,
+        "Brier": 0.1815,
+        "Accuracy": 0.7307,
+        "bestValLogLoss": 0.546832,
+        "epochsRun": 41,
+        "fitSeconds": 1157.4,
+        "targetCount": 36967
+      },
+      {
+        "seed": 43,
+        "AUC": 0.7478,
+        "LogLoss": 0.5406,
+        "Brier": 0.1806,
+        "Accuracy": 0.7358,
+        "bestValLogLoss": 0.534798,
+        "epochsRun": 41,
+        "fitSeconds": 785.4,
+        "targetCount": 34096
+      },
+      {
+        "seed": 44,
+        "AUC": 0.7387,
+        "LogLoss": 0.5332,
+        "Brier": 0.1774,
+        "Accuracy": 0.7426,
+        "bestValLogLoss": 0.541378,
+        "epochsRun": 36,
+        "fitSeconds": 681.8,
+        "targetCount": 37177
+      },
+      {
+        "seed": 45,
+        "AUC": 0.7434,
+        "LogLoss": 0.5429,
+        "Brier": 0.1818,
+        "Accuracy": 0.7312,
+        "bestValLogLoss": 0.549707,
+        "epochsRun": 45,
+        "fitSeconds": 650.4,
+        "targetCount": 30832
+      },
+      {
+        "seed": 46,
+        "AUC": 0.7504,
+        "LogLoss": 0.5352,
+        "Brier": 0.1779,
+        "Accuracy": 0.7408,
+        "bestValLogLoss": 0.54288,
+        "epochsRun": 43,
+        "fitSeconds": 621.3,
+        "targetCount": 31227
+      }
+    ],
+    "Larger-DKT": [
+      {
+        "seed": 42,
+        "AUC": 0.7385,
+        "LogLoss": 0.5425,
+        "Brier": 0.1818,
+        "Accuracy": 0.7304,
+        "bestValLogLoss": 0.545272,
+        "epochsRun": 50,
+        "fitSeconds": 1158.8,
+        "targetCount": 36967
+      },
+      {
+        "seed": 43,
+        "AUC": 0.7458,
+        "LogLoss": 0.5421,
+        "Brier": 0.1814,
+        "Accuracy": 0.7322,
+        "bestValLogLoss": 0.537119,
+        "epochsRun": 35,
+        "fitSeconds": 620.1,
+        "targetCount": 34096
+      },
+      {
+        "seed": 44,
+        "AUC": 0.7379,
+        "LogLoss": 0.5338,
+        "Brier": 0.1775,
+        "Accuracy": 0.7417,
+        "bestValLogLoss": 0.540521,
+        "epochsRun": 30,
+        "fitSeconds": 552.1,
+        "targetCount": 37177
+      },
+      {
+        "seed": 45,
+        "AUC": 0.7435,
+        "LogLoss": 0.5427,
+        "Brier": 0.1815,
+        "Accuracy": 0.7317,
+        "bestValLogLoss": 0.549325,
+        "epochsRun": 50,
+        "fitSeconds": 646.2,
+        "targetCount": 30832
+      },
+      {
+        "seed": 46,
+        "AUC": 0.7505,
+        "LogLoss": 0.5342,
+        "Brier": 0.1779,
+        "Accuracy": 0.7402,
+        "bestValLogLoss": 0.542583,
+        "epochsRun": 35,
+        "fitSeconds": 722.2,
+        "targetCount": 31227
+      }
+    ],
+    "SelfLoop-DKT": [
+      {
+        "seed": 42,
+        "AUC": 0.7392,
+        "LogLoss": 0.5409,
+        "Brier": 0.1811,
+        "Accuracy": 0.7306,
+        "bestValLogLoss": 0.547952,
+        "epochsRun": 35,
+        "fitSeconds": 980.2,
+        "targetCount": 36967
+      },
+      {
+        "seed": 43,
+        "AUC": 0.7466,
+        "LogLoss": 0.5414,
+        "Brier": 0.181,
+        "Accuracy": 0.7331,
+        "bestValLogLoss": 0.535232,
+        "epochsRun": 41,
+        "fitSeconds": 780.2,
+        "targetCount": 34096
+      },
+      {
+        "seed": 44,
+        "AUC": 0.7387,
+        "LogLoss": 0.5335,
+        "Brier": 0.1774,
+        "Accuracy": 0.7412,
+        "bestValLogLoss": 0.540276,
+        "epochsRun": 50,
+        "fitSeconds": 926.4,
+        "targetCount": 37177
+      },
+      {
+        "seed": 45,
+        "AUC": 0.7432,
+        "LogLoss": 0.5437,
+        "Brier": 0.1821,
+        "Accuracy": 0.7293,
+        "bestValLogLoss": 0.5503,
+        "epochsRun": 45,
+        "fitSeconds": 626.8,
+        "targetCount": 30832
+      },
+      {
+        "seed": 46,
+        "AUC": 0.7505,
+        "LogLoss": 0.5355,
+        "Brier": 0.1779,
+        "Accuracy": 0.7409,
+        "bestValLogLoss": 0.54243,
+        "epochsRun": 46,
+        "fitSeconds": 2227.2,
+        "targetCount": 31227
+      }
+    ]
+  },
+  "perSeedExact": {
+    "Full-DKT": [
+      {
+        "seed": 42,
+        "AUC": 0.7388159643837887,
+        "LogLoss": 0.5419986338679765,
+        "Brier": 0.18134935278741923,
+        "Accuracy": 0.7336272892038845
+      },
+      {
+        "seed": 43,
+        "AUC": 0.7485068339687947,
+        "LogLoss": 0.540221228693024,
+        "Brier": 0.18058480736012011,
+        "Accuracy": 0.7338984045049273
+      },
+      {
+        "seed": 44,
+        "AUC": 0.7395706033166888,
+        "LogLoss": 0.5325739638719138,
+        "Brier": 0.17703391805134358,
+        "Accuracy": 0.7429055598891788
+      },
+      {
+        "seed": 45,
+        "AUC": 0.7439566503474733,
+        "LogLoss": 0.5423343379741014,
+        "Brier": 0.18161108418529104,
+        "Accuracy": 0.7308964711987546
+      },
+      {
+        "seed": 46,
+        "AUC": 0.751251020685188,
+        "LogLoss": 0.5351440811895982,
+        "Brier": 0.17801252923209337,
+        "Accuracy": 0.7396163576392225
+      }
+    ],
+    "GCN-DKT": [
+      {
+        "seed": 42,
+        "AUC": 0.7398228040393451,
+        "LogLoss": 0.5405576973502204,
+        "Brier": 0.18098725842650568,
+        "Accuracy": 0.7321394757486407
+      },
+      {
+        "seed": 43,
+        "AUC": 0.7467354820798823,
+        "LogLoss": 0.5414790978170213,
+        "Brier": 0.18100127458326004,
+        "Accuracy": 0.7322853120600658
+      },
+      {
+        "seed": 44,
+        "AUC": 0.7385423216691183,
+        "LogLoss": 0.5329804599066639,
+        "Brier": 0.17724829382685386,
+        "Accuracy": 0.7420717110041154
+      },
+      {
+        "seed": 45,
+        "AUC": 0.7422278081925779,
+        "LogLoss": 0.543117894379892,
+        "Brier": 0.18195985600479778,
+        "Accuracy": 0.7304099636741048
+      },
+      {
+        "seed": 46,
+        "AUC": 0.751061878144566,
+        "LogLoss": 0.5348217535655481,
+        "Brier": 0.1778343010005797,
+        "Accuracy": 0.7393921926537932
+      }
+    ],
+    "RandomGraph-DKT": [
+      {
+        "seed": 42,
+        "AUC": 0.7382606074499792,
+        "LogLoss": 0.541913588913191,
+        "Brier": 0.1815223915765564,
+        "Accuracy": 0.7307057646008602
+      },
+      {
+        "seed": 43,
+        "AUC": 0.7478450229372527,
+        "LogLoss": 0.5405817544014192,
+        "Brier": 0.18060182140904793,
+        "Accuracy": 0.7358047864852182
+      },
+      {
+        "seed": 44,
+        "AUC": 0.7387262576615657,
+        "LogLoss": 0.5331709431165054,
+        "Brier": 0.17738633891975455,
+        "Accuracy": 0.7425827796756059
+      },
+      {
+        "seed": 45,
+        "AUC": 0.7433925567623093,
+        "LogLoss": 0.5428868985336,
+        "Brier": 0.18179640564491673,
+        "Accuracy": 0.731220809548521
+      },
+      {
+        "seed": 46,
+        "AUC": 0.750441282923573,
+        "LogLoss": 0.5351500667715118,
+        "Brier": 0.17790577830117463,
+        "Accuracy": 0.7407692061357158
+      }
+    ],
+    "Larger-DKT": [
+      {
+        "seed": 42,
+        "AUC": 0.7384675810306213,
+        "LogLoss": 0.5425460473064033,
+        "Brier": 0.18179968935484525,
+        "Accuracy": 0.7303811507560798
+      },
+      {
+        "seed": 43,
+        "AUC": 0.7457523925921552,
+        "LogLoss": 0.5420704046545306,
+        "Brier": 0.18136903667613036,
+        "Accuracy": 0.7322266541529798
+      },
+      {
+        "seed": 44,
+        "AUC": 0.7378836888387907,
+        "LogLoss": 0.5338030557566072,
+        "Brier": 0.17752046406020136,
+        "Accuracy": 0.7417220324394115
+      },
+      {
+        "seed": 45,
+        "AUC": 0.7435144416712987,
+        "LogLoss": 0.5426698508530585,
+        "Brier": 0.1815030920524617,
+        "Accuracy": 0.7317073170731707
+      },
+      {
+        "seed": 46,
+        "AUC": 0.7504855027196152,
+        "LogLoss": 0.534248822557992,
+        "Brier": 0.17786678538799347,
+        "Accuracy": 0.7401927818874692
+      }
+    ],
+    "SelfLoop-DKT": [
+      {
+        "seed": 42,
+        "AUC": 0.7392448461093231,
+        "LogLoss": 0.5408515789752975,
+        "Brier": 0.18114838396796826,
+        "Accuracy": 0.7305705088322016
+      },
+      {
+        "seed": 43,
+        "AUC": 0.7466335102844129,
+        "LogLoss": 0.5414048508644536,
+        "Brier": 0.1809722334998104,
+        "Accuracy": 0.7331358517128109
+      },
+      {
+        "seed": 44,
+        "AUC": 0.7386832701642922,
+        "LogLoss": 0.5335354637815423,
+        "Brier": 0.17743569523146904,
+        "Accuracy": 0.7411571670656589
+      },
+      {
+        "seed": 45,
+        "AUC": 0.7431798422099231,
+        "LogLoss": 0.5436543404974875,
+        "Brier": 0.18213294057860988,
+        "Accuracy": 0.7293396471198754
+      },
+      {
+        "seed": 46,
+        "AUC": 0.7505156640105762,
+        "LogLoss": 0.5354573345948761,
+        "Brier": 0.17792528925313744,
+        "Accuracy": 0.7408973004131041
+      }
+    ]
+  },
+  "mainTableInputRule": "主表 mean/populationStd 由各种子「未舍入指标」（从 predictions.jsonl 重算）聚合；perSeed 为 results.json 的 4 位记录，仅作对照",
+  "perModelStats": {
+    "Full-DKT": {
+      "AUC": {
+        "meanExact": 0.7444202145403866,
+        "populationStdExact": 0.004868297680713328,
+        "mean": 0.74442,
+        "populationStd": 0.004868,
+        "perSeedExact": [
+          0.7388159643837887,
+          0.7485068339687947,
+          0.7395706033166888,
+          0.7439566503474733,
+          0.751251020685188
+        ],
+        "meanFromStoredRounded": 0.74444,
+        "populationStdFromStoredRounded": 0.004878,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "LogLoss": {
+        "meanExact": 0.5384544491193228,
+        "populationStdExact": 0.003905763323480221,
+        "mean": 0.538454,
+        "populationStd": 0.003906,
+        "perSeedExact": [
+          0.5419986338679765,
+          0.540221228693024,
+          0.5325739638719138,
+          0.5423343379741014,
+          0.5351440811895982
+        ],
+        "meanFromStoredRounded": 0.53844,
+        "populationStdFromStoredRounded": 0.003897,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "Brier": {
+        "meanExact": 0.17971833832325346,
+        "populationStdExact": 0.0018498302908187048,
+        "mean": 0.179718,
+        "populationStd": 0.00185,
+        "perSeedExact": [
+          0.18134935278741923,
+          0.18058480736012011,
+          0.17703391805134358,
+          0.18161108418529104,
+          0.17801252923209337
+        ],
+        "meanFromStoredRounded": 0.1797,
+        "populationStdFromStoredRounded": 0.001853,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "Accuracy": {
+        "meanExact": 0.7361888164871936,
+        "populationStdExact": 0.004397249322034689,
+        "mean": 0.736189,
+        "populationStd": 0.004397,
+        "perSeedExact": [
+          0.7336272892038845,
+          0.7338984045049273,
+          0.7429055598891788,
+          0.7308964711987546,
+          0.7396163576392225
+        ],
+        "meanFromStoredRounded": 0.73618,
+        "populationStdFromStoredRounded": 0.004395,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      }
+    },
+    "GCN-DKT": {
+      "AUC": {
+        "meanExact": 0.743678058825098,
+        "populationStdExact": 0.004630564483882102,
+        "mean": 0.743678,
+        "populationStd": 0.004631,
+        "perSeedExact": [
+          0.7398228040393451,
+          0.7467354820798823,
+          0.7385423216691183,
+          0.7422278081925779,
+          0.751061878144566
+        ],
+        "meanFromStoredRounded": 0.74366,
+        "populationStdFromStoredRounded": 0.004653,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "LogLoss": {
+        "meanExact": 0.5385913806038691,
+        "populationStdExact": 0.0039594736592888004,
+        "mean": 0.538591,
+        "populationStd": 0.003959,
+        "perSeedExact": [
+          0.5405576973502204,
+          0.5414790978170213,
+          0.5329804599066639,
+          0.543117894379892,
+          0.5348217535655481
+        ],
+        "meanFromStoredRounded": 0.5386,
+        "populationStdFromStoredRounded": 0.003961,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "Brier": {
+        "meanExact": 0.17980619676839943,
+        "populationStdExact": 0.001891697973137224,
+        "mean": 0.179806,
+        "populationStd": 0.001892,
+        "perSeedExact": [
+          0.18098725842650568,
+          0.18100127458326004,
+          0.17724829382685386,
+          0.18195985600479778,
+          0.1778343010005797
+        ],
+        "meanFromStoredRounded": 0.1798,
+        "populationStdFromStoredRounded": 0.001922,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "Accuracy": {
+        "meanExact": 0.7352597310281439,
+        "populationStdExact": 0.004595295744035079,
+        "mean": 0.73526,
+        "populationStd": 0.004595,
+        "perSeedExact": [
+          0.7321394757486407,
+          0.7322853120600658,
+          0.7420717110041154,
+          0.7304099636741048,
+          0.7393921926537932
+        ],
+        "meanFromStoredRounded": 0.73526,
+        "populationStdFromStoredRounded": 0.004611,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      }
+    },
+    "RandomGraph-DKT": {
+      "AUC": {
+        "meanExact": 0.7437331455469359,
+        "populationStdExact": 0.004838186498603728,
+        "mean": 0.743733,
+        "populationStd": 0.004838,
+        "perSeedExact": [
+          0.7382606074499792,
+          0.7478450229372527,
+          0.7387262576615657,
+          0.7433925567623093,
+          0.750441282923573
+        ],
+        "meanFromStoredRounded": 0.74372,
+        "populationStdFromStoredRounded": 0.004816,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "LogLoss": {
+        "meanExact": 0.5387406503472455,
+        "populationStdExact": 0.0038616707874932613,
+        "mean": 0.538741,
+        "populationStd": 0.003862,
+        "perSeedExact": [
+          0.541913588913191,
+          0.5405817544014192,
+          0.5331709431165054,
+          0.5428868985336,
+          0.5351500667715118
+        ],
+        "meanFromStoredRounded": 0.53876,
+        "populationStdFromStoredRounded": 0.003846,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "Brier": {
+        "meanExact": 0.17984254717029005,
+        "populationStdExact": 0.0018439072731647555,
+        "mean": 0.179843,
+        "populationStd": 0.001844,
+        "perSeedExact": [
+          0.1815223915765564,
+          0.18060182140904793,
+          0.17738633891975455,
+          0.18179640564491673,
+          0.17790577830117463
+        ],
+        "meanFromStoredRounded": 0.17984,
+        "populationStdFromStoredRounded": 0.001838,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "Accuracy": {
+        "meanExact": 0.7362166692891843,
+        "populationStdExact": 0.004832210377612061,
+        "mean": 0.736217,
+        "populationStd": 0.004832,
+        "perSeedExact": [
+          0.7307057646008602,
+          0.7358047864852182,
+          0.7425827796756059,
+          0.731220809548521,
+          0.7407692061357158
+        ],
+        "meanFromStoredRounded": 0.73622,
+        "populationStdFromStoredRounded": 0.004848,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      }
+    },
+    "Larger-DKT": {
+      "AUC": {
+        "meanExact": 0.7432207213704962,
+        "populationStdExact": 0.004697849256313283,
+        "mean": 0.743221,
+        "populationStd": 0.004698,
+        "perSeedExact": [
+          0.7384675810306213,
+          0.7457523925921552,
+          0.7378836888387907,
+          0.7435144416712987,
+          0.7504855027196152
+        ],
+        "meanFromStoredRounded": 0.74324,
+        "populationStdFromStoredRounded": 0.004697,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "LogLoss": {
+        "meanExact": 0.5390676362257183,
+        "populationStdExact": 0.004123801275152319,
+        "mean": 0.539068,
+        "populationStd": 0.004124,
+        "perSeedExact": [
+          0.5425460473064033,
+          0.5420704046545306,
+          0.5338030557566072,
+          0.5426698508530585,
+          0.534248822557992
+        ],
+        "meanFromStoredRounded": 0.53906,
+        "populationStdFromStoredRounded": 0.004138,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "Brier": {
+        "meanExact": 0.18001181350632645,
+        "populationStdExact": 0.0019010751787175376,
+        "mean": 0.180012,
+        "populationStd": 0.001901,
+        "perSeedExact": [
+          0.18179968935484525,
+          0.18136903667613036,
+          0.17752046406020136,
+          0.1815030920524617,
+          0.17786678538799347
+        ],
+        "meanFromStoredRounded": 0.18002,
+        "populationStdFromStoredRounded": 0.001903,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "Accuracy": {
+        "meanExact": 0.7352459872618221,
+        "populationStdExact": 0.0047268410500949515,
+        "mean": 0.735246,
+        "populationStd": 0.004727,
+        "perSeedExact": [
+          0.7303811507560798,
+          0.7322266541529798,
+          0.7417220324394115,
+          0.7317073170731707,
+          0.7401927818874692
+        ],
+        "meanFromStoredRounded": 0.73524,
+        "populationStdFromStoredRounded": 0.004723,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      }
+    },
+    "SelfLoop-DKT": {
+      "AUC": {
+        "meanExact": 0.7436514265557055,
+        "populationStdExact": 0.004479587038043559,
+        "mean": 0.743651,
+        "populationStd": 0.00448,
+        "perSeedExact": [
+          0.7392448461093231,
+          0.7466335102844129,
+          0.7386832701642922,
+          0.7431798422099231,
+          0.7505156640105762
+        ],
+        "meanFromStoredRounded": 0.74364,
+        "populationStdFromStoredRounded": 0.004475,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "LogLoss": {
+        "meanExact": 0.5389807137427314,
+        "populationStdExact": 0.0038284281971973765,
+        "mean": 0.538981,
+        "populationStd": 0.003828,
+        "perSeedExact": [
+          0.5408515789752975,
+          0.5414048508644536,
+          0.5335354637815423,
+          0.5436543404974875,
+          0.5354573345948761
+        ],
+        "meanFromStoredRounded": 0.539,
+        "populationStdFromStoredRounded": 0.003846,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "Brier": {
+        "meanExact": 0.17992290850619902,
+        "populationStdExact": 0.0018795652350953919,
+        "mean": 0.179923,
+        "populationStd": 0.00188,
+        "perSeedExact": [
+          0.18114838396796826,
+          0.1809722334998104,
+          0.17743569523146904,
+          0.18213294057860988,
+          0.17792528925313744
+        ],
+        "meanFromStoredRounded": 0.1799,
+        "populationStdFromStoredRounded": 0.001884,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      },
+      "Accuracy": {
+        "meanExact": 0.7350200950287302,
+        "populationStdExact": 0.005056122525329117,
+        "mean": 0.73502,
+        "populationStd": 0.005056,
+        "perSeedExact": [
+          0.7305705088322016,
+          0.7331358517128109,
+          0.7411571670656589,
+          0.7293396471198754,
+          0.7408973004131041
+        ],
+        "meanFromStoredRounded": 0.73502,
+        "populationStdFromStoredRounded": 0.005074,
+        "inputRule": "各种子指标从 predictions.jsonl 以 evaluateMetricsPrecise 重算（未舍入），非 results.json 的 4 位展示值"
+      }
+    }
+  },
+  "comparisons": {
+    "GCN-DKT − Full-DKT": {
+      "perSeed": [
+        {
+          "seed": 42,
+          "dAUC": 0.0010068396555563686,
+          "dLogLoss": -0.0014409365177561195,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 43,
+          "dAUC": -0.0017713518889124202,
+          "dLogLoss": 0.0012578691239972795,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 44,
+          "dAUC": -0.001028281647570517,
+          "dLogLoss": 0.0004064960347500701,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 45,
+          "dAUC": -0.001728842154895327,
+          "dLogLoss": 0.0007835564057906419,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 46,
+          "dAUC": -0.00018914254062196711,
+          "dLogLoss": -0.000322327624050156,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        }
+      ],
+      "dAUCMean": -0.0007421557152887725,
+      "dAUCPopulationStd": 0.0010468496856399113,
+      "dAUCPositiveCount": 1,
+      "aucCISupportCount": 0,
+      "dLogLossMean": 0.00013693148454634317,
+      "dLogLossPopulationStd": 0.0009431729839809224,
+      "dLogLossNegativeCount": 2,
+      "logLossCISupportCount": 0,
+      "ciDegenerateSeeds": []
+    },
+    "GCN-DKT − RandomGraph-DKT": {
+      "perSeed": [
+        {
+          "seed": 42,
+          "dAUC": 0.0015621965893658496,
+          "dLogLoss": -0.001355891562970557,
+          "aucCISupportsGCN": true,
+          "logLossCISupportsGCN": true,
+          "ciAvailable": true
+        },
+        {
+          "seed": 43,
+          "dAUC": -0.0011095408573704724,
+          "dLogLoss": 0.0008973434156021032,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 44,
+          "dAUC": -0.0001839359924474815,
+          "dLogLoss": -0.00019048320984149658,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 45,
+          "dAUC": -0.0011647485697313664,
+          "dLogLoss": 0.00023099584629204806,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 46,
+          "dAUC": 0.0006205952209930032,
+          "dLogLoss": -0.00032831320596371505,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        }
+      ],
+      "dAUCMean": -0.00005508672183809349,
+      "dAUCPopulationStd": 0.0010423028803293807,
+      "dAUCPositiveCount": 2,
+      "aucCISupportCount": 1,
+      "dLogLossMean": -0.0001492697433763235,
+      "dLogLossPopulationStd": 0.0007388764917179181,
+      "dLogLossNegativeCount": 3,
+      "logLossCISupportCount": 1,
+      "ciDegenerateSeeds": []
+    },
+    "GCN-DKT − SelfLoop-DKT": {
+      "perSeed": [
+        {
+          "seed": 42,
+          "dAUC": 0.0005779579300220217,
+          "dLogLoss": -0.0002938816250770415,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 43,
+          "dAUC": 0.00010197179546933555,
+          "dLogLoss": 0.00007424695256774694,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 44,
+          "dAUC": -0.000140948495173987,
+          "dLogLoss": -0.0005550038748783903,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 45,
+          "dAUC": -0.0009520340173451158,
+          "dLogLoss": -0.0005364461175955126,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 46,
+          "dAUC": 0.0005462141339898086,
+          "dLogLoss": -0.0006355810293280362,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        }
+      ],
+      "dAUCMean": 0.000026632269392412588,
+      "dAUCPopulationStd": 0.0005595484529021519,
+      "dAUCPositiveCount": 3,
+      "aucCISupportCount": 0,
+      "dLogLossMean": -0.00038933313886224674,
+      "dLogLossPopulationStd": 0.00025835809934928887,
+      "dLogLossNegativeCount": 4,
+      "logLossCISupportCount": 0,
+      "ciDegenerateSeeds": []
+    },
+    "GCN-DKT − Larger-DKT": {
+      "perSeed": [
+        {
+          "seed": 42,
+          "dAUC": 0.001355223008723816,
+          "dLogLoss": -0.001988349956182911,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 43,
+          "dAUC": 0.0009830894877270735,
+          "dLogLoss": -0.0005913068375092978,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 44,
+          "dAUC": 0.0006586328303275213,
+          "dLogLoss": -0.000822595849943375,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 45,
+          "dAUC": -0.0012866334787207112,
+          "dLogLoss": 0.0004480435268334748,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        },
+        {
+          "seed": 46,
+          "dAUC": 0.0005763754249508146,
+          "dLogLoss": 0.0005729310075560656,
+          "aucCISupportsGCN": false,
+          "logLossCISupportsGCN": false,
+          "ciAvailable": true
+        }
+      ],
+      "dAUCMean": 0.00045733745460170284,
+      "dAUCPopulationStd": 0.0009141923377039999,
+      "dAUCPositiveCount": 4,
+      "aucCISupportCount": 0,
+      "dLogLossMean": -0.00047625562184920865,
+      "dLogLossPopulationStd": 0.0009353864561050261,
+      "dLogLossNegativeCount": 3,
+      "logLossCISupportCount": 0,
+      "ciDegenerateSeeds": []
+    }
+  },
+  "frozenThresholds": {
+    "minimumMeanAucGainVsFull": 0.002,
+    "maximumMeanLogLossIncreaseVsFull": 0.001,
+    "rule": "每项比较 AUC 点差 ≥4/5 种子为正且 ≥3/5 种子配对 CI 支持 GCN"
+  },
+  "statisticsImplementationHash": "sha256:ebbcb582225965b1fee21b15a0de9ab1e62f52a33a708ea1c7ec28b8241b6578",
+  "comparisonCIRule": "CI 为未舍入百分位；方向/显著性标志由原始值判定（*CI4 仅展示）",
+  "auditReferences": [
+    {
+      "seed": 42,
+      "auditFile": "seed-42/audit-report.json",
+      "auditSha256": "sha256:39e9fccfa7fbb6d2911dd8cfcf05d6f07d9993c4b17df1ca6c381ca5080a54ea",
+      "auditPassed": true,
+      "checksPassed": 164,
+      "checksTotal": 164,
+      "resultsSha256": "sha256:0953319e3fcca332aeecae26da2278ab381ca5777c8bd611b80a12f63580b8e4",
+      "predictionsSha256": "sha256:f85c7574efc40ab2a7cb01dbdb1e8f03c983da6e4048188fcf671a0ee76abf49",
+      "trainingImplementationHash": "sha256:745492f347b7764fb4fd1eb6e4142ee744afafba9f81dbe055d8f072fe20593c",
+      "statisticsImplementationHash": "sha256:ebbcb582225965b1fee21b15a0de9ab1e62f52a33a708ea1c7ec28b8241b6578",
+      "statisticsRevised": true,
+      "revisionNote": "聚合主表精度修正（2026-11-02 审计 P2）：聚合器改从落盘预测以 evaluateMetricsPrecise 重算未舍入单种子指标再聚合；本次 restat 仅刷新统计实现哈希留痕，预测与训练结果未变，未重训。"
+    },
+    {
+      "seed": 43,
+      "auditFile": "seed-43/audit-report.json",
+      "auditSha256": "sha256:119d40ad18c990a056f333525814378d849cf94df6d8c679f27d86ed2cce013c",
+      "auditPassed": true,
+      "checksPassed": 164,
+      "checksTotal": 164,
+      "resultsSha256": "sha256:5238ec0c642d538ab29ef65912f11a2bd0437e1e03e6f20a64c938ae8cc727cf",
+      "predictionsSha256": "sha256:1464a5df7c6a23c43e0bdaaa8b87d0917aa7c8d1279ee0f46569627cabd619b0",
+      "trainingImplementationHash": "sha256:0710f413864dc78bc418cd2047008b0f53746c42effd94a27dbd77ce25c796a0",
+      "statisticsImplementationHash": "sha256:ebbcb582225965b1fee21b15a0de9ab1e62f52a33a708ea1c7ec28b8241b6578",
+      "statisticsRevised": true,
+      "revisionNote": "聚合主表精度修正（2026-11-02 审计 P2）：聚合器改从落盘预测以 evaluateMetricsPrecise 重算未舍入单种子指标再聚合；本次 restat 仅刷新统计实现哈希留痕，预测与训练结果未变，未重训。"
+    },
+    {
+      "seed": 44,
+      "auditFile": "seed-44/audit-report.json",
+      "auditSha256": "sha256:106637ef87f73bf2f247b08d855f23577411b369b3bb6fa01598098aa8d58b4c",
+      "auditPassed": true,
+      "checksPassed": 164,
+      "checksTotal": 164,
+      "resultsSha256": "sha256:292c4ac4270318d25ae52aa2a10f56a566bf0406c93f58b4cf22c4c7874b701f",
+      "predictionsSha256": "sha256:e17b181e6ec0001d5eba33d999ccc0f7f33fda00773979edf55b39c8f12f3c09",
+      "trainingImplementationHash": "sha256:0710f413864dc78bc418cd2047008b0f53746c42effd94a27dbd77ce25c796a0",
+      "statisticsImplementationHash": "sha256:ebbcb582225965b1fee21b15a0de9ab1e62f52a33a708ea1c7ec28b8241b6578",
+      "statisticsRevised": true,
+      "revisionNote": "聚合主表精度修正（2026-11-02 审计 P2）：聚合器改从落盘预测以 evaluateMetricsPrecise 重算未舍入单种子指标再聚合；本次 restat 仅刷新统计实现哈希留痕，预测与训练结果未变，未重训。"
+    },
+    {
+      "seed": 45,
+      "auditFile": "seed-45/audit-report.json",
+      "auditSha256": "sha256:baef12cd556b0661fdd7afc0778573421790192d4f20110b1206f6292a3e5d18",
+      "auditPassed": true,
+      "checksPassed": 164,
+      "checksTotal": 164,
+      "resultsSha256": "sha256:93086112fca4918e49c55fcb21c7c8f99000caa4b5268fb33589a97f3b655b9a",
+      "predictionsSha256": "sha256:bcb19f97e4d855982deee450bff8ce11302c05c7c5b50ac097573a43d1426dda",
+      "trainingImplementationHash": "sha256:0710f413864dc78bc418cd2047008b0f53746c42effd94a27dbd77ce25c796a0",
+      "statisticsImplementationHash": "sha256:ebbcb582225965b1fee21b15a0de9ab1e62f52a33a708ea1c7ec28b8241b6578",
+      "statisticsRevised": true,
+      "revisionNote": "聚合主表精度修正（2026-11-02 审计 P2）：聚合器改从落盘预测以 evaluateMetricsPrecise 重算未舍入单种子指标再聚合；本次 restat 仅刷新统计实现哈希留痕，预测与训练结果未变，未重训。"
+    },
+    {
+      "seed": 46,
+      "auditFile": "seed-46/audit-report.json",
+      "auditSha256": "sha256:bedb8e5e7794aeb4e25d9fb936808930d46faa2185c678f4c77c274c18ab3fd1",
+      "auditPassed": true,
+      "checksPassed": 164,
+      "checksTotal": 164,
+      "resultsSha256": "sha256:45b006957d2771d34f8cf3fbbc16fa3da054ec1c2aa620250a883c3d1c843724",
+      "predictionsSha256": "sha256:273a0abc7eb85d17ad76b4f6ef7498be17676089b8f153cbe4c7f4c7ce4fab84",
+      "trainingImplementationHash": "sha256:0710f413864dc78bc418cd2047008b0f53746c42effd94a27dbd77ce25c796a0",
+      "statisticsImplementationHash": "sha256:ebbcb582225965b1fee21b15a0de9ab1e62f52a33a708ea1c7ec28b8241b6578",
+      "statisticsRevised": true,
+      "revisionNote": "聚合主表精度修正（2026-11-02 审计 P2）：聚合器改从落盘预测以 evaluateMetricsPrecise 重算未舍入单种子指标再聚合；本次 restat 仅刷新统计实现哈希留痕，预测与训练结果未变，未重训。"
+    }
+  ]
+}

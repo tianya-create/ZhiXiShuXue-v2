@@ -1,0 +1,2223 @@
+{
+  "smoke": false,
+  "stage": "D-train",
+  "protocolVersion": "assist2009-gcn-dkt-v1",
+  "schemaVersion": 1,
+  "seed": 45,
+  "generatedAt": "2026-11-01T09:40:27.081Z",
+  "nodeVersion": "v22.22.2",
+  "platform": "win32 x64",
+  "gitCommit": "90c908e",
+  "configSha256": "sha256:65382df7dc7f1c74cf23472a0d87c08ce74bd883efcfe5f2c5649dca333fda35",
+  "dataHashes": {
+    "rawSha256": "sha256:408698925fc3488672431e4c19b9b16808b6a25760f8e41ad4d3d6257ad0832a",
+    "taskSha256": "sha256:6f055c6b5105b8295ef8bcf9dd23c668634f56eedc4dbdcf5a8708bee0618be9",
+    "vocabularySha256": "sha256:7e8bb3874bd31bd2e0620ea59f7070106354c197f44e73910cdcd1696787f63b",
+    "splitSha256": "sha256:665787fca9cf7377ef5dd115a508ce7ba48252c342823f90805bd4afc76e7658",
+    "targetManifestHash": "sha256:cfea1e4a4116c8e69731fc434f46652326a38f8108ad0d4994918e5fa7a00a45",
+    "realEdgesSha256": "sha256:d6ebe9a59e06231e3089b7ea15edffea3dacebedfd13b0295c42bc70e89b66d3",
+    "realAdjacencySha256": "sha256:303147c46ad45411a23e0917d390739d621f2f75be8f38d0f08ee57e7c292bd9",
+    "randomEdgesSha256": "sha256:fbefa0ac0453e09136f3c171e37ba9b93a56c5555cac5c1892890b66f8d6b2d6",
+    "randomAdjacencySha256": "sha256:f6c824bda368ff4da2eccf368e6e5a30c111331dfa3bba5ff2d1b2e9e32df7fd",
+    "selfloopAdjacencySha256": "sha256:2769c885faed7eeb65771bb3d6502052450861ee548f8c8bfe495c20c8f2cc1d"
+  },
+  "sequenceCounts": {
+    "train": 2752,
+    "validation": 590,
+    "test": 589
+  },
+  "targetCount": 30832,
+  "targetManifestHash": "sha256:cfea1e4a4116c8e69731fc434f46652326a38f8108ad0d4994918e5fa7a00a45",
+  "files": {
+    "targetsFile": "targets.json",
+    "targetsSha256": "sha256:639c331c81fd49720cee41e49a5611b45dfcc60116776f019cf8c0b0f749937c",
+    "predictionsFile": "predictions.jsonl",
+    "predictionsSha256": "sha256:bcb19f97e4d855982deee450bff8ce11302c05c7c5b50ac097573a43d1426dda",
+    "trainingCurvesFile": "training-curves.json"
+  },
+  "implementationMetadata": {
+    "implementationHash": "sha256:0710f413864dc78bc418cd2047008b0f53746c42effd94a27dbd77ce25c796a0",
+    "sourceHashes": {
+      "dkt.js": "sha256:f6acfa26794d5fe679550d253c8e7ee854c4debe079b029926f7d872b4fa38f9",
+      "graphDkt.js": "sha256:aca2d2a83c8bb2adc8b6bffb7a664d93b12b3a744435f961563acd5dea67ed19",
+      "graphDktExperiment.js": "sha256:51e7e45465caa6312d0fc6879fe99ade2a9af88201f3a1221b85d408456c2134",
+      "baselineEval.js": "sha256:14795292beb35aac76d3ea64ac204834f6db7c683446fa9de336450a28ee3bb6",
+      "bootstrapStats.js": "sha256:dfcc9caa6f81e3b754c172769491c022d5a0634bf0a6256b5957dc1984e75dc4"
+    },
+    "configSha256": "sha256:65382df7dc7f1c74cf23472a0d87c08ce74bd883efcfe5f2c5649dca333fda35",
+    "note": "implementationHash = 五个源文件 sha256 串接后再哈希；结果绑定到实际运行版本。"
+  },
+  "hyperUsed": {
+    "Full-DKT": {
+      "embedDim": 32,
+      "hiddenSize": 64,
+      "dropout": 0.2,
+      "learningRate": 0.001,
+      "batchSize": 64,
+      "maxEpochs": 50,
+      "earlyStoppingPatience": 5,
+      "gradClipNorm": 5,
+      "seed": 45
+    },
+    "GCN-DKT": {
+      "embedDim": 32,
+      "hiddenSize": 64,
+      "dropout": 0.2,
+      "learningRate": 0.001,
+      "batchSize": 64,
+      "maxEpochs": 50,
+      "earlyStoppingPatience": 5,
+      "gradClipNorm": 5,
+      "seed": 45
+    },
+    "RandomGraph-DKT": {
+      "embedDim": 32,
+      "hiddenSize": 64,
+      "dropout": 0.2,
+      "learningRate": 0.001,
+      "batchSize": 64,
+      "maxEpochs": 50,
+      "earlyStoppingPatience": 5,
+      "gradClipNorm": 5,
+      "seed": 45
+    },
+    "Larger-DKT": {
+      "embedDim": 32,
+      "hiddenSize": 68,
+      "dropout": 0.2,
+      "learningRate": 0.001,
+      "batchSize": 64,
+      "maxEpochs": 50,
+      "earlyStoppingPatience": 5,
+      "gradClipNorm": 5,
+      "seed": 45
+    },
+    "SelfLoop-DKT": {
+      "embedDim": 32,
+      "hiddenSize": 64,
+      "dropout": 0.2,
+      "learningRate": 0.001,
+      "batchSize": 64,
+      "maxEpochs": 50,
+      "earlyStoppingPatience": 5,
+      "gradClipNorm": 5,
+      "seed": 45
+    }
+  },
+  "models": {
+    "Full-DKT": {
+      "modelKey": "Full-DKT",
+      "mode": "full",
+      "description": "Full-DKT：无图分支（残差分支参数清零）",
+      "fingerprint": "sha256:fdbb699f50f939a220caa2dc175e749b6af8218bc5482907563afdd8d2a586f1",
+      "paramCount": 31524,
+      "sequenceCounts": {
+        "train": 2752,
+        "validation": 590,
+        "test": 589
+      },
+      "supervisionCounts": {
+        "train": 186529,
+        "validation": 42565,
+        "test": 30832
+      },
+      "training": {
+        "epochsRun": 45,
+        "bestEpoch": 40,
+        "bestValLogLoss": 0.549737,
+        "stoppedEarly": true,
+        "fitSeconds": 1033.2,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.666507,
+            "valLogLoss": 0.628818
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.599097,
+            "valLogLoss": 0.582425
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.571251,
+            "valLogLoss": 0.571668
+          },
+          {
+            "epoch": 4,
+            "trainLogLoss": 0.563018,
+            "valLogLoss": 0.567311
+          },
+          {
+            "epoch": 5,
+            "trainLogLoss": 0.558884,
+            "valLogLoss": 0.565491
+          },
+          {
+            "epoch": 6,
+            "trainLogLoss": 0.555792,
+            "valLogLoss": 0.563204
+          },
+          {
+            "epoch": 7,
+            "trainLogLoss": 0.553302,
+            "valLogLoss": 0.563244
+          },
+          {
+            "epoch": 8,
+            "trainLogLoss": 0.550994,
+            "valLogLoss": 0.561341
+          },
+          {
+            "epoch": 9,
+            "trainLogLoss": 0.549154,
+            "valLogLoss": 0.560344
+          },
+          {
+            "epoch": 10,
+            "trainLogLoss": 0.547531,
+            "valLogLoss": 0.559439
+          },
+          {
+            "epoch": 11,
+            "trainLogLoss": 0.546824,
+            "valLogLoss": 0.558617
+          },
+          {
+            "epoch": 12,
+            "trainLogLoss": 0.545586,
+            "valLogLoss": 0.557648
+          },
+          {
+            "epoch": 13,
+            "trainLogLoss": 0.54431,
+            "valLogLoss": 0.556661
+          },
+          {
+            "epoch": 14,
+            "trainLogLoss": 0.543256,
+            "valLogLoss": 0.555649
+          },
+          {
+            "epoch": 15,
+            "trainLogLoss": 0.542002,
+            "valLogLoss": 0.556684
+          },
+          {
+            "epoch": 16,
+            "trainLogLoss": 0.541404,
+            "valLogLoss": 0.554718
+          },
+          {
+            "epoch": 17,
+            "trainLogLoss": 0.540538,
+            "valLogLoss": 0.554501
+          },
+          {
+            "epoch": 18,
+            "trainLogLoss": 0.540211,
+            "valLogLoss": 0.554594
+          },
+          {
+            "epoch": 19,
+            "trainLogLoss": 0.539036,
+            "valLogLoss": 0.553973
+          },
+          {
+            "epoch": 20,
+            "trainLogLoss": 0.538993,
+            "valLogLoss": 0.553252
+          },
+          {
+            "epoch": 21,
+            "trainLogLoss": 0.538061,
+            "valLogLoss": 0.552892
+          },
+          {
+            "epoch": 22,
+            "trainLogLoss": 0.537704,
+            "valLogLoss": 0.553287
+          },
+          {
+            "epoch": 23,
+            "trainLogLoss": 0.536919,
+            "valLogLoss": 0.552265
+          },
+          {
+            "epoch": 24,
+            "trainLogLoss": 0.536419,
+            "valLogLoss": 0.553886
+          },
+          {
+            "epoch": 25,
+            "trainLogLoss": 0.536063,
+            "valLogLoss": 0.551437
+          },
+          {
+            "epoch": 26,
+            "trainLogLoss": 0.535321,
+            "valLogLoss": 0.551406
+          },
+          {
+            "epoch": 27,
+            "trainLogLoss": 0.534879,
+            "valLogLoss": 0.551441
+          },
+          {
+            "epoch": 28,
+            "trainLogLoss": 0.534411,
+            "valLogLoss": 0.551509
+          },
+          {
+            "epoch": 29,
+            "trainLogLoss": 0.534069,
+            "valLogLoss": 0.551173
+          },
+          {
+            "epoch": 30,
+            "trainLogLoss": 0.533743,
+            "valLogLoss": 0.552571
+          },
+          {
+            "epoch": 31,
+            "trainLogLoss": 0.532859,
+            "valLogLoss": 0.551167
+          },
+          {
+            "epoch": 32,
+            "trainLogLoss": 0.532614,
+            "valLogLoss": 0.550991
+          },
+          {
+            "epoch": 33,
+            "trainLogLoss": 0.53213,
+            "valLogLoss": 0.550391
+          },
+          {
+            "epoch": 34,
+            "trainLogLoss": 0.531665,
+            "valLogLoss": 0.550106
+          },
+          {
+            "epoch": 35,
+            "trainLogLoss": 0.531347,
+            "valLogLoss": 0.549892
+          },
+          {
+            "epoch": 36,
+            "trainLogLoss": 0.530878,
+            "valLogLoss": 0.55017
+          },
+          {
+            "epoch": 37,
+            "trainLogLoss": 0.530541,
+            "valLogLoss": 0.550029
+          },
+          {
+            "epoch": 38,
+            "trainLogLoss": 0.530183,
+            "valLogLoss": 0.550443
+          },
+          {
+            "epoch": 39,
+            "trainLogLoss": 0.529775,
+            "valLogLoss": 0.550423
+          },
+          {
+            "epoch": 40,
+            "trainLogLoss": 0.529033,
+            "valLogLoss": 0.549737
+          },
+          {
+            "epoch": 41,
+            "trainLogLoss": 0.528933,
+            "valLogLoss": 0.550752
+          },
+          {
+            "epoch": 42,
+            "trainLogLoss": 0.52837,
+            "valLogLoss": 0.550818
+          },
+          {
+            "epoch": 43,
+            "trainLogLoss": 0.527737,
+            "valLogLoss": 0.550318
+          },
+          {
+            "epoch": 44,
+            "trainLogLoss": 0.527807,
+            "valLogLoss": 0.550392
+          },
+          {
+            "epoch": 45,
+            "trainLogLoss": 0.527359,
+            "valLogLoss": 0.549956
+          }
+        ]
+      },
+      "valLogLossAfterRollback": 0.549737,
+      "rollbackConsistent": true,
+      "numericalChecks": {
+        "epochCurveChecks": 44,
+        "gradientBatchesChecked": 1935,
+        "gradientFinite": true,
+        "paramUpdatesChecked": 1935,
+        "paramsFiniteAfterUpdate": true
+      },
+      "memory": {
+        "sampledAt": "adamUpdate batch 边界主动采样（此为采样峰值，非进程级连续监测峰值）",
+        "memorySamples": 1935,
+        "rssPeakSampledBytes": 328007680,
+        "heapPeakSampledBytes": 130093272
+      },
+      "paramDigest": "5113f302bf291d0b142e7a8a4c8cc8d51273c7782fa51d9ddf6c39aea68084b4",
+      "adjacencySha256": null,
+      "hyperUsed": {
+        "embedDim": 32,
+        "hiddenSize": 64,
+        "dropout": 0.2,
+        "learningRate": 0.001,
+        "batchSize": 64,
+        "maxEpochs": 50,
+        "earlyStoppingPatience": 5,
+        "gradClipNorm": 5,
+        "seed": 45
+      }
+    },
+    "GCN-DKT": {
+      "modelKey": "GCN-DKT",
+      "mode": "gcn",
+      "description": "GCN-DKT：train-only 真实共现图",
+      "fingerprint": "sha256:95bc867dfa18872ced602715605dee07ecd9119d3af03c719ae63eb5a45b164c",
+      "paramCount": 33636,
+      "sequenceCounts": {
+        "train": 2752,
+        "validation": 590,
+        "test": 589
+      },
+      "supervisionCounts": {
+        "train": 186529,
+        "validation": 42565,
+        "test": 30832
+      },
+      "training": {
+        "epochsRun": 40,
+        "bestEpoch": 35,
+        "bestValLogLoss": 0.549848,
+        "stoppedEarly": true,
+        "fitSeconds": 1176.1,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.662155,
+            "valLogLoss": 0.615467
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.597292,
+            "valLogLoss": 0.584761
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.57442,
+            "valLogLoss": 0.573793
+          },
+          {
+            "epoch": 4,
+            "trainLogLoss": 0.565402,
+            "valLogLoss": 0.56909
+          },
+          {
+            "epoch": 5,
+            "trainLogLoss": 0.560998,
+            "valLogLoss": 0.566965
+          },
+          {
+            "epoch": 6,
+            "trainLogLoss": 0.557707,
+            "valLogLoss": 0.564629
+          },
+          {
+            "epoch": 7,
+            "trainLogLoss": 0.555125,
+            "valLogLoss": 0.564139
+          },
+          {
+            "epoch": 8,
+            "trainLogLoss": 0.552625,
+            "valLogLoss": 0.56193
+          },
+          {
+            "epoch": 9,
+            "trainLogLoss": 0.550568,
+            "valLogLoss": 0.562513
+          },
+          {
+            "epoch": 10,
+            "trainLogLoss": 0.549031,
+            "valLogLoss": 0.560965
+          },
+          {
+            "epoch": 11,
+            "trainLogLoss": 0.548138,
+            "valLogLoss": 0.559357
+          },
+          {
+            "epoch": 12,
+            "trainLogLoss": 0.546285,
+            "valLogLoss": 0.557772
+          },
+          {
+            "epoch": 13,
+            "trainLogLoss": 0.545107,
+            "valLogLoss": 0.556374
+          },
+          {
+            "epoch": 14,
+            "trainLogLoss": 0.544267,
+            "valLogLoss": 0.556203
+          },
+          {
+            "epoch": 15,
+            "trainLogLoss": 0.542888,
+            "valLogLoss": 0.557053
+          },
+          {
+            "epoch": 16,
+            "trainLogLoss": 0.542158,
+            "valLogLoss": 0.555247
+          },
+          {
+            "epoch": 17,
+            "trainLogLoss": 0.541329,
+            "valLogLoss": 0.554874
+          },
+          {
+            "epoch": 18,
+            "trainLogLoss": 0.540831,
+            "valLogLoss": 0.555256
+          },
+          {
+            "epoch": 19,
+            "trainLogLoss": 0.540016,
+            "valLogLoss": 0.554085
+          },
+          {
+            "epoch": 20,
+            "trainLogLoss": 0.540029,
+            "valLogLoss": 0.553169
+          },
+          {
+            "epoch": 21,
+            "trainLogLoss": 0.539095,
+            "valLogLoss": 0.553242
+          },
+          {
+            "epoch": 22,
+            "trainLogLoss": 0.538829,
+            "valLogLoss": 0.553819
+          },
+          {
+            "epoch": 23,
+            "trainLogLoss": 0.538046,
+            "valLogLoss": 0.553376
+          },
+          {
+            "epoch": 24,
+            "trainLogLoss": 0.537458,
+            "valLogLoss": 0.553645
+          },
+          {
+            "epoch": 25,
+            "trainLogLoss": 0.537055,
+            "valLogLoss": 0.551772
+          },
+          {
+            "epoch": 26,
+            "trainLogLoss": 0.536309,
+            "valLogLoss": 0.552282
+          },
+          {
+            "epoch": 27,
+            "trainLogLoss": 0.535899,
+            "valLogLoss": 0.552296
+          },
+          {
+            "epoch": 28,
+            "trainLogLoss": 0.535529,
+            "valLogLoss": 0.552309
+          },
+          {
+            "epoch": 29,
+            "trainLogLoss": 0.535246,
+            "valLogLoss": 0.551659
+          },
+          {
+            "epoch": 30,
+            "trainLogLoss": 0.53515,
+            "valLogLoss": 0.552653
+          },
+          {
+            "epoch": 31,
+            "trainLogLoss": 0.534425,
+            "valLogLoss": 0.550892
+          },
+          {
+            "epoch": 32,
+            "trainLogLoss": 0.533737,
+            "valLogLoss": 0.552038
+          },
+          {
+            "epoch": 33,
+            "trainLogLoss": 0.533256,
+            "valLogLoss": 0.550127
+          },
+          {
+            "epoch": 34,
+            "trainLogLoss": 0.532973,
+            "valLogLoss": 0.550941
+          },
+          {
+            "epoch": 35,
+            "trainLogLoss": 0.532707,
+            "valLogLoss": 0.549848
+          },
+          {
+            "epoch": 36,
+            "trainLogLoss": 0.531932,
+            "valLogLoss": 0.550233
+          },
+          {
+            "epoch": 37,
+            "trainLogLoss": 0.531607,
+            "valLogLoss": 0.550051
+          },
+          {
+            "epoch": 38,
+            "trainLogLoss": 0.53139,
+            "valLogLoss": 0.551172
+          },
+          {
+            "epoch": 39,
+            "trainLogLoss": 0.530801,
+            "valLogLoss": 0.550406
+          },
+          {
+            "epoch": 40,
+            "trainLogLoss": 0.53026,
+            "valLogLoss": 0.549874
+          }
+        ]
+      },
+      "valLogLossAfterRollback": 0.549848,
+      "rollbackConsistent": true,
+      "numericalChecks": {
+        "epochCurveChecks": 39,
+        "gradientBatchesChecked": 1720,
+        "gradientFinite": true,
+        "paramUpdatesChecked": 1720,
+        "paramsFiniteAfterUpdate": true
+      },
+      "memory": {
+        "sampledAt": "adamUpdate batch 边界主动采样（此为采样峰值，非进程级连续监测峰值）",
+        "memorySamples": 1720,
+        "rssPeakSampledBytes": 321572864,
+        "heapPeakSampledBytes": 128983072
+      },
+      "paramDigest": "4d45c41e1b50ba33523c87b14a91ee95de56d5b31765d0f8f28fe577f00117d3",
+      "adjacencySha256": "sha256:303147c46ad45411a23e0917d390739d621f2f75be8f38d0f08ee57e7c292bd9",
+      "hyperUsed": {
+        "embedDim": 32,
+        "hiddenSize": 64,
+        "dropout": 0.2,
+        "learningRate": 0.001,
+        "batchSize": 64,
+        "maxEpochs": 50,
+        "earlyStoppingPatience": 5,
+        "gradClipNorm": 5,
+        "seed": 45
+      }
+    },
+    "RandomGraph-DKT": {
+      "modelKey": "RandomGraph-DKT",
+      "mode": "random-graph",
+      "description": "RandomGraph-DKT：同边数同边权多重集随机图",
+      "fingerprint": "sha256:7289cbc0634f961c50c092deb40413b9beb289acd2acbd61e2bd6b10e06d2323",
+      "paramCount": 33636,
+      "sequenceCounts": {
+        "train": 2752,
+        "validation": 590,
+        "test": 589
+      },
+      "supervisionCounts": {
+        "train": 186529,
+        "validation": 42565,
+        "test": 30832
+      },
+      "training": {
+        "epochsRun": 45,
+        "bestEpoch": 40,
+        "bestValLogLoss": 0.549707,
+        "stoppedEarly": true,
+        "fitSeconds": 650.4,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.662138,
+            "valLogLoss": 0.6152
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.597325,
+            "valLogLoss": 0.585016
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.574183,
+            "valLogLoss": 0.573849
+          },
+          {
+            "epoch": 4,
+            "trainLogLoss": 0.565245,
+            "valLogLoss": 0.568783
+          },
+          {
+            "epoch": 5,
+            "trainLogLoss": 0.560633,
+            "valLogLoss": 0.566554
+          },
+          {
+            "epoch": 6,
+            "trainLogLoss": 0.557233,
+            "valLogLoss": 0.5642
+          },
+          {
+            "epoch": 7,
+            "trainLogLoss": 0.55435,
+            "valLogLoss": 0.56362
+          },
+          {
+            "epoch": 8,
+            "trainLogLoss": 0.551767,
+            "valLogLoss": 0.561879
+          },
+          {
+            "epoch": 9,
+            "trainLogLoss": 0.549912,
+            "valLogLoss": 0.561718
+          },
+          {
+            "epoch": 10,
+            "trainLogLoss": 0.5483,
+            "valLogLoss": 0.560072
+          },
+          {
+            "epoch": 11,
+            "trainLogLoss": 0.547156,
+            "valLogLoss": 0.558889
+          },
+          {
+            "epoch": 12,
+            "trainLogLoss": 0.54562,
+            "valLogLoss": 0.557926
+          },
+          {
+            "epoch": 13,
+            "trainLogLoss": 0.544651,
+            "valLogLoss": 0.556258
+          },
+          {
+            "epoch": 14,
+            "trainLogLoss": 0.543927,
+            "valLogLoss": 0.55593
+          },
+          {
+            "epoch": 15,
+            "trainLogLoss": 0.542653,
+            "valLogLoss": 0.556461
+          },
+          {
+            "epoch": 16,
+            "trainLogLoss": 0.541913,
+            "valLogLoss": 0.554838
+          },
+          {
+            "epoch": 17,
+            "trainLogLoss": 0.541064,
+            "valLogLoss": 0.554568
+          },
+          {
+            "epoch": 18,
+            "trainLogLoss": 0.540726,
+            "valLogLoss": 0.555795
+          },
+          {
+            "epoch": 19,
+            "trainLogLoss": 0.540008,
+            "valLogLoss": 0.555037
+          },
+          {
+            "epoch": 20,
+            "trainLogLoss": 0.539831,
+            "valLogLoss": 0.55319
+          },
+          {
+            "epoch": 21,
+            "trainLogLoss": 0.538945,
+            "valLogLoss": 0.553189
+          },
+          {
+            "epoch": 22,
+            "trainLogLoss": 0.538538,
+            "valLogLoss": 0.553777
+          },
+          {
+            "epoch": 23,
+            "trainLogLoss": 0.537861,
+            "valLogLoss": 0.552962
+          },
+          {
+            "epoch": 24,
+            "trainLogLoss": 0.537213,
+            "valLogLoss": 0.553938
+          },
+          {
+            "epoch": 25,
+            "trainLogLoss": 0.536983,
+            "valLogLoss": 0.551616
+          },
+          {
+            "epoch": 26,
+            "trainLogLoss": 0.536263,
+            "valLogLoss": 0.552007
+          },
+          {
+            "epoch": 27,
+            "trainLogLoss": 0.535833,
+            "valLogLoss": 0.551662
+          },
+          {
+            "epoch": 28,
+            "trainLogLoss": 0.535522,
+            "valLogLoss": 0.551646
+          },
+          {
+            "epoch": 29,
+            "trainLogLoss": 0.535023,
+            "valLogLoss": 0.551254
+          },
+          {
+            "epoch": 30,
+            "trainLogLoss": 0.535178,
+            "valLogLoss": 0.552799
+          },
+          {
+            "epoch": 31,
+            "trainLogLoss": 0.534376,
+            "valLogLoss": 0.551051
+          },
+          {
+            "epoch": 32,
+            "trainLogLoss": 0.533693,
+            "valLogLoss": 0.55234
+          },
+          {
+            "epoch": 33,
+            "trainLogLoss": 0.533312,
+            "valLogLoss": 0.550382
+          },
+          {
+            "epoch": 34,
+            "trainLogLoss": 0.532825,
+            "valLogLoss": 0.551575
+          },
+          {
+            "epoch": 35,
+            "trainLogLoss": 0.532621,
+            "valLogLoss": 0.550088
+          },
+          {
+            "epoch": 36,
+            "trainLogLoss": 0.53204,
+            "valLogLoss": 0.550989
+          },
+          {
+            "epoch": 37,
+            "trainLogLoss": 0.531734,
+            "valLogLoss": 0.550339
+          },
+          {
+            "epoch": 38,
+            "trainLogLoss": 0.531459,
+            "valLogLoss": 0.551297
+          },
+          {
+            "epoch": 39,
+            "trainLogLoss": 0.531013,
+            "valLogLoss": 0.550419
+          },
+          {
+            "epoch": 40,
+            "trainLogLoss": 0.530539,
+            "valLogLoss": 0.549707
+          },
+          {
+            "epoch": 41,
+            "trainLogLoss": 0.530323,
+            "valLogLoss": 0.551305
+          },
+          {
+            "epoch": 42,
+            "trainLogLoss": 0.530098,
+            "valLogLoss": 0.551415
+          },
+          {
+            "epoch": 43,
+            "trainLogLoss": 0.529476,
+            "valLogLoss": 0.550553
+          },
+          {
+            "epoch": 44,
+            "trainLogLoss": 0.529297,
+            "valLogLoss": 0.550555
+          },
+          {
+            "epoch": 45,
+            "trainLogLoss": 0.528776,
+            "valLogLoss": 0.550318
+          }
+        ]
+      },
+      "valLogLossAfterRollback": 0.549707,
+      "rollbackConsistent": true,
+      "numericalChecks": {
+        "epochCurveChecks": 44,
+        "gradientBatchesChecked": 1935,
+        "gradientFinite": true,
+        "paramUpdatesChecked": 1935,
+        "paramsFiniteAfterUpdate": true
+      },
+      "memory": {
+        "sampledAt": "adamUpdate batch 边界主动采样（此为采样峰值，非进程级连续监测峰值）",
+        "memorySamples": 1935,
+        "rssPeakSampledBytes": 328351744,
+        "heapPeakSampledBytes": 134557336
+      },
+      "paramDigest": "11680405f2e83d26f077e33c5eeadd02365c689c0536fb829a959110aaf122e6",
+      "adjacencySha256": "sha256:f6c824bda368ff4da2eccf368e6e5a30c111331dfa3bba5ff2d1b2e9e32df7fd",
+      "hyperUsed": {
+        "embedDim": 32,
+        "hiddenSize": 64,
+        "dropout": 0.2,
+        "learningRate": 0.001,
+        "batchSize": 64,
+        "maxEpochs": 50,
+        "earlyStoppingPatience": 5,
+        "gradClipNorm": 5,
+        "seed": 45
+      }
+    },
+    "Larger-DKT": {
+      "modelKey": "Larger-DKT",
+      "mode": "larger",
+      "description": "Larger-DKT：GRU hidden=68 容量对照",
+      "fingerprint": "sha256:1dd4f09967573c37b304f5f999554a9fb226484e23956f54192433394b9830b0",
+      "paramCount": 33904,
+      "sequenceCounts": {
+        "train": 2752,
+        "validation": 590,
+        "test": 589
+      },
+      "supervisionCounts": {
+        "train": 186529,
+        "validation": 42565,
+        "test": 30832
+      },
+      "training": {
+        "epochsRun": 50,
+        "bestEpoch": 48,
+        "bestValLogLoss": 0.549325,
+        "stoppedEarly": false,
+        "fitSeconds": 646.2,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.664375,
+            "valLogLoss": 0.62378
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.595217,
+            "valLogLoss": 0.58195
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.570149,
+            "valLogLoss": 0.570954
+          },
+          {
+            "epoch": 4,
+            "trainLogLoss": 0.560501,
+            "valLogLoss": 0.56533
+          },
+          {
+            "epoch": 5,
+            "trainLogLoss": 0.555572,
+            "valLogLoss": 0.563063
+          },
+          {
+            "epoch": 6,
+            "trainLogLoss": 0.552709,
+            "valLogLoss": 0.561176
+          },
+          {
+            "epoch": 7,
+            "trainLogLoss": 0.550339,
+            "valLogLoss": 0.561068
+          },
+          {
+            "epoch": 8,
+            "trainLogLoss": 0.548427,
+            "valLogLoss": 0.560156
+          },
+          {
+            "epoch": 9,
+            "trainLogLoss": 0.547583,
+            "valLogLoss": 0.558966
+          },
+          {
+            "epoch": 10,
+            "trainLogLoss": 0.545926,
+            "valLogLoss": 0.558286
+          },
+          {
+            "epoch": 11,
+            "trainLogLoss": 0.545141,
+            "valLogLoss": 0.55849
+          },
+          {
+            "epoch": 12,
+            "trainLogLoss": 0.544333,
+            "valLogLoss": 0.556584
+          },
+          {
+            "epoch": 13,
+            "trainLogLoss": 0.543385,
+            "valLogLoss": 0.555746
+          },
+          {
+            "epoch": 14,
+            "trainLogLoss": 0.542349,
+            "valLogLoss": 0.555263
+          },
+          {
+            "epoch": 15,
+            "trainLogLoss": 0.541575,
+            "valLogLoss": 0.55599
+          },
+          {
+            "epoch": 16,
+            "trainLogLoss": 0.541231,
+            "valLogLoss": 0.55452
+          },
+          {
+            "epoch": 17,
+            "trainLogLoss": 0.540406,
+            "valLogLoss": 0.554306
+          },
+          {
+            "epoch": 18,
+            "trainLogLoss": 0.539844,
+            "valLogLoss": 0.553536
+          },
+          {
+            "epoch": 19,
+            "trainLogLoss": 0.538967,
+            "valLogLoss": 0.553824
+          },
+          {
+            "epoch": 20,
+            "trainLogLoss": 0.538488,
+            "valLogLoss": 0.552739
+          },
+          {
+            "epoch": 21,
+            "trainLogLoss": 0.537769,
+            "valLogLoss": 0.552612
+          },
+          {
+            "epoch": 22,
+            "trainLogLoss": 0.537304,
+            "valLogLoss": 0.552461
+          },
+          {
+            "epoch": 23,
+            "trainLogLoss": 0.536697,
+            "valLogLoss": 0.552712
+          },
+          {
+            "epoch": 24,
+            "trainLogLoss": 0.536052,
+            "valLogLoss": 0.55361
+          },
+          {
+            "epoch": 25,
+            "trainLogLoss": 0.536064,
+            "valLogLoss": 0.551966
+          },
+          {
+            "epoch": 26,
+            "trainLogLoss": 0.534964,
+            "valLogLoss": 0.551893
+          },
+          {
+            "epoch": 27,
+            "trainLogLoss": 0.534606,
+            "valLogLoss": 0.551438
+          },
+          {
+            "epoch": 28,
+            "trainLogLoss": 0.534202,
+            "valLogLoss": 0.551082
+          },
+          {
+            "epoch": 29,
+            "trainLogLoss": 0.533969,
+            "valLogLoss": 0.551025
+          },
+          {
+            "epoch": 30,
+            "trainLogLoss": 0.533497,
+            "valLogLoss": 0.550946
+          },
+          {
+            "epoch": 31,
+            "trainLogLoss": 0.533017,
+            "valLogLoss": 0.551234
+          },
+          {
+            "epoch": 32,
+            "trainLogLoss": 0.532654,
+            "valLogLoss": 0.551515
+          },
+          {
+            "epoch": 33,
+            "trainLogLoss": 0.532033,
+            "valLogLoss": 0.550941
+          },
+          {
+            "epoch": 34,
+            "trainLogLoss": 0.531531,
+            "valLogLoss": 0.551212
+          },
+          {
+            "epoch": 35,
+            "trainLogLoss": 0.531279,
+            "valLogLoss": 0.550165
+          },
+          {
+            "epoch": 36,
+            "trainLogLoss": 0.530646,
+            "valLogLoss": 0.550603
+          },
+          {
+            "epoch": 37,
+            "trainLogLoss": 0.530176,
+            "valLogLoss": 0.550773
+          },
+          {
+            "epoch": 38,
+            "trainLogLoss": 0.529901,
+            "valLogLoss": 0.55022
+          },
+          {
+            "epoch": 39,
+            "trainLogLoss": 0.529585,
+            "valLogLoss": 0.550401
+          },
+          {
+            "epoch": 40,
+            "trainLogLoss": 0.529025,
+            "valLogLoss": 0.549813
+          },
+          {
+            "epoch": 41,
+            "trainLogLoss": 0.528601,
+            "valLogLoss": 0.550328
+          },
+          {
+            "epoch": 42,
+            "trainLogLoss": 0.528115,
+            "valLogLoss": 0.550368
+          },
+          {
+            "epoch": 43,
+            "trainLogLoss": 0.527749,
+            "valLogLoss": 0.550186
+          },
+          {
+            "epoch": 44,
+            "trainLogLoss": 0.527395,
+            "valLogLoss": 0.549451
+          },
+          {
+            "epoch": 45,
+            "trainLogLoss": 0.5269,
+            "valLogLoss": 0.550128
+          },
+          {
+            "epoch": 46,
+            "trainLogLoss": 0.526684,
+            "valLogLoss": 0.55041
+          },
+          {
+            "epoch": 47,
+            "trainLogLoss": 0.526011,
+            "valLogLoss": 0.549442
+          },
+          {
+            "epoch": 48,
+            "trainLogLoss": 0.525861,
+            "valLogLoss": 0.549325
+          },
+          {
+            "epoch": 49,
+            "trainLogLoss": 0.525204,
+            "valLogLoss": 0.549486
+          },
+          {
+            "epoch": 50,
+            "trainLogLoss": 0.525023,
+            "valLogLoss": 0.550335
+          }
+        ]
+      },
+      "valLogLossAfterRollback": 0.549325,
+      "rollbackConsistent": true,
+      "numericalChecks": {
+        "epochCurveChecks": 50,
+        "gradientBatchesChecked": 2150,
+        "gradientFinite": true,
+        "paramUpdatesChecked": 2150,
+        "paramsFiniteAfterUpdate": true
+      },
+      "memory": {
+        "sampledAt": "adamUpdate batch 边界主动采样（此为采样峰值，非进程级连续监测峰值）",
+        "memorySamples": 2150,
+        "rssPeakSampledBytes": 342228992,
+        "heapPeakSampledBytes": 143326128
+      },
+      "paramDigest": "f726ae096c465d351acc9db78c681d81eb38fb8c78fd29bf9b39a61f3cd6614b",
+      "adjacencySha256": null,
+      "hyperUsed": {
+        "embedDim": 32,
+        "hiddenSize": 68,
+        "dropout": 0.2,
+        "learningRate": 0.001,
+        "batchSize": 64,
+        "maxEpochs": 50,
+        "earlyStoppingPatience": 5,
+        "gradClipNorm": 5,
+        "seed": 45
+      }
+    },
+    "SelfLoop-DKT": {
+      "modelKey": "SelfLoop-DKT",
+      "mode": "selfloop",
+      "description": "SelfLoop-DKT：Anorm=I（仅逐节点编码器）",
+      "fingerprint": "sha256:f13558a4f1bcad06088b2a38e0c4a800a9963e5e39717c4c281f5471d473ca4a",
+      "paramCount": 33636,
+      "sequenceCounts": {
+        "train": 2752,
+        "validation": 590,
+        "test": 589
+      },
+      "supervisionCounts": {
+        "train": 186529,
+        "validation": 42565,
+        "test": 30832
+      },
+      "training": {
+        "epochsRun": 45,
+        "bestEpoch": 40,
+        "bestValLogLoss": 0.5503,
+        "stoppedEarly": true,
+        "fitSeconds": 626.8,
+        "curve": [
+          {
+            "epoch": 1,
+            "trainLogLoss": 0.661683,
+            "valLogLoss": 0.614668
+          },
+          {
+            "epoch": 2,
+            "trainLogLoss": 0.597191,
+            "valLogLoss": 0.584941
+          },
+          {
+            "epoch": 3,
+            "trainLogLoss": 0.574145,
+            "valLogLoss": 0.573675
+          },
+          {
+            "epoch": 4,
+            "trainLogLoss": 0.56531,
+            "valLogLoss": 0.56865
+          },
+          {
+            "epoch": 5,
+            "trainLogLoss": 0.560862,
+            "valLogLoss": 0.566751
+          },
+          {
+            "epoch": 6,
+            "trainLogLoss": 0.557551,
+            "valLogLoss": 0.564134
+          },
+          {
+            "epoch": 7,
+            "trainLogLoss": 0.554681,
+            "valLogLoss": 0.563443
+          },
+          {
+            "epoch": 8,
+            "trainLogLoss": 0.552,
+            "valLogLoss": 0.562141
+          },
+          {
+            "epoch": 9,
+            "trainLogLoss": 0.550249,
+            "valLogLoss": 0.562598
+          },
+          {
+            "epoch": 10,
+            "trainLogLoss": 0.548752,
+            "valLogLoss": 0.560872
+          },
+          {
+            "epoch": 11,
+            "trainLogLoss": 0.547769,
+            "valLogLoss": 0.558928
+          },
+          {
+            "epoch": 12,
+            "trainLogLoss": 0.546055,
+            "valLogLoss": 0.557899
+          },
+          {
+            "epoch": 13,
+            "trainLogLoss": 0.545266,
+            "valLogLoss": 0.557036
+          },
+          {
+            "epoch": 14,
+            "trainLogLoss": 0.544146,
+            "valLogLoss": 0.556583
+          },
+          {
+            "epoch": 15,
+            "trainLogLoss": 0.542971,
+            "valLogLoss": 0.558298
+          },
+          {
+            "epoch": 16,
+            "trainLogLoss": 0.54209,
+            "valLogLoss": 0.55492
+          },
+          {
+            "epoch": 17,
+            "trainLogLoss": 0.541276,
+            "valLogLoss": 0.554921
+          },
+          {
+            "epoch": 18,
+            "trainLogLoss": 0.54094,
+            "valLogLoss": 0.55604
+          },
+          {
+            "epoch": 19,
+            "trainLogLoss": 0.540199,
+            "valLogLoss": 0.555262
+          },
+          {
+            "epoch": 20,
+            "trainLogLoss": 0.540168,
+            "valLogLoss": 0.553466
+          },
+          {
+            "epoch": 21,
+            "trainLogLoss": 0.539175,
+            "valLogLoss": 0.55372
+          },
+          {
+            "epoch": 22,
+            "trainLogLoss": 0.538732,
+            "valLogLoss": 0.553637
+          },
+          {
+            "epoch": 23,
+            "trainLogLoss": 0.538132,
+            "valLogLoss": 0.553742
+          },
+          {
+            "epoch": 24,
+            "trainLogLoss": 0.537517,
+            "valLogLoss": 0.553918
+          },
+          {
+            "epoch": 25,
+            "trainLogLoss": 0.537212,
+            "valLogLoss": 0.552106
+          },
+          {
+            "epoch": 26,
+            "trainLogLoss": 0.536268,
+            "valLogLoss": 0.552501
+          },
+          {
+            "epoch": 27,
+            "trainLogLoss": 0.535944,
+            "valLogLoss": 0.552753
+          },
+          {
+            "epoch": 28,
+            "trainLogLoss": 0.535576,
+            "valLogLoss": 0.552639
+          },
+          {
+            "epoch": 29,
+            "trainLogLoss": 0.535259,
+            "valLogLoss": 0.551709
+          },
+          {
+            "epoch": 30,
+            "trainLogLoss": 0.535093,
+            "valLogLoss": 0.55262
+          },
+          {
+            "epoch": 31,
+            "trainLogLoss": 0.534471,
+            "valLogLoss": 0.551384
+          },
+          {
+            "epoch": 32,
+            "trainLogLoss": 0.533669,
+            "valLogLoss": 0.553545
+          },
+          {
+            "epoch": 33,
+            "trainLogLoss": 0.533327,
+            "valLogLoss": 0.550827
+          },
+          {
+            "epoch": 34,
+            "trainLogLoss": 0.532985,
+            "valLogLoss": 0.551849
+          },
+          {
+            "epoch": 35,
+            "trainLogLoss": 0.532564,
+            "valLogLoss": 0.55058
+          },
+          {
+            "epoch": 36,
+            "trainLogLoss": 0.531879,
+            "valLogLoss": 0.551328
+          },
+          {
+            "epoch": 37,
+            "trainLogLoss": 0.531734,
+            "valLogLoss": 0.550482
+          },
+          {
+            "epoch": 38,
+            "trainLogLoss": 0.531503,
+            "valLogLoss": 0.551957
+          },
+          {
+            "epoch": 39,
+            "trainLogLoss": 0.531098,
+            "valLogLoss": 0.550825
+          },
+          {
+            "epoch": 40,
+            "trainLogLoss": 0.530536,
+            "valLogLoss": 0.5503
+          },
+          {
+            "epoch": 41,
+            "trainLogLoss": 0.530435,
+            "valLogLoss": 0.551855
+          },
+          {
+            "epoch": 42,
+            "trainLogLoss": 0.530059,
+            "valLogLoss": 0.550886
+          },
+          {
+            "epoch": 43,
+            "trainLogLoss": 0.529361,
+            "valLogLoss": 0.550582
+          },
+          {
+            "epoch": 44,
+            "trainLogLoss": 0.52948,
+            "valLogLoss": 0.551883
+          },
+          {
+            "epoch": 45,
+            "trainLogLoss": 0.528967,
+            "valLogLoss": 0.55073
+          }
+        ]
+      },
+      "valLogLossAfterRollback": 0.5503,
+      "rollbackConsistent": true,
+      "numericalChecks": {
+        "epochCurveChecks": 44,
+        "gradientBatchesChecked": 1935,
+        "gradientFinite": true,
+        "paramUpdatesChecked": 1935,
+        "paramsFiniteAfterUpdate": true
+      },
+      "memory": {
+        "sampledAt": "adamUpdate batch 边界主动采样（此为采样峰值，非进程级连续监测峰值）",
+        "memorySamples": 1935,
+        "rssPeakSampledBytes": 368107520,
+        "heapPeakSampledBytes": 179698264
+      },
+      "paramDigest": "f0ab17fd4061ec3e0ae1f3240b4996b3e4d087089f31a4afb5f736248ddc3570",
+      "adjacencySha256": "sha256:2769c885faed7eeb65771bb3d6502052450861ee548f8c8bfe495c20c8f2cc1d",
+      "hyperUsed": {
+        "embedDim": 32,
+        "hiddenSize": 64,
+        "dropout": 0.2,
+        "learningRate": 0.001,
+        "batchSize": 64,
+        "maxEpochs": 50,
+        "earlyStoppingPatience": 5,
+        "gradClipNorm": 5,
+        "seed": 45
+      }
+    }
+  },
+  "earlyStopDisclosure": "本轮至少一组实际触发早停（见各模型 training.stoppedEarly / bestEpoch）；回滚后 val LogLoss 已逐组核对。",
+  "baselineReproduction": null,
+  "results": {
+    "Full-DKT": {
+      "n": 30832,
+      "AUC": 0.744,
+      "LogLoss": 0.5423,
+      "Brier": 0.1816,
+      "Accuracy": 0.7309,
+      "F1": 0.8169,
+      "positiveRate": 0.6746
+    },
+    "GCN-DKT": {
+      "n": 30832,
+      "AUC": 0.7422,
+      "LogLoss": 0.5431,
+      "Brier": 0.182,
+      "Accuracy": 0.7304,
+      "F1": 0.8181,
+      "positiveRate": 0.6746
+    },
+    "RandomGraph-DKT": {
+      "n": 30832,
+      "AUC": 0.7434,
+      "LogLoss": 0.5429,
+      "Brier": 0.1818,
+      "Accuracy": 0.7312,
+      "F1": 0.8176,
+      "positiveRate": 0.6746
+    },
+    "Larger-DKT": {
+      "n": 30832,
+      "AUC": 0.7435,
+      "LogLoss": 0.5427,
+      "Brier": 0.1815,
+      "Accuracy": 0.7317,
+      "F1": 0.8196,
+      "positiveRate": 0.6746
+    },
+    "SelfLoop-DKT": {
+      "n": 30832,
+      "AUC": 0.7432,
+      "LogLoss": 0.5437,
+      "Brier": 0.1821,
+      "Accuracy": 0.7293,
+      "F1": 0.8152,
+      "positiveRate": 0.6746
+    }
+  },
+  "calibration": {
+    "Full-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 433,
+        "meanPredicted": 0.0569,
+        "observedRate": 0.0924
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 800,
+        "meanPredicted": 0.1494,
+        "observedRate": 0.1675
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 1137,
+        "meanPredicted": 0.2539,
+        "observedRate": 0.3149
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1642,
+        "meanPredicted": 0.3518,
+        "observedRate": 0.3843
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 2306,
+        "meanPredicted": 0.4531,
+        "observedRate": 0.4892
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 3292,
+        "meanPredicted": 0.5531,
+        "observedRate": 0.5744
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 5033,
+        "meanPredicted": 0.6522,
+        "observedRate": 0.6612
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 6812,
+        "meanPredicted": 0.7524,
+        "observedRate": 0.7572
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 7090,
+        "meanPredicted": 0.8452,
+        "observedRate": 0.8467
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 2287,
+        "meanPredicted": 0.9303,
+        "observedRate": 0.9305
+      }
+    ],
+    "GCN-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 355,
+        "meanPredicted": 0.0654,
+        "observedRate": 0.0873
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 658,
+        "meanPredicted": 0.1555,
+        "observedRate": 0.1322
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 1003,
+        "meanPredicted": 0.2554,
+        "observedRate": 0.3151
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1616,
+        "meanPredicted": 0.3534,
+        "observedRate": 0.3762
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 2303,
+        "meanPredicted": 0.4539,
+        "observedRate": 0.4624
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 3253,
+        "meanPredicted": 0.5525,
+        "observedRate": 0.5579
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 4964,
+        "meanPredicted": 0.6539,
+        "observedRate": 0.6509
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 7204,
+        "meanPredicted": 0.7524,
+        "observedRate": 0.7586
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 7262,
+        "meanPredicted": 0.8469,
+        "observedRate": 0.8447
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 2214,
+        "meanPredicted": 0.9295,
+        "observedRate": 0.9246
+      }
+    ],
+    "RandomGraph-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 387,
+        "meanPredicted": 0.0665,
+        "observedRate": 0.0904
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 786,
+        "meanPredicted": 0.1512,
+        "observedRate": 0.1641
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 1041,
+        "meanPredicted": 0.2537,
+        "observedRate": 0.3189
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1614,
+        "meanPredicted": 0.3527,
+        "observedRate": 0.3755
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 2358,
+        "meanPredicted": 0.453,
+        "observedRate": 0.4741
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 3386,
+        "meanPredicted": 0.5532,
+        "observedRate": 0.5659
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 5101,
+        "meanPredicted": 0.6542,
+        "observedRate": 0.6675
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 6996,
+        "meanPredicted": 0.753,
+        "observedRate": 0.7593
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 7003,
+        "meanPredicted": 0.8455,
+        "observedRate": 0.8488
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 2160,
+        "meanPredicted": 0.9283,
+        "observedRate": 0.9269
+      }
+    ],
+    "Larger-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 422,
+        "meanPredicted": 0.0572,
+        "observedRate": 0.0995
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 783,
+        "meanPredicted": 0.1496,
+        "observedRate": 0.1622
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 998,
+        "meanPredicted": 0.2523,
+        "observedRate": 0.3036
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1477,
+        "meanPredicted": 0.3525,
+        "observedRate": 0.3751
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 2105,
+        "meanPredicted": 0.4532,
+        "observedRate": 0.4684
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 3119,
+        "meanPredicted": 0.5538,
+        "observedRate": 0.5463
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 4960,
+        "meanPredicted": 0.6528,
+        "observedRate": 0.6556
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 6809,
+        "meanPredicted": 0.7528,
+        "observedRate": 0.7455
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 7576,
+        "meanPredicted": 0.8475,
+        "observedRate": 0.8448
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 2583,
+        "meanPredicted": 0.9307,
+        "observedRate": 0.9117
+      }
+    ],
+    "SelfLoop-DKT": [
+      {
+        "range": "[0.0, 0.1)",
+        "n": 388,
+        "meanPredicted": 0.0668,
+        "observedRate": 0.0799
+      },
+      {
+        "range": "[0.1, 0.2)",
+        "n": 763,
+        "meanPredicted": 0.1504,
+        "observedRate": 0.1625
+      },
+      {
+        "range": "[0.2, 0.3)",
+        "n": 1167,
+        "meanPredicted": 0.251,
+        "observedRate": 0.3171
+      },
+      {
+        "range": "[0.3, 0.4)",
+        "n": 1717,
+        "meanPredicted": 0.3515,
+        "observedRate": 0.3943
+      },
+      {
+        "range": "[0.4, 0.5)",
+        "n": 2449,
+        "meanPredicted": 0.4529,
+        "observedRate": 0.4884
+      },
+      {
+        "range": "[0.5, 0.6)",
+        "n": 3466,
+        "meanPredicted": 0.5533,
+        "observedRate": 0.5718
+      },
+      {
+        "range": "[0.6, 0.7)",
+        "n": 5164,
+        "meanPredicted": 0.6529,
+        "observedRate": 0.6718
+      },
+      {
+        "range": "[0.7, 0.8)",
+        "n": 7248,
+        "meanPredicted": 0.7523,
+        "observedRate": 0.7674
+      },
+      {
+        "range": "[0.8, 0.9)",
+        "n": 6611,
+        "meanPredicted": 0.8451,
+        "observedRate": 0.8566
+      },
+      {
+        "range": "[0.9, 1.0)",
+        "n": 1859,
+        "meanPredicted": 0.9282,
+        "observedRate": 0.9279
+      }
+    ]
+  },
+  "bootstrap": {
+    "reps": 2000,
+    "units": 589,
+    "unitRule": "学生级聚类 bootstrap（重采样单位 = test 学生），同一批权重用于五组 → 天然配对",
+    "ciRule": "CI 存未舍入百分位（2.5/97.5）；方向/显著性标志由未舍入值判定（*CI4 仅作展示，不参与判定）",
+    "ci": {
+      "Full-DKT": {
+        "AUC": [
+          0.7297,
+          0.7581
+        ],
+        "LogLoss": [
+          0.5263,
+          0.5566
+        ],
+        "Brier": [
+          0.1749,
+          0.1877
+        ],
+        "Accuracy": [
+          0.7173,
+          0.7448
+        ],
+        "precise": {
+          "AUC": [
+            0.7297184636877888,
+            0.7580855489428552
+          ],
+          "LogLoss": [
+            0.5263174952019616,
+            0.5565815189063814
+          ],
+          "Brier": [
+            0.17485003845515926,
+            0.1877092507663782
+          ],
+          "Accuracy": [
+            0.7172883574508006,
+            0.7448141411947645
+          ]
+        },
+        "draws": 2000
+      },
+      "GCN-DKT": {
+        "AUC": [
+          0.7278,
+          0.7565
+        ],
+        "LogLoss": [
+          0.527,
+          0.557
+        ],
+        "Brier": [
+          0.1752,
+          0.188
+        ],
+        "Accuracy": [
+          0.717,
+          0.7442
+        ],
+        "precise": {
+          "AUC": [
+            0.727799852815546,
+            0.7564898151101809
+          ],
+          "LogLoss": [
+            0.5269663520269461,
+            0.5570492858284254
+          ],
+          "Brier": [
+            0.1751685123912041,
+            0.18802993796469528
+          ],
+          "Accuracy": [
+            0.7169755901719836,
+            0.7442074342004191
+          ]
+        },
+        "draws": 2000
+      },
+      "RandomGraph-DKT": {
+        "AUC": [
+          0.7286,
+          0.7576
+        ],
+        "LogLoss": [
+          0.5269,
+          0.557
+        ],
+        "Brier": [
+          0.175,
+          0.1879
+        ],
+        "Accuracy": [
+          0.7177,
+          0.7452
+        ],
+        "precise": {
+          "AUC": [
+            0.7286449871266903,
+            0.7575794696169105
+          ],
+          "LogLoss": [
+            0.52686037862126,
+            0.5570463450454669
+          ],
+          "Brier": [
+            0.17497731326606694,
+            0.1878775108059955
+          ],
+          "Accuracy": [
+            0.7176817516878171,
+            0.7451617923191202
+          ]
+        },
+        "draws": 2000
+      },
+      "Larger-DKT": {
+        "AUC": [
+          0.729,
+          0.7578
+        ],
+        "LogLoss": [
+          0.5264,
+          0.557
+        ],
+        "Brier": [
+          0.1746,
+          0.1877
+        ],
+        "Accuracy": [
+          0.7176,
+          0.746
+        ],
+        "precise": {
+          "AUC": [
+            0.7289847782186112,
+            0.7577941698585324
+          ],
+          "LogLoss": [
+            0.5263732271079498,
+            0.5569921573023937
+          ],
+          "Brier": [
+            0.1745826714014291,
+            0.18765375472306475
+          ],
+          "Accuracy": [
+            0.7176460159994161,
+            0.7459944138035951
+          ]
+        },
+        "draws": 2000
+      },
+      "SelfLoop-DKT": {
+        "AUC": [
+          0.7289,
+          0.7573
+        ],
+        "LogLoss": [
+          0.5279,
+          0.5576
+        ],
+        "Brier": [
+          0.1754,
+          0.1882
+        ],
+        "Accuracy": [
+          0.7156,
+          0.7433
+        ],
+        "precise": {
+          "AUC": [
+            0.7288736503712159,
+            0.7573355971872785
+          ],
+          "LogLoss": [
+            0.5278665294750623,
+            0.5576437727034204
+          ],
+          "Brier": [
+            0.175353458847164,
+            0.1882321580339607
+          ],
+          "Accuracy": [
+            0.7155889746315867,
+            0.7432741266371924
+          ]
+        },
+        "draws": 2000
+      }
+    },
+    "comparisons": [
+      {
+        "comparison": "GCN-DKT − Full-DKT",
+        "dAUC": -0.001728842154895327,
+        "dAUCCI": [
+          -0.003420768816096859,
+          -0.000042481749798806155
+        ],
+        "dAUCCI4": [
+          -0.0034,
+          0
+        ],
+        "dAUCBootstrapMean": -0.0017232036945487013,
+        "dLogLoss": 0.0007835564057906419,
+        "dLogLossCI": [
+          -0.0005195883695974096,
+          0.0020965251313074364
+        ],
+        "dLogLossCI4": [
+          -0.0005,
+          0.0021
+        ],
+        "dLogLossBootstrapMean": 0.0007749049012043257,
+        "ciAvailable": true,
+        "aucExcludesZero": true,
+        "aucCISupportsGCN": false,
+        "logLossExcludesZero": false,
+        "logLossCISupportsGCN": false,
+        "pointEstimateAvailable": true,
+        "dAUCValidDraws": 2000,
+        "dLogLossValidDraws": 2000,
+        "units": 589,
+        "ciRounding": "raw（percentile 2.5/97.5，未舍入）",
+        "ciNote": null
+      },
+      {
+        "comparison": "GCN-DKT − RandomGraph-DKT",
+        "dAUC": -0.0011647485697313664,
+        "dAUCCI": [
+          -0.0024232270622693702,
+          0.000138216951077126
+        ],
+        "dAUCCI4": [
+          -0.0024,
+          0.0001
+        ],
+        "dAUCBootstrapMean": -0.0011450001681133106,
+        "dLogLoss": 0.00023099584629204806,
+        "dLogLossCI": [
+          -0.0007117119924341303,
+          0.0011320741472171658
+        ],
+        "dLogLossCI4": [
+          -0.0007,
+          0.0011
+        ],
+        "dLogLossBootstrapMean": 0.00021938555336309596,
+        "ciAvailable": true,
+        "aucExcludesZero": false,
+        "aucCISupportsGCN": false,
+        "logLossExcludesZero": false,
+        "logLossCISupportsGCN": false,
+        "pointEstimateAvailable": true,
+        "dAUCValidDraws": 2000,
+        "dLogLossValidDraws": 2000,
+        "units": 589,
+        "ciRounding": "raw（percentile 2.5/97.5，未舍入）",
+        "ciNote": null
+      },
+      {
+        "comparison": "GCN-DKT − SelfLoop-DKT",
+        "dAUC": -0.0009520340173451158,
+        "dAUCCI": [
+          -0.0023931873407005396,
+          0.0004027354595156967
+        ],
+        "dAUCCI4": [
+          -0.0024,
+          0.0004
+        ],
+        "dAUCBootstrapMean": -0.0009316107502434705,
+        "dLogLoss": -0.0005364461175955126,
+        "dLogLossCI": [
+          -0.0016292354274658305,
+          0.0006086138289010075
+        ],
+        "dLogLossCI4": [
+          -0.0016,
+          0.0006
+        ],
+        "dLogLossBootstrapMean": -0.0005442439577736338,
+        "ciAvailable": true,
+        "aucExcludesZero": false,
+        "aucCISupportsGCN": false,
+        "logLossExcludesZero": false,
+        "logLossCISupportsGCN": false,
+        "pointEstimateAvailable": true,
+        "dAUCValidDraws": 2000,
+        "dLogLossValidDraws": 2000,
+        "units": 589,
+        "ciRounding": "raw（percentile 2.5/97.5，未舍入）",
+        "ciNote": null
+      },
+      {
+        "comparison": "GCN-DKT − Larger-DKT",
+        "dAUC": -0.0012866334787207112,
+        "dAUCCI": [
+          -0.0037741860375046592,
+          0.0010647784144357097
+        ],
+        "dAUCCI4": [
+          -0.0038,
+          0.0011
+        ],
+        "dAUCBootstrapMean": -0.0013123135273089305,
+        "dLogLoss": 0.0004480435268334748,
+        "dLogLossCI": [
+          -0.0014585992254784852,
+          0.0025474864178023546
+        ],
+        "dLogLossCI4": [
+          -0.0015,
+          0.0025
+        ],
+        "dLogLossBootstrapMean": 0.00046412207067701966,
+        "ciAvailable": true,
+        "aucExcludesZero": false,
+        "aucCISupportsGCN": false,
+        "logLossExcludesZero": false,
+        "logLossCISupportsGCN": false,
+        "pointEstimateAvailable": true,
+        "dAUCValidDraws": 2000,
+        "dLogLossValidDraws": 2000,
+        "units": 589,
+        "ciRounding": "raw（percentile 2.5/97.5，未舍入）",
+        "ciNote": null
+      }
+    ]
+  },
+  "statisticsRevision": {
+    "stage": "D-restat",
+    "revisedAt": "2026-11-02T02:52:18.802Z",
+    "nodeVersion": "v22.22.2",
+    "reason": "聚合主表精度修正（2026-11-02 审计 P2）：聚合器改从落盘预测以 evaluateMetricsPrecise 重算未舍入单种子指标再聚合；本次 restat 仅刷新统计实现哈希留痕，预测与训练结果未变，未重训。",
+    "previousStatisticsSha256": "sha256:954817657a9544b8afaa711641fce2029ef16e529d3fa1bde0a02d4de16d21e7",
+    "noRetraining": true,
+    "predictionsSha256": "sha256:bcb19f97e4d855982deee450bff8ce11302c05c7c5b50ac097573a43d1426dda",
+    "predictionsUnchanged": true,
+    "trainingImplementationHash": "sha256:0710f413864dc78bc418cd2047008b0f53746c42effd94a27dbd77ce25c796a0",
+    "trainingSourceHashes": {
+      "dkt.js": "sha256:f6acfa26794d5fe679550d253c8e7ee854c4debe079b029926f7d872b4fa38f9",
+      "graphDkt.js": "sha256:aca2d2a83c8bb2adc8b6bffb7a664d93b12b3a744435f961563acd5dea67ed19",
+      "graphDktExperiment.js": "sha256:51e7e45465caa6312d0fc6879fe99ade2a9af88201f3a1221b85d408456c2134",
+      "baselineEval.js": "sha256:14795292beb35aac76d3ea64ac204834f6db7c683446fa9de336450a28ee3bb6",
+      "bootstrapStats.js": "sha256:dfcc9caa6f81e3b754c172769491c022d5a0634bf0a6256b5957dc1984e75dc4"
+    },
+    "statisticsImplementationHash": "sha256:ebbcb582225965b1fee21b15a0de9ab1e62f52a33a708ea1c7ec28b8241b6578",
+    "statisticsSourceHashes": {
+      "dkt.js": "sha256:f6acfa26794d5fe679550d253c8e7ee854c4debe079b029926f7d872b4fa38f9",
+      "graphDkt.js": "sha256:aca2d2a83c8bb2adc8b6bffb7a664d93b12b3a744435f961563acd5dea67ed19",
+      "graphDktExperiment.js": "sha256:d000bead1a22691b284636d2907d445ba7ea864917076a213da5592a75bfe8c0",
+      "baselineEval.js": "sha256:32a943efda5186c1d4a1f1efa5db93c6191389ff9fb182784cd8c6e86b58bc71",
+      "bootstrapStats.js": "sha256:dfcc9caa6f81e3b754c172769491c022d5a0634bf0a6256b5957dc1984e75dc4"
+    },
+    "history": []
+  }
+}

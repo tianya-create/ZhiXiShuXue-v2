@@ -128,3 +128,6 @@ frontend/.verify-build*/
 # 消融实验断点（临时产物，逐目标预测全量 JSON，约 25MB/个）
 backend/实验结果文件/ablation-checkpoint-*.json
 ablation-checkpoint-*.json
+
+# 阶段D 训练缓存（checkpoint 指纹与逐目标预测断点；按方案不入库，是否入库由用户决定）
+backend/实验结果文件/gcn-dkt-v1/cache/

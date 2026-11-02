@@ -31,7 +31,13 @@ function rocAUC(pairs) {
   return (rankSumPos - pos * (pos + 1) / 2) / (pos * neg);
 }
 
-function evaluateMetrics(rows) {
+/**
+ * 未舍入指标（原始精度）：AUC/LogLoss/Brier/Accuracy/F1/positiveRate 均不做 toFixed。
+ * 用途：跨种子聚合必须从落盘预测重算「未舍入」单种子指标——results.json 里按惯例
+ * 存 4 位展示值，直接拿它求均值/标准差会污染聚合主表第 4 位小数
+ * （例：Full 平均 LogLoss 存储值口径 0.5384 vs 预测重算口径 0.5385，2026-11-02 审计 P2）。
+ */
+function evaluateMetricsPrecise(rows) {
   const eps = params.logLossEps;
   const n = rows.length;
   if (!n) return { n: 0 };
@@ -53,12 +59,27 @@ function evaluateMetrics(rows) {
   const recall = tp + fn ? tp / (tp + fn) : 0;
   return {
     n,
-    AUC: auc === null ? null : Number(auc.toFixed(4)),
-    LogLoss: Number((logLoss / n).toFixed(4)),
-    Brier: Number((brier / n).toFixed(4)),
-    Accuracy: Number(((tp + tn) / n).toFixed(4)),
-    F1: precision + recall ? Number((2 * precision * recall / (precision + recall)).toFixed(4)) : 0,
-    positiveRate: Number((rows.filter((r) => r.target === 1).length / n).toFixed(4))
+    AUC: auc, // 样本只有一类时为 null（与 evaluateMetrics 口径一致）
+    LogLoss: logLoss / n,
+    Brier: brier / n,
+    Accuracy: (tp + tn) / n,
+    F1: precision + recall ? 2 * precision * recall / (precision + recall) : 0,
+    positiveRate: rows.filter((r) => r.target === 1).length / n
+  };
+}
+
+function evaluateMetrics(rows) {
+  const raw = evaluateMetricsPrecise(rows);
+  if (!raw.n) return raw;
+  const r4 = (v) => (v === null || v === undefined ? v : Number(v.toFixed(4)));
+  return {
+    n: raw.n,
+    AUC: r4(raw.AUC),
+    LogLoss: r4(raw.LogLoss),
+    Brier: r4(raw.Brier),
+    Accuracy: r4(raw.Accuracy),
+    F1: r4(raw.F1),
+    positiveRate: r4(raw.positiveRate)
   };
 }
 
@@ -482,6 +503,7 @@ if (require.main === module) main();
 
 module.exports = {
   evaluateMetrics,
+  evaluateMetricsPrecise,
   rocAUC,
   groupByStudentKp,
   walkForward,
