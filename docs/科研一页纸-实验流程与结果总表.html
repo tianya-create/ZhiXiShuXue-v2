@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>知识追踪模型与稀疏图结构的受控实证研究 · 一页总览</title>
+<style>
+  :root{
+    --ink:#1f2430; --muted:#5b6472; --line:#d8dde6; --bg:#ffffff;
+    --panel:#f5f7fa; --blue:#2563eb; --green:#15803d; --red:#b91c1c; --amber:#b45309;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:"Source Han Sans SC","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+    color:var(--ink); background:#e9edf3; padding:24px 0;
+  }
+  .page{
+    width:900px; min-height:1240px; margin:0 auto; background:var(--bg);
+    padding:44px 48px; box-shadow:0 2px 14px rgba(0,0,0,.12);
+  }
+  h1{font-size:24px; letter-spacing:.5px;}
+  .sub{color:var(--muted); font-size:12.5px; margin-top:6px; line-height:1.6;}
+  .divider{border:none; border-top:2px solid var(--ink); margin:16px 0 18px;}
+  h2{font-size:15px; margin:20px 0 10px; display:flex; align-items:center; gap:8px;}
+  h2::before{content:""; width:4px; height:15px; background:var(--blue); display:inline-block; border-radius:2px;}
+  /* ---------- 流程图 ---------- */
+  .flow{width:100%;}
+  .stage-label{font-size:12px; font-weight:600; fill:var(--muted); letter-spacing:1px;}
+  .box-title{font-size:12.5px; font-weight:700; fill:var(--ink);}
+  .box-note{font-size:10px; fill:var(--muted);}
+  .arrow{stroke:#8b95a5; stroke-width:1.6; fill:none; marker-end:url(#ah);}
+  /* ---------- 表格 ---------- */
+  table{width:100%; border-collapse:collapse; font-size:12px; margin-top:6px;}
+  th{background:var(--panel); font-weight:700; text-align:left; padding:6px 8px; border:1px solid var(--line);}
+  td{padding:5.5px 8px; border:1px solid var(--line); vertical-align:top; line-height:1.5;}
+  .num{font-variant-numeric:tabular-nums; text-align:right;}
+  .best{color:var(--green); font-weight:700;}
+  .fail{color:var(--red); font-weight:700;}
+  .tag{display:inline-block; padding:1px 7px; border-radius:9px; font-size:10.5px; font-weight:600; margin:0 2px;}
+  .tag-pass{background:#e7f5ec; color:var(--green); border:1px solid #b5dfc5;}
+  .tag-fail{background:#fdeaea; color:var(--red); border:1px solid #f0c2c2;}
+  .cols{display:flex; gap:18px;}
+  .cols > div{flex:1;}
+  .finding{background:var(--panel); border-left:4px solid var(--blue); padding:10px 14px; font-size:12.5px; line-height:1.75; margin-top:8px;}
+  .finding b{color:var(--blue);}
+  .footer{margin-top:22px; padding-top:10px; border-top:1px solid var(--line); color:var(--muted); font-size:10.5px; line-height:1.7;}
+  @media print{ body{background:#fff; padding:0;} .page{box-shadow:none; width:100%; min-height:auto; padding:32px 40px;} }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>知识追踪模型与稀疏图结构的受控实证研究</h1>
+  <div class="sub">
+    ASSISTments2009（266,948 交互 · 3,931 学生 · 100 知识点 · 序列中位数 6）｜ 5 随机种子（42–46）· 25 次正式拟合 · 学生级配对 bootstrap（2,000 reps）· 独立审计 164/164 × 5 ｜ 协议与阈值见 test 前冻结的 experiment-config.json
+  </div>
+  <hr class="divider">
+
+  <h2>一、实验流程</h2>
+  <svg class="flow" viewBox="0 0 804 300" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="ah" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+        <path d="M0,0 L7,3.5 L0,7 Z" fill="#8b95a5"/>
+      </marker>
+    </defs>
+    <!-- row 1 -->
+    <text x="0" y="16" class="stage-label">① 数据与协议</text>
+    <g>
+      <rect x="0" y="24" width="150" height="52" rx="6" fill="#eef3fb" stroke="#a9c2e8"/>
+      <text x="75" y="45" text-anchor="middle" class="box-title">原始 CSV（SHA-256 固定）</text>
+      <text x="75" y="62" text-anchor="middle" class="box-note">清洗：266,948 行 / 3,931 学生</text>
+    </g>
+    <path class="arrow" d="M150,50 L176,50"/>
+    <g>
+      <rect x="178" y="24" width="150" height="52" rx="6" fill="#eef3fb" stroke="#a9c2e8"/>
+      <text x="253" y="45" text-anchor="middle" class="box-title">学生级 70/15/15</text>
+      <text x="253" y="62" text-anchor="middle" class="box-note">train 2752 / val 590 / test 589</text>
+    </g>
+    <path class="arrow" d="M328,50 L354,50"/>
+    <g>
+      <rect x="356" y="24" width="150" height="52" rx="6" fill="#eef3fb" stroke="#a9c2e8"/>
+      <text x="431" y="45" text-anchor="middle" class="box-title">train-only 共标注图</text>
+      <text x="431" y="62" text-anchor="middle" class="box-note">100 节点 · 42 边 · 64 孤立</text>
+    </g>
+    <path class="arrow" d="M506,50 L532,50"/>
+    <g>
+      <rect x="534" y="24" width="150" height="52" rx="6" fill="#eef3fb" stroke="#a9c2e8"/>
+      <text x="609" y="45" text-anchor="middle" class="box-title">冻结配置 + 缓存指纹</text>
+      <text x="609" y="62" text-anchor="middle" class="box-note">阈值/超参/哈希，test 前锁死</text>
+    </g>
+    <!-- row 2 -->
+    <text x="0" y="116" class="stage-label">② 三条证据链（每种子 × 每模型一次性完整训练）</text>
+    <g>
+      <rect x="0" y="126" width="190" height="62" rx="6" fill="#f4f9f4" stroke="#b3d6ba"/>
+      <text x="95" y="147" text-anchor="middle" class="box-title">演进链（5 种子）</text>
+      <text x="95" y="163" text-anchor="middle" class="box-note">Majority → Rule-0 → BKT</text>
+      <text x="95" y="177" text-anchor="middle" class="box-note">→ GRU-DKT</text>
+    </g>
+    <g>
+      <rect x="212" y="126" width="190" height="62" rx="6" fill="#f4f9f4" stroke="#b3d6ba"/>
+      <text x="307" y="147" text-anchor="middle" class="box-title">输入消融（5 种子）</text>
+      <text x="307" y="163" text-anchor="middle" class="box-note">Same-KP / Shuffled-KP</text>
+      <text x="307" y="177" text-anchor="middle" class="box-note">/ NoResponse（vs Full）</text>
+    </g>
+    <g>
+      <rect x="424" y="126" width="220" height="62" rx="6" fill="#f4f9f4" stroke="#b3d6ba"/>
+      <text x="534" y="147" text-anchor="middle" class="box-title">图五组对照（5 种子 = 25 次拟合）</text>
+      <text x="534" y="163" text-anchor="middle" class="box-note">Full / GCN(真实图) / RandomGraph</text>
+      <text x="534" y="177" text-anchor="middle" class="box-note">/ SelfLoop / Larger(容量对照)</text>
+    </g>
+    <g>
+      <rect x="666" y="126" width="138" height="62" rx="6" fill="#fdf6ec" stroke="#e5c9a0"/>
+      <text x="735" y="147" text-anchor="middle" class="box-title">训练产物落盘</text>
+      <text x="735" y="163" text-anchor="middle" class="box-note">targets / predictions</text>
+      <text x="735" y="177" text-anchor="middle" class="box-note">curves / results（哈希绑定）</text>
+    </g>
+    <path class="arrow" d="M190,157 L212,157"/>
+    <path class="arrow" d="M402,157 L424,157"/>
+    <path class="arrow" d="M644,157 L666,157"/>
+    <!-- row 3 -->
+    <text x="0" y="222" class="stage-label">③ 统计与审计闭环（不信任脚本内缓存）</text>
+    <g>
+      <rect x="0" y="232" width="186" height="56" rx="6" fill="#f6f2fb" stroke="#cdbce8"/>
+      <text x="93" y="253" text-anchor="middle" class="box-title">配对 bootstrap</text>
+      <text x="93" y="270" text-anchor="middle" class="box-note">学生级聚类 · 2000 reps · 589 units</text>
+    </g>
+    <path class="arrow" d="M186,260 L212,260"/>
+    <g>
+      <rect x="214" y="232" width="186" height="56" rx="6" fill="#f6f2fb" stroke="#cdbce8"/>
+      <text x="307" y="253" text-anchor="middle" class="box-title">独立审计器（不加载模型）</text>
+      <text x="307" y="270" text-anchor="middle" class="box-note">从预测重算指标/校准/CI，164 项/种子</text>
+    </g>
+    <path class="arrow" d="M400,260 L426,260"/>
+    <g>
+      <rect x="428" y="232" width="186" height="56" rx="6" fill="#f6f2fb" stroke="#cdbce8"/>
+      <text x="521" y="253" text-anchor="middle" class="box-title">restat 修订留痕</text>
+      <text x="521" y="270" text-anchor="middle" class="box-note">复用预测重算 · 不重训 · 哈希历史</text>
+    </g>
+    <path class="arrow" d="M614,260 L640,260"/>
+    <g>
+      <rect x="642" y="232" width="162" height="56" rx="6" fill="#f6f2fb" stroke="#cdbce8"/>
+      <text x="723" y="253" text-anchor="middle" class="box-title">五种子聚合（四道闸门）</text>
+      <text x="723" y="270" text-anchor="middle" class="box-note">哈希/标志/CI/实现哈希校验</text>
+    </g>
+  </svg>
+
+  <h2>二、结果总表 A：模型演进（test，5 种子 mean ± 总体 std）</h2>
+  <table>
+    <tr><th style="width:24%">模型</th><th class="num" style="width:22%">AUC</th><th class="num" style="width:22%">LogLoss</th><th>说明</th></tr>
+    <tr><td>Majority</td><td class="num">0.5437 ± 0.0099</td><td class="num">0.6335 ± 0.0041</td><td>恒猜全局正确率（下界）</td></tr>
+    <tr><td>Rule-0（在线规则掌握度）</td><td class="num">0.7010 ± 0.0055</td><td class="num">0.5961 ± 0.0044</td><td>平台现行掌握度公式离线复算</td></tr>
+    <tr><td>BKT</td><td class="num">0.7157 ± 0.0061</td><td class="num">0.5588 ± 0.0051</td><td>逐知识点 2 参数贝叶斯估计</td></tr>
+    <tr><td class="best">GRU-DKT</td><td class="num best">0.7444 ± 0.0049</td><td class="num best">0.5384 ± 0.0039</td><td>单层 GRU，跨知识点共享序列（最强）</td></tr>
+  </table>
+
+  <h2>三、结果总表 B：输入消融（Full − 消融，五种子全部 5/5 方向一致 + CI 支持）</h2>
+  <table>
+    <tr><th style="width:26%">变体</th><th class="num" style="width:20%">AUC</th><th class="num" style="width:20%">ΔAUC（Full 优势）</th><th>归因</th></tr>
+    <tr><td>Full-DKT</td><td class="num">0.7444 ± 0.0049</td><td class="num">—</td><td>参照</td></tr>
+    <tr><td>Same-KP-DKT（仅同知识点历史）</td><td class="num">0.7342 ± 0.0047</td><td class="num">+0.0102</td><td>知识点身份有独立贡献</td></tr>
+    <tr><td>Shuffled-KP-DKT（置换历史 KP 标签）</td><td class="num">0.7144 ± 0.0038</td><td class="num">+0.0300</td><td>跨知识点时序有独立贡献</td></tr>
+    <tr><td>NoResponse-DKT（移除对错信号）</td><td class="num">0.6767 ± 0.0064</td><td class="num"><b>+0.0677</b></td><td><b>response 历史是主要预测信号</b></td></tr>
+  </table>
+
+  <h2>四、结果总表 C：图五组对照（gcn-dkt-v1，未舍入重算口径）</h2>
+  <table>
+    <tr><th style="width:20%">模型</th><th class="num" style="width:20%">AUC</th><th class="num" style="width:22%">LogLoss</th><th>GCN − X ΔAUC（正/CI 支持种子数）</th><th style="width:9%">判定</th></tr>
+    <tr><td class="best">Full-DKT（无图）</td><td class="num best">0.74442 ± 0.00487</td><td class="num best">0.53845 ± 0.00391</td><td class="num">−0.000742（1/5 正 · 0/5 CI）</td><td><span class="tag tag-pass">保留基线</span></td></tr>
+    <tr><td>GCN-DKT（真实图）</td><td class="num">0.74368 ± 0.00463</td><td class="num">0.53859 ± 0.00396</td><td>—（主假设组）</td><td><span class="tag tag-fail">未达标</span></td></tr>
+    <tr><td>RandomGraph-DKT</td><td class="num">0.74373 ± 0.00484</td><td class="num">0.53874 ± 0.00386</td><td class="num">−0.000055（2/5 正 · 1/5 CI）</td><td><span class="tag tag-fail">≈随机</span></td></tr>
+    <tr><td>SelfLoop-DKT</td><td class="num">0.74365 ± 0.00448</td><td class="num">0.53898 ± 0.00383</td><td class="num">跨零（0/5 CI）</td><td><span class="tag tag-fail">≈自环</span></td></tr>
+    <tr><td>Larger-DKT（容量对照）</td><td class="num">0.74322 ± 0.00470</td><td class="num">0.53907 ± 0.00412</td><td class="num">负向（0/5 CI）</td><td><span class="tag tag-fail">非容量</span></td></tr>
+  </table>
+  <div class="sub" style="margin-top:6px">冻结筛选标准（GCN 升级）：平均 AUC 增益 ≥ +0.002、LogLoss 劣化 ≤ +0.001、AUC 点差 ≥4/5 种子为正、配对 CI 支持 ≥3/5 种子 —— <b style="color:var(--red)">四项比较全部未达标准，其中三项方向性证据为负。</b></div>
+
+  <h2>五、核心发现</h2>
+  <div class="finding">
+    <b>① response 历史是主要预测信号</b>（ΔAUC +0.0677，5/5 CI 显著），知识点身份与时序次之（+0.0102 / +0.0300，均 5/5）。<br>
+    <b>② 稀疏共标注图未产生稳定增益</b>：GCN−Full 平均 −0.000742；真图 ≈ 随机图、≈ 自环，容量对照排除"参数不足"。机制：42 边 / 64 孤立节点 / 约 50% test 目标在有邻边节点上，且序列中位数仅 6，GRU 序列信号已近饱和。<br>
+    <b>③ 结论为有条件否定</b>（单一数据集 × 单一图构造 × n=5），不外推为"图增强一律无效"；Full-DKT 进入推荐模块候选基线，不在本数据集继续调图追正结果。
+  </div>
+
+  <div class="footer">
+    复现：环境 Node ≥ 22.13（实验实际 v22.22.2 / win32 x64）；入口 backend/scripts/buildAssist2009SkillGraph.js 与 backend/models/*.js；命令与许可详见 docs/复现指南与许可说明.md。
+    数据：ASSISTments 2009-2010 Skill Builder，限学术研究使用（成果引用 ASSISTments 团队），原始 CSV 不入 git。
+    统计实现哈希 ebbcb582…（五种子一致）；阶段 D 提交 58ec8a3，阶段 E 报告 80618dc。
+  </div>
+</div>
+</body>
+</html>
