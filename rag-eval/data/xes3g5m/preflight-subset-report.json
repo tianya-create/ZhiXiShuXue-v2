@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-11-12T02:21:47.019Z",
+  "input": {
+    "questionsPath": "D:\\迅雷云盘\\WorkBuddy\\2026-10-28-23-41-59\\rag-eval\\data\\xes3g5m\\kt4eqg\\data\\dataset\\XES3G5M\\zh_question_info.json",
+    "questionsJsonSha256": "sha256:758c51a96111425aeec4baa6c6a8c0d0a9b60b5ec7d82b00eed555a58d59297d"
+  },
+  "source": {
+    "dataset": "XES3G5M",
+    "license": "MIT",
+    "officialSource": "https://github.com/ai4ed/XES3G5M",
+    "note": "原始数据由 TAL 通过 Google Drive 分发；使用即视为同意其许可。",
+    "subsetCaveat": "来自 HF Gyikoo/KT4EQG-data（无解析/答案，content 多为英译），仅管道验证用"
+  },
+  "mode": "subset",
+  "corpusStats": {
+    "questionsTotal": 7618,
+    "docsKept": 7618,
+    "dropped": 0,
+    "charMin": 18,
+    "charMedian": 184,
+    "charMax": 979
+  },
+  "chunkStats": {
+    "chunkCount": 9228,
+    "perDocMean": "1.21",
+    "charMin": 18,
+    "charMedian": 176,
+    "charMax": 300,
+    "size": 300,
+    "overlap": 40
+  },
+  "docClusters": {
+    "count": 7433,
+    "multiMember": 158,
+    "multiMemberCoverage": 343
+  },
+  "selfRetrieval": {
+    "n": 500,
+    "recallAt1": "0.7920",
+    "recallAt10": "0.9820"
+  },
+  "coverage": {
+    "answerInCorpusRate": null,
+    "degraded": true,
+    "note": "subset 无 answer/analysis，无法计算覆盖率三口径；仅作管道验证，不得用于正式评测"
+  },
+  "dropped": [],
+  "droppedTotal": 0
+}

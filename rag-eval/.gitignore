@@ -1,0 +1,24 @@
+# 依赖与密钥
+node_modules/
+.env
+*.key
+
+# 大数据（可重新下载，不入库）
+data/xes3g5m/*.tar.gz
+data/xes3g5m/XES3G5M/
+
+# 运行期日志（体积大、可由脚本重建）
+data/stage0/**/responses.jsonl
+data/stage0/**/contexts.jsonl
+
+# 数据集大文件（原始压缩包、parquet、解压目录、题面元数据）——按 README 自行下载
+data/xes3g5m/kt4eqg/
+data/xes3g5m/metadata/
+data/xes3g5m/*.parquet
+
+# 下载过程的临时凭据/页面（禁止入库）
+gd_cookies.txt
+gd_page.html
+
+# 父仓库 .gitignore 全局忽略 *.csv；本目录下的人工评分表与结果表是评测证据，必须入库
+!*.csv

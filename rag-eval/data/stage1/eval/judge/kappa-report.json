@@ -1,0 +1,270 @@
+{
+  "generatedAt": "2026-11-12T09:43:17.156Z",
+  "complete": true,
+  "n": {
+    "rated": 201,
+    "expected": 201,
+    "mainRated": 195,
+    "mainExpected": 195,
+    "enrichedRated": 6,
+    "missing": 0,
+    "invalid": 0,
+    "unknown": 0
+  },
+  "missing": [],
+  "invalid": [],
+  "unknown": [],
+  "agreement": {
+    "po": 0.958974358974359,
+    "pe": 0.4834976988823143,
+    "cohenKappa": 0.9205702647657842,
+    "cohenKappaCI": [
+      0.8518372184907154,
+      0.9790482558787473
+    ],
+    "weightedKappaQuadratic": 0.969846067336754,
+    "weightedKappaQuadraticCI": [
+      0.9374926009234048,
+      0.9921612241889882
+    ],
+    "weightedKappaLinear": 0.9523162613775302,
+    "gwetAC1": 0.9447087907706213,
+    "pabak": 0.917948717948718,
+    "bootstrap": {
+      "reps": 2000,
+      "nClusters": 142,
+      "unit": "queryId"
+    }
+  },
+  "binaryDiagnostics": {
+    "bothRight": 115,
+    "bothWrong": 74,
+    "judgeOnlyRight": 1,
+    "humanOnlyRight": 5,
+    "prevalenceIndex": 0.9384615384615385,
+    "biasIndex": 0.020512820512820513,
+    "note": "prevalenceIndex 大 = 分布偏斜会压低 κ；biasIndex 大 = 一方系统性更宽松"
+  },
+  "confusion": [
+    [
+      74,
+      0,
+      1
+    ],
+    [
+      5,
+      3,
+      2
+    ],
+    [
+      0,
+      0,
+      110
+    ]
+  ],
+  "byArm": {
+    "N": {
+      "n": 50,
+      "po": 0.96,
+      "kappa": 0.9266862170087976,
+      "kappaNote": null,
+      "meanJudge": 0.84,
+      "meanHuman": 0.88,
+      "meanSignedBias": -0.04,
+      "dist": {
+        "human": [
+          26,
+          4,
+          20
+        ],
+        "judge": [
+          28,
+          2,
+          20
+        ]
+      }
+    },
+    "O": {
+      "n": 53,
+      "po": 0.9622641509433962,
+      "kappa": 0.69971671388102,
+      "kappaNote": null,
+      "meanJudge": 1.8867924528301887,
+      "meanHuman": 1.8867924528301887,
+      "meanSignedBias": 0,
+      "dist": {
+        "human": [
+          2,
+          2,
+          49
+        ],
+        "judge": [
+          3,
+          0,
+          50
+        ]
+      }
+    },
+    "R": {
+      "n": 44,
+      "po": 0.9772727272727273,
+      "kappa": 0.9573229873908827,
+      "kappaNote": null,
+      "meanJudge": 0.9772727272727273,
+      "meanHuman": 1,
+      "meanSignedBias": -0.022727272727272728,
+      "dist": {
+        "human": [
+          21,
+          2,
+          21
+        ],
+        "judge": [
+          22,
+          1,
+          21
+        ]
+      }
+    },
+    "X": {
+      "n": 48,
+      "po": 0.9375,
+      "kappa": 0.8787878787878789,
+      "kappaNote": null,
+      "meanJudge": 0.9166666666666666,
+      "meanHuman": 0.875,
+      "meanSignedBias": 0.041666666666666664,
+      "dist": {
+        "human": [
+          26,
+          2,
+          20
+        ],
+        "judge": [
+          26,
+          0,
+          22
+        ]
+      }
+    }
+  },
+  "differentialBias": {
+    "meanSignedBias": {
+      "N": -0.04,
+      "O": 0,
+      "R": -0.022727272727272728,
+      "X": 0.041666666666666664
+    },
+    "RminusX": -0.06439393939393939,
+    "RminusXCI": [
+      -0.18818181818181817,
+      0.02564102564102564
+    ],
+    "note": "judge − human 的有符号均值；R−X 若显著为正，说明 judge 对检索臂系统性宽松，ΔREL 需用人类分重算"
+  },
+  "interHuman": null,
+  "byNeedsImage": {
+    "note": "依赖图的题模型看不到图 → pred 系统性偏低；分开报以区分「判不了」与「judge 判不准」",
+    "unknown": 0,
+    "noImage": {
+      "n": 138,
+      "po": 0.9637681159420289,
+      "weightedKappaQuadratic": 0.9673585240376087,
+      "ci95": [
+        0.9241706161137441,
+        0.9959363255828164
+      ],
+      "ac1": 0.9518080704021231,
+      "insufficient": false
+    },
+    "withImage": {
+      "n": 57,
+      "po": 0.9473684210526315,
+      "weightedKappaQuadratic": 0.9728700618752975,
+      "ci95": [
+        0.9304152637485971,
+        1
+      ],
+      "ac1": 0.9287128712871286,
+      "insufficient": false
+    }
+  },
+  "enrichedOnly": {
+    "n": 6,
+    "po": 1,
+    "dist": {
+      "human": [
+        0,
+        6,
+        0
+      ],
+      "judge": [
+        0,
+        6,
+        0
+      ]
+    },
+    "items": [
+      {
+        "itemId": "c-196",
+        "judge": 1,
+        "human": 1,
+        "note": ""
+      },
+      {
+        "itemId": "c-197",
+        "judge": 1,
+        "human": 1,
+        "note": ""
+      },
+      {
+        "itemId": "c-198",
+        "judge": 1,
+        "human": 1,
+        "note": ""
+      },
+      {
+        "itemId": "c-199",
+        "judge": 1,
+        "human": 1,
+        "note": ""
+      },
+      {
+        "itemId": "c-200",
+        "judge": 1,
+        "human": 1,
+        "note": ""
+      },
+      {
+        "itemId": "c-201",
+        "judge": 1,
+        "human": 1,
+        "note": ""
+      }
+    ],
+    "note": "富集样本（judge 判中间档）单独看：判断人对「部分正确」这一档是否与 judge 同构；不并入主 κ"
+  },
+  "gate": {
+    "level": "primary",
+    "l3UsableForVerdict": true,
+    "verdictMayRelyOnL3": true,
+    "biasAlarm": false,
+    "biasDiffCI": [
+      -0.18818181818181817,
+      0.02564102564102564
+    ],
+    "reasons": [
+      "κ_w=0.970 [0.937, 0.992]，门槛 0.6",
+      "κ 与下界均达标 → L3 可作主证据之一",
+      "差异化偏差 -0.064（< 0.25，未触发）"
+    ]
+  },
+  "protocol": {
+    "rubricSha256": "sha256:f7c77f192fe298afbfea27c797ddf0635a9d43b6ad967da80030e16ffa67869f",
+    "judgeModel": null,
+    "seed": 42,
+    "reps": 2000,
+    "enrichedExcludedFromMain": true,
+    "note": "κ 只在随机盲评样本上算；富集样本仅用于看中间档分歧，不进主 κ"
+  }
+}

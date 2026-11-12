@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-11-12T09:11:17.428Z",
+  "evalDir": "data/stage1/eval",
+  "stepsPath": "data/stage1/steps/step-coverage-eval.json",
+  "nQueries": 200,
+  "v1_sameArm": {
+    "R": {
+      "field": "coverageSkeletonNoEcho",
+      "pearson": 0.33873049079490947,
+      "pearsonN": 198,
+      "spearman": 0.4411513033557265
+    },
+    "X": {
+      "field": "coverageSkeletonNoEcho",
+      "pearson": 0.10425678987385847,
+      "pearsonN": 198,
+      "spearman": 0.3768936978385235
+    },
+    "O": {
+      "field": "coverageSkeletonNoEcho",
+      "pearson": -0.041370278990360505,
+      "pearsonN": 198,
+      "spearman": 0.7351795123904401
+    }
+  },
+  "v2_pairedGain": {
+    "pearson": 0.21071991618076108,
+    "n": 198,
+    "meanDeltaCov": 0.4877465127465127,
+    "meanDeltaF1": 0.12056842939195883
+  },
+  "v3_buckets": [
+    {
+      "bucket": "0（完全没覆盖）",
+      "n": 59,
+      "meanF1_R": 0.30225988700564976,
+      "meanF1_X": 0.3135593220338983
+    },
+    {
+      "bucket": "(0, 0.5)",
+      "n": 9,
+      "meanF1_R": 0.1111111111111111,
+      "meanF1_X": 0.18518518518518517
+    },
+    {
+      "bucket": "[0.5, 1)",
+      "n": 18,
+      "meanF1_R": 0.31481481481481477,
+      "meanF1_X": 0.2962962962962963
+    },
+    {
+      "bucket": "1（全步覆盖）",
+      "n": 112,
+      "meanF1_R": 0.6421568627450982,
+      "meanF1_X": 0.42008053221288516
+    }
+  ],
+  "v4_exprSameArm": {
+    "field": "exprCoverageCompound",
+    "pearson": 0.3155654243531097,
+    "n": 128
+  },
+  "verdict": "指标可用：覆盖率与正确率同向，且能预测检索带来的增益"
+}

@@ -1,0 +1,28 @@
+{
+ "seed": 20261112,
+ "stats": {
+  "questionsTotal": 7652,
+  "eligibleTotal": 6113,
+  "kc2Groups": 46,
+  "devSize": 100,
+  "evalSize": 200,
+  "clusterDisjoint": true
+ },
+ "droppedTotal": 1539,
+ "droppedReasons": {
+  "type=单选（非填空，探针无区分度）": 1510,
+  "纯符号答案": 13,
+  "单字母答案（疑似漏标注单选）": 16
+ },
+ "dev": {
+  "n": 100,
+  "queryIdsSha256": "sha256:560cba52c2f3b9fdfd6d226b6d98b89e3ef0c99201627959b2c7cb84e95f4412",
+  "recordsSha256": "sha256:94b66ee1852cf9d2fa14f7906f6688a2c0af835ad9cca4d5902142414ab6f85f"
+ },
+ "eval": {
+  "n": 200,
+  "queryIdsSha256": "sha256:48a92ab3ae1febd29a8498f38ca2f2cbb45942f46c99434c63deb9d40d7d28e5",
+  "recordsSha256": "sha256:89f606e6ad6660c8dd116c13c6d6d731f4ed660ff117bfdc4439a095ad57dc54"
+ },
+ "clusterDisjointAssertion": true
+}

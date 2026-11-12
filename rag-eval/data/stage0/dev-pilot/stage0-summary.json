@@ -1,0 +1,283 @@
+{
+  "stage": "stage0-dev-pilot",
+  "generatedAt": "2026-11-12T08:47:19.636Z",
+  "model": "qwen3.7-flash-2026-07-15",
+  "promptTemplateSha256": "sha256:474f5ccc3f0feb288ff12619210afba10f3b319a2b768593cb5c6bbb1d178dd0",
+  "config": {
+    "generator": {
+      "provider": "dashscope",
+      "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "model": "qwen3.7-flash-2026-07-15",
+      "version": "qwen3.7-flash-2026-07-15",
+      "temperature": 0,
+      "topP": 1,
+      "maxTokens": 512,
+      "samplesPerQuery": 3,
+      "enableThinking": false,
+      "_enableThinking_note": "关闭 thinking：评测只取最终答案，打开会消耗 maxTokens 并引入不可控推理长度；该开关属于生成口径，冻结后不得改",
+      "aggregation": "mean",
+      "_aggregation_note": "mean | majority；预注册后不得改，改则 = 换指标，须全量重算并写 revision",
+      "promptTemplateSha256": "sha256:474f5ccc3f0feb288ff12619210afba10f3b319a2b768593cb5c6bbb1d178dd0",
+      "_prompt_note": "四臂共用同一模板，仅 {context} 槽位内容不同；N 臂填空字符串而非删除整段。模板见 src/stage0/contexts.js",
+      "_apiKey_note": "API key 只从环境变量 DASHSCOPE_API_KEY 读取，禁止写入本文件或任何入库文件"
+    },
+    "retriever": {
+      "type": "bm25",
+      "model": "bm25-k1.2-b0.75-cjk2gram",
+      "modelVersionHash": "sha256:fd95dd57ffc14c69a0960fd35d8d5f20c321ec019d240d69dfd744877f43687d",
+      "topK": 5,
+      "searchParams": {
+        "k1": 1.2,
+        "b": 0.75,
+        "tokenizer": "cjk-2gram"
+      },
+      "indexBuildId": null,
+      "_note": "Stage 0 冻结 BM25（P0 自检索 @1=0.886 @10=1.000）；dense 属于后续实验，须另开配置，不得在同一配置内比较 retriever"
+    },
+    "corpus": {
+      "docCount": 7652,
+      "chunkPolicy": {
+        "size": 300,
+        "overlap": 40,
+        "splitter": "recursive-character",
+        "_note": "沿 preflight-full 实测参数（doc 中位 163 字符，512/64 过大）；分块参数冻结，Stage 3 之后不允许再调",
+        "validatedChunkCount": 9150
+      }
+    }
+  },
+  "nQueries": 100,
+  "samplesPerQuery": 3,
+  "excludeSelfDoc": false,
+  "chunkCount": 9150,
+  "arms": {
+    "N": {
+      "n": 300,
+      "meanF1": 0.30528985507246376,
+      "meanEM": 0.2866666666666667,
+      "sampleStdF1": 0.45380060039777587,
+      "meanChars": 0,
+      "meanLatencyMs": 488.1333333333333,
+      "errors": 0
+    },
+    "X": {
+      "n": 300,
+      "meanF1": 0.29500000000000004,
+      "meanEM": 0.2833333333333333,
+      "sampleStdF1": 0.45158892031834796,
+      "meanChars": 792.49,
+      "meanLatencyMs": 563.5433333333333,
+      "errors": 0
+    },
+    "R": {
+      "n": 300,
+      "meanF1": 0.8933333333333333,
+      "meanEM": 0.89,
+      "sampleStdF1": 0.30648872739840927,
+      "meanChars": 793.24,
+      "meanLatencyMs": 511.7966666666667,
+      "errors": 0
+    },
+    "O": {
+      "n": 300,
+      "meanF1": 0.9102898550724637,
+      "meanEM": 0.9033333333333333,
+      "sampleStdF1": 0.2825085298789522,
+      "meanChars": 200.17,
+      "meanLatencyMs": 470.87333333333333,
+      "errors": 0
+    }
+  },
+  "retrieval": {
+    "n": 100,
+    "recallAtK": 0.99,
+    "mrr": 0.9166666666666667,
+    "topK": 5,
+    "meanRChars": 793.24,
+    "xLengthDeltaMax": 0.019801980198019802
+  },
+  "delta": {
+    "rel": {
+      "point": 0.5983333333333334,
+      "ci": [
+        0.5082916666666669,
+        0.6883333333333332
+      ],
+      "p": 0.001,
+      "support": true
+    },
+    "rn": {
+      "point": 0.5880434782608697,
+      "ci": [
+        0.4894202898550725,
+        0.6797101449275363
+      ],
+      "p": 0.001,
+      "support": true
+    },
+    "ro": {
+      "point": -0.016956521739130537,
+      "ci": [
+        -0.057246376811594175,
+        0.020000000000000018
+      ],
+      "p": 0.4258
+    }
+  },
+  "noiseSigma": {
+    "value": 0.018484227510682356,
+    "sampleSd": 0.18484227510682358,
+    "nQueries": 100,
+    "withinDf": 200,
+    "source": "generation：σ_within（同 query 跨 sample 的 ΔREL 组内 SD）除以 √n，即 Δ 点估计的种子噪声标准误"
+  },
+  "proposedThresholds": {
+    "noiseSigma": 0.01848,
+    "strongDeltaRel": 0.03697,
+    "_derivation": "strongDeltaRel = 2 × noiseSigma；noiseSigma = σ_within / √n（σ_within 为同 query 跨 sample 的 ΔREL 组内标准差）"
+  },
+  "kcBreakdown": {
+    "七大能力>运算求解": {
+      "n": 1,
+      "N": 1,
+      "X": 0.3333333333333333,
+      "R": 1,
+      "O": 1
+    },
+    "拓展思维>几何模块": {
+      "n": 9,
+      "N": 0.2962962962962963,
+      "X": 0.33333333333333326,
+      "R": 0.8888888888888888,
+      "O": 0.8888888888888888
+    },
+    "拓展思维>应用题模块": {
+      "n": 27,
+      "N": 0.43209876543209874,
+      "X": 0.45679012345679015,
+      "R": 0.9259259259259259,
+      "O": 0.9506172839506173
+    },
+    "拓展思维>数论模块": {
+      "n": 2,
+      "N": 0.25,
+      "X": 0.25,
+      "R": 0.8333333333333333,
+      "O": 1
+    },
+    "拓展思维>组合模块": {
+      "n": 10,
+      "N": 0.1,
+      "X": 0.1,
+      "R": 0.7,
+      "O": 0.9
+    },
+    "拓展思维>行程模块": {
+      "n": 3,
+      "N": 0.3333333333333333,
+      "X": 0,
+      "R": 1,
+      "O": 1
+    },
+    "拓展思维>计数模块": {
+      "n": 15,
+      "N": 0.1111111111111111,
+      "X": 0.08888888888888888,
+      "R": 0.888888888888889,
+      "O": 0.9333333333333333
+    },
+    "拓展思维>计算模块": {
+      "n": 15,
+      "N": 0.42415458937198064,
+      "X": 0.4666666666666667,
+      "R": 0.9333333333333333,
+      "O": 0.8463768115942029
+    },
+    "知识点>应用题": {
+      "n": 1,
+      "N": 0,
+      "X": 0,
+      "R": 1,
+      "O": 1
+    },
+    "知识点>应用题模块": {
+      "n": 4,
+      "N": 0.25,
+      "X": 0.08333333333333333,
+      "R": 0.8333333333333333,
+      "O": 0.75
+    },
+    "知识点>组合模块": {
+      "n": 1,
+      "N": 0,
+      "X": 0,
+      "R": 1,
+      "O": 1
+    },
+    "知识点>计数模块": {
+      "n": 1,
+      "N": 0,
+      "X": 0,
+      "R": 1,
+      "O": 1
+    },
+    "知识点>计算模块": {
+      "n": 2,
+      "N": 0.6666666666666666,
+      "X": 0.8333333333333333,
+      "R": 1,
+      "O": 1
+    },
+    "能力>图形认知": {
+      "n": 1,
+      "N": 0,
+      "X": 0,
+      "R": 0,
+      "O": 0
+    },
+    "能力>运算求解": {
+      "n": 1,
+      "N": 0.3333333333333333,
+      "X": 0,
+      "R": 1,
+      "O": 1
+    },
+    "课内知识点>数与运算": {
+      "n": 1,
+      "N": 0,
+      "X": 0,
+      "R": 1,
+      "O": 0.6666666666666666
+    },
+    "课内知识点>测量": {
+      "n": 1,
+      "N": 1,
+      "X": 1,
+      "R": 1,
+      "O": 1
+    },
+    "课内题型>空间与图形": {
+      "n": 1,
+      "N": 0,
+      "X": 0,
+      "R": 1,
+      "O": 1
+    },
+    "课内题型>综合与实践": {
+      "n": 4,
+      "N": 0.25,
+      "X": 0.25,
+      "R": 1,
+      "O": 1
+    }
+  },
+  "errors": {
+    "total": 0,
+    "byArm": {}
+  },
+  "notes": [
+    "ΔREL 主效应 = R − X（等长随机上下文），不是 R − N：X 消掉了上下文长度与「有资料」暗示的混杂。",
+    "noiseSigma = σ_within/√n，衡量「换一批生成种子时 Δ 点估计会漂多少」；逐 query 的抽样波动由 bootstrap CI 覆盖，两者不重复计数。",
+    "σ_within 在 temperature=0 下仍非零（服务端非确定性），属实测值；若某模型完全确定，σ 会趋近 0，此时阈值须并入 judge 噪声并写 revision。",
+    "O 臂 = gold 该题 doc（含解析），用作生成器上限诊断，不参与决策矩阵。"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "stage": "stage1-eval-judge",
+  "generatedAt": "2026-11-12T08:57:46.786Z",
+  "judgeModel": "qwen3.7-flash-2026-07-15",
+  "rubricSha256": "sha256:f7c77f192fe298afbfea27c797ddf0635a9d43b6ad967da80030e16ffa67869f",
+  "judgePromptSha256": "sha256:7efa27afbc3da72bff9639b7fea63c3faf28e25b78432cd46b9d9269afcba3c8",
+  "sampleIdx": 0,
+  "nItems": 800,
+  "arms": {
+    "R": {
+      "n": 200,
+      "dist": {
+        "0": 96,
+        "1": 2,
+        "2": 102
+      },
+      "meanScore": 1.03,
+      "meanScoreNorm": 0.515,
+      "meanF1": 0.46044117647058824
+    },
+    "N": {
+      "n": 200,
+      "dist": {
+        "0": 117,
+        "1": 4,
+        "2": 79
+      },
+      "meanScore": 0.81,
+      "meanScoreNorm": 0.405,
+      "meanF1": 0.3498529411764706
+    },
+    "X": {
+      "n": 200,
+      "dist": {
+        "0": 125,
+        "1": 2,
+        "2": 73
+      },
+      "meanScore": 0.74,
+      "meanScoreNorm": 0.37,
+      "meanF1": 0.35294117647058826
+    },
+    "O": {
+      "n": 200,
+      "dist": {
+        "0": 10,
+        "1": 1,
+        "2": 189
+      },
+      "meanScore": 1.895,
+      "meanScoreNorm": 0.9475,
+      "meanF1": 0.8504411764705883
+    }
+  },
+  "rejudgeAgreement": {
+    "n": 70,
+    "exactAgreement": 1,
+    "within1Agreement": 1,
+    "meanAbsDiff": 0
+  },
+  "minRejudgeAgreement": 0.9,
+  "l3Usable": true,
+  "notes": [
+    "judge 盲评：输入不含臂名与上下文。",
+    "空答案由程序判 0，未调用模型。",
+    "judge 与生成器同模型，存在自评偏好；须靠人工校准（κ）兜底，不能只报重判一致率。"
+  ]
+}

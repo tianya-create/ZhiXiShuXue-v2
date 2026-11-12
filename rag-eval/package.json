@@ -1,0 +1,14 @@
+{
+  "name": "rag-eval",
+  "version": "0.1.0",
+  "private": true,
+  "description": "RAG 受控评测框架（三臂 + 分组防泄漏 + 冻结配置 + 独立审计）——骨架实现",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test",
+    "demo": "node src/demo.js"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}

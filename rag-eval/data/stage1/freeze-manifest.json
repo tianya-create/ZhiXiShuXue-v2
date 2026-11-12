@@ -1,0 +1,113 @@
+{
+  "protocolVersion": "rag-controlled-eval-v1",
+  "revision": 2,
+  "frozenAt": "2026-11-12T08:53:22.116Z",
+  "frozenBy": "src/stage1/freeze.js",
+  "hashes": {
+    "configFile": "sha256:9ebb0c316de8cc0bf2745d753caa14b1d73d3b287606bea60183c5782258fd25",
+    "evalSetFile": "sha256:a2257a56eb94e74f9fc3baf777bdb1a5b886c7cdc52e08237a4e59895469eb10",
+    "devSetFile": "sha256:bbbb7e60cbb62950a0d3fd0aedb3e5b0220fce3cc083651c8c8b0dcbd3762152",
+    "corpusManifestFile": "sha256:8bd487fcdfd5f514667aba706e7599252196bd77715210205e4a6e00f069de54",
+    "promptTemplate": "sha256:474f5ccc3f0feb288ff12619210afba10f3b319a2b768593cb5c6bbb1d178dd0",
+    "retrieverModule": "sha256:fd95dd57ffc14c69a0960fd35d8d5f20c321ec019d240d69dfd744877f43687d"
+  },
+  "declaredHashes": {
+    "evalSet": "sha256:89f606e6ad6660c8dd116c13c6d6d731f4ed660ff117bfdc4439a095ad57dc54",
+    "devSet": "sha256:94b66ee1852cf9d2fa14f7906f6688a2c0af835ad9cca4d5902142414ab6f85f",
+    "promptTemplate": "sha256:474f5ccc3f0feb288ff12619210afba10f3b319a2b768593cb5c6bbb1d178dd0",
+    "corpusManifest": "sha256:8bd487fcdfd5f514667aba706e7599252196bd77715210205e4a6e00f069de54"
+  },
+  "assertions": {
+    "queryClusterDisjoint": {
+      "pass": true,
+      "leaked": []
+    },
+    "docClusterDisjoint": {
+      "pass": true,
+      "leaked": [],
+      "devClusters": 100
+    },
+    "fewShotExcludedFromEval": {
+      "pass": true,
+      "leaked": [],
+      "exampleCount": 0
+    },
+    "indexExcludesEvalQueries": {
+      "pass": true,
+      "leaked": [],
+      "checked": 200
+    }
+  },
+  "frozenParameters": {
+    "stage0Preflight": {
+      "_note": "以下四值均由 dev 集（n=100）实测填入，来源 data/stage0/dev-pilot-loo/stage0-summary.json（2026-11-12，qwen3.7-flash-2026-07-15，temp=0，thinking off，3 采样）",
+      "answerInCorpusRate": 0.92,
+      "_answerInCorpusRate_note": "dev 集 92/100 的 gold 答案能在语料块中找到（eval 集 185/200=0.925）；两集接近，说明 dev/eval 同分布",
+      "oracleRecallAtK": {
+        "k": 5,
+        "value": 0.99,
+        "mrr": 0.9167
+      },
+      "_oracleRecallAtK_note": "允许检索题目自身时的 gold doc recall@5=0.990、MRR=0.917；LOO 协议下按定义不含自身，故该值用于诊断「语料是否可检索到」而非 R 臂效果",
+      "generatorCeiling": 0.9203,
+      "_generatorCeiling_note": "O 臂（gold doc 全文，含解析）token-F1 均值，即生成器在本任务上的上限",
+      "noiseSigma": 0.0209,
+      "_noiseSigma_note": "σ_within(0.2091)/√100；同一臂、不同生成种子重复 3 次，ΔREL 点估计的标准误。temperature=0 下仍非零（服务端非确定性）"
+    },
+    "thresholds": {
+      "strongDeltaRel": 0.0418,
+      "strongMinPositiveSeeds": 4,
+      "guardDeltaRel": 0.001,
+      "stopCooldown": null,
+      "_derivation": "strongDeltaRel = 2 × noiseSigma = 2 × 0.0209 = 0.0418（实测推导，非经验值）；guardDeltaRel 为 X 臂作废线",
+      "_note": "阈值已由 Stage 0 实测填入；此后冻结，不允许因 eval 结果不利而调整",
+      "_power_note": "n=200 时 bootstrap 可检出最小效应约 8.9pp（0.089），远低于实测 ΔREL=0.221，主效应有充足余量"
+    },
+    "retriever": {
+      "type": "bm25",
+      "model": "bm25-k1.2-b0.75-cjk2gram",
+      "modelVersionHash": "sha256:fd95dd57ffc14c69a0960fd35d8d5f20c321ec019d240d69dfd744877f43687d",
+      "topK": 5,
+      "searchParams": {
+        "k1": 1.2,
+        "b": 0.75,
+        "tokenizer": "cjk-2gram"
+      },
+      "indexBuildId": null,
+      "_note": "Stage 0 冻结 BM25（P0 自检索 @1=0.886 @10=1.000）；dense 属于后续实验，须另开配置，不得在同一配置内比较 retriever"
+    },
+    "generator": {
+      "provider": "dashscope",
+      "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "model": "qwen3.7-flash-2026-07-15",
+      "version": "qwen3.7-flash-2026-07-15",
+      "temperature": 0,
+      "topP": 1,
+      "maxTokens": 512,
+      "samplesPerQuery": 3,
+      "enableThinking": false,
+      "_enableThinking_note": "关闭 thinking：评测只取最终答案，打开会消耗 maxTokens 并引入不可控推理长度；该开关属于生成口径，冻结后不得改",
+      "aggregation": "mean",
+      "_aggregation_note": "mean | majority；预注册后不得改，改则 = 换指标，须全量重算并写 revision",
+      "promptTemplateSha256": "sha256:474f5ccc3f0feb288ff12619210afba10f3b319a2b768593cb5c6bbb1d178dd0",
+      "_prompt_note": "四臂共用同一模板，仅 {context} 槽位内容不同；N 臂填空字符串而非删除整段。模板见 src/stage0/contexts.js",
+      "_apiKey_note": "API key 只从环境变量 DASHSCOPE_API_KEY 读取，禁止写入本文件或任何入库文件"
+    },
+    "chunkPolicy": {
+      "size": 300,
+      "overlap": 40,
+      "splitter": "recursive-character",
+      "_note": "沿 preflight-full 实测参数（doc 中位 163 字符，512/64 过大）；分块参数冻结，Stage 3 之后不允许再调",
+      "validatedChunkCount": 9150
+    },
+    "samplesPerQuery": 3,
+    "nEval": 200,
+    "nDev": 100
+  },
+  "evalSetDigest": {
+    "n": 200,
+    "recordsSha256": "sha256:89f606e6ad6660c8dd116c13c6d6d731f4ed660ff117bfdc4439a095ad57dc54",
+    "queryClusterIdsSha256": "sha256:294d88ad1db259f61cdb1c2137edc1a1694a8aa53565c5bd9750230f41b83358"
+  },
+  "evalSetHashNote": "evalSet.sha256 为记录级 sha（buildQuerySet.querySetManifest），manifest.hashes.evalSetFile 为文件字节 sha，两者口径不同"
+}

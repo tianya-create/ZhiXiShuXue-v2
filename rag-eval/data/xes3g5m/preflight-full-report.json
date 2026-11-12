@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-11-12T02:55:47.424Z",
+  "input": {
+    "questionsPath": "D:\\迅雷云盘\\WorkBuddy\\2026-10-28-23-41-59\\rag-eval\\data\\xes3g5m\\XES3G5M\\metadata\\questions.json",
+    "questionsJsonSha256": "sha256:57a3a63ef924e1f10bc83e673213841be4885f5ad52f0e606775a4fc030bc0d4"
+  },
+  "source": {
+    "dataset": "XES3G5M",
+    "license": "MIT",
+    "officialSource": "https://github.com/ai4ed/XES3G5M",
+    "note": "原始数据由 TAL 通过 Google Drive 分发；使用即视为同意其许可。"
+  },
+  "mode": "full",
+  "corpusStats": {
+    "questionsTotal": 7652,
+    "docsKept": 7652,
+    "dropped": 0,
+    "charMin": 25,
+    "charMedian": 171.5,
+    "charMax": 1828
+  },
+  "chunkStats": {
+    "chunkCount": 9150,
+    "perDocMean": "1.20",
+    "charMin": 25,
+    "charMedian": 163,
+    "charMax": 300,
+    "size": 300,
+    "overlap": 40
+  },
+  "docClusters": {
+    "count": 7157,
+    "multiMember": 381,
+    "multiMemberCoverage": 876
+  },
+  "selfRetrieval": {
+    "n": 500,
+    "recallAt1": "0.8860",
+    "recallAt10": "1.0000"
+  },
+  "coverage": {
+    "answerInCorpusRate": 0.9198890520476424,
+    "answerInCorpusFound": 5638,
+    "answerInCorpusTotal": 6129,
+    "skippedChoiceQuestions": 1510,
+    "skippedSymbolAnswerQuestions": 13,
+    "note": "answerInCorpusRate 仅对填空题计算（单选答案为字母无探针区分度；纯符号答案 <、>、= 共 13 题亦剔除）；oracle recall 的 query 为题面原文前 80 字符，gold 为该题解析所在 doc",
+    "oracleRecallAt5": 0.998,
+    "oracleRecallAt10": 1,
+    "generatorCeiling": "需 LLM 在 O 臂（gold 上下文）下实测，骨架显式拒绝估计值"
+  },
+  "dropped": [],
+  "droppedTotal": 0
+}

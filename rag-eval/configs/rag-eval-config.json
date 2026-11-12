@@ -1,0 +1,302 @@
+{
+  "protocolVersion": "rag-controlled-eval-v1",
+  "frozenBeforeRun": true,
+  "frozenAt": "2026-11-12T08:53:22.116Z",
+  "_frozenAt_note": "Stage 1 冻结时填写日期；此字段非空即表示 eval 集已解封，不得再改任何阈值",
+  "revision": 6,
+  "_revision_note": "rev2：R 臂冻结为 LOO（Stage 0 实测题库自答）；rev3（2026-11-12）：仅新增 L3 judge 配置，未改动任何 generator/retriever/threshold/chunk 参数。eval 正式运行对应 rev2（configs/frozen/rag-eval-config.rev2.json，sha 9ebb0c31…）；rev4（2026-11-12）：仅新增 alternativeL1 指标声明，未改动 generator/retriever/threshold/chunk；eval 产物仍对应 rev2 快照 configs/frozen/rag-eval-config.rev2.json；rev5（2026-11-12）：仅新增 judge.calibration 校准协议声明，未改动 generator/retriever/threshold/chunk/rubric；eval 产物仍对应 rev2 快照；rev6（2026-11-12）：仅新增校准材料与 needsImage 分层判读规则，未改动 generator/retriever/threshold/chunk/rubric；eval 产物仍对应 rev2 快照",
+  "stage0Preflight": {
+    "_note": "以下四值均由 dev 集（n=100）实测填入，来源 data/stage0/dev-pilot-loo/stage0-summary.json（2026-11-12，qwen3.7-flash-2026-07-15，temp=0，thinking off，3 采样）",
+    "answerInCorpusRate": 0.92,
+    "_answerInCorpusRate_note": "dev 集 92/100 的 gold 答案能在语料块中找到（eval 集 185/200=0.925）；两集接近，说明 dev/eval 同分布",
+    "oracleRecallAtK": {
+      "k": 5,
+      "value": 0.99,
+      "mrr": 0.9167
+    },
+    "_oracleRecallAtK_note": "允许检索题目自身时的 gold doc recall@5=0.990、MRR=0.917；LOO 协议下按定义不含自身，故该值用于诊断「语料是否可检索到」而非 R 臂效果",
+    "generatorCeiling": 0.9203,
+    "_generatorCeiling_note": "O 臂（gold doc 全文，含解析）token-F1 均值，即生成器在本任务上的上限",
+    "noiseSigma": 0.0209,
+    "_noiseSigma_note": "σ_within(0.2091)/√100；同一臂、不同生成种子重复 3 次，ΔREL 点估计的标准误。temperature=0 下仍非零（服务端非确定性）"
+  },
+  "corpus": {
+    "file": "data/xes3g5m/XES3G5M/metadata/questions.json",
+    "sha256": "sha256:57a3a63ef924e1f10bc83e673213841be4885f5ad52f0e606775a4fc030bc0d4",
+    "docCount": 7652,
+    "chunkPolicy": {
+      "size": 300,
+      "overlap": 40,
+      "splitter": "recursive-character",
+      "_note": "沿 preflight-full 实测参数（doc 中位 163 字符，512/64 过大）；分块参数冻结，Stage 3 之后不允许再调",
+      "validatedChunkCount": 9150
+    },
+    "manifestSha256": "sha256:8bd487fcdfd5f514667aba706e7599252196bd77715210205e4a6e00f069de54",
+    "manifestFile": "data/xes3g5m/corpus-manifest.json",
+    "docCluster": {
+      "method": "minhash",
+      "shingleSize": 5,
+      "jaccardThreshold": 0.8,
+      "_note": "阈值冻结在配置里；P0 实测 7,157 簇（多成员 381）。聚类在任何模型运行之前完成",
+      "validatedClusterCount": 7157
+    }
+  },
+  "retriever": {
+    "type": "bm25",
+    "model": "bm25-k1.2-b0.75-cjk2gram",
+    "modelVersionHash": "sha256:fd95dd57ffc14c69a0960fd35d8d5f20c321ec019d240d69dfd744877f43687d",
+    "topK": 5,
+    "searchParams": {
+      "k1": 1.2,
+      "b": 0.75,
+      "tokenizer": "cjk-2gram"
+    },
+    "indexBuildId": null,
+    "_note": "Stage 0 冻结 BM25（P0 自检索 @1=0.886 @10=1.000）；dense 属于后续实验，须另开配置，不得在同一配置内比较 retriever"
+  },
+  "generator": {
+    "provider": "dashscope",
+    "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "model": "qwen3.7-flash-2026-07-15",
+    "version": "qwen3.7-flash-2026-07-15",
+    "temperature": 0,
+    "topP": 1,
+    "maxTokens": 512,
+    "samplesPerQuery": 3,
+    "enableThinking": false,
+    "_enableThinking_note": "关闭 thinking：评测只取最终答案，打开会消耗 maxTokens 并引入不可控推理长度；该开关属于生成口径，冻结后不得改",
+    "aggregation": "mean",
+    "_aggregation_note": "mean | majority；预注册后不得改，改则 = 换指标，须全量重算并写 revision",
+    "promptTemplateSha256": "sha256:474f5ccc3f0feb288ff12619210afba10f3b319a2b768593cb5c6bbb1d178dd0",
+    "_prompt_note": "四臂共用同一模板，仅 {context} 槽位内容不同；N 臂填空字符串而非删除整段。模板见 src/stage0/contexts.js",
+    "_apiKey_note": "API key 只从环境变量 DASHSCOPE_API_KEY 读取，禁止写入本文件或任何入库文件"
+  },
+  "arms": {
+    "N": {
+      "context": "empty",
+      "role": "下界（参数记忆）"
+    },
+    "X": {
+      "context": "random-length-matched",
+      "role": "护栏（上下文长度）"
+    },
+    "R": {
+      "context": "retrieved-topk-leave-one-out",
+      "role": "待测（检索）"
+    },
+    "O": {
+      "context": "gold-oracle",
+      "role": "诊断（生成器上限）",
+      "optional": true
+    }
+  },
+  "protocol": {
+    "mainEffect": "R − X",
+    "rArmMode": "leave-one-out",
+    "excludeSelfDoc": true,
+    "_rArmMode_note": "题库语料下，允许检索题目自身 doc 等于把解析直接喂给模型（Stage 0 实测 R=0.893 vs X=0.295，Δ=+59.8pp），测的是「抄本题」而非「用同类题」；故冻结 LOO：R 臂排除题目自身 doc",
+    "diagnosticRuns": {
+      "R-self": {
+        "dir": "data/stage0/dev-pilot",
+        "deltaRel": 0.5983,
+        "ci": [
+          0.5083,
+          0.6883
+        ],
+        "role": "诊断：闭卷题库上限，不作为主结论"
+      },
+      "R-loo": {
+        "dir": "data/stage0/dev-pilot-loo",
+        "deltaRel": 0.2211,
+        "ci": [
+          0.1267,
+          0.3156
+        ],
+        "role": "主协议"
+      }
+    },
+    "pilot": {
+      "date": "2026-11-12",
+      "devN": 100,
+      "samples": 3,
+      "model": "qwen3.7-flash-2026-07-15",
+      "errors": 0
+    }
+  },
+  "randomArm": {
+    "lengthMatchTolerance": 0.02,
+    "sampleUnit": "docCluster",
+    "seedRule": "hash(configSeed, queryId)",
+    "requireDisjointFromR": true,
+    "_note": "X 的 doc 簇 id 必须与 R 检索到的 doc 簇 id 无交集；长度差 ≤2%；二者任一不满足则该 query 记录作废"
+  },
+  "evalSet": {
+    "file": "data/evalset/eval-queries.json",
+    "sha256": "sha256:89f606e6ad6660c8dd116c13c6d6d731f4ed660ff117bfdc4439a095ad57dc54",
+    "nQueries": 200,
+    "queryClusterIdsSha256": "sha256:89f606e6ad6660c8dd116c13c6d6d731f4ed660ff117bfdc4439a095ad57dc54",
+    "_note": "本基准每 qid 单 query（单例簇），queryId 集即 queryClusterId 集。n=200 → 可检出 ≥8.9pp 主效应（bootstrap 重采样单位=query，见设计文档 §6.2）",
+    "manifestFile": "data/evalset/queryset-manifest.json"
+  },
+  "devSet": {
+    "file": "data/evalset/dev-queries.json",
+    "sha256": "sha256:94b66ee1852cf9d2fa14f7906f6688a2c0af835ad9cca4d5902142414ab6f85f",
+    "nQueries": 100,
+    "queryClusterIdsSha256": "sha256:94b66ee1852cf9d2fa14f7906f6688a2c0af835ad9cca4d5902142414ab6f85f",
+    "docClusterIdsSha256": null,
+    "_note": "Stage 0 噪声底测量与 prompt 调试只允许用 dev 集"
+  },
+  "evalSetBuild": {
+    "seed": 20261112,
+    "module": "src/evalset/buildQuerySet.js",
+    "sourcePool": "XES3G5M 填空题（type=填空 且答案探针含字母/数字）",
+    "eligibleTotal": 6113,
+    "kc2Strata": 46,
+    "droppedReasons": {
+      "type=单选（非填空，探针无区分度）": 1510,
+      "纯符号答案": 13,
+      "单字母答案（疑似漏标注单选）": 16
+    },
+    "clusterDisjointAssertion": true
+  },
+  "leakageAssertions": {
+    "queryClusterDisjoint": true,
+    "docClusterDisjoint": true,
+    "fewShotExcludedFromEval": true,
+    "indexExcludesEvalQueries": true,
+    "_note": "query 簇已实测不相交（构造保证）；其余三项在 Stage 1 前必须实测为 true 并写入 freeze-manifest.json，任一 false 则配置不可冻结"
+  },
+  "judge": {
+    "type": "llm",
+    "model": "qwen3.7-flash-2026-07-15",
+    "version": "qwen3.7-flash-2026-07-15",
+    "rubricSha256": "sha256:f7c77f192fe298afbfea27c797ddf0635a9d43b6ad967da80030e16ffa67869f",
+    "judgePromptSha256": "sha256:7efa27afbc3da72bff9639b7fea63c3faf28e25b78432cd46b9d9269afcba3c8",
+    "scale": [
+      0,
+      1,
+      2
+    ],
+    "sampleRateForHumanCalibration": 0.25,
+    "minHumanKappa": 0.6,
+    "minRejudgeAgreement": 0.9,
+    "blindToArm": true,
+    "_note": "judge 与生成器同模型（仅此一个 key），存在自评偏好；κ<0.6 时 L3 仅参考。换 judge 版本=换尺子，全部 L3 作废重算并写 revision",
+    "calibration": {
+      "method": "人工盲评 + 加权 κ（quadratic）+ 差异化偏差护栏",
+      "sheetPath": "data/stage1/eval/judge/human-calibration-blind.csv",
+      "keyPath": "data/stage1/eval/judge/human-calibration-key.jsonl",
+      "sampleRate": 0.25,
+      "nMain": 195,
+      "nEnriched": 6,
+      "seed": 20261112,
+      "blindToArm": true,
+      "blindToJudgeScore": true,
+      "enrichedHeldOutOfMainKappa": true,
+      "bootstrap": {
+        "unit": "queryId",
+        "reps": 2000
+      },
+      "gate": {
+        "primary": 0.6,
+        "primaryCI_Lower": 0.45,
+        "directional": 0.4,
+        "biasAlarmAbs": 0.25
+      },
+      "metrics": [
+        "weightedKappaQuadratic",
+        "cohenKappa",
+        "gwetAC1",
+        "pabak",
+        "biasIndex",
+        "RminusX_bias"
+      ],
+      "_note": "κ 只在盲表上算；富集样本单列；触发 biasAlarm 须用人类分做 ΔREL 敏感性重算。门槛改动=换判据，须写 revision 并重判全部校准样本",
+      "materials": {
+        "reviewSheet": "data/stage1/eval/judge/human-calibration-review.html",
+        "sheetV2": "data/stage1/eval/judge/human-calibration-blind-v2.csv",
+        "imagesDir": "data/stage1/eval/judge/images/",
+        "superseded": [
+          "data/stage1/eval/judge/human-calibration-blind.csv",
+          "data/stage1/eval/judge/human-calibration-sheet.deprecated.csv"
+        ],
+        "_note": "v1 直接灌题库原文（LaTeX 未渲染、图片只剩内部文件名）导致人无法判分；v2 只做展示层转换，评测管线仍用原文"
+      },
+      "strata": {
+        "dimension": "needsImage",
+        "source": "human-calibration-blind-v2.csv#needsImage（或 --strata 指定）",
+        "counts": {
+          "withImage": 58,
+          "total": 201
+        },
+        "rule": "主 κ 仍用全部样本（保持代表性）；含图/不含图分组必须单列。含图组 κ 显著更低时，须归因于「模型看不到图导致 pred 系统性偏差」，不得据此下调 judge 可信度",
+        "_why": "四臂模型均无视觉输入，依赖图的题 pred 偏低是设定使然，不是 judge 判错"
+      }
+    }
+  },
+  "metrics": {
+    "retrieval": [
+      "recall@k",
+      "ndcg@k",
+      "mrr"
+    ],
+    "primary": "token-f1",
+    "secondary": [
+      "exact-match",
+      "citation-precision",
+      "refusal-rate"
+    ],
+    "_note": "primary 预注册，不得事后更换；L1 检索指标零噪声，必须报",
+    "alternativeL1": {
+      "name": "step-coverage（步骤覆盖率）",
+      "role": "ret-strong 的 L1 证据；LOO 协议下 gold-doc recall 恒为 0，故改用「检索内容是否含所需解题步骤」",
+      "primary": "coverageSkeletonNoEcho（skeleton 骨架 + 题干残差 + 剔除题面回声）",
+      "baseline": "X 臂（等长随机上下文），主口径 ΔStepCov = R − X",
+      "tau": 0.4,
+      "tauRule": "最小 τ 使 X 臂判别口径覆盖率 ≤ 0.15（零基线不得自带信号）",
+      "shingleK": 3,
+      "stemResidualMinShare": 0.25,
+      "metricImplSha256": "sha256:5d51dafe60315eabbb24458069177ba7884144cdf57ee34290e4f85877f37925",
+      "tauFrozenAt": "2026-11-12T09:12:26.265Z",
+      "secondary": [
+        "exprCoverageCompound（复合算式骨架，算子≥2）",
+        "exprCoverageLiteral（同数值算式：用于识别近似重复题检索）"
+      ],
+      "validity": {
+        "pearson_R_vs_F1": 0.3387,
+        "pearson_pairedGain": 0.2107,
+        "note": "中等强度相关：覆盖是「供给」的度量，不能替代正确率"
+      },
+      "_measure_note": "该指标零 LLM 调用、可逐位复现；tau 只能在 dev 上选，eval 只允许 --apply 应用冻结值"
+    }
+  },
+  "thresholds": {
+    "strongDeltaRel": 0.0418,
+    "strongMinPositiveSeeds": 4,
+    "guardDeltaRel": 0.001,
+    "stopCooldown": null,
+    "_derivation": "strongDeltaRel = 2 × noiseSigma = 2 × 0.0209 = 0.0418（实测推导，非经验值）；guardDeltaRel 为 X 臂作废线",
+    "_note": "阈值已由 Stage 0 实测填入；此后冻结，不允许因 eval 结果不利而调整",
+    "_power_note": "n=200 时 bootstrap 可检出最小效应约 8.9pp（0.089），远低于实测 ΔREL=0.221，主效应有充足余量"
+  },
+  "decisionMatrix": {
+    "rel-strong_and_ret-strong_and_coverage>=0.8": "build",
+    "rel~=0_and_ret-strong": "fix-generator（先看 O 臂）",
+    "rel~=0_and_ret~=0_and_coverage-high": "stop",
+    "coverage<0.6": "fix-corpus（禁止调模型）",
+    "rel-negative_significant": "invalidate（查分块与 prompt 冲突）",
+    "guard-failed": "invalidate-rerun"
+  },
+  "antiCheat": [
+    "config 与 evalSet 的 sha256 在 Stage 1 一同写入 freeze-manifest.json，审计器首先比对",
+    "四臂 prompt 模板逐字一致，仅 {context} 槽位不同；N 臂填空串",
+    "X 臂长度差 ≤2% 且 doc 簇与 R 无交集，否则该 query 作废",
+    "eval 集在 Stage 0 期间一次都不读；任何读取均记录 audit log",
+    "主指标在配置里预注册，运行后不得更换",
+    "所有 query × 臂 × sample 的记录必须完整落盘，禁止静默丢弃失败样本",
+    "聚合器从原始 log 重算指标，不接受 summary 中的数值",
+    "judge 版本或 rubric 变更视为换尺子，必须写 revision 并全量重算 L3",
+    "结论按 §8 判定矩阵给出，不允许挑单一指标下结论",
+    "结果为负时照常报告；不因负结果改阈值重跑"
+  ]
+}

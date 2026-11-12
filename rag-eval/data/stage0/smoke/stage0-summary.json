@@ -1,0 +1,160 @@
+{
+  "stage": "stage0-dev-pilot",
+  "generatedAt": "2026-11-12T08:41:55.398Z",
+  "model": "qwen3.7-flash-2026-07-15",
+  "promptTemplateSha256": "sha256:474f5ccc3f0feb288ff12619210afba10f3b319a2b768593cb5c6bbb1d178dd0",
+  "config": {
+    "generator": {
+      "provider": "dashscope",
+      "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "model": "qwen3.7-flash-2026-07-15",
+      "version": "qwen3.7-flash-2026-07-15",
+      "temperature": 0,
+      "topP": 1,
+      "maxTokens": 512,
+      "samplesPerQuery": 3,
+      "enableThinking": false,
+      "_enableThinking_note": "关闭 thinking：评测只取最终答案，打开会消耗 maxTokens 并引入不可控推理长度；该开关属于生成口径，冻结后不得改",
+      "aggregation": "mean",
+      "_aggregation_note": "mean | majority；预注册后不得改，改则 = 换指标，须全量重算并写 revision",
+      "promptTemplateSha256": "sha256:474f5ccc3f0feb288ff12619210afba10f3b319a2b768593cb5c6bbb1d178dd0",
+      "_prompt_note": "四臂共用同一模板，仅 {context} 槽位内容不同；N 臂填空字符串而非删除整段。模板见 src/stage0/contexts.js",
+      "_apiKey_note": "API key 只从环境变量 DASHSCOPE_API_KEY 读取，禁止写入本文件或任何入库文件"
+    },
+    "retriever": {
+      "type": "bm25",
+      "model": "bm25-k1.2-b0.75-cjk2gram",
+      "modelVersionHash": "sha256:fd95dd57ffc14c69a0960fd35d8d5f20c321ec019d240d69dfd744877f43687d",
+      "topK": 5,
+      "searchParams": {
+        "k1": 1.2,
+        "b": 0.75,
+        "tokenizer": "cjk-2gram"
+      },
+      "indexBuildId": null,
+      "_note": "Stage 0 冻结 BM25（P0 自检索 @1=0.886 @10=1.000）；dense 属于后续实验，须另开配置，不得在同一配置内比较 retriever"
+    },
+    "corpus": {
+      "docCount": 7652,
+      "chunkPolicy": {
+        "size": 300,
+        "overlap": 40,
+        "splitter": "recursive-character",
+        "_note": "沿 preflight-full 实测参数（doc 中位 163 字符，512/64 过大）；分块参数冻结，Stage 3 之后不允许再调",
+        "validatedChunkCount": 9150
+      }
+    }
+  },
+  "nQueries": 3,
+  "samplesPerQuery": 3,
+  "chunkCount": 9150,
+  "arms": {
+    "N": {
+      "n": 9,
+      "meanF1": 0.3333333333333333,
+      "meanEM": 0.3333333333333333,
+      "sampleStdF1": 0.5,
+      "meanChars": 0,
+      "meanLatencyMs": 682.8888888888889,
+      "errors": 0
+    },
+    "X": {
+      "n": 9,
+      "meanF1": 0.3333333333333333,
+      "meanEM": 0.3333333333333333,
+      "sampleStdF1": 0.5,
+      "meanChars": 949.3333333333334,
+      "meanLatencyMs": 494.3333333333333,
+      "errors": 0
+    },
+    "R": {
+      "n": 9,
+      "meanF1": 1,
+      "meanEM": 1,
+      "sampleStdF1": 0,
+      "meanChars": 949.3333333333334,
+      "meanLatencyMs": 486.22222222222223,
+      "errors": 0
+    },
+    "O": {
+      "n": 9,
+      "meanF1": 1,
+      "meanEM": 1,
+      "sampleStdF1": 0,
+      "meanChars": 188.66666666666666,
+      "meanLatencyMs": 474.22222222222223,
+      "errors": 0
+    }
+  },
+  "retrieval": {
+    "n": 3,
+    "recallAtK": 1,
+    "mrr": 1,
+    "topK": 5,
+    "meanRChars": 949.3333333333334,
+    "xLengthDeltaMax": 0
+  },
+  "delta": {
+    "rel": {
+      "point": -0.6666666666666667,
+      "ci": [
+        -1,
+        -0.33333333333333337
+      ],
+      "p": 0.001,
+      "support": false
+    },
+    "rn": {
+      "point": -0.6666666666666667,
+      "ci": [
+        -1,
+        0
+      ],
+      "p": 0.072,
+      "support": false
+    },
+    "ro": {
+      "point": 0,
+      "ci": [
+        0,
+        0
+      ],
+      "p": 1
+    }
+  },
+  "noiseSigma": {
+    "value": 0.4714045207910317,
+    "source": "generation（同 query 跨 sample 的 ΔREL 组内标准差）",
+    "withinDf": 6
+  },
+  "proposedThresholds": {
+    "noiseSigma": 0.4714,
+    "strongDeltaRel": 0.9428,
+    "_derivation": "strongDeltaRel = 2 × noiseSigma（σ_gen 由 query 组内、跨 sample 的 ΔREL 方差池化得到）"
+  },
+  "kcBreakdown": {
+    "七大能力>运算求解": {
+      "n": 1,
+      "N": 1,
+      "X": 0.6666666666666666,
+      "R": 1,
+      "O": 1
+    },
+    "拓展思维>几何模块": {
+      "n": 2,
+      "N": 0,
+      "X": 0.16666666666666666,
+      "R": 1,
+      "O": 1
+    }
+  },
+  "errors": {
+    "total": 0,
+    "byArm": {}
+  },
+  "notes": [
+    "ΔREL 主效应 = R − X（等长随机上下文），不是 R − N：X 消掉了上下文长度与「有资料」暗示的混杂。",
+    "σ_gen 只在 temperature>0 时有意义；本跑 temperature=0。若 σ_gen≈0，阈值须改为 judge 噪声口径（L3 κ 与重判一致性），并写 revision。",
+    "O 臂 = gold 该题 doc（含解析），用作生成器上限诊断，不参与决策矩阵。"
+  ]
+}

@@ -1,0 +1,2002 @@
+[
+ {
+  "queryId": "q-xes-2105",
+  "queryClusterId": "qc-xes-2105",
+  "qid": "2105",
+  "kcId": "七大能力>运算求解",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n甲乙丙丁四位同学分作业，一共有$$60$$本作业．甲说：“我分到的作业最少，比乙少$$2$$本，比丁少$$2$$本，比丙少$$4$$本，”那么甲分到本作业．丙分到本作业．\n请直接给出最终答案。",
+  "goldAnswer": "13 17",
+  "oracleDocId": "xes-q2105"
+ },
+ {
+  "queryId": "q-xes-21",
+  "queryClusterId": "qc-xes-21",
+  "qid": "21",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n如右图所示，用$$5$$个完全一样的小长方形拼成一个大长方形．如果小长方形的周长是$$40$$厘米，那么，大长方形的周长是厘米．\n question_21-image_0\n请直接给出最终答案。",
+  "goldAnswer": "80",
+  "oracleDocId": "xes-q21"
+ },
+ {
+  "queryId": "q-xes-5289",
+  "queryClusterId": "qc-xes-5289",
+  "qid": "5289",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n下图这块长方形绿地的宽要增加到$$24$$米，长不变．扩大后的绿地面积是平方米．\n question_5289-image_0",
+  "goldAnswer": "1200",
+  "oracleDocId": "xes-q5289"
+ },
+ {
+  "queryId": "q-xes-2512",
+  "queryClusterId": "qc-xes-2512",
+  "qid": "2512",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n李奶奶分别用$$36$$米长的篱笆围了$$3$$个正方形的养鸡棚，第一个围在场地中间；第二个一面靠墙；第三个围在墙角，两面靠墙．那么三个养鸡棚的占地面积分别是、、平方米．",
+  "goldAnswer": "81 144 324",
+  "oracleDocId": "xes-q2512"
+ },
+ {
+  "queryId": "q-xes-2758",
+  "queryClusterId": "qc-xes-2758",
+  "qid": "2758",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n(1)长方形面积是$$20\\text{c}{{\\text{m}}^{2}}$$，长是$$5$$厘米，宽为厘米．\n(2)正方形面积是$$25\\text{c}{{\\text{m}}^{2}}$$，边长是厘米．\n请直接给出最终答案。",
+  "goldAnswer": "4 5",
+  "oracleDocId": "xes-q2758"
+ },
+ {
+  "queryId": "q-xes-3220",
+  "queryClusterId": "qc-xes-3220",
+  "qid": "3220",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n梯形的面积为$$84$$平方厘米，上底为$$9$$厘米，高为$$8$$厘米，则下底为．\n它的答案是什么？",
+  "goldAnswer": "12",
+  "oracleDocId": "xes-q3220"
+ },
+ {
+  "queryId": "q-xes-1778",
+  "queryClusterId": "qc-xes-1778",
+  "qid": "1778",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n如图，两个相同的平行四边形分别水平、竖直放置，并重叠在一起．已知重叠部分恰好是一个边长为$$8$$厘米的正方形，$$AH$$长为$$3$$厘米，那么这两个平行四边形所覆盖的面积是平方厘米．\n question_1778-image_0",
+  "goldAnswer": "112",
+  "oracleDocId": "xes-q1778"
+ },
+ {
+  "queryId": "q-xes-22",
+  "queryClusterId": "qc-xes-22",
+  "qid": "22",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n一个长方形与一个正方形部分重合．没有重合的阴影部分面积相差．\n question_22-image_0\n它的答案是什么？",
+  "goldAnswer": "23",
+  "oracleDocId": "xes-q22"
+ },
+ {
+  "queryId": "q-xes-3225",
+  "queryClusterId": "qc-xes-3225",
+  "qid": "3225",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n如图，大正方形的边长是$$8$$厘米，小正方形的边长是$$6$$厘米．请问：图中阴影图形的面积是平方厘米. question_3225-image_0\n它的答案是什么？",
+  "goldAnswer": "14",
+  "oracleDocId": "xes-q3225"
+ },
+ {
+  "queryId": "q-xes-4290",
+  "queryClusterId": "qc-xes-4290",
+  "qid": "4290",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n（1）一个正方形的周长是$$36$$厘米，边长=厘米；（2）一个长方形的周长是$$60$$厘米，长是$$20$$厘米，宽=厘米",
+  "goldAnswer": "9 10",
+  "oracleDocId": "xes-q4290"
+ },
+ {
+  "queryId": "q-xes-17",
+  "queryClusterId": "qc-xes-17",
+  "qid": "17",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n下图中，相邻的边互相垂直，那么这个图形的周长为． question_17-image_0",
+  "goldAnswer": "92",
+  "oracleDocId": "xes-q17"
+ },
+ {
+  "queryId": "q-xes-911",
+  "queryClusterId": "qc-xes-911",
+  "qid": "911",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n（$$1$$）一个长方形的面积是$$42$$平方米，长是$$7$$米，宽是米；\n（$$2$$）一个正方形的面积是$$64$$平方米，边长是米．\n请直接给出最终答案。",
+  "goldAnswer": "6 8",
+  "oracleDocId": "xes-q911"
+ },
+ {
+  "queryId": "q-xes-4204",
+  "queryClusterId": "qc-xes-4204",
+  "qid": "4204",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n如图，小正方形$$ABCD$$放在大正方形$$EFGH$$上面，已知小正方形的边长为$$4$$厘米，且梯形$$AEHD$$的面积是$$28$$平方厘米，那么梯形$$AFGD$$的面积是平方厘米. question_4204-image_0",
+  "goldAnswer": "98",
+  "oracleDocId": "xes-q4204"
+ },
+ {
+  "queryId": "q-xes-6646",
+  "queryClusterId": "qc-xes-6646",
+  "qid": "6646",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n下图中标出的数表示每边长，单位是厘米．它的周长是厘米. question_6646-image_0\n它的答案是什么？",
+  "goldAnswer": "30",
+  "oracleDocId": "xes-q6646"
+ },
+ {
+  "queryId": "q-xes-4501",
+  "queryClusterId": "qc-xes-4501",
+  "qid": "4501",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n一块菜地，形状如图所示，已知$$a=b=30$$米，$$c=12$$米，这块地的周长是米. question_4501-image_0\n请直接给出最终答案。",
+  "goldAnswer": "144",
+  "oracleDocId": "xes-q4501"
+ },
+ {
+  "queryId": "q-xes-3124",
+  "queryClusterId": "qc-xes-3124",
+  "qid": "3124",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n如图所示，图中的数字表示所在的小长方形的面积，那么问号所在小长方形的面积是． question_3124-image_0",
+  "goldAnswer": "18",
+  "oracleDocId": "xes-q3124"
+ },
+ {
+  "queryId": "q-xes-4401",
+  "queryClusterId": "qc-xes-4401",
+  "qid": "4401",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n如图，将一个大长方形分割成$$9$$个小长方形．图上已标出部分小长方形的周长，那么阴影小长方形的周长是．\n question_4401-image_0\n它的答案是什么？",
+  "goldAnswer": "22",
+  "oracleDocId": "xes-q4401"
+ },
+ {
+  "queryId": "q-xes-914",
+  "queryClusterId": "qc-xes-914",
+  "qid": "914",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n下图是已知边长的一个正方形和一个长方形．正方形的面积是$$\\text{c}{{\\text{m}}^{2}}$$，长方形的面积是$$\\text{c}{{\\text{m}}^{2}}$$．\n question_914-image_0 question_914-image_1",
+  "goldAnswer": "4 10",
+  "oracleDocId": "xes-q914"
+ },
+ {
+  "queryId": "q-xes-1228",
+  "queryClusterId": "qc-xes-1228",
+  "qid": "1228",
+  "kcId": "拓展思维>几何模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n如图所示，已知$$OE$$与$$OF$$垂直，过$$O$$点做直线$$AB$$，若$$\\angle EOA=2\\angle AOF$$，则$$\\angle BOF=$$度．\n question_1228-image_0",
+  "goldAnswer": "150",
+  "oracleDocId": "xes-q1228"
+ },
+ {
+  "queryId": "q-xes-6059",
+  "queryClusterId": "qc-xes-6059",
+  "qid": "6059",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n有一根$$100$$厘米长的绳子，先从左端开始每隔$$3$$厘米作一记号，再从右端开始每隔$$5$$厘米也作一记号，然后将有记号的地方剪断，绳子一共被剪成了段？",
+  "goldAnswer": "47",
+  "oracleDocId": "xes-q6059"
+ },
+ {
+  "queryId": "q-xes-945",
+  "queryClusterId": "qc-xes-945",
+  "qid": "945",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n$$5$$、$$6$$、$$7\\cdots \\cdots \\cdots 50$$共有个数.\n它的答案是什么？",
+  "goldAnswer": "46",
+  "oracleDocId": "xes-q945"
+ },
+ {
+  "queryId": "q-xes-3696",
+  "queryClusterId": "qc-xes-3696",
+  "qid": "3696",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n某部队战士排成实心方阵行军，另一支队伍共$$31$$人加入他们的方阵，正好使横竖各增加一排，现共有战士人.\n它的答案是什么？",
+  "goldAnswer": "256",
+  "oracleDocId": "xes-q3696"
+ },
+ {
+  "queryId": "q-xes-6786",
+  "queryClusterId": "qc-xes-6786",
+  "qid": "6786",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n鸡兔同笼，共$$3$$只动物，$$10$$条腿，所以有只兔.\n它的答案是什么？",
+  "goldAnswer": "2",
+  "oracleDocId": "xes-q6786"
+ },
+ {
+  "queryId": "q-xes-2789",
+  "queryClusterId": "qc-xes-2789",
+  "qid": "2789",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n李明和张亮轮流打一份稿件，李明每天打$$15$$页，张亮每天打$$10$$页，他们一连打了$$25$$天，平均每天打$$12$$页，问张亮打了天．\n请直接给出最终答案。",
+  "goldAnswer": "15",
+  "oracleDocId": "xes-q2789"
+ },
+ {
+  "queryId": "q-xes-4053",
+  "queryClusterId": "qc-xes-4053",
+  "qid": "4053",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n一次阅兵中，接受检阅的一列彩车车队共$$30$$辆，每辆车长$$4$$米，前后每辆车相隔$$5$$米．这列车队共排列了米．\n请直接给出最终答案。",
+  "goldAnswer": "265",
+  "oracleDocId": "xes-q4053"
+ },
+ {
+  "queryId": "q-xes-4666",
+  "queryClusterId": "qc-xes-4666",
+  "qid": "4666",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n老师给同学们分糖果，如果每人分$$9$$个，则差$$2$$个；如果每人分$$11$$个，则差$$14$$个．那么一共有名学生，老师准备了个糖果．\n它的答案是什么？",
+  "goldAnswer": "6 52",
+  "oracleDocId": "xes-q4666"
+ },
+ {
+  "queryId": "q-xes-6270",
+  "queryClusterId": "qc-xes-6270",
+  "qid": "6270",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n大宽在做三位数与三位数加法时，把其中一个加数十位上的$$4$$看错了，结果比正确答案少$$30$$，那么大宽把$$4$$错看成了？\n请直接给出最终答案。",
+  "goldAnswer": "1",
+  "oracleDocId": "xes-q6270"
+ },
+ {
+  "queryId": "q-xes-4107",
+  "queryClusterId": "qc-xes-4107",
+  "qid": "4107",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n如下图所示，在$$X$$年$$X$$月的日历上，$$A+B+C=45$$，那么，该月份的第一个星期日是号． question_4107-image_0\n它的答案是什么？",
+  "goldAnswer": "4",
+  "oracleDocId": "xes-q4107"
+ },
+ {
+  "queryId": "q-xes-138",
+  "queryClusterId": "qc-xes-138",
+  "qid": "138",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n鸡兔共有$$15$$只，关在同一个笼子中，笼中共有$$34$$条腿．试计算，笼中有鸡只，兔子只．",
+  "goldAnswer": "13 2",
+  "oracleDocId": "xes-q138"
+ },
+ {
+  "queryId": "q-xes-1927",
+  "queryClusterId": "qc-xes-1927",
+  "qid": "1927",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n在“庆祝建国$$70$$周年”知识抢答赛中，答对一题加$$10$$分，答错一题扣$$5$$分．聪聪共抢答$$10$$题，最后得分$$85$$分．他答对题，答错题．\n它的答案是什么？",
+  "goldAnswer": "9 1",
+  "oracleDocId": "xes-q1927"
+ },
+ {
+  "queryId": "q-xes-6388",
+  "queryClusterId": "qc-xes-6388",
+  "qid": "6388",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n张伯伯家的养殖场养了一些鸡和兔，如果把一只鸡和一只兔放在一个笼子里，需要$$100$$个笼子，那么张伯伯家鸡和兔共有只，鸡腿和兔腿一共有条．\n question_6388-image_0",
+  "goldAnswer": "200 600",
+  "oracleDocId": "xes-q6388"
+ },
+ {
+  "queryId": "q-xes-7401",
+  "queryClusterId": "qc-xes-7401",
+  "qid": "7401",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n两根同样长的绳子，第一根剪掉$$31$$米，第二根剪掉$$19$$米，剩下的绳子第二根的长度是第一根的$$4$$倍，每根绳子原来长米．",
+  "goldAnswer": "35",
+  "oracleDocId": "xes-q7401"
+ },
+ {
+  "queryId": "q-xes-1907",
+  "queryClusterId": "qc-xes-1907",
+  "qid": "1907",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n一个实心方阵，最外边一层每边$$14$$人，那么这个方阵一共人．\n请直接给出最终答案。",
+  "goldAnswer": "196",
+  "oracleDocId": "xes-q1907"
+ },
+ {
+  "queryId": "q-xes-4766",
+  "queryClusterId": "qc-xes-4766",
+  "qid": "4766",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n这是一些棋子摆成的正三角形点阵．和“空心方阵”类似，也可以有“空心三角阵”．（1）如果有一个$$5$$层的空心三角阵，最外层每边有$$20$$个棋子，那么一共有枚棋子. question_4766-image_0\n它的答案是什么？",
+  "goldAnswer": "195",
+  "oracleDocId": "xes-q4766"
+ },
+ {
+  "queryId": "q-xes-7572",
+  "queryClusterId": "qc-xes-7572",
+  "qid": "7572",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n4年前，王叔叔的年龄是小明的$$5$$倍；$$8$$年后王叔叔的年龄是小明的$$3$$倍，小明今年岁\n请直接给出最终答案。",
+  "goldAnswer": "16",
+  "oracleDocId": "xes-q7572"
+ },
+ {
+  "queryId": "q-xes-1481",
+  "queryClusterId": "qc-xes-1481",
+  "qid": "1481",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n如图，电子跳蚤每跳一步，可从一个圆圈跳到相邻的圆圈．现在，一只红跳蚤从标有数“$$1$$”的圆圈按顺时针方向跳了$$100$$步，落在一个圆圈里，这个圆圈里的数是．\n question_1481-image_0\n请直接给出最终答案。",
+  "goldAnswer": "3",
+  "oracleDocId": "xes-q1481"
+ },
+ {
+  "queryId": "q-xes-6677",
+  "queryClusterId": "qc-xes-6677",
+  "qid": "6677",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n二年级合唱方阵，总数为$$81$$人，再增加一行一列，需要增加人． question_6677-image_0\n它的答案是什么？",
+  "goldAnswer": "19",
+  "oracleDocId": "xes-q6677"
+ },
+ {
+  "queryId": "q-xes-4281",
+  "queryClusterId": "qc-xes-4281",
+  "qid": "4281",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n三个鱼缸共有$$100$$条金鱼，第一个鱼缸的金鱼总数比其余两个鱼缸的金鱼总数少$$20$$条，第二个鱼缸的金鱼总数比第三个多$$10$$条．那么第一个鱼缸有条金鱼，第二个鱼缸有条金鱼，第三个鱼缸有条金鱼．",
+  "goldAnswer": "40 35 25",
+  "oracleDocId": "xes-q4281"
+ },
+ {
+  "queryId": "q-xes-7456",
+  "queryClusterId": "qc-xes-7456",
+  "qid": "7456",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n某初中一共有$$1422$$个学生，每个年级中各个班级的人数一样多，已知初一初二一共有$$20$$个班级，每班$$48$$人；初三有$$11$$个班级，则初三每个班级有人.",
+  "goldAnswer": "42",
+  "oracleDocId": "xes-q7456"
+ },
+ {
+  "queryId": "q-xes-5016",
+  "queryClusterId": "qc-xes-5016",
+  "qid": "5016",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n老树、大树、小树聊天，老树说：“小树生长多少天，大树就生长了多少周；小树生长了多少月，我就生长了多少年．我们加起来一共$$1000$$岁．”请问，它们今年小树岁，大树岁，老树岁．\n它的答案是什么？",
+  "goldAnswer": "50 350 600",
+  "oracleDocId": "xes-q5016"
+ },
+ {
+  "queryId": "q-xes-5214",
+  "queryClusterId": "qc-xes-5214",
+  "qid": "5214",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n小帅在超市结账时，收银员由于粗心，把“应付款”$$69$$元看成了$$96$$元，结果找回小帅$$4$$元，售货员应该找小帅元钱．\n请直接给出最终答案。",
+  "goldAnswer": "31",
+  "oracleDocId": "xes-q5214"
+ },
+ {
+  "queryId": "q-xes-4948",
+  "queryClusterId": "qc-xes-4948",
+  "qid": "4948",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n三年后小象将年满$$18$$岁，大象对小象说：“当你像我这么大时，我已经$$61$$岁．\"大象今年岁．\n请直接给出最终答案。",
+  "goldAnswer": "38",
+  "oracleDocId": "xes-q4948"
+ },
+ {
+  "queryId": "q-xes-1918",
+  "queryClusterId": "qc-xes-1918",
+  "qid": "1918",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n妈妈过年时在微信里给小朋友们发压岁钱红包，加加第一个领，领走了红包里一半的钱，减减第二个领，领了$$5$$元钱，最后$$6$$元钱全被乘乘领走，妈妈一共发了元钱的红包．\n它的答案是什么？",
+  "goldAnswer": "22",
+  "oracleDocId": "xes-q1918"
+ },
+ {
+  "queryId": "q-xes-6546",
+  "queryClusterId": "qc-xes-6546",
+  "qid": "6546",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n经过辛勤的照料，花果山取得了桃子的丰收．如果把桃子全部分给大猴子，每只分$$8$$个，则余下$$8$$个；如果全部分给小猴子，每只分$$15$$个，则缺$$7$$个．已知大猴子比小猴子多$$6$$只．那么，桃子一共有个．",
+  "goldAnswer": "128",
+  "oracleDocId": "xes-q6546"
+ },
+ {
+  "queryId": "q-xes-2841",
+  "queryClusterId": "qc-xes-2841",
+  "qid": "2841",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n小巧读一本小说，如果每天读$$30$$页，则比规定的日期迟一天读完全书；如果每天读$$35$$页，则最后一天要少读$$5$$页；如果每天读$$33$$页，最后一天要读页才能按规定的日期读完这本书．",
+  "goldAnswer": "42",
+  "oracleDocId": "xes-q2841"
+ },
+ {
+  "queryId": "q-xes-4045",
+  "queryClusterId": "qc-xes-4045",
+  "qid": "4045",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n艾迪和薇儿准备美化整个麦斯魔法学校首先他们在一条长$$100$$米的步行街一侧种柳树，每隔$$10$$米种一棵，两端都种，一共要种棵柳树？\n它的答案是什么？",
+  "goldAnswer": "11",
+  "oracleDocId": "xes-q4045"
+ },
+ {
+  "queryId": "q-xes-3536",
+  "queryClusterId": "qc-xes-3536",
+  "qid": "3536",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n果园中水蜜桃树比李子树多$$18$$棵，水蜜桃树的棵数恰好为李子树棵数的$$4$$倍，果园现在有李子树棵，水蜜桃树棵．\n请直接给出最终答案。",
+  "goldAnswer": "6 24",
+  "oracleDocId": "xes-q3536"
+ },
+ {
+  "queryId": "q-xes-7164",
+  "queryClusterId": "qc-xes-7164",
+  "qid": "7164",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n学而思学校杨老师和小刘、小关、小张三个学生，现在杨老师的年龄刚好是这三个学生的年龄和；$$9$$年后，杨老师年龄是小刘、小关两个学生的年龄和；又$$3$$年后，杨老师年龄是小刘、小张两个学生的年龄和；再$$3$$年后，杨老师年龄是小关、小张两个学生的年龄和．求现在小关的年龄是岁，小刘的年龄是岁，小张的年龄是岁，杨老师的年龄是岁．\n它的答案是什么？",
+  "goldAnswer": "12 15 9 36",
+  "oracleDocId": "xes-q7164"
+ },
+ {
+  "queryId": "q-xes-2027",
+  "queryClusterId": "qc-xes-2027",
+  "qid": "2027",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n请回答下列各题书架有$$2$$层，上面一层书的数量是下面一层的$$3$$倍多$$8$$本，且已知两层书架相差$$48$$本书，那么上层书架有本书．",
+  "goldAnswer": "68",
+  "oracleDocId": "xes-q2027"
+ },
+ {
+  "queryId": "q-xes-5618",
+  "queryClusterId": "qc-xes-5618",
+  "qid": "5618",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n在一个停车场上，现有车辆$$24$$辆，其中汽车有$$4$$个轮子，三轮摩托车有$$3$$个轮子，这些车共有$$86$$个轮子，那么三轮摩托车有辆．",
+  "goldAnswer": "10",
+  "oracleDocId": "xes-q5618"
+ },
+ {
+  "queryId": "q-xes-5222",
+  "queryClusterId": "qc-xes-5222",
+  "qid": "5222",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n艾迪和薇儿去参加植树活动，艾迪比薇儿多种了$$20$$棵数，而且艾迪种的树恰好是薇儿的$$5$$倍，请问：薇儿种了棵树．\n它的答案是什么？",
+  "goldAnswer": "5",
+  "oracleDocId": "xes-q5222"
+ },
+ {
+  "queryId": "q-xes-6913",
+  "queryClusterId": "qc-xes-6913",
+  "qid": "6913",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n$$2012$$年元旦（$$1$$月$$1$$日）是星期日，$$2018$$年元旦是星期.\n它的答案是什么？",
+  "goldAnswer": "一",
+  "oracleDocId": "xes-q6913"
+ },
+ {
+  "queryId": "q-xes-4058",
+  "queryClusterId": "qc-xes-4058",
+  "qid": "4058",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n$$10$$位小朋友站成一列做操，每相邻两位小朋友相隔$$2$$米，做操的队伍长米．\n请直接给出最终答案。",
+  "goldAnswer": "18",
+  "oracleDocId": "xes-q4058"
+ },
+ {
+  "queryId": "q-xes-1746",
+  "queryClusterId": "qc-xes-1746",
+  "qid": "1746",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n鸡、兔同笼，鸡比兔多$$26$$只，腿数共$$274$$条，鸡有只，兔有只．\n它的答案是什么？",
+  "goldAnswer": "63 37",
+  "oracleDocId": "xes-q1746"
+ },
+ {
+  "queryId": "q-xes-4563",
+  "queryClusterId": "qc-xes-4563",
+  "qid": "4563",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n$$2$$辆大卡车和$$6$$辆小卡车$$5$$小时可以运货$$1500$$吨，现在有一批货物，要用$$5$$辆大卡车和$$15$$辆小卡车用$$4$$个小时才能运完，运了$$3$$个小时后，有$$4$$辆大卡车和$$12$$辆小卡车被调走，那么剩下的货物小时能运完．\n它的答案是什么？",
+  "goldAnswer": "5",
+  "oracleDocId": "xes-q4563"
+ },
+ {
+  "queryId": "q-xes-1728",
+  "queryClusterId": "qc-xes-1728",
+  "qid": "1728",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n学而思杯原计划一等奖$$10$$人、二等奖$$20$$人，现在将一等奖中最后$$4$$人调整为二等奖，这样得二等奖的学生的平均分提高了$$2$$分，得一等奖的学生的平均分也提高了$$2$$分．那么，原计划的一等奖平均分比二等奖平均分多分．\n请直接给出最终答案。",
+  "goldAnswer": "15",
+  "oracleDocId": "xes-q1728"
+ },
+ {
+  "queryId": "q-xes-5989",
+  "queryClusterId": "qc-xes-5989",
+  "qid": "5989",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n张叔叔和李叔叔两人年龄和是$$56$$岁，当张叔叔是李叔叔现在年龄的一半时，李叔叔当时的年龄是张叔叔现在的年龄．那么张叔叔现在岁．\n请直接给出最终答案。",
+  "goldAnswer": "24",
+  "oracleDocId": "xes-q5989"
+ },
+ {
+  "queryId": "q-xes-6141",
+  "queryClusterId": "qc-xes-6141",
+  "qid": "6141",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n有一列数：$$3$$，$$5$$，$$1$$，$$4$$，$$2$$，$$8$$，$$5$$，$$7$$，$$1$$，$$4$$，$$2$$，$$8$$，$$5$$，$$7$$，$$\\cdots$$（2）前$$20$$个数的和为.\n它的答案是什么？",
+  "goldAnswer": "89",
+  "oracleDocId": "xes-q6141"
+ },
+ {
+  "queryId": "q-xes-969",
+  "queryClusterId": "qc-xes-969",
+  "qid": "969",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n三年级一班比二班多$$27$$人，一班人数比二班的$$4$$倍少$$9$$人，那么一班有人，二班有人．\n它的答案是什么？",
+  "goldAnswer": "39 12",
+  "oracleDocId": "xes-q969"
+ },
+ {
+  "queryId": "q-xes-4382",
+  "queryClusterId": "qc-xes-4382",
+  "qid": "4382",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n甲、乙共有$$58$$本连环画，甲给乙$$5$$本后，乙比甲还少$$4$$本，甲原来有连环画本.\n请直接给出最终答案。",
+  "goldAnswer": "36",
+  "oracleDocId": "xes-q4382"
+ },
+ {
+  "queryId": "q-xes-3881",
+  "queryClusterId": "qc-xes-3881",
+  "qid": "3881",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n○○○★★○○○★★○○○……这样的一排图形中，观察规律回答下列问题：前$$88$$个图形中有个五角星．\n请直接给出最终答案。",
+  "goldAnswer": "34",
+  "oracleDocId": "xes-q3881"
+ },
+ {
+  "queryId": "q-xes-6331",
+  "queryClusterId": "qc-xes-6331",
+  "qid": "6331",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n兄弟俩都以为只有自己过一年长一岁而别人不会长大．有一天，哥哥对弟弟说：“再过$$3$$年我的年龄就是你的$$2$$倍．”弟弟说：“不对，再过$$3$$年我和你一样大．”这时哥哥岁，弟弟岁．\n请直接给出最终答案。",
+  "goldAnswer": "9 6",
+  "oracleDocId": "xes-q6331"
+ },
+ {
+  "queryId": "q-xes-5648",
+  "queryClusterId": "qc-xes-5648",
+  "qid": "5648",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n黑、白两种颜色的珠子，一行黑，一行白，排成正三角形的形状（如图），当白珠子比黑珠子多$$10$$颗时，共用了颗白珠子． question_5648-image_0\n它的答案是什么？",
+  "goldAnswer": "110",
+  "oracleDocId": "xes-q5648"
+ },
+ {
+  "queryId": "q-xes-3072",
+  "queryClusterId": "qc-xes-3072",
+  "qid": "3072",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n乐乐老师有一桶巧克力，将它们分给三年级的小朋友，如果每人分$$9$$块，就剩下$$40$$块，如果每人分$$12$$块，就剩下$$10$$块．那乐乐老师一共有块巧克力，又将这些巧克力分给了个小朋友？\n它的答案是什么？",
+  "goldAnswer": "130 10",
+  "oracleDocId": "xes-q3072"
+ },
+ {
+  "queryId": "q-xes-7243",
+  "queryClusterId": "qc-xes-7243",
+  "qid": "7243",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n$$2008$$年$$2$$月$$8$$日是星期五，$$2009$$年$$2$$月$$8$$日是星期.",
+  "goldAnswer": "日",
+  "oracleDocId": "xes-q7243"
+ },
+ {
+  "queryId": "q-xes-4993",
+  "queryClusterId": "qc-xes-4993",
+  "qid": "4993",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n买一些$$4$$元和$$8$$元的雪糕，共花$$680$$元．已知$$8$$元的雪糕比$$4$$元的雪糕多$$40$$个，那么两种雪糕$$4$$元有个,$$8$$元有个．",
+  "goldAnswer": "30 70",
+  "oracleDocId": "xes-q4993"
+ },
+ {
+  "queryId": "q-xes-3064",
+  "queryClusterId": "qc-xes-3064",
+  "qid": "3064",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n一家三口人，两年前三人年龄之和是$$66$$岁．妈妈和爸爸同岁，今年妈妈的年龄是孩子的$$4$$倍，今年三人各是多少岁？答：孩子岁，爸爸妈妈岁\n请直接给出最终答案。",
+  "goldAnswer": "8 32",
+  "oracleDocId": "xes-q3064"
+ },
+ {
+  "queryId": "q-xes-1917",
+  "queryClusterId": "qc-xes-1917",
+  "qid": "1917",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n甲、乙两人比积分卡数量，如果甲拿出$$20$$张卡给乙，乙再从现有的积分卡中拿出$$30$$张给甲，这时两人恰好都有$$100$$张卡，甲原来有张积分卡．",
+  "goldAnswer": "90",
+  "oracleDocId": "xes-q1917"
+ },
+ {
+  "queryId": "q-xes-3050",
+  "queryClusterId": "qc-xes-3050",
+  "qid": "3050",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n大客车的乘客是小客车的$$3$$倍，大客车上的乘客比小客车的多$$20$$人，则小客车的乘客有人．\n它的答案是什么？",
+  "goldAnswer": "10",
+  "oracleDocId": "xes-q3050"
+ },
+ {
+  "queryId": "q-xes-87",
+  "queryClusterId": "qc-xes-87",
+  "qid": "87",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n某数先加上$$3$$，再乘$$3$$，然后除以$$2$$，最后减去$$2$$，结果是$$10$$，问：原数是．",
+  "goldAnswer": "5",
+  "oracleDocId": "xes-q87"
+ },
+ {
+  "queryId": "q-xes-4582",
+  "queryClusterId": "qc-xes-4582",
+  "qid": "4582",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n$$2018$$年$$10$$月$$10$$日是星期三，$$2028$$年$$10$$月$$10$$日是星期．",
+  "goldAnswer": "二",
+  "oracleDocId": "xes-q4582"
+ },
+ {
+  "queryId": "q-xes-6380",
+  "queryClusterId": "qc-xes-6380",
+  "qid": "6380",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n艾迪参加了若干次考试，在最后一次考试时他发现：如果这次考试得$$97$$分，那么他的平均分是$$90$$分；如果这次考试得$$71$$分，那么他的平均分数是$$88$$分．艾迪一共参加了次考试．\n请直接给出最终答案。",
+  "goldAnswer": "13",
+  "oracleDocId": "xes-q6380"
+ },
+ {
+  "queryId": "q-xes-4451",
+  "queryClusterId": "qc-xes-4451",
+  "qid": "4451",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n乐乐百货商店委托搬运站运送$$100$$只花瓶．双方商定每只运费$$10$$元，但如果发生损坏，那么每打破一只不仅不给运费，而且还要赔偿$$10$$元，结果搬运站共得运费$$920$$元．搬运过程中共打破了只花\n请直接给出最终答案。",
+  "goldAnswer": "4",
+  "oracleDocId": "xes-q4451"
+ },
+ {
+  "queryId": "q-xes-5912",
+  "queryClusterId": "qc-xes-5912",
+  "qid": "5912",
+  "kcId": "拓展思维>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n幼儿园将一筐苹果分给小朋友，如果分给大班的小朋友每人$$5$$个，则余$$10$$个；如果分给小班的小朋友每人$$8$$个，则缺$$2$$个．已知大班比小班多$$3$$个小朋友，则这筐苹果共有个，大班、小班共有小朋友人.",
+  "goldAnswer": "70 21",
+  "oracleDocId": "xes-q5912"
+ },
+ {
+  "queryId": "q-xes-4659",
+  "queryClusterId": "qc-xes-4659",
+  "qid": "4659",
+  "kcId": "拓展思维>数论模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n已知☆$$\\div 7=8\\cdots \\cdots \\triangle $$，请问：$$\\triangle $$最大是．",
+  "goldAnswer": "6",
+  "oracleDocId": "xes-q4659"
+ },
+ {
+  "queryId": "q-xes-3647",
+  "queryClusterId": "qc-xes-3647",
+  "qid": "3647",
+  "kcId": "拓展思维>数论模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n除法算式$$\\square \\div \\square =13\\cdots \\cdots 27$$中，被除数最小等于．$$13\\times 27+27=378$$\n请直接给出最终答案。",
+  "goldAnswer": "391",
+  "oracleDocId": "xes-q3647"
+ },
+ {
+  "queryId": "q-xes-4893",
+  "queryClusterId": "qc-xes-4893",
+  "qid": "4893",
+  "kcId": "拓展思维>数论模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n六位数$$\\overline{4067\\square \\square }$$的各位数字均不相同，且能被$$25$$整除，那么这个六位数是．",
+  "goldAnswer": "406725",
+  "oracleDocId": "xes-q4893"
+ },
+ {
+  "queryId": "q-xes-2852",
+  "queryClusterId": "qc-xes-2852",
+  "qid": "2852",
+  "kcId": "拓展思维>数论模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n从$$1$$~$$10$$这$$10$$个正整数中，每次取出两个不同的数，使它们的和是$$4$$的倍数，共有种不同的取法．\n它的答案是什么？",
+  "goldAnswer": "10",
+  "oracleDocId": "xes-q2852"
+ },
+ {
+  "queryId": "q-xes-5823",
+  "queryClusterId": "qc-xes-5823",
+  "qid": "5823",
+  "kcId": "拓展思维>数论模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n某校四年级学生排成一个方阵，最外一层的人数为$$40$$人．问方阵最外层每边有人，这个方阵共有人．",
+  "goldAnswer": "11 121",
+  "oracleDocId": "xes-q5823"
+ },
+ {
+  "queryId": "q-xes-1507",
+  "queryClusterId": "qc-xes-1507",
+  "qid": "1507",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n在下边乘法竖式的“$$\\square $$”中填入适当的数字，使竖式成立，乘积是．\n question_1507-image_0\n请直接给出最终答案。",
+  "goldAnswer": "684",
+  "oracleDocId": "xes-q1507"
+ },
+ {
+  "queryId": "q-xes-4429",
+  "queryClusterId": "qc-xes-4429",
+  "qid": "4429",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n北京、洛阳分别有$$9$$台和$$12$$台完全相同的机器，准备给杭州$$13$$台、西安$$8$$台，每台机器的运费如表所示，则使总运费最省是元．\n question_4429-image_0",
+  "goldAnswer": "15200",
+  "oracleDocId": "xes-q4429"
+ },
+ {
+  "queryId": "q-xes-1201",
+  "queryClusterId": "qc-xes-1201",
+  "qid": "1201",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n下图是三阶和幻方的一部分，$$A=$$．\n question_1201-image_0\n请直接给出最终答案。",
+  "goldAnswer": "9",
+  "oracleDocId": "xes-q1201"
+ },
+ {
+  "queryId": "q-xes-6477",
+  "queryClusterId": "qc-xes-6477",
+  "qid": "6477",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n下图的九个方格中已填入四个数，请再填入五个自然数，使得任一行、任一列的三个数之积都相等．那么你填的所有数的和是． question_6477-image_0\n请直接给出最终答案。",
+  "goldAnswer": "22",
+  "oracleDocId": "xes-q6477"
+ },
+ {
+  "queryId": "q-xes-7276",
+  "queryClusterId": "qc-xes-7276",
+  "qid": "7276",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n如图是一个加法竖式，其中$$\\triangle $$、$$\\square $$和$$\\Diamond$$分别代表三个不同的数字，那么$$\\triangle +\\square -\\Diamond$$等于或． question_7276-image_0\n它的答案是什么？",
+  "goldAnswer": "13 10",
+  "oracleDocId": "xes-q7276"
+ },
+ {
+  "queryId": "q-xes-749",
+  "queryClusterId": "qc-xes-749",
+  "qid": "749",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n在图中的空格内填入合适的数字，使乘法竖式成立．\n\n\n\n\n9\n\n2\n\n\nX\n\n\n\n\n\n6\n\n5\n4\n请直接给出最终答案。",
+  "goldAnswer": "2 7 4",
+  "oracleDocId": "xes-q749"
+ },
+ {
+  "queryId": "q-xes-1790",
+  "queryClusterId": "qc-xes-1790",
+  "qid": "1790",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n用$$16$$根火柴棍，在方框内各摆一个数，摆成的两个数中，所有的数字都各不相同，组成加法算式结果最小是． question_1790-image_0",
+  "goldAnswer": "23",
+  "oracleDocId": "xes-q1790"
+ },
+ {
+  "queryId": "q-xes-1695",
+  "queryClusterId": "qc-xes-1695",
+  "qid": "1695",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n班上四名同学进行跳棋比赛，每两名同学都要赛一局．每局胜者得$$2$$分，平局各得$$1$$分，负者得$$0$$分．（1）四名同学的总分是分.\n它的答案是什么？",
+  "goldAnswer": "12",
+  "oracleDocId": "xes-q1695"
+ },
+ {
+  "queryId": "q-xes-4938",
+  "queryClusterId": "qc-xes-4938",
+  "qid": "4938",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n下图中有条直线，个交点． question_4938-image_0\n它的答案是什么？",
+  "goldAnswer": "4 4",
+  "oracleDocId": "xes-q4938"
+ },
+ {
+  "queryId": "q-xes-776",
+  "queryClusterId": "qc-xes-776",
+  "qid": "776",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n下图是一块$$5\\times 5$$的区域，种有$$5$$棵树，现在要求在不种树的空地上搭帐篷，而且要求帐篷必须搭在树边，任意两个帐篷所占方格没有公共点，且每行帐篷数如最右边所示，每列帐篷数如最下边所示．那么第$$1$$行的帐篷在第列. question_776-image_0\n它的答案是什么？",
+  "goldAnswer": "5",
+  "oracleDocId": "xes-q776"
+ },
+ {
+  "queryId": "q-xes-2585",
+  "queryClusterId": "qc-xes-2585",
+  "qid": "2585",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n在下列竖式的$$□$$里填上合适的数字，使算式成立，则$$A=$$.\n question_2585-image_0",
+  "goldAnswer": "6",
+  "oracleDocId": "xes-q2585"
+ },
+ {
+  "queryId": "q-xes-5512",
+  "queryClusterId": "qc-xes-5512",
+  "qid": "5512",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n某班学生在运动会上，进入前三名的有$$10$$人次，已知获第一名可得$$9$$分，获第二名可得$$5$$分，获第三名可得$$2$$分，其他名次不记分，该班共计得$$64$$分，其中获第一名的至多有人次．\n请直接给出最终答案。",
+  "goldAnswer": "5",
+  "oracleDocId": "xes-q5512"
+ },
+ {
+  "queryId": "q-xes-2154",
+  "queryClusterId": "qc-xes-2154",
+  "qid": "2154",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n在如图所示的乘法竖式中，有些数字被三角形纸片盖住了．算式的结果是. question_2154-image_0\n它的答案是什么？",
+  "goldAnswer": "1056",
+  "oracleDocId": "xes-q2154"
+ },
+ {
+  "queryId": "q-xes-4362",
+  "queryClusterId": "qc-xes-4362",
+  "qid": "4362",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n图①中每个小正方形的边长都是$$8$$米，那么从$$A$$点到$$B$$点，不许走重复路（可经过同一个点但不能经过同一条线段），最多可以走米．\n question_4362-image_0\n它的答案是什么？",
+  "goldAnswer": "328",
+  "oracleDocId": "xes-q4362"
+ },
+ {
+  "queryId": "q-xes-3360",
+  "queryClusterId": "qc-xes-3360",
+  "qid": "3360",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n某城市的交通系统由若干个路口（下图中线段的交点）和街道（下图中的线段）组成，每条街道都连接着两个路口．所有街道都是双向通行的，且每条街道都有一个长度值（标在图中相应的线段处）．一名邮递员传送报纸和信件，要从邮局出发经过他所管辖的每一条街道最后返回邮局（每条街道可以经过不止一次）．他合理安排路线，可以使得自己走过最短的总长度是．（单位：千米） question_3360-image_0\n它的答案是什么？",
+  "goldAnswer": "108",
+  "oracleDocId": "xes-q3360"
+ },
+ {
+  "queryId": "q-xes-2008",
+  "queryClusterId": "qc-xes-2008",
+  "qid": "2008",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n下面的竖式共有$$10$$个数字，恰好是$$0$$~$$9$$各一个．其中$$3$$的位置已经给出，请计数：共有种满足要求的不同的竖式. question_2008-image_0\n请直接给出最终答案。",
+  "goldAnswer": "6",
+  "oracleDocId": "xes-q2008"
+ },
+ {
+  "queryId": "q-xes-7250",
+  "queryClusterId": "qc-xes-7250",
+  "qid": "7250",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n在空格内填入适当的数字，使减法竖式成立．从上到下，这三个数分别是、、． question_7250-image_0",
+  "goldAnswer": "10237 9656 581",
+  "oracleDocId": "xes-q7250"
+ },
+ {
+  "queryId": "q-xes-1168",
+  "queryClusterId": "qc-xes-1168",
+  "qid": "1168",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n请将下列幻方补充完整，第三行最右边的格子应该填．\n question_1168-image_0\n请直接给出最终答案。",
+  "goldAnswer": "8",
+  "oracleDocId": "xes-q1168"
+ },
+ {
+  "queryId": "q-xes-5087",
+  "queryClusterId": "qc-xes-5087",
+  "qid": "5087",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n已知一个三阶幻方的幻和是30，那么这个三阶幻方的中心数是.\n它的答案是什么？",
+  "goldAnswer": "10",
+  "oracleDocId": "xes-q5087"
+ },
+ {
+  "queryId": "q-xes-7574",
+  "queryClusterId": "qc-xes-7574",
+  "qid": "7574",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n在图中的方格中填上合适的数，使得每一行、每一列、每条对角线上的三个数之和相等． question_7574-image_0 第三行第一个数是：\n请直接给出最终答案。",
+  "goldAnswer": "7",
+  "oracleDocId": "xes-q7574"
+ },
+ {
+  "queryId": "q-xes-4885",
+  "queryClusterId": "qc-xes-4885",
+  "qid": "4885",
+  "kcId": "拓展思维>组合模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n小蜜蜂通过蜂巢房间，规定只能由小号房间进入大号房间，则小蜜蜂由$$1$$号房间到达$$7$$号房间有种方法．\n question_4885-image_0\n请直接给出最终答案。",
+  "goldAnswer": "13",
+  "oracleDocId": "xes-q4885"
+ },
+ {
+  "queryId": "q-xes-683",
+  "queryClusterId": "qc-xes-683",
+  "qid": "683",
+  "kcId": "拓展思维>行程模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n甲、乙两车分别从相距$$280$$千米的$$A$$、$$B$$两地同时出发，相向而行，$$8$$小时后相遇．相遇后两车继续前行，又过了$$6$$小时甲车到达$$B$$地，此时乙车距离$$A$$地还有千米.",
+  "goldAnswer": "70",
+  "oracleDocId": "xes-q683"
+ },
+ {
+  "queryId": "q-xes-6095",
+  "queryClusterId": "qc-xes-6095",
+  "qid": "6095",
+  "kcId": "拓展思维>行程模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n【课前热身2】大白和小明从相距$$1000$$米的两地同时出发相向而行，大白每分钟走$$47$$米，小明每分钟走$$53$$米，他们出发分钟第二次相距$$100$$米．\n请直接给出最终答案。",
+  "goldAnswer": "11",
+  "oracleDocId": "xes-q6095"
+ },
+ {
+  "queryId": "q-xes-4870",
+  "queryClusterId": "qc-xes-4870",
+  "qid": "4870",
+  "kcId": "拓展思维>行程模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n甲，乙两地相距$$200$$千米，薇儿先用$$15$$小时走完了$$120$$千米，休息了一下之后，继续以同样的速度前往乙地，则还需要小时才能到达乙地．",
+  "goldAnswer": "10",
+  "oracleDocId": "xes-q4870"
+ },
+ {
+  "queryId": "q-xes-1810",
+  "queryClusterId": "qc-xes-1810",
+  "qid": "1810",
+  "kcId": "拓展思维>行程模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n摩托车和自行车从相距$$365$$千米的甲乙两地同时出发相向而行，摩托车每小时行$$55$$千米，自行车每小时行$$15$$千米，途中摩托车发生故障，修理了$$1$$小时，然后继续前进，两车相遇时，摩托车行了千米．",
+  "goldAnswer": "275",
+  "oracleDocId": "xes-q1810"
+ },
+ {
+  "queryId": "q-xes-4864",
+  "queryClusterId": "qc-xes-4864",
+  "qid": "4864",
+  "kcId": "拓展思维>行程模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n大宽步行每分钟行$$20$$米．按照这样的速度，他步行$$100$$米，需要分钟．\n请直接给出最终答案。",
+  "goldAnswer": "5",
+  "oracleDocId": "xes-q4864"
+ },
+ {
+  "queryId": "q-xes-5712",
+  "queryClusterId": "qc-xes-5712",
+  "qid": "5712",
+  "kcId": "拓展思维>行程模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n青青从家到学校正好要翻过一座小山，她上坡每分钟行$$50$$米，下坡速度比上坡每分钟快$$20$$米，从家到学校的路程为$$2800$$米，上学要用$$50$$分钟．从学校回家要用分钟.\n请直接给出最终答案。",
+  "goldAnswer": "46",
+  "oracleDocId": "xes-q5712"
+ },
+ {
+  "queryId": "q-xes-5013",
+  "queryClusterId": "qc-xes-5013",
+  "qid": "5013",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n在春游研学的途中，同学们发现了一些可爱的小白兔．于是，数学老师提出了如下问题：森林里住着$$100$$只小白兔，凡是不爱吃萝卜的小白兔都爱吃白菜．其中爱吃萝卜的小白兔数量是爱吃白菜的小白兔数量的$$2$$倍，而不爱吃白菜的小白兔数量是不爱吃萝卜的小白兔数量的$$3$$倍．它们当中有只小白兔既爱吃萝卜又爱吃白菜.\n请直接给出最终答案。",
+  "goldAnswer": "20",
+  "oracleDocId": "xes-q5013"
+ },
+ {
+  "queryId": "q-xes-5557",
+  "queryClusterId": "qc-xes-5557",
+  "qid": "5557",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n博士正在做实验，每隔一段时间就记录了一次水温，结果如下表所示：水加热时温度的变化情况统计表加热时间（分）$$0$$$$2$$$$4$$$$6$$$$8$$$$10$$$$12$$水温（$${}^\\circ \\text{C}$$ ）$$26$$$$32$$$$50$$$$70$$$$85$$$$90$$$$100$$根据统计表的数据回答下列问题：(1)未加热时水温是$${}^\\circ \\text{C}$$；(2)加热$$10$$分钟后，水温达到了$${}^\\circ \\text{C}$$；(3)水温从$$50{}^\\circ \\text{C}$$加热到$$85{}^\\circ \\text{C}$$用了分钟；(4)估计一下，加热分钟时，水温大约可以达到$$60{}^\\circ \\text{C}$$．\n它的答案是什么？",
+  "goldAnswer": "26 90 4 5",
+  "oracleDocId": "xes-q5557"
+ },
+ {
+  "queryId": "q-xes-2817",
+  "queryClusterId": "qc-xes-2817",
+  "qid": "2817",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n下图中，一共有个三角形． question_2817-image_0\n它的答案是什么？",
+  "goldAnswer": "12",
+  "oracleDocId": "xes-q2817"
+ },
+ {
+  "queryId": "q-xes-2917",
+  "queryClusterId": "qc-xes-2917",
+  "qid": "2917",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n艾迪用若干张$$1$$元、$$5$$元、$$10$$元的人民币（每种钱都足够用）去买一个$$20$$元的水杯，艾迪一共有种不同的付款方式．\n它的答案是什么？",
+  "goldAnswer": "9",
+  "oracleDocId": "xes-q2917"
+ },
+ {
+  "queryId": "q-xes-6811",
+  "queryClusterId": "qc-xes-6811",
+  "qid": "6811",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n四个同学排成一排照相，一共能照出种不同的照片（不同的位置照出的照片也不同）．\n它的答案是什么？",
+  "goldAnswer": "24",
+  "oracleDocId": "xes-q6811"
+ },
+ {
+  "queryId": "q-xes-6615",
+  "queryClusterId": "qc-xes-6615",
+  "qid": "6615",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n一块木板上有$$13$$枚钉子（如下图）．用橡皮筋套住其中的几枚钉子，可以构成三角形，正方形，梯形等等．请回答：可以构成个正方形. question_6615-image_0",
+  "goldAnswer": "11",
+  "oracleDocId": "xes-q6615"
+ },
+ {
+  "queryId": "q-xes-3716",
+  "queryClusterId": "qc-xes-3716",
+  "qid": "3716",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n小美要沿下图中的路线从$$A$$点去$$B$$点，由于$$C$$点正在修路所以暂时无法通行，则小美要到$$B$$点有条最短的路线． question_3716-image_0\n请直接给出最终答案。",
+  "goldAnswer": "17",
+  "oracleDocId": "xes-q3716"
+ },
+ {
+  "queryId": "q-xes-3197",
+  "queryClusterId": "qc-xes-3197",
+  "qid": "3197",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n$$63$$只猫咪参加猫咪训练营，经过一段时间的训练之后，其中只学会抓鱼的有$$15$$只，只学会抓老鼠的有$$12$$只，既学会抓老鼠又学会抓鱼的有$$9$$只，既学会抓老鼠又学会爬树的有$$6$$只，既能爬树又能抓鱼的有$$5$$只，三种都能做的有$$2$$只，已知这$$63$$只猫咪必然会其中的至少一种，则只学会爬树的猫咪有只.\n请直接给出最终答案。",
+  "goldAnswer": "20",
+  "oracleDocId": "xes-q3197"
+ },
+ {
+  "queryId": "q-xes-6526",
+  "queryClusterId": "qc-xes-6526",
+  "qid": "6526",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n一只蜜蜂从$$A$$处出发，回到家里$$B$$处，每次只能从一个蜂房爬向右侧（右边、右上、右下）邻近的蜂房而不准逆行，共有种回家的方法？ question_6526-image_0\n请直接给出最终答案。",
+  "goldAnswer": "22",
+  "oracleDocId": "xes-q6526"
+ },
+ {
+  "queryId": "q-xes-5360",
+  "queryClusterId": "qc-xes-5360",
+  "qid": "5360",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n某班级的学生每人都至少订阅了一种视频，订《礼花蛋》的有$$25$$人，订《超能先锋历险记》的有$$30$$人，两种都订的有$$10$$人，那么全班有人．\n它的答案是什么？",
+  "goldAnswer": "45",
+  "oracleDocId": "xes-q5360"
+ },
+ {
+  "queryId": "q-xes-7455",
+  "queryClusterId": "qc-xes-7455",
+  "qid": "7455",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n艾迪收到三种不同面值的硬币，如图所示，假若你恰好有以下四枚硬币．问共能组成种不同的钱数. question_7455-image_0 question_7455-image_1 question_7455-image_2 question_7455-image_3\n请直接给出最终答案。",
+  "goldAnswer": "11",
+  "oracleDocId": "xes-q7455"
+ },
+ {
+  "queryId": "q-xes-6034",
+  "queryClusterId": "qc-xes-6034",
+  "qid": "6034",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n在$$1\\sim 60$$这些自然数中：（1）$$2$$的倍数有个？（2）$$3$$的倍数有个？（3）既是$$2$$的倍数又是$$3$$的倍数有个？\n它的答案是什么？",
+  "goldAnswer": "30 20 10",
+  "oracleDocId": "xes-q6034"
+ },
+ {
+  "queryId": "q-xes-3514",
+  "queryClusterId": "qc-xes-3514",
+  "qid": "3514",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n如图，现要从$$1$$号房间走到$$4$$号房间，如果每个房间最多只能经过一次，那么一共有种不同走法．\n question_3514-image_0\n它的答案是什么？",
+  "goldAnswer": "4",
+  "oracleDocId": "xes-q3514"
+ },
+ {
+  "queryId": "q-xes-3919",
+  "queryClusterId": "qc-xes-3919",
+  "qid": "3919",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n艾迪正在收拾书桌，将$$9$$支相同的铅笔分成$$3$$堆，共有种不同的分法．\n请直接给出最终答案。",
+  "goldAnswer": "7",
+  "oracleDocId": "xes-q3919"
+ },
+ {
+  "queryId": "q-xes-7516",
+  "queryClusterId": "qc-xes-7516",
+  "qid": "7516",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n分别数一数，两幅图中各有多少个正方形？（1） question_7516-image_0 question_7516-image_2 ​（2）\n它的答案是什么？",
+  "goldAnswer": "30 32",
+  "oracleDocId": "xes-q7516"
+ },
+ {
+  "queryId": "q-xes-4158",
+  "queryClusterId": "qc-xes-4158",
+  "qid": "4158",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n数一数图中有个长方形（包括正方形）. question_4158-image_0\n它的答案是什么？",
+  "goldAnswer": "35",
+  "oracleDocId": "xes-q4158"
+ },
+ {
+  "queryId": "q-xes-7631",
+  "queryClusterId": "qc-xes-7631",
+  "qid": "7631",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n$$A$$、$$B$$、$$C$$三个小朋友互相传球，先从$$A$$开始发球，这样经过了$$2$$次传球后，那么不同的传球方式共种．",
+  "goldAnswer": "4",
+  "oracleDocId": "xes-q7631"
+ },
+ {
+  "queryId": "q-xes-5658",
+  "queryClusterId": "qc-xes-5658",
+  "qid": "5658",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n下图是一个变形的蘑菇，一共分为六块区域．现在要用四种颜色对其染色，要求相邻的两块区域（有公共边的两块区域称为相邻）染成不同的颜色．如果颜色能反复使用，那么一共有种不同的染色方法. question_5658-image_0",
+  "goldAnswer": "432",
+  "oracleDocId": "xes-q5658"
+ },
+ {
+  "queryId": "q-xes-3558",
+  "queryClusterId": "qc-xes-3558",
+  "qid": "3558",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n下面是三（1）班同学$$1$$分钟跳绳情况统计表．\n\n\n\n\n人数\n\n$$80$$个以下\n\n$$80$$~$$90$$\n\n$$91$$~$$100$$\n\n$$101$$~$$110$$\n\n$$110$$以上\n\n\n\n性\n别\n\n男\n\n$$4$$\n\n$$6$$\n\n$$9$$\n\n$$4$$\n\n$$2$$\n\n\n\n女\n\n$$1$$\n\n$$4$$\n\n$$6$$\n\n$$6$$\n\n$$7$$\n\n\n\n三（1）班一分钟跳绳在$$100$$个以上的一共有人．\n请直接给出最终答案。",
+  "goldAnswer": "19",
+  "oracleDocId": "xes-q3558"
+ },
+ {
+  "queryId": "q-xes-1864",
+  "queryClusterId": "qc-xes-1864",
+  "qid": "1864",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n将$$10$$个完全相同的小球，放入$$3$$个相同的盒子中（每个盒子里可以不放小球），共有种不同的放法．\n请直接给出最终答案。",
+  "goldAnswer": "14",
+  "oracleDocId": "xes-q1864"
+ },
+ {
+  "queryId": "q-xes-5923",
+  "queryClusterId": "qc-xes-5923",
+  "qid": "5923",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n把$$8$$辆坦克分给小小、中中、大大三位小朋友，每人至少分到一辆坦克，有种方法？\n它的答案是什么？",
+  "goldAnswer": "21",
+  "oracleDocId": "xes-q5923"
+ },
+ {
+  "queryId": "q-xes-4138",
+  "queryClusterId": "qc-xes-4138",
+  "qid": "4138",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n艾迪和薇儿准备去看望养老院的李奶奶，但是薇儿想先去市中心买东西，他们计划从学校经过市中心再到养老院，最短路线共有条？ question_4138-image_0\n它的答案是什么？",
+  "goldAnswer": "60",
+  "oracleDocId": "xes-q4138"
+ },
+ {
+  "queryId": "q-xes-6276",
+  "queryClusterId": "qc-xes-6276",
+  "qid": "6276",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n博士给艾迪与薇儿上课，课上介绍了“拐弯”的概念．\n博士：“对于一行数，如果有三个数$$abc$$依次排一起，且$$a>b$$，$$c>b$$或者$$a < b$$，$$c <b$$，我们就称它发生了一次拐弯．”\n艾迪：“我懂了，比如$$4321$$没有拐弯，像$$1243$$就发生了一次拐弯．”\n薇儿：“没错，再比如$$1324$$就发生了两次拐弯．”\n博士：“非常棒！看来你们都掌握得非常扎实了，现在我要考考你们了，如果我们将$$1$$，$$2$$，$$3$$，$$4$$排成一行，则能使这行数刚好发生两次拐弯的排列方法共有种．“",
+  "goldAnswer": "10",
+  "oracleDocId": "xes-q6276"
+ },
+ {
+  "queryId": "q-xes-2396",
+  "queryClusterId": "qc-xes-2396",
+  "qid": "2396",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n把$10$个苹果分给$3$个小朋友，每个小朋友至少分一个，有种不同的分法．\n它的答案是什么？",
+  "goldAnswer": "36",
+  "oracleDocId": "xes-q2396"
+ },
+ {
+  "queryId": "q-xes-2208",
+  "queryClusterId": "qc-xes-2208",
+  "qid": "2208",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n小明决定去香港、澳门、台湾这三个地方旅游，要走遍这三个地方（不重复），他一共有种不同的游览顺序．\n请直接给出最终答案。",
+  "goldAnswer": "6",
+  "oracleDocId": "xes-q2208"
+ },
+ {
+  "queryId": "q-xes-7619",
+  "queryClusterId": "qc-xes-7619",
+  "qid": "7619",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n用数字$$0$$、$$1$$、$$2$$、$$3$$可以组成个不同的无重复数字的三位数．",
+  "goldAnswer": "18",
+  "oracleDocId": "xes-q7619"
+ },
+ {
+  "queryId": "q-xes-7451",
+  "queryClusterId": "qc-xes-7451",
+  "qid": "7451",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n假若你恰好有四枚硬币（$$1$$、$$5$$、$$5$$、$$8$$）．问共能组成种不同的钱数．\n它的答案是什么？",
+  "goldAnswer": "11．",
+  "oracleDocId": "xes-q7451"
+ },
+ {
+  "queryId": "q-xes-6325",
+  "queryClusterId": "qc-xes-6325",
+  "qid": "6325",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n下图中一共有个正方形． question_6325-image_0",
+  "goldAnswer": "130",
+  "oracleDocId": "xes-q6325"
+ },
+ {
+  "queryId": "q-xes-1981",
+  "queryClusterId": "qc-xes-1981",
+  "qid": "1981",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n有不同的推理书$$6$$本，图画书$$4$$本，杂志$$3$$本，故事书$$2$$本，从中任取一本，共有种取法.",
+  "goldAnswer": "15",
+  "oracleDocId": "xes-q1981"
+ },
+ {
+  "queryId": "q-xes-7585",
+  "queryClusterId": "qc-xes-7585",
+  "qid": "7585",
+  "kcId": "拓展思维>计数模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n如下图，从$$A$$到$$B$$的最短路线有条. question_7585-image_0\n它的答案是什么？",
+  "goldAnswer": "35",
+  "oracleDocId": "xes-q7585"
+ },
+ {
+  "queryId": "q-xes-6585",
+  "queryClusterId": "qc-xes-6585",
+  "qid": "6585",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n定义两种运算“#”和“$$\\Delta $$”如下：\n　　a#b表示$$a$$，$$b$$两数中较小的数的$$3$$倍，a$$\\Delta $$b表示$$a$$，$$b$$两数中较大的数的$$5$$倍．\n　　比如：$$4\\#5=4\\times 3=12,4\\Delta 5=5\\times 5=25$$．计算：$$\\left[ \\left( 6\\#5 \\right)+\\left( 3\\Delta 8 \\right) \\right]\\times \\left[ \\left( 4\\Delta 2 \\right)-\\left( 2\\#7 \\right) \\right]$$=．\n它的答案是什么？",
+  "goldAnswer": "770",
+  "oracleDocId": "xes-q6585"
+ },
+ {
+  "queryId": "q-xes-5194",
+  "queryClusterId": "qc-xes-5194",
+  "qid": "5194",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n计算下列各题：（1）博士要买一套书捐赠给小朋友，这套书共有$$20$$本，每本$$15$$元，博士买书要准备元．（2）博士还想买一些牛奶给小朋友，每箱牛奶$$40$$元，共买$$150$$箱，博士买牛奶要准备元．\n它的答案是什么？",
+  "goldAnswer": "300 6000",
+  "oracleDocId": "xes-q5194"
+ },
+ {
+  "queryId": "q-xes-2778",
+  "queryClusterId": "qc-xes-2778",
+  "qid": "2778",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n计算：\n（1）$$23\\times 67+23\\times 32+23$$=．\n（2）$$34\\times 25+87\\times 22+34\\times 62+87\\times 44$$=．\n请直接给出最终答案。",
+  "goldAnswer": "2300 8700",
+  "oracleDocId": "xes-q2778"
+ },
+ {
+  "queryId": "q-xes-6674",
+  "queryClusterId": "qc-xes-6674",
+  "qid": "6674",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n计算： $$\\frac{1}{4-\\dfrac{1}{3+\\dfrac{1}{2-\\dfrac{1}{1+\\dfrac{1}{2}}}}}$$=．",
+  "goldAnswer": "\\frac{15}{56}",
+  "oracleDocId": "xes-q6674"
+ },
+ {
+  "queryId": "q-xes-7520",
+  "queryClusterId": "qc-xes-7520",
+  "qid": "7520",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n一个电影院放映厅一共有$$11$$排座位，后一排比前一排多$$2$$个座位．第一排有$$10$$个座位． question_7520-image_0 （1）最后一排有个座位．（2）这个放映厅一共有个座位．",
+  "goldAnswer": "30 220",
+  "oracleDocId": "xes-q7520"
+ },
+ {
+  "queryId": "q-xes-213",
+  "queryClusterId": "qc-xes-213",
+  "qid": "213",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n$1235+2351+3512+5123=$",
+  "goldAnswer": "12221",
+  "oracleDocId": "xes-q213"
+ },
+ {
+  "queryId": "q-xes-7541",
+  "queryClusterId": "qc-xes-7541",
+  "qid": "7541",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n定义新运算：$$A$$※$$B=3\\times A+4\\times B$$，则$$9$$※$$10=$$．\n它的答案是什么？",
+  "goldAnswer": "67",
+  "oracleDocId": "xes-q7541"
+ },
+ {
+  "queryId": "q-xes-7096",
+  "queryClusterId": "qc-xes-7096",
+  "qid": "7096",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n结合刚刚发现的规律，快速计算下列各式：（1）$$\\left( 13039+260 \\right)\\div 13$$=．（2）$$\\left( 54+81+360 \\right)\\div 9$$=．（3）$$\\left( 18000-720 \\right)\\div 9$$=．（4）$$\\left( 4800-240+720 \\right)\\div 12$$=．\n请直接给出最终答案。",
+  "goldAnswer": "1023 55 1920 440",
+  "oracleDocId": "xes-q7096"
+ },
+ {
+  "queryId": "q-xes-6643",
+  "queryClusterId": "qc-xes-6643",
+  "qid": "6643",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n计算：（$$1$$）$$23\\times 4\\times 25=$$．\n（$$2$$）$$125\\times 13\\times 8=$$．\n（$$3$$）$$12\\times 25=$$．\n（$$4$$）$$48\\times 125=$$．\n（$$5$$）$$125\\times (80+4)=$$．\n（$$6$$）$$(100-8)\\times 25=$$．",
+  "goldAnswer": "2300 13000 300 6000 10500 2300",
+  "oracleDocId": "xes-q6643"
+ },
+ {
+  "queryId": "q-xes-5877",
+  "queryClusterId": "qc-xes-5877",
+  "qid": "5877",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n从$$1$$开始的连续奇数$$1$$，$$3$$，$$5$$，$$7$$，$$……$$，那么$$21$$是这个数串中的第个数．",
+  "goldAnswer": "11",
+  "oracleDocId": "xes-q5877"
+ },
+ {
+  "queryId": "q-xes-4573",
+  "queryClusterId": "qc-xes-4573",
+  "qid": "4573",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n填一填．\n\n\n\n$$7$$平方分米$$=$$平方厘米\n$$12$$平方米$$=$$平方分米\n\n\n$$300$$平方厘米$$=$$平方分米\n$$500$$平方分米$$=$$平方米\n它的答案是什么？",
+  "goldAnswer": "700 1200 3 5",
+  "oracleDocId": "xes-q4573"
+ },
+ {
+  "queryId": "q-xes-3003",
+  "queryClusterId": "qc-xes-3003",
+  "qid": "3003",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n已知$${{3}^{m}}\\cdot {{9}^{3}}\\cdot {{27}^{3}}\\cdot 8{{1}^{m}}={{3}^{30}}$$，求$$m=$$．\n它的答案是什么？",
+  "goldAnswer": "3",
+  "oracleDocId": "xes-q3003"
+ },
+ {
+  "queryId": "q-xes-1583",
+  "queryClusterId": "qc-xes-1583",
+  "qid": "1583",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n计算：$$11\\div 17+17\\div 19+20\\div 17+40\\div 19+37\\div 17$$=.\n请直接给出最终答案。",
+  "goldAnswer": "7",
+  "oracleDocId": "xes-q1583"
+ },
+ {
+  "queryId": "q-xes-1392",
+  "queryClusterId": "qc-xes-1392",
+  "qid": "1392",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n计算：$$80\\times 75+22\\times 75-150=$$．\n它的答案是什么？",
+  "goldAnswer": "7500",
+  "oracleDocId": "xes-q1392"
+ },
+ {
+  "queryId": "q-xes-36",
+  "queryClusterId": "qc-xes-36",
+  "qid": "36",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n计算：$$31\\times 28+31\\times 85-31\\times 13=$$．",
+  "goldAnswer": "3100",
+  "oracleDocId": "xes-q36"
+ },
+ {
+  "queryId": "q-xes-6789",
+  "queryClusterId": "qc-xes-6789",
+  "qid": "6789",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n计算：$$207+205+203+201+199+197+195+193$$=．\n请直接给出最终答案。",
+  "goldAnswer": "1600",
+  "oracleDocId": "xes-q6789"
+ },
+ {
+  "queryId": "q-xes-7182",
+  "queryClusterId": "qc-xes-7182",
+  "qid": "7182",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n计算：（1）$$\\frac{1}{53}+\\frac{2}{53}=$$．（2）$$\\frac{5}{79}-\\frac{1}{79}=$$．（3）$$\\frac{7}{117}+\\frac{8}{117}-\\frac{5}{117}+\\frac{1}{117}=$$．（4）$$\\frac{7}{92}-\\left( \\frac{5}{89}+\\frac{7}{92} \\right)+\\frac{6}{89}=$$．",
+  "goldAnswer": "\\frac{3}{53} \\frac{4}{79} \\frac{11}{117} \\frac{1}{89}",
+  "oracleDocId": "xes-q7182"
+ },
+ {
+  "queryId": "q-xes-5729",
+  "queryClusterId": "qc-xes-5729",
+  "qid": "5729",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n等差数列：$$1$$，$$4$$，$$7$$，$$10$$，$$\\cdots $$，其中$$55$$是这个数串的第个数．\n请直接给出最终答案。",
+  "goldAnswer": "19",
+  "oracleDocId": "xes-q5729"
+ },
+ {
+  "queryId": "q-xes-550",
+  "queryClusterId": "qc-xes-550",
+  "qid": "550",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n从$$1$$开始的奇数：$$1$$，$$3$$，$$5$$，$$7$$，$$\\cdots $$，其中第$$100$$个奇数是．\n它的答案是什么？",
+  "goldAnswer": "199",
+  "oracleDocId": "xes-q550"
+ },
+ {
+  "queryId": "q-xes-2737",
+  "queryClusterId": "qc-xes-2737",
+  "qid": "2737",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n艾迪拿出了自己珍藏的$$35$$块巧克力给大家分，他自己没吃．平均分给了三年级参加比赛的同学，不到$$10$$人，最后还剩$$5$$块，无法再分．请问三年级有名同学参加比赛？",
+  "goldAnswer": "6",
+  "oracleDocId": "xes-q2737"
+ },
+ {
+  "queryId": "q-xes-6578",
+  "queryClusterId": "qc-xes-6578",
+  "qid": "6578",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n已知$${{3}^{m}}=4$$，$${{3}^{n}}=5$$，$${{3}^{2m+4n}}=$$．",
+  "goldAnswer": "10000",
+  "oracleDocId": "xes-q6578"
+ },
+ {
+  "queryId": "q-xes-562",
+  "queryClusterId": "qc-xes-562",
+  "qid": "562",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n李老师每天研制做糖，从第$$2$$天开始，每天都比前一天多做$$7$$块糖，第$$11$$天做了$$72$$块糖，则他第$$6$$天做了块糖．",
+  "goldAnswer": "37",
+  "oracleDocId": "xes-q562"
+ },
+ {
+  "queryId": "q-xes-1585",
+  "queryClusterId": "qc-xes-1585",
+  "qid": "1585",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n在一个等差数列中，首项为$$11$$，第$$11$$项为$$51$$，求公差是．",
+  "goldAnswer": "4",
+  "oracleDocId": "xes-q1585"
+ },
+ {
+  "queryId": "q-xes-4131",
+  "queryClusterId": "qc-xes-4131",
+  "qid": "4131",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n解方程 $$2x+3+4x=54-3$$$x=$",
+  "goldAnswer": "8",
+  "oracleDocId": "xes-q4131"
+ },
+ {
+  "queryId": "q-xes-7368",
+  "queryClusterId": "qc-xes-7368",
+  "qid": "7368",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n把$$6.103$$扩大为原来的$$100$$倍是；把$$320.7$$缩小为原来的$$\\frac{1}{100}$$是．",
+  "goldAnswer": "610.3 3.207",
+  "oracleDocId": "xes-q7368"
+ },
+ {
+  "queryId": "q-xes-3251",
+  "queryClusterId": "qc-xes-3251",
+  "qid": "3251",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n求出下面符号代表的值．$$37 -(3x +7)=(16 -5x）+18$$，$$x =$$.\n请直接给出最终答案。",
+  "goldAnswer": "2",
+  "oracleDocId": "xes-q3251"
+ },
+ {
+  "queryId": "q-xes-1390",
+  "queryClusterId": "qc-xes-1390",
+  "qid": "1390",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n计算：$$9\\times 125-25\\times 29+75\\times 21+175\\times 3=$$．\n请直接给出最终答案。",
+  "goldAnswer": "2500",
+  "oracleDocId": "xes-q1390"
+ },
+ {
+  "queryId": "q-xes-1260",
+  "queryClusterId": "qc-xes-1260",
+  "qid": "1260",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n下图的“宝塔”是由一个个的等边三角形拼成，它们的层数不同．例如：第一层有$$1$$个等边三角形，第二层有$$3$$个等边三角形，仔细观察并填空：（1）$$10$$层的“宝塔”的最下层包含个小三角形．（2）整个$$10$$层“宝塔”一共包含个小三角形． question_1260-image_0",
+  "goldAnswer": "19 100",
+  "oracleDocId": "xes-q1260"
+ },
+ {
+  "queryId": "q-xes-5799",
+  "queryClusterId": "qc-xes-5799",
+  "qid": "5799",
+  "kcId": "拓展思维>计算模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n计算：$$17\\times 9=$$．\n请直接给出最终答案。",
+  "goldAnswer": "153",
+  "oracleDocId": "xes-q5799"
+ },
+ {
+  "queryId": "q-xes-2049",
+  "queryClusterId": "qc-xes-2049",
+  "qid": "2049",
+  "kcId": "知识点>几何模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n有一个长方形纸片，长是$$10$$厘米，宽是$$8$$厘米，用剪刀竖着剪一刀（见下图），这$$2$$个长方形的周长之和是厘米. question_2049-image_0",
+  "goldAnswer": "52",
+  "oracleDocId": "xes-q2049"
+ },
+ {
+  "queryId": "q-xes-5791",
+  "queryClusterId": "qc-xes-5791",
+  "qid": "5791",
+  "kcId": "知识点>应用题",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n甲乙两桶原来装有一样多的油，现在从甲桶倒$$9$$千克油到乙桶中，则乙桶中的油是甲桶的$$4$$倍，那么甲桶现在有千克油，乙桶现在有千克油．\n question_5791-image_0\n它的答案是什么？",
+  "goldAnswer": "6 24",
+  "oracleDocId": "xes-q5791"
+ },
+ {
+  "queryId": "q-xes-2729",
+  "queryClusterId": "qc-xes-2729",
+  "qid": "2729",
+  "kcId": "知识点>应用题",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n哥哥有$$95$$本书，弟弟有$$155$$本书．哥哥给了弟弟一些书本后，弟弟的书本总数恰好变为哥哥的$$4$$倍．（1）哥哥给了弟弟一些书本后，哥哥和弟弟一共有本书．（2）此时哥哥和弟弟两人分别有、本书？ question_2729-image_0",
+  "goldAnswer": "250 50 200",
+  "oracleDocId": "xes-q2729"
+ },
+ {
+  "queryId": "q-xes-3841",
+  "queryClusterId": "qc-xes-3841",
+  "qid": "3841",
+  "kcId": "知识点>应用题模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n三($$1$$)班有象棋、飞行棋共$$14$$副，恰好可供全班$$40$$名同学同时进行活动．象棋要$$2$$人下一副，飞行棋要$$4$$人下一副，则飞行棋有副，象棋有副.",
+  "goldAnswer": "6 8",
+  "oracleDocId": "xes-q3841"
+ },
+ {
+  "queryId": "q-xes-3838",
+  "queryClusterId": "qc-xes-3838",
+  "qid": "3838",
+  "kcId": "知识点>应用题模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n一个芭蕾舞剧团赴省外演出．休息一天，要付出$$600$$元的剧场租金；演出一天，扣去场租、杂项开支，平均可收入$$2400$$元．现租用剧场$$30$$天，演出共收入$$42000$$元．这个芭蕾舞剧团共演出天.\n请直接给出最终答案。",
+  "goldAnswer": "20",
+  "oracleDocId": "xes-q3838"
+ },
+ {
+  "queryId": "q-xes-5067",
+  "queryClusterId": "qc-xes-5067",
+  "qid": "5067",
+  "kcId": "知识点>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n在图中所示的表里，将每列上、下两个字组成一组词，例如第一组词为（春投），第二组词为（风我），那么第$$48$$组词是.春风花草香春风花草香春风花草香$$……$$投我以桃报之以李投我以桃报之以李$$……$$\n它的答案是什么？",
+  "goldAnswer": "花李",
+  "oracleDocId": "xes-q5067"
+ },
+ {
+  "queryId": "q-xes-2974",
+  "queryClusterId": "qc-xes-2974",
+  "qid": "2974",
+  "kcId": "知识点>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n亚洲杯决赛中，中国记者的人数是外国记者人数的$$3$$倍．比赛结束后中国记者有$$180$$人离场，外国记者有$$40$$人离场．剩下的中、外记者人数相等．则中国记者有人、外国记者有人.\n它的答案是什么？",
+  "goldAnswer": "210 70",
+  "oracleDocId": "xes-q2974"
+ },
+ {
+  "queryId": "q-xes-5303",
+  "queryClusterId": "qc-xes-5303",
+  "qid": "5303",
+  "kcId": "知识点>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n运动场上有一排彩旗，共$$234$$面，按$$3$$面红旗，$$1$$面黄旗依次排列着，这些彩旗中，红旗有面，黄旗有面．\n它的答案是什么？",
+  "goldAnswer": "176 58",
+  "oracleDocId": "xes-q5303"
+ },
+ {
+  "queryId": "q-xes-1602",
+  "queryClusterId": "qc-xes-1602",
+  "qid": "1602",
+  "kcId": "知识点>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n有一群学生排成三层空心方阵，多$$9$$人，如果空心部分增加两层，又少$$15$$人，有学生人.\n它的答案是什么？",
+  "goldAnswer": "105",
+  "oracleDocId": "xes-q1602"
+ },
+ {
+  "queryId": "q-xes-2371",
+  "queryClusterId": "qc-xes-2371",
+  "qid": "2371",
+  "kcId": "知识点>应用题模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n儿子和妈妈算年龄，两年前两人年龄之和是$$36$$岁，今年妈妈的年龄是孩子的$$4$$倍．那么今年儿子是岁．\n它的答案是什么？",
+  "goldAnswer": "8",
+  "oracleDocId": "xes-q2371"
+ },
+ {
+  "queryId": "q-xes-2392",
+  "queryClusterId": "qc-xes-2392",
+  "qid": "2392",
+  "kcId": "知识点>测量",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n如图，相邻的两条边都相互垂直，线段长度对应如下，图形的周长是厘米．\n question_2392-image_0\n请直接给出最终答案。",
+  "goldAnswer": "40",
+  "oracleDocId": "xes-q2392"
+ },
+ {
+  "queryId": "q-xes-5959",
+  "queryClusterId": "qc-xes-5959",
+  "qid": "5959",
+  "kcId": "知识点>组合模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n四支足球队进行单循环比赛，每两队都要赛一场．如果踢平，每队各得$$1$$分，否则胜队得$$3$$分，负队得$$0$$分．比赛结束，各队的总得分恰好是四个连续的自然数，问：输给第一名的队的总分是分.\n请直接给出最终答案。",
+  "goldAnswer": "4",
+  "oracleDocId": "xes-q5959"
+ },
+ {
+  "queryId": "q-xes-675",
+  "queryClusterId": "qc-xes-675",
+  "qid": "675",
+  "kcId": "知识点>计数模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n某班每个同学都报名参加杯赛，其中，参加大力神杯的有$$12$$人，参加葫芦娃杯的有$$15$$人，参加学而思杯的有$$21$$人，只同时参加大力神杯和葫芦娃杯的有$$5$$人，只同时参加大力神杯和学而思杯的有$$4$$人，只同时参加学而思杯和葫芦娃杯的有$$7$$人，三个杯赛都报名的有$$2$$人，那么这个班一共有人．\n请直接给出最终答案。",
+  "goldAnswer": "28",
+  "oracleDocId": "xes-q675"
+ },
+ {
+  "queryId": "q-xes-2067",
+  "queryClusterId": "qc-xes-2067",
+  "qid": "2067",
+  "kcId": "知识点>计算模块",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n在一个共有$$15$$个数的等差数串中，已知第$$1$$个数为$$9$$，第$$8$$个数为$$30$$，求这个等差数串的和是.",
+  "goldAnswer": "450",
+  "oracleDocId": "xes-q2067"
+ },
+ {
+  "queryId": "q-xes-5533",
+  "queryClusterId": "qc-xes-5533",
+  "qid": "5533",
+  "kcId": "知识点>计算模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n计算：（3）$$6300\\div \\left( 25\\times 9 \\right)=$$．\n请直接给出最终答案。",
+  "goldAnswer": "28",
+  "oracleDocId": "xes-q5533"
+ },
+ {
+  "queryId": "q-xes-7345",
+  "queryClusterId": "qc-xes-7345",
+  "qid": "7345",
+  "kcId": "知识点>计算模块",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n$$900\\div 25=$$．\n它的答案是什么？",
+  "goldAnswer": "36",
+  "oracleDocId": "xes-q7345"
+ },
+ {
+  "queryId": "q-xes-4026",
+  "queryClusterId": "qc-xes-4026",
+  "qid": "4026",
+  "kcId": "知识点>计算模块",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n求和：$$5+8+11+\\cdots +62=$$．\n请直接给出最终答案。",
+  "goldAnswer": "670",
+  "oracleDocId": "xes-q4026"
+ },
+ {
+  "queryId": "q-xes-6589",
+  "queryClusterId": "qc-xes-6589",
+  "qid": "6589",
+  "kcId": "能力>图形认知",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n如图，在平行四边形$$ABCD$$中，过$$A$$点作$$AE$$垂直$$DC$$于$$E$$点，已知$$AB=5$$厘米，$$AE=3$$厘米，求平行四边形$$ABCD$$的面积为平方厘米． question_6589-image_0",
+  "goldAnswer": "15",
+  "oracleDocId": "xes-q6589"
+ },
+ {
+  "queryId": "q-xes-5736",
+  "queryClusterId": "qc-xes-5736",
+  "qid": "5736",
+  "kcId": "能力>运算求解",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n将$$12$$个相同大小的西瓜分成数量不同的$$3$$堆，有种不同的分法． question_5736-image_0\n它的答案是什么？",
+  "goldAnswer": "7",
+  "oracleDocId": "xes-q5736"
+ },
+ {
+  "queryId": "q-xes-7114",
+  "queryClusterId": "qc-xes-7114",
+  "qid": "7114",
+  "kcId": "课内知识点>常见的量",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n回答下列各题：（按$$1.2.3.4.5.6.7$$填写）（1）如果今天是星期三．从这天算起，第$$25$$天是星期．（2）如果今天是星期三，再过$$25$$天是星期．\n它的答案是什么？",
+  "goldAnswer": "6 7",
+  "oracleDocId": "xes-q7114"
+ },
+ {
+  "queryId": "q-xes-446",
+  "queryClusterId": "qc-xes-446",
+  "qid": "446",
+  "kcId": "课内知识点>式与方程",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n如图，一个大的长方形被分成四个小的长方形，面积大小如图所示（单位：平方米），？处长方形的面积是平方米． question_446-image_0\n请直接给出最终答案。",
+  "goldAnswer": "45",
+  "oracleDocId": "xes-q446"
+ },
+ {
+  "queryId": "q-xes-5796",
+  "queryClusterId": "qc-xes-5796",
+  "qid": "5796",
+  "kcId": "课内知识点>数与运算",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n列竖式计算：（1）$$23\\times 14=$$（2）$$25\\times 41=$$\n它的答案是什么？",
+  "goldAnswer": "322 1025",
+  "oracleDocId": "xes-q5796"
+ },
+ {
+  "queryId": "q-xes-5439",
+  "queryClusterId": "qc-xes-5439",
+  "qid": "5439",
+  "kcId": "课内知识点>数与运算",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n计算：$$46\\times 99$$=．\n它的答案是什么？",
+  "goldAnswer": "4554",
+  "oracleDocId": "xes-q5439"
+ },
+ {
+  "queryId": "q-xes-7263",
+  "queryClusterId": "qc-xes-7263",
+  "qid": "7263",
+  "kcId": "课内知识点>数的认识",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n（2）根据分数墙回答，将单位“1”平均分成$$10$$份，取其中的$$7$$份，用分数表示为，这个分数的分子是，分母是，它的分数单位是，分数单位有个； question_7263-image_0 question_7263-image_2 ​​",
+  "goldAnswer": "\\frac{7}{10} 7 10 \\frac{1}{10} 7",
+  "oracleDocId": "xes-q7263"
+ },
+ {
+  "queryId": "q-xes-5650",
+  "queryClusterId": "qc-xes-5650",
+  "qid": "5650",
+  "kcId": "课内知识点>测量",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n如图，三角形纸板、正方形纸板、圆形纸板的面积相等，都等于$$60$$平方厘米．阴影部分的面积总和是$$40$$平方厘米，$$3$$张纸板盖住的总面积是$$100$$平方厘米，$$3$$张纸板重叠部分的面积是平方厘米． question_5650-image_0 ​\n请直接给出最终答案。",
+  "goldAnswer": "20",
+  "oracleDocId": "xes-q5650"
+ },
+ {
+  "queryId": "q-xes-3623",
+  "queryClusterId": "qc-xes-3623",
+  "qid": "3623",
+  "kcId": "课内题型>空间与图形",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n如图，在梯形$$ABCD$$中，$$AE$$垂直$$DC$$于$$E$$，$$AB=4$$厘米，$$AE=5$$厘米，$$CD=8$$厘米，所以梯形$$ABCD$$的面积为平方厘米．\n question_3623-image_0\n请直接给出最终答案。",
+  "goldAnswer": "30",
+  "oracleDocId": "xes-q3623"
+ },
+ {
+  "queryId": "q-xes-7594",
+  "queryClusterId": "qc-xes-7594",
+  "qid": "7594",
+  "kcId": "课内题型>空间与图形",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n下面的图形是由$$6$$个正方形拼成的长方形，已知正方形的周长是$$8$$厘米，长方形的周长是厘米 question_7594-image_0",
+  "goldAnswer": "20",
+  "oracleDocId": "xes-q7594"
+ },
+ {
+  "queryId": "q-xes-6656",
+  "queryClusterId": "qc-xes-6656",
+  "qid": "6656",
+  "kcId": "课内题型>综合与实践",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n老师把$$12$$朵相同的花放在红色、黄色和蓝色这$$3$$个花瓶里，每个花瓶至少放一朵，有种不同的放法． question_6656-image_0",
+  "goldAnswer": "55",
+  "oracleDocId": "xes-q6656"
+ },
+ {
+  "queryId": "q-xes-4150",
+  "queryClusterId": "qc-xes-4150",
+  "qid": "4150",
+  "kcId": "课内题型>综合与实践",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n红光大队用拖拉机耕地，$$2$$台$$3$$小时耕地$$75$$亩，照这样计算，$$4$$台$$5$$小时耕地亩．\n它的答案是什么？",
+  "goldAnswer": "250",
+  "oracleDocId": "xes-q4150"
+ },
+ {
+  "queryId": "q-xes-7627",
+  "queryClusterId": "qc-xes-7627",
+  "qid": "7627",
+  "kcId": "课内题型>综合与实践",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n小飞要到一栋楼的$$8$$层，他从$$1$$层走至$$4$$层用了$$60$$秒，如果接下来用同样的速度走至$$8$$层还需要秒.\n它的答案是什么？",
+  "goldAnswer": "80",
+  "oracleDocId": "xes-q7627"
+ },
+ {
+  "queryId": "q-xes-3541",
+  "queryClusterId": "qc-xes-3541",
+  "qid": "3541",
+  "kcId": "课内题型>综合与实践",
+  "templateIndex": 2,
+  "queryText": "解答下面的题目，只需给出最终答案：\n白球比红球多$$60$$个，白球是红球的$$2$$倍，红球有个，白球有个．",
+  "goldAnswer": "60 120",
+  "oracleDocId": "xes-q3541"
+ },
+ {
+  "queryId": "q-xes-4889",
+  "queryClusterId": "qc-xes-4889",
+  "qid": "4889",
+  "kcId": "课内题型>综合与实践",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n一只蜜蜂从$$A$$处出发，回到$$B$$处，每次只能从一个蜂房爬向右侧邻近的蜂房而不准逆行，共有种回家的方法． question_4889-image_0\n它的答案是什么？",
+  "goldAnswer": "153",
+  "oracleDocId": "xes-q4889"
+ },
+ {
+  "queryId": "q-xes-3531",
+  "queryClusterId": "qc-xes-3531",
+  "qid": "3531",
+  "kcId": "课内题型>综合与实践",
+  "templateIndex": 0,
+  "queryText": "请回答下面这道数学题：\n等等比艾迪多$$6$$个苹果，已知等等的苹果数量是艾迪苹果数量的$$3$$倍，则艾迪有个苹果，等等有个苹果．\n请直接给出最终答案。",
+  "goldAnswer": "3 9",
+  "oracleDocId": "xes-q3531"
+ },
+ {
+  "queryId": "q-xes-3510",
+  "queryClusterId": "qc-xes-3510",
+  "qid": "3510",
+  "kcId": "课内题型>综合与实践",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n如果把一根木头截成$$3$$段要花$$8$$分钟，那么要把$$12$$根木头每根都截成$$6$$段，需要分钟．\n它的答案是什么？",
+  "goldAnswer": "240",
+  "oracleDocId": "xes-q3510"
+ },
+ {
+  "queryId": "q-xes-3304",
+  "queryClusterId": "qc-xes-3304",
+  "qid": "3304",
+  "kcId": "课内题型>综合与实践",
+  "templateIndex": 1,
+  "queryText": "下面是一道数学题：\n有五个数的平均数是$$60$$，如果把其中一个数改为$$80$$，平均数就变成$$70$$，被改动的这个数原来是.\n它的答案是什么？",
+  "goldAnswer": "30",
+  "oracleDocId": "xes-q3304"
+ }
+]

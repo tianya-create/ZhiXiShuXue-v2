@@ -1,0 +1,147 @@
+{
+  "protocolVersion": "rag-controlled-eval-v1",
+  "frozenBeforeRun": true,
+  "frozenAt": null,
+  "_frozenAt_note": "Stage 1 冻结时填写日期；此字段非空即表示 eval 集已解封，不得再改任何阈值",
+  "revision": 1,
+
+  "stage0Preflight": {
+    "_note": "Stage 0 只在 dev 集上执行；以下四个值必须由实测填入，null 表示尚未测，配置不得冻结",
+    "answerInCorpusRate": null,
+    "oracleRecallAtK": null,
+    "generatorCeiling": null,
+    "noiseSigma": null,
+    "_noiseSigma_note": "同一臂、不同生成种子重复 3 次，Δ 的标准差；阈值 = k×σ 由本值推出，不得拍脑袋"
+  },
+
+  "corpus": {
+    "file": null,
+    "sha256": null,
+    "docCount": null,
+    "chunkPolicy": {
+      "size": 512,
+      "overlap": 64,
+      "splitter": "recursive-character",
+      "_note": "分块参数冻结；Stage 3 之后不允许再调，否则全量重跑"
+    },
+    "manifestSha256": null,
+    "docCluster": {
+      "method": "minhash",
+      "shingleSize": 5,
+      "jaccardThreshold": 0.8,
+      "_note": "阈值冻结在配置里；聚类在任何模型运行之前完成"
+    }
+  },
+
+  "retriever": {
+    "type": "dense",
+    "model": null,
+    "modelVersionHash": null,
+    "topK": 5,
+    "searchParams": { "metric": "cosine" },
+    "indexBuildId": null,
+    "_note": "只冻结一个 retriever。本框架问的是『检索有没有用』，不是『哪个 retriever 最好』；比较 retriever 属于后续实验，需另开配置"
+  },
+
+  "generator": {
+    "model": null,
+    "version": null,
+    "temperature": 0.0,
+    "topP": 1.0,
+    "maxTokens": 512,
+    "samplesPerQuery": 3,
+    "aggregation": "mean",
+    "_aggregation_note": "mean | majority；预注册后不得改，改则 = 换指标，须全量重算并写 revision",
+    "promptTemplateSha256": null,
+    "_prompt_note": "三臂共用同一模板，仅 {context} 槽位内容不同；N 臂填空字符串而非删除整段"
+  },
+
+  "arms": {
+    "N": { "context": "empty", "role": "下界（参数记忆）" },
+    "X": { "context": "random-length-matched", "role": "护栏（上下文长度）" },
+    "R": { "context": "retrieved-topk", "role": "待测（检索）" },
+    "O": { "context": "gold-oracle", "role": "诊断（生成器上限）", "optional": true }
+  },
+
+  "randomArm": {
+    "lengthMatchTolerance": 0.02,
+    "sampleUnit": "docCluster",
+    "seedRule": "hash(configSeed, queryId)",
+    "requireDisjointFromR": true,
+    "_note": "X 的 doc 簇 id 必须与 R 检索到的 doc 簇 id 无交集；长度差 ≤2%；二者任一不满足则该 query 记录作废"
+  },
+
+  "evalSet": {
+    "file": null,
+    "sha256": null,
+    "nQueries": null,
+    "queryClusterIdsSha256": null,
+    "_note": "nQueries 决定可检出最小效应，见设计文档 §6.2；<500 条时只能检出 ≥5pp 的效应"
+  },
+
+  "devSet": {
+    "file": null,
+    "sha256": null,
+    "nQueries": null,
+    "queryClusterIdsSha256": null,
+    "docClusterIdsSha256": null
+  },
+
+  "leakageAssertions": {
+    "queryClusterDisjoint": null,
+    "docClusterDisjoint": null,
+    "fewShotExcludedFromEval": null,
+    "indexExcludesEvalQueries": null,
+    "_note": "四项在 Stage 1 前必须实测为 true，并写入 freeze-manifest.json；任一为 false 则配置不可冻结"
+  },
+
+  "judge": {
+    "type": "llm",
+    "model": null,
+    "version": null,
+    "rubricSha256": null,
+    "scale": [0, 1, 2],
+    "sampleRateForHumanCalibration": 0.1,
+    "minHumanKappa": 0.6,
+    "minRejudgeAgreement": 0.9,
+    "_note": "κ < 0.6 → L3 仅作参考，不得作为判定依据；judge 换版本 = 换尺子，全部 L3 作废重算"
+  },
+
+  "metrics": {
+    "retrieval": ["recall@k", "ndcg@k", "mrr"],
+    "primary": "token-f1",
+    "secondary": ["exact-match", "citation-precision", "refusal-rate"],
+    "_note": "primary 预注册，不得事后更换；L1 检索指标零噪声，必须报"
+  },
+
+  "thresholds": {
+    "strongDeltaRel": null,
+    "strongMinPositiveSeeds": 4,
+    "guardDeltaRel": 0.001,
+    "stopCooldown": null,
+    "_derivation": "strongDeltaRel = 2 × noiseSigma；guardDeltaRel 为 X 臂作废线（|R−X| 低于该值视为无信号而非有效）",
+    "_note": "全部由 stage0Preflight.noiseSigma 推导填入，禁止手填经验值"
+  },
+
+  "decisionMatrix": {
+    "rel-strong_and_ret-strong_and_coverage>=0.8": "build",
+    "rel~=0_and_ret-strong": "fix-generator（先看 O 臂）",
+    "rel~=0_and_ret~=0_and_coverage-high": "stop",
+    "coverage<0.6": "fix-corpus（禁止调模型）",
+    "rel-negative_significant": "invalidate（查分块与 prompt 冲突）",
+    "guard-failed": "invalidate-rerun"
+  },
+
+  "antiCheat": [
+    "config 与 evalSet 的 sha256 在 Stage 1 一同写入 freeze-manifest.json，审计器首先比对",
+    "三臂 prompt 模板逐字一致，仅 {context} 槽位不同；N 臂填空串",
+    "X 臂长度差 ≤2% 且 doc 簇与 R 无交集，否则该 query 作废",
+    "eval 集在 Stage 0 期间一次都不读；任何读取均记录 audit log",
+    "主指标在配置里预注册，运行后不得更换",
+    "所有 query × 臂 × sample 的记录必须完整落盘，禁止静默丢弃失败样本",
+    "聚合器从原始 log 重算指标，不接受 summary 中的数值",
+    "judge 版本或 rubric 变更视为换尺子，必须写 revision 并全量重算 L3",
+    "结论按 §8 判定矩阵给出，不允许挑单一指标下结论",
+    "结果为负时照常报告；不因负结果改阈值重跑"
+  ]
+}
