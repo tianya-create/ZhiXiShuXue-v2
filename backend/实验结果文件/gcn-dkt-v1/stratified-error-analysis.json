@@ -1,0 +1,937 @@
+{
+ "stage": "stratified-error-analysis",
+ "exploratory": true,
+ "disclaimer": "事后探索性分层分析：不重训、不引入新协议；分桶在见到逐种子结果前以数据常识固定（度数 0/1-2/3+，历史 0-5/6-15/16+，活跃度 1-10/11-30/31+）；不做子群内 bootstrap CI，跨种子仅 mean±总体std 与正向种子数；任何子群结论都受多重比较影响，不能作为图结构有效性的正式判定。",
+ "generatedAt": "2026-11-09T02:53:17.957Z",
+ "inputDir": "实验结果文件/gcn-dkt-v1",
+ "seeds": [
+  42,
+  43,
+  44,
+  45,
+  46
+ ],
+ "bucketDefinitions": {
+  "degree": "本种子 graph-real-edges.csv 无权度：isolated=0, low=1-2, hub>=3",
+  "history": "目标记录 sequenceIndex-1（前一交互数）：h0-5 / h6-15 / h16plus",
+  "activity": "学生总交互数：act1-10 / act11-30 / act31plus"
+ },
+ "interactionsMeta": {
+  "rows": 266948,
+  "duplicateKeys": 0
+ },
+ "perSeed": {
+  "42": {
+   "degree": {
+    "hub(3+)": {
+     "n": 8755,
+     "positiveRate": 0.651741861793261,
+     "aucFull": 0.7282030492262321,
+     "aucGcn": 0.7280182822981155,
+     "dAucGcnMinusFull": -0.00018476692811664197,
+     "logLossFull": 0.5643059563459134,
+     "logLossGcn": 0.5647148511655176,
+     "dLogLossGcnMinusFull": 0.0004088948196041553,
+     "aucRandom": 0.7282996143029893,
+     "dAucGcnMinusRandom": 0.00028133200487379106
+    },
+    "isolated": {
+     "n": 18552,
+     "positiveRate": 0.6757222940922811,
+     "aucFull": 0.7239729631851757,
+     "aucGcn": 0.724534722976551,
+     "dAucGcnMinusFull": 0.0005617597913752936,
+     "logLossFull": 0.5549073577279304,
+     "logLossGcn": 0.5521815564379539,
+     "dLogLossGcnMinusFull": -0.0027258012899765705,
+     "aucRandom": 0.7218166268911492,
+     "dAucGcnMinusRandom": -0.0027180960854017444
+    },
+    "low(1-2)": {
+     "n": 9660,
+     "positiveRate": 0.7027950310559006,
+     "aucFull": 0.7718512628686794,
+     "aucGcn": 0.7749393970690084,
+     "dAucGcnMinusFull": 0.0030881342003289403,
+     "logLossFull": 0.49699001550934657,
+     "logLossGcn": 0.4963401284632267,
+     "dLogLossGcnMinusFull": -0.0006498870461198458,
+     "aucRandom": 0.7737352907481055,
+     "dAucGcnMinusRandom": -0.0012041063209028424
+    }
+   },
+   "history": {
+    "h0-5": {
+     "n": 2410,
+     "positiveRate": 0.6460580912863071,
+     "aucFull": 0.7527122905217221,
+     "aucGcn": 0.7522944069102138,
+     "dAucGcnMinusFull": -0.0004178836115082962,
+     "logLossFull": 0.5551684375169095,
+     "logLossGcn": 0.5565719164347515,
+     "dLogLossGcnMinusFull": 0.0014034789178419826,
+     "aucRandom": 0.751651769680624,
+     "dAucGcnMinusRandom": -0.0006426372295897931
+    },
+    "h6-15": {
+     "n": 3657,
+     "positiveRate": 0.6406890894175554,
+     "aucFull": 0.7585393129961913,
+     "aucGcn": 0.7628166025812176,
+     "dAucGcnMinusFull": 0.004277289585026378,
+     "logLossFull": 0.5481222784924057,
+     "logLossGcn": 0.5462816806888633,
+     "dLogLossGcnMinusFull": -0.0018405978035423987,
+     "aucRandom": 0.7596795662587675,
+     "dAucGcnMinusRandom": -0.003137036322450104
+    },
+    "h16plus": {
+     "n": 30900,
+     "positiveRate": 0.6838511326860841,
+     "aucFull": 0.7345392348688425,
+     "aucGcn": 0.735266430126282,
+     "dAucGcnMinusFull": 0.0007271952574394724,
+     "logLossFull": 0.5402467440561424,
+     "logLossGcn": 0.5386312612640382,
+     "dLogLossGcnMinusFull": -0.001615482792104217,
+     "aucRandom": 0.7338196887401419,
+     "dAucGcnMinusRandom": -0.0014467413861400935
+    }
+   },
+   "activity": {
+    "act11-30": {
+     "n": 3100,
+     "positiveRate": 0.6445161290322581,
+     "aucFull": 0.7657035438342153,
+     "aucGcn": 0.7645717405245536,
+     "dAucGcnMinusFull": -0.001131803309661783,
+     "logLossFull": 0.5421313277051724,
+     "logLossGcn": 0.5442503965854772,
+     "dLogLossGcnMinusFull": 0.0021190688803048863,
+     "aucRandom": 0.7620322227853988,
+     "dAucGcnMinusRandom": -0.0025395177391547286
+    },
+    "act31plus": {
+     "n": 33134,
+     "positiveRate": 0.679634212591296,
+     "aucFull": 0.7349962329398002,
+     "aucGcn": 0.7362442605382878,
+     "dAucGcnMinusFull": 0.0012480275984876332,
+     "logLossFull": 0.5428853091599123,
+     "logLossGcn": 0.541033048265984,
+     "dLogLossGcnMinusFull": -0.0018522608939283147,
+     "aucRandom": 0.7348137670399102,
+     "dAucGcnMinusRandom": -0.0014304934983776496
+    },
+    "act1-10": {
+     "n": 733,
+     "positiveRate": 0.7012278308321964,
+     "aucFull": 0.7814171241760389,
+     "aucGcn": 0.7848018051631932,
+     "dAucGcnMinusFull": 0.003384680987154276,
+     "logLossFull": 0.5013568193817391,
+     "logLossGcn": 0.5034531340868509,
+     "dLogLossGcnMinusFull": 0.002096314705111735,
+     "aucRandom": 0.7865696569123892,
+     "dAucGcnMinusRandom": 0.0017678517491960255
+    }
+   }
+  },
+  "43": {
+   "degree": {
+    "hub(3+)": {
+     "n": 8118,
+     "positiveRate": 0.6506528701650652,
+     "aucFull": 0.7309227148753864,
+     "aucGcn": 0.730336323324979,
+     "dAucGcnMinusFull": -0.0005863915504074058,
+     "logLossFull": 0.561256917732179,
+     "logLossGcn": 0.562420622613626,
+     "dLogLossGcnMinusFull": 0.0011637048814470141,
+     "aucRandom": 0.7295487268414057,
+     "dAucGcnMinusRandom": -0.000787596483573294
+    },
+    "isolated": {
+     "n": 16971,
+     "positiveRate": 0.6603617936479877,
+     "aucFull": 0.7393341808217292,
+     "aucGcn": 0.7363793599680283,
+     "dAucGcnMinusFull": -0.0029548208537009124,
+     "logLossFull": 0.5494080543476041,
+     "logLossGcn": 0.5505683090462674,
+     "dLogLossGcnMinusFull": 0.001160254698663321,
+     "aucRandom": 0.7393879835066403,
+     "dAucGcnMinusRandom": 0.0030086235386119764
+    },
+    "low(1-2)": {
+     "n": 9007,
+     "positiveRate": 0.691018097035639,
+     "aucFull": 0.7768371040849373,
+     "aucGcn": 0.7755072167410102,
+     "dAucGcnMinusFull": -0.0013298873439271386,
+     "logLossFull": 0.5039519557049432,
+     "logLossGcn": 0.5054786201806833,
+     "dLogLossGcnMinusFull": 0.0015266644757401249,
+     "aucRandom": 0.7750318507888974,
+     "dAucGcnMinusRandom": -0.0004753659521128384
+    }
+   },
+   "history": {
+    "h0-5": {
+     "n": 2409,
+     "positiveRate": 0.638854296388543,
+     "aucFull": 0.7227263561201855,
+     "aucGcn": 0.7217356396525584,
+     "dAucGcnMinusFull": -0.0009907164676271618,
+     "logLossFull": 0.5819162648236873,
+     "logLossGcn": 0.5828757778099325,
+     "dLogLossGcnMinusFull": 0.0009595129862451923,
+     "aucRandom": 0.7211280649473834,
+     "dAucGcnMinusRandom": -0.0006075747051750291
+    },
+    "h6-15": {
+     "n": 3595,
+     "positiveRate": 0.6305980528511822,
+     "aucFull": 0.7503625552053826,
+     "aucGcn": 0.7478710054155749,
+     "dAucGcnMinusFull": -0.002491549789807701,
+     "logLossFull": 0.558313615981622,
+     "logLossGcn": 0.5605189555297203,
+     "dLogLossGcnMinusFull": 0.0022053395480983173,
+     "aucRandom": 0.748820989737512,
+     "dAucGcnMinusRandom": 0.0009499843219370474
+    },
+    "h16plus": {
+     "n": 28092,
+     "positiveRate": 0.6730385874982201,
+     "aucFull": 0.7495439054047864,
+     "aucGcn": 0.7478462654740237,
+     "dAucGcnMinusFull": -0.0016976399307627732,
+     "logLossFull": 0.534330388797638,
+     "logLossGcn": 0.5354925930975248,
+     "dLogLossGcnMinusFull": 0.0011622042998868931,
+     "aucRandom": 0.7490816047456191,
+     "dAucGcnMinusRandom": 0.0012353392715954703
+    }
+   },
+   "activity": {
+    "act11-30": {
+     "n": 2892,
+     "positiveRate": 0.6462655601659751,
+     "aucFull": 0.7419749715871499,
+     "aucGcn": 0.7422325570205237,
+     "dAucGcnMinusFull": 0.00025758543337384143,
+     "logLossFull": 0.5586313547455473,
+     "logLossGcn": 0.5588922855408122,
+     "dLogLossGcnMinusFull": 0.00026093079526490204,
+     "aucRandom": 0.7426650913421482,
+     "dAucGcnMinusRandom": 0.00043253432162448924
+    },
+    "act31plus": {
+     "n": 30378,
+     "positiveRate": 0.6666995852261505,
+     "aucFull": 0.7498948401486626,
+     "aucGcn": 0.7480935840628397,
+     "dAucGcnMinusFull": -0.0018012560858229332,
+     "logLossFull": 0.538537141854448,
+     "logLossGcn": 0.5398690917934126,
+     "dLogLossGcnMinusFull": 0.0013319499389645717,
+     "aucRandom": 0.7493353229791289,
+     "dAucGcnMinusRandom": 0.0012417389162892034
+    },
+    "act1-10": {
+     "n": 826,
+     "positiveRate": 0.715496368038741,
+     "aucFull": 0.7186125211505923,
+     "aucGcn": 0.712269143536019,
+     "dAucGcnMinusFull": -0.0063433776145732645,
+     "logLossFull": 0.5376995645748794,
+     "logLossGcn": 0.5397234369066193,
+     "dLogLossGcnMinusFull": 0.00202387233173984,
+     "aucRandom": 0.7082082298304353,
+     "dAucGcnMinusRandom": -0.004060913705583702
+    }
+   }
+  },
+  "44": {
+   "degree": {
+    "hub(3+)": {
+     "n": 8969,
+     "positiveRate": 0.6738766863641431,
+     "aucFull": 0.735430489798458,
+     "aucGcn": 0.7357731054885257,
+     "dAucGcnMinusFull": 0.00034261569006766024,
+     "logLossFull": 0.5471280987041983,
+     "logLossGcn": 0.546345526491672,
+     "dLogLossGcnMinusFull": -0.0007825722125263113,
+     "aucRandom": 0.7335559458557473,
+     "dAucGcnMinusRandom": -0.002217159632778354
+    },
+    "low(1-2)": {
+     "n": 10149,
+     "positiveRate": 0.7051926298157454,
+     "aucFull": 0.7780704299070728,
+     "aucGcn": 0.7766096624672454,
+     "dAucGcnMinusFull": -0.0014607674398273707,
+     "logLossFull": 0.4924725116087209,
+     "logLossGcn": 0.49325423089492293,
+     "dLogLossGcnMinusFull": 0.0007817192862020206,
+     "aucRandom": 0.7771835462308693,
+     "dAucGcnMinusRandom": 0.0005738837636238836
+    },
+    "isolated": {
+     "n": 18059,
+     "positiveRate": 0.6901268065784374,
+     "aucFull": 0.7171953930023147,
+     "aucGcn": 0.7153993834616799,
+     "dAucGcnMinusFull": -0.0017960095406348575,
+     "logLossFull": 0.5478823200216658,
+     "logLossGcn": 0.5486684944622467,
+     "dLogLossGcnMinusFull": 0.0007861744405809334,
+     "aucRandom": 0.7168542187233038,
+     "dAucGcnMinusRandom": 0.0014548352616239324
+    }
+   },
+   "history": {
+    "h0-5": {
+     "n": 2433,
+     "positiveRate": 0.6761200164406083,
+     "aucFull": 0.7340753398238008,
+     "aucGcn": 0.7333042753768534,
+     "dAucGcnMinusFull": -0.0007710644469474115,
+     "logLossFull": 0.554420808109016,
+     "logLossGcn": 0.5539124228018167,
+     "dLogLossGcnMinusFull": -0.0005083853071992106,
+     "aucRandom": 0.7316036134726058,
+     "dAucGcnMinusRandom": -0.001700661904247558
+    },
+    "h6-15": {
+     "n": 3730,
+     "positiveRate": 0.6479892761394102,
+     "aucFull": 0.7441583024029146,
+     "aucGcn": 0.744910306249746,
+     "dAucGcnMinusFull": 0.0007520038468313839,
+     "logLossFull": 0.5557955393873844,
+     "logLossGcn": 0.5535265629102953,
+     "dLogLossGcnMinusFull": -0.002268976477089013,
+     "aucRandom": 0.7438131022293535,
+     "dAucGcnMinusRandom": -0.0010972040203924838
+    },
+    "h16plus": {
+     "n": 31014,
+     "positiveRate": 0.6965241503836976,
+     "aucFull": 0.7389977634250469,
+     "aucGcn": 0.7375758506289635,
+     "dAucGcnMinusFull": -0.001421912796083391,
+     "logLossFull": 0.5280672943451946,
+     "logLossGcn": 0.5288673358360059,
+     "dLogLossGcnMinusFull": 0.0008000414908112541,
+     "aucRandom": 0.7381649941669707,
+     "dAucGcnMinusRandom": 0.0005891435380072085
+    }
+   },
+   "activity": {
+    "act31plus": {
+     "n": 33694,
+     "positiveRate": 0.6934172256188046,
+     "aucFull": 0.7372628238179455,
+     "aucGcn": 0.7360423748701679,
+     "dAucGcnMinusFull": -0.0012204489477776193,
+     "logLossFull": 0.5318899410843475,
+     "logLossGcn": 0.5324745059469375,
+     "dLogLossGcnMinusFull": 0.0005845648625899535,
+     "aucRandom": 0.7364926336063143,
+     "dAucGcnMinusRandom": 0.0004502587361464583
+    },
+    "act1-10": {
+     "n": 759,
+     "positiveRate": 0.7075098814229249,
+     "aucFull": 0.7551587900749912,
+     "aucGcn": 0.7537243947858473,
+     "dAucGcnMinusFull": -0.0014343952891439082,
+     "logLossFull": 0.5257604061514661,
+     "logLossGcn": 0.5248838330018211,
+     "dLogLossGcnMinusFull": -0.0008765731496450657,
+     "aucRandom": 0.752440988474508,
+     "dAucGcnMinusRandom": -0.0012834063113392746
+    },
+    "act11-30": {
+     "n": 2724,
+     "positiveRate": 0.6472099853157122,
+     "aucFull": 0.760358460976377,
+     "aucGcn": 0.7608451089955809,
+     "dAucGcnMinusFull": 0.00048664801920383916,
+     "logLossFull": 0.5429333449710527,
+     "logLossGcn": 0.5414947596643253,
+     "dLogLossGcnMinusFull": -0.001438585306727469,
+     "aucRandom": 0.7586633086281012,
+     "dAucGcnMinusRandom": -0.002181800367479725
+    }
+   }
+  },
+  "45": {
+   "degree": {
+    "isolated": {
+     "n": 15147,
+     "positiveRate": 0.6792764243744636,
+     "aucFull": 0.7154245295721056,
+     "aucGcn": 0.7137868642745847,
+     "dAucGcnMinusFull": -0.0016376652975208517,
+     "logLossFull": 0.5610678663077591,
+     "logLossGcn": 0.5619497355791979,
+     "dLogLossGcnMinusFull": 0.000881869271438851,
+     "aucRandom": 0.7151576739755043,
+     "dAucGcnMinusRandom": 0.0013708097009196285
+    },
+    "hub(3+)": {
+     "n": 7631,
+     "positiveRate": 0.6485388546717337,
+     "aucFull": 0.7464269403244941,
+     "aucGcn": 0.7457528762053031,
+     "dAucGcnMinusFull": -0.0006740641191910202,
+     "logLossFull": 0.5540441885602903,
+     "logLossGcn": 0.5533585896944058,
+     "dLogLossGcnMinusFull": -0.0006855988658844847,
+     "aucRandom": 0.7457948404072019,
+     "dAucGcnMinusRandom": 0.00004196420189883643
+    },
+    "low(1-2)": {
+     "n": 8054,
+     "positiveRate": 0.6904643655326546,
+     "aucFull": 0.7870838924424461,
+     "aucGcn": 0.7844378573979449,
+     "dAucGcnMinusFull": -0.002646035044501227,
+     "logLossFull": 0.4960077147442476,
+     "logLossGcn": 0.49799837059159713,
+     "dLogLossGcnMinusFull": 0.0019906558473495317,
+     "aucRandom": 0.7864895290701754,
+     "dAucGcnMinusRandom": 0.002051671672230526
+    }
+   },
+   "history": {
+    "h0-5": {
+     "n": 2388,
+     "positiveRate": 0.6444723618090452,
+     "aucFull": 0.7380869287033401,
+     "aucGcn": 0.7360128607519759,
+     "dAucGcnMinusFull": -0.0020740679513642224,
+     "logLossFull": 0.5692975032586949,
+     "logLossGcn": 0.5705440679850559,
+     "dLogLossGcnMinusFull": 0.001246564726360977,
+     "aucRandom": 0.7390711543068289,
+     "dAucGcnMinusRandom": 0.0030582935548529866
+    },
+    "h6-15": {
+     "n": 3545,
+     "positiveRate": 0.6352609308885755,
+     "aucFull": 0.7584336823914534,
+     "aucGcn": 0.7601626602597125,
+     "dAucGcnMinusFull": 0.0017289778682590962,
+     "logLossFull": 0.5538257594849584,
+     "logLossGcn": 0.5524305427986248,
+     "dLogLossGcnMinusFull": -0.001395216686333578,
+     "aucRandom": 0.7597275396004445,
+     "dAucGcnMinusRandom": -0.0004351206592679846
+    },
+    "h16plus": {
+     "n": 24899,
+     "positiveRate": 0.6830796417526809,
+     "aucFull": 0.7415431494111979,
+     "aucGcn": 0.7394498535907812,
+     "dAucGcnMinusFull": -0.0020932958204167296,
+     "logLossFull": 0.5381122757243839,
+     "logLossGcn": 0.5391616294209156,
+     "dLogLossGcnMinusFull": 0.0010493536965316963,
+     "aucRandom": 0.7405194375494523,
+     "dAucGcnMinusRandom": 0.001069583958671072
+    }
+   },
+   "activity": {
+    "act11-30": {
+     "n": 2754,
+     "positiveRate": 0.6303558460421206,
+     "aucFull": 0.7527480579975193,
+     "aucGcn": 0.754842274542113,
+     "dAucGcnMinusFull": 0.00209421654459363,
+     "logLossFull": 0.5611435427889316,
+     "logLossGcn": 0.5591601317105173,
+     "dLogLossGcnMinusFull": -0.0019834110784143766,
+     "aucRandom": 0.7554587697934868,
+     "dAucGcnMinusRandom": 0.0006164952513738609
+    },
+    "act1-10": {
+     "n": 859,
+     "positiveRate": 0.7147846332945286,
+     "aucFull": 0.7888120720600944,
+     "aucGcn": 0.7848833344412683,
+     "dAucGcnMinusFull": -0.003928737618826061,
+     "logLossFull": 0.5038927612424641,
+     "logLossGcn": 0.5047612551563093,
+     "dLogLossGcnMinusFull": 0.0008684939138452474,
+     "aucRandom": 0.7867047796317224,
+     "dAucGcnMinusRandom": 0.0018214451904540185
+    },
+    "act31plus": {
+     "n": 27219,
+     "positiveRate": 0.6777985965685734,
+     "aucFull": 0.7413796040278192,
+     "aucGcn": 0.7393949315605355,
+     "dAucGcnMinusFull": -0.0019846724672837324,
+     "logLossFull": 0.5416444068360122,
+     "logLossGcn": 0.5427052426103379,
+     "dLogLossGcnMinusFull": 0.0010608357743256969,
+     "aucRandom": 0.7404695170939667,
+     "dAucGcnMinusRandom": 0.0010745855334312049
+    }
+   }
+  },
+  "46": {
+   "degree": {
+    "hub(3+)": {
+     "n": 7012,
+     "positiveRate": 0.6647176269252709,
+     "aucFull": 0.7537830542422342,
+     "aucGcn": 0.7527254718032315,
+     "dAucGcnMinusFull": -0.00105758243900278,
+     "logLossFull": 0.535170890217926,
+     "logLossGcn": 0.535548829536656,
+     "dLogLossGcnMinusFull": 0.00037793931872998066,
+     "aucRandom": 0.7536097563691075,
+     "dAucGcnMinusRandom": 0.0008842845658760812
+    },
+    "isolated": {
+     "n": 15717,
+     "positiveRate": 0.6617675128841382,
+     "aucFull": 0.7381866842403662,
+     "aucGcn": 0.738752944473635,
+     "dAucGcnMinusFull": 0.0005662602332688893,
+     "logLossFull": 0.5513315391516153,
+     "logLossGcn": 0.5499130167195573,
+     "dLogLossGcnMinusFull": -0.0014185224320579781,
+     "aucRandom": 0.7378133281303839,
+     "dAucGcnMinusRandom": -0.0009396163432511262
+    },
+    "low(1-2)": {
+     "n": 8498,
+     "positiveRate": 0.6989879971758061,
+     "aucFull": 0.7702641149572346,
+     "aucGcn": 0.7689956642263132,
+     "dAucGcnMinusFull": -0.001268450730921411,
+     "logLossFull": 0.5051833537601187,
+     "logLossGcn": 0.5063106168626699,
+     "dLogLossGcnMinusFull": 0.0011272631025511792,
+     "aucRandom": 0.7678091509307303,
+     "dAucGcnMinusRandom": -0.0011865132955828361
+    }
+   },
+   "history": {
+    "h0-5": {
+     "n": 2395,
+     "positiveRate": 0.6384133611691023,
+     "aucFull": 0.7529665119468565,
+     "aucGcn": 0.7519511159915234,
+     "dAucGcnMinusFull": -0.001015395955333065,
+     "logLossFull": 0.5593167450834546,
+     "logLossGcn": 0.5607115745780997,
+     "dLogLossGcnMinusFull": 0.001394829494645089,
+     "aucRandom": 0.7530337267032899,
+     "dAucGcnMinusRandom": 0.0010826107117665185
+    },
+    "h6-15": {
+     "n": 3565,
+     "positiveRate": 0.6258064516129033,
+     "aucFull": 0.7547951147689266,
+     "aucGcn": 0.7538109587071099,
+     "dAucGcnMinusFull": -0.0009841560618166767,
+     "logLossFull": 0.5574814119992488,
+     "logLossGcn": 0.5594389341921093,
+     "dLogLossGcnMinusFull": 0.0019575221928604947,
+     "aucRandom": 0.7541079863474807,
+     "dAucGcnMinusRandom": 0.0002970276403707617
+    },
+    "h16plus": {
+     "n": 25267,
+     "positiveRate": 0.6823920528752919,
+     "aucFull": 0.7492003623695093,
+     "aucGcn": 0.7490787004565032,
+     "dAucGcnMinusFull": -0.00012166191300611029,
+     "logLossFull": 0.5297011669393021,
+     "logLossGcn": 0.5288944028607233,
+     "dLogLossGcnMinusFull": -0.0008067640785788255,
+     "aucRandom": 0.7482178994204184,
+     "dAucGcnMinusRandom": -0.0008608010360847684
+    }
+   },
+   "activity": {
+    "act11-30": {
+     "n": 2854,
+     "positiveRate": 0.6306937631394534,
+     "aucFull": 0.7396070524984187,
+     "aucGcn": 0.7390939278937382,
+     "dAucGcnMinusFull": -0.0005131246046805593,
+     "logLossFull": 0.5689213460601676,
+     "logLossGcn": 0.5695046441403464,
+     "dLogLossGcnMinusFull": 0.0005832980801787624,
+     "aucRandom": 0.740343137254902,
+     "dAucGcnMinusRandom": 0.0012492093611637944
+    },
+    "act1-10": {
+     "n": 830,
+     "positiveRate": 0.7240963855421687,
+     "aucFull": 0.8037986180238177,
+     "aucGcn": 0.8051718751135298,
+     "dAucGcnMinusFull": 0.0013732570897121432,
+     "logLossFull": 0.47572454906384676,
+     "logLossGcn": 0.4762475539780198,
+     "dLogLossGcnMinusFull": 0.0005230049141730642,
+     "aucRandom": 0.807010150477007,
+     "dAucGcnMinusRandom": 0.0018382753634771376
+    },
+    "act31plus": {
+     "n": 27543,
+     "positiveRate": 0.675344007551828,
+     "aucFull": 0.750652927356967,
+     "aucGcn": 0.7504209519643168,
+     "dAucGcnMinusFull": -0.00023197539265018552,
+     "logLossFull": 0.533434677628759,
+     "logLossGcn": 0.5329930354141906,
+     "dLogLossGcnMinusFull": -0.0004416422145683274,
+     "aucRandom": 0.7496023150151582,
+     "dAucGcnMinusRandom": -0.0008186369491586243
+    }
+   }
+  }
+ },
+ "aggregate": {
+  "degree": {
+   "hub(3+)": {
+    "aucAvailableSeeds": 5,
+    "totalSeeds": 5,
+    "nPerSeed": [
+     8755,
+     8118,
+     8969,
+     7631,
+     7012
+    ],
+    "positiveRateMean": 0.6579055799838948,
+    "dAucGcnMinusFull": {
+     "perSeed": [
+      -0.00018476692811664197,
+      -0.0005863915504074058,
+      0.00034261569006766024,
+      -0.0006740641191910202,
+      -0.00105758243900278
+     ],
+     "mean": -0.0004320378693300375,
+     "populationStd": 0.000476432330680243,
+     "positiveSeeds": 1
+    },
+    "dAucGcnMinusRandom": {
+     "perSeed": [
+      0.00028133200487379106,
+      -0.000787596483573294,
+      -0.002217159632778354,
+      0.00004196420189883643,
+      0.0008842845658760812
+     ],
+     "mean": -0.00035943506874058784,
+     "populationStd": 0.00107266071985601,
+     "positiveSeeds": 3
+    }
+   },
+   "isolated": {
+    "aucAvailableSeeds": 5,
+    "totalSeeds": 5,
+    "nPerSeed": [
+     18552,
+     16971,
+     18059,
+     15147,
+     15717
+    ],
+    "positiveRateMean": 0.6734509663154615,
+    "dAucGcnMinusFull": {
+     "perSeed": [
+      0.0005617597913752936,
+      -0.0029548208537009124,
+      -0.0017960095406348575,
+      -0.0016376652975208517,
+      0.0005662602332688893
+     ],
+     "mean": -0.0010520951334424878,
+     "populationStd": 0.001395726910261617,
+     "positiveSeeds": 2
+    },
+    "dAucGcnMinusRandom": {
+     "perSeed": [
+      -0.0027180960854017444,
+      0.0030086235386119764,
+      0.0014548352616239324,
+      0.0013708097009196285,
+      -0.0009396163432511262
+     ],
+     "mean": 0.00043531121450053335,
+     "populationStd": 0.0020184611171048623,
+     "positiveSeeds": 3
+    }
+   },
+   "low(1-2)": {
+    "aucAvailableSeeds": 5,
+    "totalSeeds": 5,
+    "nPerSeed": [
+     9660,
+     9007,
+     10149,
+     8054,
+     8498
+    ],
+    "positiveRateMean": 0.6976916241231492,
+    "dAucGcnMinusFull": {
+     "perSeed": [
+      0.0030881342003289403,
+      -0.0013298873439271386,
+      -0.0014607674398273707,
+      -0.002646035044501227,
+      -0.001268450730921411
+     ],
+     "mean": -0.0007234012717696414,
+     "populationStd": 0.00197144294432036,
+     "positiveSeeds": 1
+    },
+    "dAucGcnMinusRandom": {
+     "perSeed": [
+      -0.0012041063209028424,
+      -0.0004753659521128384,
+      0.0005738837636238836,
+      0.002051671672230526,
+      -0.0011865132955828361
+     ],
+     "mean": -0.00004808602654882144,
+     "populationStd": 0.0012337582028987052,
+     "positiveSeeds": 2
+    }
+   }
+  },
+  "history": {
+   "h0-5": {
+    "aucAvailableSeeds": 5,
+    "totalSeeds": 5,
+    "nPerSeed": [
+     2410,
+     2409,
+     2433,
+     2388,
+     2395
+    ],
+    "positiveRateMean": 0.6487836254187211,
+    "dAucGcnMinusFull": {
+     "perSeed": [
+      -0.0004178836115082962,
+      -0.0009907164676271618,
+      -0.0007710644469474115,
+      -0.0020740679513642224,
+      -0.001015395955333065
+     ],
+     "mean": -0.0010538256865560314,
+     "populationStd": 0.0005533046426874892,
+     "positiveSeeds": 0
+    },
+    "dAucGcnMinusRandom": {
+     "perSeed": [
+      -0.0006426372295897931,
+      -0.0006075747051750291,
+      -0.001700661904247558,
+      0.0030582935548529866,
+      0.0010826107117665185
+     ],
+     "mean": 0.00023800608552142498,
+     "populationStd": 0.0016683136084647313,
+     "positiveSeeds": 2
+    }
+   },
+   "h6-15": {
+    "aucAvailableSeeds": 5,
+    "totalSeeds": 5,
+    "nPerSeed": [
+     3657,
+     3595,
+     3730,
+     3545,
+     3565
+    ],
+    "positiveRateMean": 0.6360687601819254,
+    "dAucGcnMinusFull": {
+     "perSeed": [
+      0.004277289585026378,
+      -0.002491549789807701,
+      0.0007520038468313839,
+      0.0017289778682590962,
+      -0.0009841560618166767
+     ],
+     "mean": 0.0006565130896984961,
+     "populationStd": 0.0023182500630056315,
+     "positiveSeeds": 3
+    },
+    "dAucGcnMinusRandom": {
+     "perSeed": [
+      -0.003137036322450104,
+      0.0009499843219370474,
+      -0.0010972040203924838,
+      -0.0004351206592679846,
+      0.0002970276403707617
+     ],
+     "mean": -0.0006844698079605527,
+     "populationStd": 0.0014058722971793097,
+     "positiveSeeds": 2
+    }
+   },
+   "h16plus": {
+    "aucAvailableSeeds": 5,
+    "totalSeeds": 5,
+    "nPerSeed": [
+     30900,
+     28092,
+     31014,
+     24899,
+     25267
+    ],
+    "positiveRateMean": 0.6837771130391949,
+    "dAucGcnMinusFull": {
+     "perSeed": [
+      0.0007271952574394724,
+      -0.0016976399307627732,
+      -0.001421912796083391,
+      -0.0020932958204167296,
+      -0.00012166191300611029
+     ],
+     "mean": -0.0009214630405659063,
+     "populationStd": 0.0010567732598655221,
+     "positiveSeeds": 1
+    },
+    "dAucGcnMinusRandom": {
+     "perSeed": [
+      -0.0014467413861400935,
+      0.0012353392715954703,
+      0.0005891435380072085,
+      0.001069583958671072,
+      -0.0008608010360847684
+     ],
+     "mean": 0.00011730486920977779,
+     "populationStd": 0.0010753975980409957,
+     "positiveSeeds": 3
+    }
+   }
+  },
+  "activity": {
+   "act11-30": {
+    "aucAvailableSeeds": 5,
+    "totalSeeds": 5,
+    "nPerSeed": [
+     3100,
+     2892,
+     2724,
+     2754,
+     2854
+    ],
+    "positiveRateMean": 0.6398082567391039,
+    "dAucGcnMinusFull": {
+     "perSeed": [
+      -0.001131803309661783,
+      0.00025758543337384143,
+      0.00048664801920383916,
+      0.00209421654459363,
+      -0.0005131246046805593
+     ],
+     "mean": 0.00023870441656579367,
+     "populationStd": 0.0010907150026456002,
+     "positiveSeeds": 3
+    },
+    "dAucGcnMinusRandom": {
+     "perSeed": [
+      -0.0025395177391547286,
+      0.00043253432162448924,
+      -0.002181800367479725,
+      0.0006164952513738609,
+      0.0012492093611637944
+     ],
+     "mean": -0.0004846158344944618,
+     "populationStd": 0.0015596677221877307,
+     "positiveSeeds": 3
+    }
+   },
+   "act31plus": {
+    "aucAvailableSeeds": 5,
+    "totalSeeds": 5,
+    "nPerSeed": [
+     33134,
+     30378,
+     33694,
+     27219,
+     27543
+    ],
+    "positiveRateMean": 0.6785787255113305,
+    "dAucGcnMinusFull": {
+     "perSeed": [
+      0.0012480275984876332,
+      -0.0018012560858229332,
+      -0.0012204489477776193,
+      -0.0019846724672837324,
+      -0.00023197539265018552
+     ],
+     "mean": -0.0007980650590093674,
+     "populationStd": 0.0011916199226736383,
+     "positiveSeeds": 1
+    },
+    "dAucGcnMinusRandom": {
+     "perSeed": [
+      -0.0014304934983776496,
+      0.0012417389162892034,
+      0.0004502587361464583,
+      0.0010745855334312049,
+      -0.0008186369491586243
+     ],
+     "mean": 0.00010349054766611854,
+     "populationStd": 0.0010547330629605029,
+     "positiveSeeds": 3
+    }
+   },
+   "act1-10": {
+    "aucAvailableSeeds": 5,
+    "totalSeeds": 5,
+    "nPerSeed": [
+     733,
+     826,
+     759,
+     859,
+     830
+    ],
+    "positiveRateMean": 0.7126230198261119,
+    "dAucGcnMinusFull": {
+     "perSeed": [
+      0.003384680987154276,
+      -0.0063433776145732645,
+      -0.0014343952891439082,
+      -0.003928737618826061,
+      0.0013732570897121432
+     ],
+     "mean": -0.001389714489135363,
+     "populationStd": 0.0035047475600063125,
+     "positiveSeeds": 2
+    },
+    "dAucGcnMinusRandom": {
+     "perSeed": [
+      0.0017678517491960255,
+      -0.004060913705583702,
+      -0.0012834063113392746,
+      0.0018214451904540185,
+      0.0018382753634771376
+     ],
+     "mean": 0.00001665045724084102,
+     "populationStd": 0.0023646980524575185,
+     "positiveSeeds": 3
+    }
+   }
+  }
+ }
+}

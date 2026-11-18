@@ -1,0 +1,205 @@
+{
+  "dataset": {
+    "name": "ASSISTments 2012-2013 School Data with Affect",
+    "protocolVersion": "assist2012-gcn-dkt-v1",
+    "officialPage": "https://sites.google.com/site/assistmentsdata/home/2012-13-school-data-with-affect",
+    "downloadUrl": "https://drive.usercontent.google.com/download?id=1cU6Ft4R3hLqA7G1rIGArVfelSZvc6RxY&export=download&confirm=t",
+    "archiveFile": "2012-2013-data-with-predictions-4-final.zip",
+    "archiveBytes": 576365408,
+    "archiveSha256": "sha256:7bb18f932f97e63c2eb34bb869c44cd4f46f4adec4d7fe02298578dbba572445",
+    "archiveEntryCrc32": "0x8f51cc70",
+    "license": "WPI/ASSISTments 数据使用条款：仅限学术研究；不得再分发原始数据；发表须致谢 ASSISTments 团队并公开所用算法。本仓库不提交原始数据与逐人记录。",
+    "licenseCheckedAt": "2026-11-12",
+    "note": "原始文件不提交仓库；逐人记录同样不提交，只提交聚合统计"
+  },
+  "source": {
+    "rawFile": "2012-2013-data-with-predictions-4-final.csv",
+    "rawBytes": 3009494391,
+    "rawSha256": "sha256:1d06aee9e649c5ba9db49052fe9a86e68d0c3ccb4709a7487289d7721f5464db",
+    "rawColumns": [
+      "problem_log_id",
+      "skill",
+      "problem_id",
+      "user_id",
+      "assignment_id",
+      "assistment_id",
+      "start_time",
+      "end_time",
+      "problem_type",
+      "original",
+      "correct",
+      "bottom_hint",
+      "hint_count",
+      "actions",
+      "attempt_count",
+      "ms_first_response",
+      "tutor_mode",
+      "sequence_id",
+      "student_class_id",
+      "position",
+      "type",
+      "base_sequence_id",
+      "skill_id",
+      "teacher_id",
+      "school_id",
+      "overlap_time",
+      "template_id",
+      "answer_id",
+      "answer_text",
+      "first_action",
+      "problemlogid",
+      "Average_confidence(FRUSTRATED)",
+      "Average_confidence(CONFUSED)",
+      "Average_confidence(CONCENTRATING)",
+      "Average_confidence(BORED)"
+    ],
+    "detectedColumns": {
+      "studentId": {
+        "rawName": "user_id",
+        "index": 3
+      },
+      "problemId": {
+        "rawName": "problem_id",
+        "index": 2
+      },
+      "skillId": {
+        "rawName": "skill_id",
+        "index": 22
+      },
+      "skillName": {
+        "rawName": "skill",
+        "index": 1
+      },
+      "correct": {
+        "rawName": "correct",
+        "index": 10
+      },
+      "startTime": {
+        "rawName": "start_time",
+        "index": 6
+      },
+      "msFirstResponse": {
+        "rawName": "ms_first_response",
+        "index": 15
+      },
+      "attemptId": {
+        "rawName": "problem_log_id",
+        "index": 0
+      }
+    },
+    "rowCountInRaw": 6123270
+  },
+  "output": {
+    "file": "datasets/assist2012/interactions.csv",
+    "sha256": "sha256:8155ff18615c7a09f15d974bc1711c303021642ca95d780882ad88016220d115",
+    "bytes": 213019137,
+    "rowCount": 2626275,
+    "columns": [
+      "userId",
+      "questionId",
+      "kpCode",
+      "isCorrect",
+      "costTime",
+      "createdAt",
+      "sequenceIndex",
+      "attemptId"
+    ]
+  },
+  "cleaning": [
+    {
+      "step": "read",
+      "description": "读取数据行数（不含表头）",
+      "removed": 0,
+      "remaining": 6123270
+    },
+    {
+      "step": "malformed",
+      "description": "删除列数与目标列不一致的行",
+      "removed": 0,
+      "remaining": 6123270
+    },
+    {
+      "step": "missing-student",
+      "description": "删除缺少 user_id / problem_log_id 的行",
+      "removed": 0,
+      "remaining": 6123270
+    },
+    {
+      "step": "missing-problem",
+      "description": "删除缺少 problem_id 的行",
+      "removed": 0,
+      "remaining": 6123270
+    },
+    {
+      "step": "missing-skill",
+      "description": "删除缺少 skill_id 的行（无知识点标注，无法定位输出端口）",
+      "removed": 3411457,
+      "remaining": 2711813
+    },
+    {
+      "step": "invalid-correct",
+      "description": "删除 correct 非 \"0\"/\"1\" 的行（含部分得分小数，不做阈值二值化）",
+      "removed": 211,
+      "remaining": 2711602
+    },
+    {
+      "step": "missing-time",
+      "description": "删除 start_time 缺失或不可解析的行（排序依赖时间）",
+      "removed": 0,
+      "remaining": 2711602
+    },
+    {
+      "step": "short-sequence",
+      "description": "删除交互数 < 2 的 (学生,知识点) 序列（首条无历史，无法预测下一次）",
+      "removed": 85327,
+      "remaining": 2626275
+    }
+  ],
+  "rules": {
+    "attempt": "attemptId = problem_log_id（实测与 problemlogid 逐行相同且全局唯一）。脚本断言唯一性，不唯一即停止，避免把一次作答的多条 skill 标注拆成多次作答",
+    "primarySkill": "不适用：实测每个 problem_log_id 只有一行、每行至多一个 skill_id，不存在「同一作答多 skill」需要折叠的情形（见 stats.attemptsWithMultipleSkills）",
+    "correct": "仅接受字面 \"0\"/\"1\"；小数（0.25/0.5/0.75 等部分得分）一律剔除并计数",
+    "ordering": "按 (studentId, start_time, problem_log_id) 稳定升序；orderViolations 记录原始文件非升序的次数",
+    "timeModel": "createdAt = 2000-01-01T00:00:00.000Z + 学生内交互序号 × 60s（仅用于构造可复现的相对顺序；原始 start_time 见源文件）",
+    "ids": {
+      "userId": "a12-u<原始 user_id>",
+      "questionId": "a12-p<原始 problem_id>",
+      "kpCode": "a12-s<原始 skill_id>",
+      "attemptId": "a12-a<原始 problem_log_id>"
+    },
+    "minInteractions": 2
+  },
+  "stats": {
+    "students": 27306,
+    "questions": 52478,
+    "knowledgePoints": 228,
+    "interactions": 2626275,
+    "skillSequenceCount": 293301,
+    "predictors": 2332974,
+    "predictorDefinition": "可预测目标数 = 交互数 − (学生,知识点) 序列数（每条序列首条无历史）",
+    "correctRate": 0.6979,
+    "attemptsWithMultipleSkills": 0,
+    "attemptsWithMultipleSkillsNote": "由 attemptId 唯一性断言推出：problem_log_id 全局唯一 → 一行即一次作答 → 不可能出现同一次作答的多条 skill 标注",
+    "rawRowsTotal": 6123270,
+    "rowsWithSkillId": 2711813,
+    "rowsWithSkillIdRatio": 0.44287,
+    "rowsPassingAllFilters": 2711602,
+    "skillIdsWithoutName": 20,
+    "rowsMissingSkillName": 81732,
+    "orderViolations": 1662,
+    "rawFileGloballyOrdered": false
+  },
+  "reproducibility": {
+    "script": "scripts/ingest-assistments2012.js",
+    "scriptSha256": "sha256:d737f756fa26aee5d12a572af196453aaa4e06bdd2c42834fb5ab4e4cfbf43a0",
+    "gitCommit": "55c742615972f3df793beae2e2f02b88499bff63",
+    "generatedAt": "2026-11-12T15:12:31.511Z",
+    "node": "v22.22.2",
+    "args": {
+      "input": "backend/datasets/raw/2012-2013-data-with-predictions-4-final.csv",
+      "out": "backend/datasets/assist2012",
+      "minInteractions": 2,
+      "quiet": false
+    }
+  }
+}

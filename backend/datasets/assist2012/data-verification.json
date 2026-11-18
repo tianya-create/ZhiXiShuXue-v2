@@ -1,0 +1,482 @@
+{
+  "protocolVersion": "assist2012-gcn-dkt-v1",
+  "generatedAt": "2026-11-12T15:14:29.576Z",
+  "source": {
+    "officialPage": "https://sites.google.com/site/assistmentsdata/home/2012-13-school-data-with-affect",
+    "downloadUrl": "https://drive.usercontent.google.com/download?id=1cU6Ft4R3hLqA7G1rIGArVfelSZvc6RxY&export=download&confirm=t",
+    "archiveFile": "2012-2013-data-with-predictions-4-final.zip",
+    "archiveBytes": 576365408,
+    "archiveSha256": "sha256:7bb18f932f97e63c2eb34bb869c44cd4f46f4adec4d7fe02298578dbba572445",
+    "archiveEntryCrc32": "0x8f51cc70",
+    "innerFile": "2012-2013-data-with-predictions-4-final.csv",
+    "innerBytes": 3009494391,
+    "innerSha256": "sha256:1d06aee9e649c5ba9db49052fe9a86e68d0c3ccb4709a7487289d7721f5464db",
+    "licenseSummary": "WPI/ASSISTments 数据使用条款：仅限学术研究；不得再分发原始数据；发表须致谢 ASSISTments 团队并公开所用算法",
+    "licenseCheckedAt": "2026-11-12"
+  },
+  "shape": {
+    "rows": 6123270,
+    "columns": 35
+  },
+  "fields": [
+    {
+      "index": 0,
+      "name": "problem_log_id",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "137792159"
+    },
+    {
+      "index": 1,
+      "name": "skill",
+      "nonEmptyCount": 2630080,
+      "nonEmptyRatio": 0.429522,
+      "distinctOrNull": null,
+      "sample": "Rounding"
+    },
+    {
+      "index": 2,
+      "name": "problem_id",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "557460"
+    },
+    {
+      "index": 3,
+      "name": "user_id",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "u657a7886"
+    },
+    {
+      "index": 4,
+      "name": "assignment_id",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "565736"
+    },
+    {
+      "index": 5,
+      "name": "assistment_id",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "341511"
+    },
+    {
+      "index": 6,
+      "name": "start_time",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "2012-09-28 15:11:27"
+    },
+    {
+      "index": 7,
+      "name": "end_time",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "2012-09-28 15:11:36.856"
+    },
+    {
+      "index": 8,
+      "name": "problem_type",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "choose_1"
+    },
+    {
+      "index": 9,
+      "name": "original",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "1"
+    },
+    {
+      "index": 10,
+      "name": "correct",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "1"
+    },
+    {
+      "index": 11,
+      "name": "bottom_hint",
+      "nonEmptyCount": 6062922,
+      "nonEmptyRatio": 0.990144,
+      "distinctOrNull": null,
+      "sample": "0"
+    },
+    {
+      "index": 12,
+      "name": "hint_count",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "0"
+    },
+    {
+      "index": 13,
+      "name": "actions",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "--- \n- - start\n  - 1348859487561\n  - \"959522\"\n- - answer\n  - 9852\n  - true\n  - s"
+    },
+    {
+      "index": 14,
+      "name": "attempt_count",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "1"
+    },
+    {
+      "index": 15,
+      "name": "ms_first_response",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "9852"
+    },
+    {
+      "index": 16,
+      "name": "tutor_mode",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "tutor"
+    },
+    {
+      "index": 17,
+      "name": "sequence_id",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "55482"
+    },
+    {
+      "index": 18,
+      "name": "student_class_id",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "23643"
+    },
+    {
+      "index": 19,
+      "name": "position",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "4"
+    },
+    {
+      "index": 20,
+      "name": "type",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "LinearSection"
+    },
+    {
+      "index": 21,
+      "name": "base_sequence_id",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "55482"
+    },
+    {
+      "index": 22,
+      "name": "skill_id",
+      "nonEmptyCount": 2711813,
+      "nonEmptyRatio": 0.44287,
+      "distinctOrNull": null,
+      "sample": "54"
+    },
+    {
+      "index": 23,
+      "name": "teacher_id",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "53472"
+    },
+    {
+      "index": 24,
+      "name": "school_id",
+      "nonEmptyCount": 6123113,
+      "nonEmptyRatio": 0.999974,
+      "distinctOrNull": null,
+      "sample": "5048"
+    },
+    {
+      "index": 25,
+      "name": "overlap_time",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "9852"
+    },
+    {
+      "index": 26,
+      "name": "template_id",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "341511"
+    },
+    {
+      "index": 27,
+      "name": "answer_id",
+      "nonEmptyCount": 8275,
+      "nonEmptyRatio": 0.001351,
+      "distinctOrNull": null,
+      "sample": "57641"
+    },
+    {
+      "index": 28,
+      "name": "answer_text",
+      "nonEmptyCount": 5776922,
+      "nonEmptyRatio": 0.943437,
+      "distinctOrNull": null,
+      "sample": "she"
+    },
+    {
+      "index": 29,
+      "name": "first_action",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "0"
+    },
+    {
+      "index": 30,
+      "name": "problemlogid",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "137792159"
+    },
+    {
+      "index": 31,
+      "name": "Average_confidence(FRUSTRATED)",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "0.36132300000000000000"
+    },
+    {
+      "index": 32,
+      "name": "Average_confidence(CONFUSED)",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "0.00000000000000000000"
+    },
+    {
+      "index": 33,
+      "name": "Average_confidence(CONCENTRATING)",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "0.33652900000000000000"
+    },
+    {
+      "index": 34,
+      "name": "Average_confidence(BORED)",
+      "nonEmptyCount": 6123270,
+      "nonEmptyRatio": 1,
+      "distinctOrNull": null,
+      "sample": "0.00000000000000000000"
+    }
+  ],
+  "missing": {
+    "malformedRows": 0,
+    "emptySkillRows": 3493190,
+    "emptySkillIdRows": 3411457,
+    "emptySkillRatio": 0.570478,
+    "nonBinaryCorrectRows": 5323,
+    "nonBinaryCorrectValues": [
+      {
+        "value": "0.5",
+        "count": 2395
+      },
+      {
+        "value": "0.75",
+        "count": 1629
+      },
+      {
+        "value": "0.25",
+        "count": 1211
+      },
+      {
+        "value": "0.6",
+        "count": 24
+      },
+      {
+        "value": "0.975",
+        "count": 24
+      },
+      {
+        "value": "0.85",
+        "count": 10
+      },
+      {
+        "value": "0.65",
+        "count": 10
+      },
+      {
+        "value": "0.95",
+        "count": 9
+      },
+      {
+        "value": "0.875",
+        "count": 6
+      },
+      {
+        "value": "0.625",
+        "count": 4
+      },
+      {
+        "value": "0.375",
+        "count": 1
+      }
+    ]
+  },
+  "duplicates": {
+    "duplicateProblemLogIds": 0,
+    "uniqueProblemLogIds": 6123270,
+    "attemptsWithMultipleSkills": 0,
+    "attemptsWithMultipleSkillsNote": "problem_log_id 全局唯一 → 一行即一次作答 → 同一作答不可能承载多条 skill 标注"
+  },
+  "cardinality": {
+    "students": 46674,
+    "problems": 179999,
+    "skillIdsWithAnnotation": 265,
+    "problemsWithSkillAnnotation": 53091,
+    "problemsWithMultipleSkills": 0,
+    "multiSkillProblemRatio": 0
+  },
+  "binaryLabels": {
+    "correct0": 1976383,
+    "correct1": 4141564,
+    "binaryRows": 6117947,
+    "correctRate": 0.677
+  },
+  "samplesMasked": [
+    {
+      "problem_log_id": "138083797",
+      "user_id": "u657a7886",
+      "problem_id": "365981",
+      "skill": "Rounding",
+      "skill_id": "54",
+      "correct": "1",
+      "start_time": "2012-10-09 11:01:52",
+      "end_time": "2012-10-09 11:02:13.182"
+    },
+    {
+      "problem_log_id": "142332619",
+      "user_id": "u657a7886",
+      "problem_id": "426415",
+      "skill": "Multiplication and Division Integers",
+      "skill_id": "279",
+      "correct": "0",
+      "start_time": "2013-03-07 10:53:20",
+      "end_time": "2013-03-07 10:53:28.661"
+    },
+    {
+      "problem_log_id": "145939397",
+      "user_id": "u657a7886",
+      "problem_id": "86686",
+      "skill": "Proportion",
+      "skill_id": "79",
+      "correct": "1",
+      "start_time": "2013-08-20 19:54:56",
+      "end_time": "2013-08-20 19:55:21.753"
+    },
+    {
+      "problem_log_id": "140218191",
+      "user_id": "ucce1639a",
+      "problem_id": "401234",
+      "skill": "Exponents",
+      "skill_id": "86",
+      "correct": "1",
+      "start_time": "2012-12-12 21:00:55",
+      "end_time": "2012-12-12 21:01:07.536"
+    },
+    {
+      "problem_log_id": "138367797",
+      "user_id": "ufb5cd11e",
+      "problem_id": "87699",
+      "skill": "Equation Solving Two or Fewer Steps",
+      "skill_id": "311",
+      "correct": "1",
+      "start_time": "2012-10-16 10:30:54",
+      "end_time": "2012-10-16 10:31:55.445"
+    },
+    {
+      "problem_log_id": "138657569",
+      "user_id": "u708a62c1",
+      "problem_id": "88297",
+      "skill": "Equation Solving Two or Fewer Steps",
+      "skill_id": "311",
+      "correct": "1",
+      "start_time": "2012-10-23 12:54:46",
+      "end_time": "2012-10-23 12:55:13.919"
+    },
+    {
+      "problem_log_id": "145062104",
+      "user_id": "u708a62c1",
+      "problem_id": "93198",
+      "skill": "Venn Diagram",
+      "skill_id": "11",
+      "correct": "1",
+      "start_time": "2013-05-23 13:07:11",
+      "end_time": "2013-05-23 13:07:43.14"
+    },
+    {
+      "problem_log_id": "138089613",
+      "user_id": "u0d1982b1",
+      "problem_id": "86648",
+      "skill": "Addition and Subtraction Fractions",
+      "skill_id": "280",
+      "correct": "1",
+      "start_time": "2012-10-09 12:39:05",
+      "end_time": "2012-10-09 12:39:43.674"
+    },
+    {
+      "problem_log_id": "138967351",
+      "user_id": "u0d1982b1",
+      "problem_id": "248623",
+      "skill": "Combining Like Terms",
+      "skill_id": "338",
+      "correct": "0",
+      "start_time": "2012-11-01 12:40:57",
+      "end_time": "2012-11-01 12:43:28.011"
+    },
+    {
+      "problem_log_id": "140802353",
+      "user_id": "u0d1982b1",
+      "problem_id": "185941",
+      "skill": "Unit Rate",
+      "skill_id": "81",
+      "correct": "0",
+      "start_time": "2013-01-10 12:40:16",
+      "end_time": "2013-01-10 12:41:41.662"
+    }
+  ],
+  "conclusionHints": {
+    "multiSkillCoAnnotationAvailable": false,
+    "note": "若 problemsWithMultipleSkills = 0 且每次作答只有一行，则 2009 的「同题多知识点共标注图」在本数据集上必然为空图，属协议 §1/§4 的「协议不适用/图过稀疏」分支"
+  }
+}

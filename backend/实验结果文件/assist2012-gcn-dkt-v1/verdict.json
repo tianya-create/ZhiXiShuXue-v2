@@ -1,0 +1,125 @@
+{
+  "protocolVersion": "assist2012-gcn-dkt-v1",
+  "generatedAt": "2026-11-12T15:21:14.332Z",
+  "stage": "precheck-gate",
+  "verdict": "protocol-not-applicable-graph-too-sparse",
+  "dataVerification": {
+    "source": {
+      "officialPage": "https://sites.google.com/site/assistmentsdata/home/2012-13-school-data-with-affect",
+      "downloadUrl": "https://drive.usercontent.google.com/download?id=1cU6Ft4R3hLqA7G1rIGArVfelSZvc6RxY&export=download&confirm=t",
+      "archiveFile": "2012-2013-data-with-predictions-4-final.zip",
+      "archiveBytes": 576365408,
+      "archiveSha256": "sha256:7bb18f932f97e63c2eb34bb869c44cd4f46f4adec4d7fe02298578dbba572445",
+      "archiveEntryCrc32": "0x8f51cc70",
+      "innerFile": "2012-2013-data-with-predictions-4-final.csv",
+      "innerBytes": 3009494391,
+      "innerSha256": "sha256:1d06aee9e649c5ba9db49052fe9a86e68d0c3ccb4709a7487289d7721f5464db",
+      "licenseSummary": "WPI/ASSISTments 数据使用条款：仅限学术研究；不得再分发原始数据；发表须致谢 ASSISTments 团队并公开所用算法",
+      "licenseCheckedAt": "2026-11-12"
+    },
+    "rows": 6123270,
+    "columns": 35,
+    "students": 46674,
+    "problems": 179999,
+    "skillIds": 265,
+    "problemsWithSkillAnnotation": 53091,
+    "problemsWithMultipleSkills": 0,
+    "emptySkillRows": 3493190,
+    "nonBinaryCorrectRows": 5323,
+    "duplicateProblemLogIds": 0,
+    "file": "backend/datasets/assist2012/data-verification.json"
+  },
+  "cleaning": {
+    "interactions": 2626275,
+    "students": 27306,
+    "questions": 52478,
+    "knowledgePoints": 228,
+    "skillSequenceCount": 293301,
+    "predictors": 2332974,
+    "correctRate": 0.6979,
+    "attemptsWithMultipleSkills": 0,
+    "interactionsSha256": "sha256:8155ff18615c7a09f15d974bc1711c303021642ca95d780882ad88016220d115",
+    "file": "backend/datasets/assist2012/interactions.csv"
+  },
+  "graphPrecheck": {
+    "threshold": 0.4,
+    "meanValidationCoverage": 0,
+    "meanTrainCoverage": 0,
+    "perSeedValidationCoverage": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "passes": false,
+    "perSeed": [
+      {
+        "seed": 42,
+        "nodeCount": 228,
+        "undirectedEdgeCount": 0,
+        "isolatedNodeCount": 228,
+        "isolatedNodeRatio": 1,
+        "multiSkillAttemptGroups": 0,
+        "validationCoverage": 0
+      },
+      {
+        "seed": 43,
+        "nodeCount": 228,
+        "undirectedEdgeCount": 0,
+        "isolatedNodeCount": 228,
+        "isolatedNodeRatio": 1,
+        "multiSkillAttemptGroups": 0,
+        "validationCoverage": 0
+      },
+      {
+        "seed": 44,
+        "nodeCount": 228,
+        "undirectedEdgeCount": 0,
+        "isolatedNodeCount": 228,
+        "isolatedNodeRatio": 1,
+        "multiSkillAttemptGroups": 0,
+        "validationCoverage": 0
+      },
+      {
+        "seed": 45,
+        "nodeCount": 228,
+        "undirectedEdgeCount": 0,
+        "isolatedNodeCount": 228,
+        "isolatedNodeRatio": 1,
+        "multiSkillAttemptGroups": 0,
+        "validationCoverage": 0
+      },
+      {
+        "seed": 46,
+        "nodeCount": 228,
+        "undirectedEdgeCount": 0,
+        "isolatedNodeCount": 228,
+        "isolatedNodeRatio": 1,
+        "multiSkillAttemptGroups": 0,
+        "validationCoverage": 0
+      }
+    ],
+    "file": "backend/实验结果文件/assist2012-gcn-dkt-v1/precheck-coverage.json"
+  },
+  "rootCause": {
+    "statement": "本数据集每个 problem_id 只对应一个 skill_id，且每次作答（problem_log_id）只有一行 → 「同一作答多 skill 共标注」不存在 → 2009 的共现图规则必然产出 0 条边",
+    "problemsWithMultipleSkills": 0,
+    "attemptsWithMultipleSkills": 0
+  },
+  "decision": {
+    "trainedModels": false,
+    "fiveSeedComparisonRun": false,
+    "reason": "未通过：2012 同口径图仍过稀疏，不能用本次实验检验模型增益（保留图统计，不得解释为再次证明无增益）",
+    "allowedConclusions": [
+      "2012-2013 with Affect 在本协议的同口径共标注图下为 0 条边（228/228 孤立），validation 目标覆盖率 0%",
+      "按预注册的 40% 可行性闸门，本次实验不能用于检验「图增强是否有增益」",
+      "2009 的「无增益」结论未被推翻，也未被第二数据集确认——它仍只是单个数据条件下的观测"
+    ],
+    "forbiddenConclusions": [
+      "不得说「2012 上再次证明图增强无增益」——未训练不是证据",
+      "不得把 2012 换成全体学生共现图/先修图/题目相似度图后称为本协议复现",
+      "不得把 2009 与 2012 的绝对 AUC 直接排名"
+    ]
+  }
+}

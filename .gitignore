@@ -131,3 +131,8 @@ ablation-checkpoint-*.json
 
 # 阶段D 训练缓存（checkpoint 指纹与逐目标预测断点；按方案不入库，是否入库由用户决定）
 backend/实验结果文件/gcn-dkt-v1/cache/
+
+# 2012 预检用 validation 目标清单（每个 66MB × 5，可由 buildAssist2012ValTargets.js 确定性重生成）
+backend/实验结果文件/assist2012-gcn-dkt-v1/seed-*/val-targets.json
+# 2012 边表 CSV（仅表头，0 边的直接证据）需入库，豁免全局 *.csv 规则
+!backend/实验结果文件/assist2012-gcn-dkt-v1/**/*.csv

@@ -1,0 +1,22 @@
+{
+ "protocolVersion": "assist2009-prior-edges-v1",
+ "generatedAt": "2026-11-09T03:31:19.442Z",
+ "runs": [
+  "run1.csv",
+  "run2.csv",
+  "run3.csv"
+ ],
+ "votesRule": ">=2/3",
+ "ambiguousNamesExcluded": [
+  "Absolute Value"
+ ],
+ "usableNameCount": 98,
+ "votedCandidates": 69,
+ "edgeCount": 69,
+ "kcsWithEdges": 85,
+ "isolatedKcs": 15,
+ "rejectedByRules": [],
+ "finalFile": "datasets/assist2009/prior-edges.csv",
+ "sha256": "sha256:cea60176c68220421f09d76fbe0698527703afcb70dfc798e297a39773d5a894",
+ "note": "final 定稿后必须先 git commit 再跑探针；本报告与 sha256 是防\"看到结果再改图\"的留痕。"
+}

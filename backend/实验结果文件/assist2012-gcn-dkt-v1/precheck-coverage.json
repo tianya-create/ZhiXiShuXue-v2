@@ -1,0 +1,226 @@
+{
+  "protocolVersion": "assist2012-gcn-dkt-v1",
+  "generatedAt": "2026-11-12T15:20:56.560Z",
+  "inputs": {
+    "interactions": "datasets/assist2012/interactions.csv",
+    "interactionsSha256": "sha256:8155ff18615c7a09f15d974bc1711c303021642ca95d780882ad88016220d115",
+    "graphsRoot": "backend/实验结果文件/assist2012-gcn-dkt-v1",
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ]
+  },
+  "targetRule": "目标 = 指定学生集合中 (学生,知识点) 组非首条记录（与 graphDktExperiment.buildTargetManifest 同一规则）",
+  "coverageRule": "非孤立节点 = 真实图（无自环）中度 > 0 的节点；覆盖率 = 目标 kpCode 落在非孤立节点的比例",
+  "testLabelsUsed": false,
+  "seedReports": [
+    {
+      "seed": 42,
+      "nodeCount": 228,
+      "undirectedEdgeCount": 0,
+      "edgeCountFromCsv": 0,
+      "density": 0,
+      "weightSum": 0,
+      "isolatedNodeCount": 228,
+      "isolatedNodeRatio": 1,
+      "componentSizesTop3": [
+        1,
+        1,
+        1
+      ],
+      "attemptGroups": 1787246,
+      "multiSkillAttemptGroups": 0,
+      "multiSkillGroupRatio": 0,
+      "trainTargetCoverage": {
+        "targetCount": 1621756,
+        "nonIsolatedTargetCount": 0,
+        "coverage": 0
+      },
+      "validationTargetCoverage": {
+        "targetCount": 361614,
+        "nonIsolatedTargetCount": 0,
+        "coverage": 0
+      },
+      "splitCounts": {
+        "train": 19114,
+        "validation": 4096,
+        "test": 4096
+      },
+      "hashes": {
+        "splitSha256": "sha256:754730b35a52348de5d3e6912b4ca7f5ea09a6ea3371e3724eefbedd749cbffc",
+        "graphEdgesSha256": "sha256:74161f33012cffdddbeeda815d9e211723211f78e8fb5a353fbaa94709d0c17d",
+        "vocabularySha256": "sha256:4d4e3d2c391fc948e2df6174d7d45c0fc5126afc914a2164128e978d73f3a782"
+      }
+    },
+    {
+      "seed": 43,
+      "nodeCount": 228,
+      "undirectedEdgeCount": 0,
+      "edgeCountFromCsv": 0,
+      "density": 0,
+      "weightSum": 0,
+      "isolatedNodeCount": 228,
+      "isolatedNodeRatio": 1,
+      "componentSizesTop3": [
+        1,
+        1,
+        1
+      ],
+      "attemptGroups": 1825366,
+      "multiSkillAttemptGroups": 0,
+      "multiSkillGroupRatio": 0,
+      "trainTargetCoverage": {
+        "targetCount": 1641506,
+        "nonIsolatedTargetCount": 0,
+        "coverage": 0
+      },
+      "validationTargetCoverage": {
+        "targetCount": 340807,
+        "nonIsolatedTargetCount": 0,
+        "coverage": 0
+      },
+      "splitCounts": {
+        "train": 19114,
+        "validation": 4096,
+        "test": 4096
+      },
+      "hashes": {
+        "splitSha256": "sha256:1d30645b93441c72aa5d9d43b1960564737108c6e03ef84e60a0c21cebbd4d4e",
+        "graphEdgesSha256": "sha256:74161f33012cffdddbeeda815d9e211723211f78e8fb5a353fbaa94709d0c17d",
+        "vocabularySha256": "sha256:82add3bd6d2f96d0bf41ed608b6d576b0da89d5f2c0743e5d1b94cfb253c7a5b"
+      }
+    },
+    {
+      "seed": 44,
+      "nodeCount": 228,
+      "undirectedEdgeCount": 0,
+      "edgeCountFromCsv": 0,
+      "density": 0,
+      "weightSum": 0,
+      "isolatedNodeCount": 228,
+      "isolatedNodeRatio": 1,
+      "componentSizesTop3": [
+        1,
+        1,
+        1
+      ],
+      "attemptGroups": 1825251,
+      "multiSkillAttemptGroups": 0,
+      "multiSkillGroupRatio": 0,
+      "trainTargetCoverage": {
+        "targetCount": 1630370,
+        "nonIsolatedTargetCount": 0,
+        "coverage": 0
+      },
+      "validationTargetCoverage": {
+        "targetCount": 346806,
+        "nonIsolatedTargetCount": 0,
+        "coverage": 0
+      },
+      "splitCounts": {
+        "train": 19114,
+        "validation": 4096,
+        "test": 4096
+      },
+      "hashes": {
+        "splitSha256": "sha256:2c638a060e0749c3c4578394d5751a42e72a1a10c45bfb14a24cde1ea89c1ddc",
+        "graphEdgesSha256": "sha256:74161f33012cffdddbeeda815d9e211723211f78e8fb5a353fbaa94709d0c17d",
+        "vocabularySha256": "sha256:c7e9dae1e9b93e7f0b8271fd7728998e34bd88adb764d8afa1f59cbd570fbbdd"
+      }
+    },
+    {
+      "seed": 45,
+      "nodeCount": 228,
+      "undirectedEdgeCount": 0,
+      "edgeCountFromCsv": 0,
+      "density": 0,
+      "weightSum": 0,
+      "isolatedNodeCount": 228,
+      "isolatedNodeRatio": 1,
+      "componentSizesTop3": [
+        1,
+        1,
+        1
+      ],
+      "attemptGroups": 1782122,
+      "multiSkillAttemptGroups": 0,
+      "multiSkillGroupRatio": 0,
+      "trainTargetCoverage": {
+        "targetCount": 1623640,
+        "nonIsolatedTargetCount": 0,
+        "coverage": 0
+      },
+      "validationTargetCoverage": {
+        "targetCount": 352189,
+        "nonIsolatedTargetCount": 0,
+        "coverage": 0
+      },
+      "splitCounts": {
+        "train": 19114,
+        "validation": 4096,
+        "test": 4096
+      },
+      "hashes": {
+        "splitSha256": "sha256:a069ffd4f14e8abb742b38e6459c429b8b29616695184d56a64cd93f7adbdcf5",
+        "graphEdgesSha256": "sha256:74161f33012cffdddbeeda815d9e211723211f78e8fb5a353fbaa94709d0c17d",
+        "vocabularySha256": "sha256:a0add6a7805aba8202f7fb0b835a7c8e4dd61a07b80e2efe6674fb0c814c75aa"
+      }
+    },
+    {
+      "seed": 46,
+      "nodeCount": 228,
+      "undirectedEdgeCount": 0,
+      "edgeCountFromCsv": 0,
+      "density": 0,
+      "weightSum": 0,
+      "isolatedNodeCount": 228,
+      "isolatedNodeRatio": 1,
+      "componentSizesTop3": [
+        1,
+        1,
+        1
+      ],
+      "attemptGroups": 1817574,
+      "multiSkillAttemptGroups": 0,
+      "multiSkillGroupRatio": 0,
+      "trainTargetCoverage": {
+        "targetCount": 1624124,
+        "nonIsolatedTargetCount": 0,
+        "coverage": 0
+      },
+      "validationTargetCoverage": {
+        "targetCount": 360839,
+        "nonIsolatedTargetCount": 0,
+        "coverage": 0
+      },
+      "splitCounts": {
+        "train": 19114,
+        "validation": 4096,
+        "test": 4096
+      },
+      "hashes": {
+        "splitSha256": "sha256:69b521236dbcf0e29e9c18aa0e32654dfcb9e7d0be0056a4a19d73084c6e3e14",
+        "graphEdgesSha256": "sha256:74161f33012cffdddbeeda815d9e211723211f78e8fb5a353fbaa94709d0c17d",
+        "vocabularySha256": "sha256:b0daa208cb8266419ed8bf243809c9e6ef60e41fdff45794aff013fff2ec58d5"
+      }
+    }
+  ],
+  "gate": {
+    "rule": "五种子 validation 目标落在非孤立节点的覆盖率均值 < 0.4 时停止正式 GCN 训练",
+    "threshold": 0.4,
+    "meanValidationCoverage": 0,
+    "meanTrainCoverage": 0,
+    "perSeedValidationCoverage": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "passes": false,
+    "verdict": "未通过：2012 同口径图仍过稀疏，不能用本次实验检验模型增益（保留图统计，不得解释为再次证明无增益）"
+  }
+}

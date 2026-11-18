@@ -1,0 +1,54 @@
+{
+  "protocolVersion": "assist2009-prior-probe-v1",
+  "frozenBeforeRun": true,
+  "frozenAt": "2026-11-09",
+  "seeds": [42, 43, 44, 45, 46],
+  "folds": 5,
+  "foldSeed": 20261109,
+  "lrC": 1.0,
+  "featureSets": ["S", "SA", "SB", "SC", "SAB"],
+  "baseFeatures": [
+    "dkt_logit", "kc_attempts_log", "kc_last5_acc", "kc_last_correct", "kc_gap_log",
+    "kc_train_acc", "stu_attempts_log", "stu_acc", "stu_last5_acc", "hist_len_log"
+  ],
+  "neighborFeatures": ["nb_missing", "nb_cov", "nb_recent_acc", "nb_last_correct", "nb_gap_log", "nb_recent20"],
+  "missingPolicy": "标准化后补 0，另加缺失指示变量（nb_recent_acc/nb_last_correct/nb_gap_log 三列指示）",
+  "groups": {
+    "A": {"file": "datasets/assist2009/prior-edges.csv", "direction": "directed", "weight": "confidence", "sha256": "sha256:cea60176c68220421f09d76fbe0698527703afcb70dfc798e297a39773d5a894"},
+    "B": {"file": "seed-{s}/graph-real-edges.csv", "direction": "undirected", "weight": "support"},
+    "C": {"file": "seed-{s}/graph-random-edges.csv", "direction": "undirected", "weight": "1"}
+  },
+  "interactions": {"file": "datasets/assist2009/interactions.csv", "sha256": "sha256:6f055c6b5105b8295ef8bcf9dd23c668634f56eedc4dbdcf5a8708bee0618be9"},
+  "reviewModel": {
+    "type": "histogram-stump-boost（深度1桩、16分位箱、100轮、步长0.5）",
+    "deviation": "环境无 Python/sklearn，HistGradientBoosting 以直方图桩提升等价替代；仅在 seed 42 的 S 与 S+A 上复核符号一致性",
+    "appliedTo": ["S", "SA"],
+    "seeds": [42]
+  },
+  "thresholds": {
+    "strongDeltaA": 0.002,
+    "strongMinPositiveSeeds": 4,
+    "strongDeltaAB": 0.001,
+    "strongMaxDeltaC": 0.0005,
+    "grayDeltaA": 0.001,
+    "grayPositiveSeeds": 3,
+    "noneDeltaA": 0.001,
+    "noneMinDeltaGap": 0.0005,
+    "randomGuardInvalid": 0.001,
+    "note": "来自方案 §4：以 multiseed-summary 的 GCN−Full 配对差噪声（ΔAUC std 0.001047 / ΔLogLoss std 0.000943）为尺度，0.002≈2σ"
+  },
+  "decisionMatrix": {
+    "strong-and-coverage>=0.4": "build",
+    "strong-and-coverage<0.4": "switch-dataset",
+    "gray": "switch-dataset-review（先扩 ASSIST2012 复核，不扩则按 none 处理）",
+    "none": "stop"
+  },
+  "antiCheat": [
+    "先修边定稿 sha256 冻结于本配置，先于任何探针结果",
+    "特征只用 createdAt < t 的交互（测试第 1 条）",
+    "LR 只在 4 折 fit、第 5 折 predict",
+    "五种子全部跑完才汇总",
+    "A/B/C 同一次运行、同一折划分、同一随机种子",
+    "ΔC ≥ 0.001 则本次结果作废"
+  ]
+}
